@@ -5,8 +5,8 @@ liboseaclientincludedir = $(includedir)/liboseaclient
 lib_LTLIBRARIES = liboseaclient.la
 
 liboseaclient_la_SOURCES =	\
-	oseaclient-detaileddatanode.c \
 	oseaclient-datanode.c \
+	oseaclient-detaileddatanode.c \
 	oseaclient.c \
 	oseaclient_list.c \
 	oseaclient_request.c \
