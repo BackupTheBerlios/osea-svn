@@ -40,7 +40,7 @@ void
 <FUNCTION>
 <NAME>oseaserver_main_run_server</NAME>
 <RETURNS>void  </RETURNS>
-gchar                * server_name,gchar                * server_description,gchar                * server_version,glong                  server_compilation_date,gint                 * argc,gchar               ** argv[],gchar                * config_file,gchar                * accepted_keys[],OseaServerServicesProvided   services_provided[],gint                   services_version,AfgsMainCallback       check_function,struct poptOption    * server_extra_popt_option
+gchar                * server_name,gchar                * server_description,gchar                * server_version,glong                  server_compilation_date,gint                 * argc,gchar               ** argv[],gchar                * config_file,gchar                * accepted_keys[],OseaServerServicesProvided   services_provided[],gint                   services_version,OseaServerMainCallback       check_function,struct poptOption    * server_extra_popt_option
 </FUNCTION>
 <FUNCTION>
 <NAME>oseaserver_main_abort</NAME>
@@ -243,8 +243,8 @@ struct OseaClientDataNode {
 <NAME>OseaClientDataNodeClass</NAME>
 struct OseaClientDataNodeClass {
 	GObjectClass __parent__;
-	gboolean (* edit_wrapper) (OseaClientDataNode * self, AfDalNulFunc usr_function, gpointer usr_data);
-	gboolean (* new_wrapper) (OseaClientDataNode * self, AfDalNulFunc usr_function, gpointer usr_data);
+	gboolean (* edit_wrapper) (OseaClientDataNode * self, OseaClientNulFunc usr_function, gpointer usr_data);
+	gboolean (* new_wrapper) (OseaClientDataNode * self, OseaClientNulFunc usr_function, gpointer usr_data);
 };
 </STRUCT>
 <FUNCTION>
@@ -255,12 +255,12 @@ void
 <FUNCTION>
 <NAME>oseaclient_datanode_edit_wrapper</NAME>
 <RETURNS>gboolean  </RETURNS>
-OseaClientDataNode * self,AfDalNulFunc usr_function,gpointer usr_data
+OseaClientDataNode * self,OseaClientNulFunc usr_function,gpointer usr_data
 </FUNCTION>
 <FUNCTION>
 <NAME>oseaclient_datanode_new_wrapper</NAME>
 <RETURNS>gboolean  </RETURNS>
-OseaClientDataNode * self,AfDalNulFunc usr_function,gpointer usr_data
+OseaClientDataNode * self,OseaClientNulFunc usr_function,gpointer usr_data
 </FUNCTION>
 <FUNCTION>
 <NAME>oseaclient_decimal_stringfy</NAME>
@@ -1057,23 +1057,23 @@ gint id,gchar * nick,gchar * description
 </MACRO>
 <MACRO>
 <NAME>OSEACOMM_SIMPLE</NAME>
-#define OSEACOMM_SIMPLE(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), TYPE_COYOTE_SIMPLE, OseaCommSimple))
+#define OSEACOMM_SIMPLE(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), TYPE_OSEACOMM_SIMPLE, OseaCommSimple))
 </MACRO>
 <MACRO>
 <NAME>OSEACOMM_SIMPLE_CLASS</NAME>
-#define OSEACOMM_SIMPLE_CLASS(class) (G_TYPE_CHECK_CLASS_CAST ((class), TYPE_COYOTE_SIMPLE, OseaCommSimpleClass))
+#define OSEACOMM_SIMPLE_CLASS(class) (G_TYPE_CHECK_CLASS_CAST ((class), TYPE_OSEACOMM_SIMPLE, OseaCommSimpleClass))
 </MACRO>
 <MACRO>
 <NAME>IS_OSEACOMM_SIMPLE</NAME>
-#define IS_OSEACOMM_SIMPLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), TYPE_COYOTE_SIMPLE))
+#define IS_OSEACOMM_SIMPLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), TYPE_OSEACOMM_SIMPLE))
 </MACRO>
 <MACRO>
 <NAME>IS_OSEACOMM_SIMPLE_CLASS</NAME>
-#define IS_OSEACOMM_SIMPLE_CLASS(class) (G_TYPE_CHECK_CLASS_TYPE ((class), TYPE_COYOTE_SIMPLE))
+#define IS_OSEACOMM_SIMPLE_CLASS(class) (G_TYPE_CHECK_CLASS_TYPE ((class), TYPE_OSEACOMM_SIMPLE))
 </MACRO>
 <MACRO>
 <NAME>OSEACOMM_SIMPLE_GET_CLASS</NAME>
-#define OSEACOMM_SIMPLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), TYPE_COYOTE_SIMPLE, OseaCommSimpleClass))
+#define OSEACOMM_SIMPLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), TYPE_OSEACOMM_SIMPLE, OseaCommSimpleClass))
 </MACRO>
 <STRUCT>
 <NAME>OseaCommSimple</NAME>
@@ -1133,11 +1133,11 @@ OseaCommSimple * channel,gchar * data, gint len,gint msg_no, gint free,GError **
 </STRUCT>
 <ENUM>
 <NAME>OseaCommXmlServiceType</NAME>
-typedef enum {OSEACOMM_XML_SERVICE_REQUEST, COYOTE_XML_SERVICE_RESPONSE} OseaCommXmlServiceType;
+typedef enum {OSEACOMM_XML_SERVICE_REQUEST, OSEACOMM_XML_SERVICE_RESPONSE} OseaCommXmlServiceType;
 </ENUM>
 <ENUM>
 <NAME>OseaCommXmlArgType</NAME>
-typedef enum {OSEACOMM_XML_ARG_STRING, COYOTE_XML_ARG_DATASET} OseaCommXmlArgType;
+typedef enum {OSEACOMM_XML_ARG_STRING, OSEACOMM_XML_ARG_DATASET} OseaCommXmlArgType;
 </ENUM>
 <STRUCT>
 <NAME>OseaCommXmlMessage</NAME>
@@ -1188,12 +1188,12 @@ OseaCommXmlObject * object,gchar * name_of_service,va_list args
 <FUNCTION>
 <NAME>oseacomm_xml_add_response_service</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommXmlObject * object,CoyoteCodeType status_code,gchar * explanation,...
+OseaCommXmlObject * object,OseaCommCodeType status_code,gchar * explanation,...
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_xml_add_vresponse_service</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommXmlObject * object,CoyoteCodeType status_code,gchar * explanation,va_list args
+OseaCommXmlObject * object,OseaCommCodeType status_code,gchar * explanation,va_list args
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_xml_validate_message</NAME>
@@ -1448,35 +1448,35 @@ OseaCommSimpleCfg *config
 <FUNCTION>
 <NAME>oseacomm_simple_cfg_set_frame_available</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommSimpleCfg *config,CoyoteSimpleCfgFrameAvailable cb
+OseaCommSimpleCfg *config,OseaCommSimpleCfgFrameAvailable cb
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_simple_cfg_set_close_indication</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommSimpleCfg *config,CoyoteSimpleCfgCloseIndication cb
+OseaCommSimpleCfg *config,OseaCommSimpleCfgCloseIndication cb
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_simple_cfg_set_close_confirmation</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommSimpleCfg *config,CoyoteSimpleCfgCloseConfirmation cb
+OseaCommSimpleCfg *config,OseaCommSimpleCfgCloseConfirmation cb
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_simple_cfg_set_finalize</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommSimpleCfg *config,CoyoteSimpleCfgFinalize cb
+OseaCommSimpleCfg *config,OseaCommSimpleCfgFinalize cb
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_simple_cfg_set_server_init</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommSimpleCfg *config,CoyoteSimpleCfgServerInit cb,gpointer data
+OseaCommSimpleCfg *config,OseaCommSimpleCfgServerInit cb,gpointer data
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_simple_cfg_set_server_confirm</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommSimpleCfg *config,CoyoteSimpleCfgServerConfirmation cb
+OseaCommSimpleCfg *config,OseaCommSimpleCfgServerConfirmation cb
 </FUNCTION>
 <FUNCTION>
 <NAME>oseacomm_simple_cfg_set_complete_message</NAME>
 <RETURNS>void  </RETURNS>
-OseaCommSimpleCfg * config,CoyoteSimpleCfgCompleteMessage cb,gpointer data,gpointer custom_data
+OseaCommSimpleCfg * config,OseaCommSimpleCfgCompleteMessage cb,gpointer data,gpointer custom_data
 </FUNCTION>
