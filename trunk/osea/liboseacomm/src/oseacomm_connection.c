@@ -1,4 +1,4 @@
-//  LibCoyote:  Support library with xml and communication functions.
+//  LibOseaComm:  Support library with xml and communication functions.
 //  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -23,14 +23,14 @@
 
 
 
-#define LOG_DOMAIN "COYOTE_CONNECTION"
+#define LOG_DOMAIN "OSEACOMM_CONNECTION"
 
 
 /**
  * oseacomm_connection_new:
  * @server: server we are going to connect to.
  * @port: tcp port.
- * @connection_profile: beep profile identifier. Try TYPE_COYOTE_SIMPLE.
+ * @connection_profile: beep profile identifier. Try TYPE_OSEACOMM_SIMPLE.
  * 
  * This function create a new Road Runner connection to @server:@port using given
  * profile @connection_profile.

@@ -1,4 +1,4 @@
-//  LibCoyote:  Support library with xml and communication functions.
+//  LibOseacomm:  Support library with xml and communication functions.
 //  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -24,7 +24,7 @@
  * @argv: 
  * @error: 
  * 
- * Initialize oseacomm so this function have to be called before use coyote.
+ * Initialize oseacomm so this function have to be called before use oseacomm.
  * 
  * Return value: TRUE on succesful init, otherwise FALSE.
  **/

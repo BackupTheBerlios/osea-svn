@@ -1,4 +1,4 @@
-//  LibCoyote:  Support library with xml and communication functions.
+//  LibOseaComm:  Support library with xml and communication functions.
 //  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -15,38 +15,38 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __COYOTE_DATASET_H__
-#define __COYOTE_DATASET_H__
+#ifndef __OSEACOMM_DATASET_H__
+#define __OSEACOMM_DATASET_H__
 
 #include<glib.h>
 
-typedef struct __CoyoteDataSet CoyoteDataSet;
+typedef struct __OseaCommDataSet OseaCommDataSet;
 
-CoyoteDataSet * oseacomm_dataset_new        ();
+OseaCommDataSet * oseacomm_dataset_new        ();
 
-const gchar *   oseacomm_dataset_get        (CoyoteDataSet * data, 
+const gchar *   oseacomm_dataset_get        (OseaCommDataSet * data, 
 					   gint row, 
 					   gint col);
 
-gboolean        oseacomm_dataset_set        (CoyoteDataSet * dataset, 
+gboolean        oseacomm_dataset_set        (OseaCommDataSet * dataset, 
 					   gchar * data,
 					   gint row, 
 					   gint col);
 
-void            oseacomm_dataset_add        (CoyoteDataSet * data, gchar * user_data);
+void            oseacomm_dataset_add        (OseaCommDataSet * data, gchar * user_data);
 
-void            oseacomm_dataset_add_nth    (CoyoteDataSet * data, ...);
+void            oseacomm_dataset_add_nth    (OseaCommDataSet * data, ...);
 
-void            oseacomm_dataset_new_row    (CoyoteDataSet * data);
+void            oseacomm_dataset_new_row    (OseaCommDataSet * data);
 
-gint            oseacomm_dataset_get_height (CoyoteDataSet * data);
+gint            oseacomm_dataset_get_height (OseaCommDataSet * data);
 
-gint            oseacomm_dataset_get_width  (CoyoteDataSet * data);
+gint            oseacomm_dataset_get_width  (OseaCommDataSet * data);
 
-gint            oseacomm_dataset_lookup_row (CoyoteDataSet * data, gint column, const gchar *value);
+gint            oseacomm_dataset_lookup_row (OseaCommDataSet * data, gint column, const gchar *value);
 
-void            oseacomm_dataset_free       (CoyoteDataSet * data);
+void            oseacomm_dataset_free       (OseaCommDataSet * data);
 
-void            oseacomm_dataset_print      (CoyoteDataSet * data);
+void            oseacomm_dataset_print      (OseaCommDataSet * data);
 
 #endif

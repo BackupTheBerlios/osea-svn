@@ -1,4 +1,4 @@
-//  LibCoyote:  Support library with xml and communication functions.
+//  LibOseaComm:  Support library with xml and communication functions.
 //  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -18,15 +18,15 @@
 #include <librr/rr.h>
 #include "oseacomm_simple.h"
 
-#define LOG_DOMAIN "COYOTE_SIMPLE"
+#define LOG_DOMAIN "OSEACOMM_SIMPLE"
 
 static GObjectClass * parent_class = NULL;
 
 
-typedef struct __CoyoteSimpleData {
+typedef struct __OseaCommSimpleData {
 	gboolean finish_connection;
 	GString * buffer;
-} CoyoteSimpleData;
+} OseaCommSimpleData;
 
 
 gboolean oseacomm_simple_close_indication  (RRChannel *channel, gint code,
@@ -56,9 +56,9 @@ static void finalize            (GObject *object);
 static void
 oseacomm_simple_init (GObject *object, gpointer user_data)
 {
-	CoyoteSimple * channel  = NULL;
+	OseaCommSimple * channel  = NULL;
 	
-	channel = COYOTE_SIMPLE (object);
+	channel = OSEACOMM_SIMPLE (object);
 	
 	// Initialize internal oseacomm simple data
 	channel->buffer = g_byte_array_new ();
@@ -126,23 +126,23 @@ oseacomm_simple_get_type (void)
 	static GType oseacomm_simple_type = 0;
 	if (!oseacomm_simple_type) {
 		static GTypeInfo type_info = {
-			sizeof (CoyoteSimpleClass),
+			sizeof (OseaCommSimpleClass),
 			NULL,
 			NULL,
 			(GClassInitFunc) oseacomm_simple_class_init,
 			NULL,
 			NULL,
-			sizeof (CoyoteSimple),
+			sizeof (OseaCommSimple),
 			16,
 			(GInstanceInitFunc) oseacomm_simple_init
 		};
 		oseacomm_simple_type = g_type_register_static (RR_TYPE_CHANNEL, 
-							     "CoyoteSimple", 
+							     "OseaCommSimple", 
 							     &type_info, 0);
 
 		/* Tell RoadRunner which URI this profile will 
 		 * identify itself with */
-		rr_channel_set_uri (oseacomm_simple_type, COYOTE_SIMPLE_URI);
+		rr_channel_set_uri (oseacomm_simple_type, OSEACOMM_SIMPLE_URI);
 	}
 	return oseacomm_simple_type;
 }
@@ -151,7 +151,7 @@ gboolean oseacomm_simple_server_init     (RRChannel *channel,
 					const gchar *piggyback, 
 					GError **error)
 {
-	CoyoteSimpleCfg * configuration = channel->instance_config;
+	OseaCommSimpleCfg * configuration = channel->instance_config;
 	
 	rr_channel_set_aggregate (channel, FALSE);	
 
@@ -174,7 +174,7 @@ gboolean oseacomm_simple_close_indication  (RRChannel *channel, gint code,
 					  const gchar *diagnostic,
 					  GError **error)
 {
-	CoyoteSimpleCfg * configuration = channel->instance_config;
+	OseaCommSimpleCfg * configuration = channel->instance_config;
 	
 	// Check for instance_config
 	if ((configuration) && (configuration->close_indication_cb)) {
@@ -194,7 +194,7 @@ void oseacomm_simple_close_confirmation (RRChannel *channel, gint code,
 					   const gchar *xml_lang, 
 					   const gchar *diagnostic)
 {
-	CoyoteSimpleCfg * configuration = channel->instance_config;
+	OseaCommSimpleCfg * configuration = channel->instance_config;
 	
 	// Check for instance_config
 	if ((configuration) && (configuration->close_confirmation_cb)) {
@@ -235,17 +235,17 @@ void oseacomm_simple_close_confirmation (RRChannel *channel, gint code,
 static gboolean
 oseacomm_simple_frame_available (RRChannel *channel, RRFrame *frame, GError **error)
 {
-	CoyoteSimple * oseacomm_channel;
-	CoyoteSimpleCfg * global_cfg, * instance_cfg;
+	OseaCommSimple * oseacomm_channel;
+	OseaCommSimpleCfg * global_cfg, * instance_cfg;
 	GString * string;
 
-	oseacomm_channel = COYOTE_SIMPLE (channel);
+	oseacomm_channel = OSEACOMM_SIMPLE (channel);
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Frame available ");
 
 	// Get channel configuration	       		 
-	global_cfg = (CoyoteSimpleCfg *) RR_CHANNEL(channel)->global_config;		
-	instance_cfg = (CoyoteSimpleCfg *) RR_CHANNEL(channel)->instance_config;
+	global_cfg = (OseaCommSimpleCfg *) RR_CHANNEL(channel)->global_config;		
+	instance_cfg = (OseaCommSimpleCfg *) RR_CHANNEL(channel)->instance_config;
 
 	// Check if were set frame_available_cb (in instance_cfg or in global_cfg)
 	// If it was set, execute corresponding callback and return
@@ -283,7 +283,7 @@ oseacomm_simple_frame_available (RRChannel *channel, RRFrame *frame, GError **er
 		// "complete_message_cb")
 
 		//if (oseacomm_channel->buffer->len < 2048)
-		oseacomm_channel->buffer = g_byte_array_append (coyote_channel->buffer, 
+		oseacomm_channel->buffer = g_byte_array_append (oseacomm_channel->buffer, 
 							      frame->payload, frame->size);
 		break;
 
@@ -297,7 +297,7 @@ oseacomm_simple_frame_available (RRChannel *channel, RRFrame *frame, GError **er
 		// "complete_message_cb")
 
 		// if (oseacomm_channel->buffer->len < 10240)
-		oseacomm_channel->buffer = g_byte_array_append (coyote_channel->buffer, 
+		oseacomm_channel->buffer = g_byte_array_append (oseacomm_channel->buffer, 
 							      frame->payload, frame->size);
 		
 		break;
@@ -313,7 +313,7 @@ oseacomm_simple_frame_available (RRChannel *channel, RRFrame *frame, GError **er
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Calling user defined callback for complete message");
 		
 		// Call to a user defined function.
-		string = g_string_new_len (oseacomm_channel->buffer->data, coyote_channel->buffer->len);
+		string = g_string_new_len (oseacomm_channel->buffer->data, oseacomm_channel->buffer->len);
 		
 		if (instance_cfg && instance_cfg->complete_message_cb) 
 			instance_cfg->complete_message_cb 
@@ -344,20 +344,20 @@ oseacomm_simple_frame_available (RRChannel *channel, RRFrame *frame, GError **er
  * @error: location to store an error of type RR_ERROR or RR_BEEP_ERROR.
  * 
  * This function starts a new channel on @connection using the
- * CoyoteSimple profile.
+ * OseaCommSimple profile.
  * 
- * Return value: A CoyoteSimple object on success and %NULL on failure.
+ * Return value: A OseaCommSimple object on success and %NULL on failure.
  **/
-CoyoteSimple * oseacomm_simple_start (RRConnection *connection, 
-				    CoyoteSimpleCfg * config, 
+OseaCommSimple * oseacomm_simple_start (RRConnection *connection, 
+				    OseaCommSimpleCfg * config, 
 				    GError **error)
 {
-	CoyoteSimple * channel;
+	OseaCommSimple * channel;
 	
 	g_return_val_if_fail (RR_IS_CONNECTION (connection), NULL);
 
-	channel = (CoyoteSimple *) rr_connection_start (connection, NULL, 
-							TYPE_COYOTE_SIMPLE, config, 
+	channel = (OseaCommSimple *) rr_connection_start (connection, NULL, 
+							TYPE_OSEACOMM_SIMPLE, config, 
 							error);
 	if (channel == NULL) {
 		return NULL;
@@ -371,7 +371,7 @@ CoyoteSimple * oseacomm_simple_start (RRConnection *connection,
 
 /**
   * oseacomm_simple_close:
- * @channel: a #CoyoteSimple object
+ * @channel: a #OseaCommSimple object
  * @error: location to store an error of type RR_ERROR or RR_BEEP_ERROR.
  * 
  * This functions closes the channel.
@@ -379,12 +379,12 @@ CoyoteSimple * oseacomm_simple_start (RRConnection *connection,
  * Return value: %TRUE on success, %FALSE on failure.
  **/
 gboolean
-oseacomm_simple_close (CoyoteSimple * channel, GError **error)
+oseacomm_simple_close (OseaCommSimple * channel, GError **error)
 {
 	RRManager *manager;
 	RRConnection *conn;
 
-	g_return_val_if_fail (IS_COYOTE_SIMPLE (channel), FALSE);
+	g_return_val_if_fail (IS_OSEACOMM_SIMPLE (channel), FALSE);
 
 	conn = rr_channel_get_connection (RR_CHANNEL (channel));
 	g_return_val_if_fail (conn, FALSE);
@@ -419,11 +419,11 @@ oseacomm_simple_close (CoyoteSimple * channel, GError **error)
  * Return value: TRUE if sent process was right, otherwise FALSE.
  **/
 gboolean 
-oseacomm_simple_send (CoyoteSimple * channel, gchar * data, gint len, gint free,GError ** error)
+oseacomm_simple_send (OseaCommSimple * channel, gchar * data, gint len, gint free,GError ** error)
 {
 	RRMessage * msg;
 	
-	g_return_val_if_fail (IS_COYOTE_SIMPLE (channel), FALSE);
+	g_return_val_if_fail (IS_OSEACOMM_SIMPLE (channel), FALSE);
 	
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Sending MSG frame...");
 	msg = rr_message_static_new (RR_FRAME_TYPE_MSG, data, len, free);
@@ -450,11 +450,11 @@ oseacomm_simple_send (CoyoteSimple * channel, gchar * data, gint len, gint free,
  * Return value: TRUE if reply process was right, otherwise FALSE.
  **/
 gboolean 
-oseacomm_simple_reply (CoyoteSimple * channel, gchar * data, gint len, gint msg_no, gint free, GError ** error)
+oseacomm_simple_reply (OseaCommSimple * channel, gchar * data, gint len, gint msg_no, gint free, GError ** error)
 {
 	RRMessage * msg;
 	
-	g_return_val_if_fail (IS_COYOTE_SIMPLE (channel), FALSE);
+	g_return_val_if_fail (IS_OSEACOMM_SIMPLE (channel), FALSE);
 	
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Sending RPY frame...");
 	msg = rr_message_static_new (RR_FRAME_TYPE_RPY, data, len, free);
@@ -482,11 +482,11 @@ oseacomm_simple_reply (CoyoteSimple * channel, gchar * data, gint len, gint msg_
  * Return value: TRUE if reply process was right, otherwise FALSE.
  **/
 gboolean 
-oseacomm_simple_reply_error (CoyoteSimple * channel, gchar * data, gint len, gint msg_no, gint free, GError ** error)
+oseacomm_simple_reply_error (OseaCommSimple * channel, gchar * data, gint len, gint msg_no, gint free, GError ** error)
 {
 	RRMessage * msg;
 	
-	g_return_val_if_fail (IS_COYOTE_SIMPLE (channel), FALSE);
+	g_return_val_if_fail (IS_OSEACOMM_SIMPLE (channel), FALSE);
 	
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Sending ERR frame...");
 	msg = rr_message_static_new (RR_FRAME_TYPE_ERR, data, len, free);

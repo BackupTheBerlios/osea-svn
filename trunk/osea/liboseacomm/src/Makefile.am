@@ -1,18 +1,18 @@
 INCLUDES = -g -I$(top_srcdir) $(LIBRARIES_CFLAGS) \
 	-DPACKAGE_DTD_DIR=\""$(datadir)"\"  -Wall
 
-libcoyoteincludedir = $(includedir)/coyote
+liboseacommincludedir = $(includedir)/liboseacomm
 
-lib_LTLIBRARIES = libcoyote.la
+lib_LTLIBRARIES = liboseacomm.la
 
-libcoyote_la_SOURCES =	\
-	coyote_simple.c coyote_simple_cfg.c coyote_xml.c  \
-        coyote_connection.c coyote.c coyote_code.c coyote_dataset.c
+liboseacomm_la_SOURCES =	\
+	oseacomm_simple.c oseacomm_simple_cfg.c oseacomm_xml.c  \
+        oseacomm_connection.c oseacomm.c oseacomm_code.c oseacomm_dataset.c
 
-libcoyoteinclude_HEADERS =	\
-	coyote_simple.h coyote_simple_cfg.h coyote_xml.h \
-	coyote_connection.h coyote.h coyote_code.h coyote_dataset.h
+liboseacomminclude_HEADERS =	\
+	oseacomm_simple.h oseacomm_simple_cfg.h oseacomm_xml.h \
+	oseacomm_connection.h oseacomm.h oseacomm_code.h oseacomm_dataset.h
 
-libcoyote_la_LIBADD = \
+liboseacomm_la_LIBADD = \
 	$(LIBRARIES_LIBS)
 

@@ -1,4 +1,4 @@
-//  LibCoyote:  Support library with xml and communication functions.
+//  LibOseaComm:  Support library with xml and communication functions.
 //  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 
 #include "oseacomm_simple_cfg.h"
 
-#define LOG_DOMAIN "COYOTE_SIMPLE_CFG"
+#define LOG_DOMAIN "OSEACOMM_SIMPLE_CFG"
 
 /**
  * oseacomm_simple_cfg_destroy:
@@ -25,7 +25,7 @@
  * 
  * This function frees up all allocated resources by @config.
  **/
-void oseacomm_simple_cfg_destroy (CoyoteSimpleCfg *config)
+void oseacomm_simple_cfg_destroy (OseaCommSimpleCfg *config)
 {
 	g_return_if_fail (config);
 	g_free (config);
@@ -45,8 +45,8 @@ void oseacomm_simple_cfg_destroy (CoyoteSimpleCfg *config)
  * generated.
  *
  **/
-void oseacomm_simple_cfg_set_frame_available  (CoyoteSimpleCfg *config,
-					     CoyoteSimpleCfgFrameAvailable cb)
+void oseacomm_simple_cfg_set_frame_available  (OseaCommSimpleCfg *config,
+					     OseaCommSimpleCfgFrameAvailable cb)
 {
 	g_return_if_fail (config);
 	g_return_if_fail (cb);
@@ -64,8 +64,8 @@ void oseacomm_simple_cfg_set_frame_available  (CoyoteSimpleCfg *config,
  * event. This event arises when a client wants to close an already
  * opened channe.
  **/
-void oseacomm_simple_cfg_set_close_indication (CoyoteSimpleCfg *config,
-					     CoyoteSimpleCfgCloseIndication cb)
+void oseacomm_simple_cfg_set_close_indication (OseaCommSimpleCfg *config,
+					     OseaCommSimpleCfgCloseIndication cb)
 {
 	g_return_if_fail (config);
 	g_return_if_fail (cb);
@@ -85,8 +85,8 @@ void oseacomm_simple_cfg_set_close_indication (CoyoteSimpleCfg *config,
  * This function sets a callback function for "close confirmation"
  * event. 
  **/
-void oseacomm_simple_cfg_set_close_confirmation (CoyoteSimpleCfg *config,
-					       CoyoteSimpleCfgCloseConfirmation cb)
+void oseacomm_simple_cfg_set_close_confirmation (OseaCommSimpleCfg *config,
+					       OseaCommSimpleCfgCloseConfirmation cb)
 {
 	g_return_if_fail (config);
 	g_return_if_fail (cb);
@@ -96,8 +96,8 @@ void oseacomm_simple_cfg_set_close_confirmation (CoyoteSimpleCfg *config,
 }
 
 
-void oseacomm_simple_cfg_set_finalize         (CoyoteSimpleCfg *config,
-					     CoyoteSimpleCfgFinalize cb)
+void oseacomm_simple_cfg_set_finalize         (OseaCommSimpleCfg *config,
+					     OseaCommSimpleCfgFinalize cb)
 {
 	g_return_if_fail (config);
 	g_return_if_fail (cb);
@@ -115,8 +115,8 @@ void oseacomm_simple_cfg_set_finalize         (CoyoteSimpleCfg *config,
  * event arises when an incoming client connection is going to be
  * started.
  **/
-void oseacomm_simple_cfg_set_server_init      (CoyoteSimpleCfg *config,
-					     CoyoteSimpleCfgServerInit cb,
+void oseacomm_simple_cfg_set_server_init      (OseaCommSimpleCfg *config,
+					     OseaCommSimpleCfgServerInit cb,
 					     gpointer data)
 {
 	g_return_if_fail (config);
@@ -127,8 +127,8 @@ void oseacomm_simple_cfg_set_server_init      (CoyoteSimpleCfg *config,
 	return;
 }
 
-void oseacomm_simple_cfg_set_server_confirm   (CoyoteSimpleCfg *config,
-					     CoyoteSimpleCfgServerConfirmation cb)
+void oseacomm_simple_cfg_set_server_confirm   (OseaCommSimpleCfg *config,
+					     OseaCommSimpleCfgServerConfirmation cb)
 {
 	g_return_if_fail (config);
 	g_return_if_fail (cb);
@@ -136,8 +136,8 @@ void oseacomm_simple_cfg_set_server_confirm   (CoyoteSimpleCfg *config,
 	return;
 }
 
-void oseacomm_simple_cfg_set_client_confirm   (CoyoteSimpleCfg *config,
-					     CoyoteSimpleCfgClientConfirmation cb)
+void oseacomm_simple_cfg_set_client_confirm   (OseaCommSimpleCfg *config,
+					     OseaCommSimpleCfgClientConfirmation cb)
 {
 	g_return_if_fail (config);
 	g_return_if_fail (cb);
@@ -159,8 +159,8 @@ void oseacomm_simple_cfg_set_client_confirm   (CoyoteSimpleCfg *config,
  * message, use this callback.
  *
  **/
-void oseacomm_simple_cfg_set_complete_message (CoyoteSimpleCfg * config,
-					     CoyoteSimpleCfgCompleteMessage cb,
+void oseacomm_simple_cfg_set_complete_message (OseaCommSimpleCfg * config,
+					     OseaCommSimpleCfgCompleteMessage cb,
 					     gpointer data, gpointer custom_data)
 {
 	g_return_if_fail (config);
@@ -188,11 +188,11 @@ void oseacomm_simple_cfg_set_complete_message (CoyoteSimpleCfg * config,
  * 
  * Return value: The config object.
  **/
-CoyoteSimpleCfg * oseacomm_simple_cfg_new     (void)
+OseaCommSimpleCfg * oseacomm_simple_cfg_new     (void)
 {
-	CoyoteSimpleCfg *config;
+	OseaCommSimpleCfg *config;
 	
-	config = g_new0 (CoyoteSimpleCfg, 1);
+	config = g_new0 (OseaCommSimpleCfg, 1);
 	config->buffer = g_byte_array_new ();
 	config->buffer_len = 0;
 

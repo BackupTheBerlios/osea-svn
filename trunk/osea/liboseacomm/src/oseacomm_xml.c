@@ -1,4 +1,4 @@
-//  LibCoyote:  Support library with xml and communication functions.
+//  LibOseaComm:  Support library with xml and communication functions.
 //  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -21,22 +21,22 @@
 #include "oseacomm_xml.h"
 #include "oseacomm_dataset.h"
 
-#define LOG_DOMAIN "COYOTE_XML"
+#define LOG_DOMAIN "OSEACOMM_XML"
 
-typedef struct _CoyoteAttrib CoyoteAttrib;
+typedef struct _OseaCommAttrib OseaCommAttrib;
 
-struct _CoyoteAttrib {
+struct _OseaCommAttrib {
 	gchar *attrib_name;
 	gchar *attrib_value;
 };
 
-struct _CoyoteXmlObject {
+struct _OseaCommXmlObject {
 	xmlDocPtr doc;
 };
 
 
 
-xmlNodePtr __oseacomm_xml_create_table (CoyoteDataSet * data_set, xmlDocPtr doc)
+xmlNodePtr __oseacomm_xml_create_table (OseaCommDataSet * data_set, xmlDocPtr doc)
 {
 	gint i;
 	gint j;
@@ -88,22 +88,22 @@ xmlNodePtr __oseacomm_xml_create_table (CoyoteDataSet * data_set, xmlDocPtr doc)
 
 
 
-xmlNodePtr __oseacomm_xml_insert_arg (xmlDocPtr doc, gchar *attrib, CoyoteXmlArgType type, gpointer value)
+xmlNodePtr __oseacomm_xml_insert_arg (xmlDocPtr doc, gchar *attrib, OseaCommXmlArgType type, gpointer value)
 {
 	xmlNodePtr node = NULL;
 
 	switch (type) {
-	case COYOTE_XML_ARG_STRING:
+	case OSEACOMM_XML_ARG_STRING:
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, " param: %s, %s", attrib, (gchar *)value);
 		node = xmlNewDocRawNode (doc, NULL, "param", NULL);
 		xmlSetProp (node, "attrib", (xmlChar *)attrib);
 		xmlSetProp (node, "value", (xmlChar *)value);
 		break;
-	case COYOTE_XML_ARG_DATASET:
+	case OSEACOMM_XML_ARG_DATASET:
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, " paramtable: %s, DATASET", attrib);
 		node = xmlNewDocRawNode (doc, NULL, "paramtable", NULL);
 		xmlSetProp (node, "attrib", (xmlChar *)attrib);
-		node->children = __oseacomm_xml_create_table ((CoyoteDataSet *)value, doc);
+		node->children = __oseacomm_xml_create_table ((OseaCommDataSet *)value, doc);
 		break;
 	}
 	
@@ -111,25 +111,25 @@ xmlNodePtr __oseacomm_xml_insert_arg (xmlDocPtr doc, gchar *attrib, CoyoteXmlArg
 }
 
 
-CoyoteXmlServiceData *  __oseacomm_xml_parse_service_request (xmlNodePtr cursor, 
+OseaCommXmlServiceData *  __oseacomm_xml_parse_service_request (xmlNodePtr cursor, 
 							    xmlDocPtr document, 
-							    CoyoteXmlServiceData * object )
+							    OseaCommXmlServiceData * object )
 {
 	xmlChar               * string;
 	GString               * row_log;
-	CoyoteXmlServiceNode  * node;
+	OseaCommXmlServiceNode  * node;
 	xmlNodePtr              cursor_table;
 	xmlNodePtr              cursor_row;
 	xmlNodePtr              cursor_data;
-	CoyoteDataSet         * data_set;
+	OseaCommDataSet         * data_set;
 	gint                    i, j;
 	
-	object->type = COYOTE_XML_SERVICE_REQUEST;
+	object->type = OSEACOMM_XML_SERVICE_REQUEST;
 	
 	// For each request service node
 	for (; cursor; cursor = cursor->next) {
 		// Create a node for containing the information
-		node = g_new0 (CoyoteXmlServiceNode, 1);
+		node = g_new0 (OseaCommXmlServiceNode, 1);
 
 		// Set the request service name.
 		node->attrib = g_strdup ((gchar *) xmlGetProp (cursor, "attrib"));
@@ -139,14 +139,14 @@ CoyoteXmlServiceData *  __oseacomm_xml_parse_service_request (xmlNodePtr cursor,
 
 			// We are at a param
 			g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Parsing a param.");
-			node->type = COYOTE_XML_ARG_STRING;
+			node->type = OSEACOMM_XML_ARG_STRING;
 			node->value =  g_strdup ((gchar *) xmlGetProp (cursor, "value"));
 
 		} else {
 
 			// We are at a paramtable	
 			g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Parsing a paramtable.");
-			node->type = COYOTE_XML_ARG_DATASET;
+			node->type = OSEACOMM_XML_ARG_DATASET;
 
 			// Set cursor_table to the table element (there is only one)
 			cursor_table = cursor->children;
@@ -200,19 +200,19 @@ CoyoteXmlServiceData *  __oseacomm_xml_parse_service_request (xmlNodePtr cursor,
 }
 
 
-CoyoteXmlServiceData *  __oseacomm_xml_parse_service_response (xmlNodePtr cursor, 
+OseaCommXmlServiceData *  __oseacomm_xml_parse_service_response (xmlNodePtr cursor, 
 							    xmlDocPtr document, 
-							    CoyoteXmlServiceData * object )
+							    OseaCommXmlServiceData * object )
 {
 	xmlNodePtr              cursor_aux;
 	xmlNodePtr              cursor_aux2;
 	xmlChar               * string;
 	xmlChar               * string2;
-	CoyoteDataSet         * data_set;
+	OseaCommDataSet         * data_set;
 	gint                    i, j;
 	GString               * string_aux;
 	
-	object->type = COYOTE_XML_SERVICE_RESPONSE;
+	object->type = OSEACOMM_XML_SERVICE_RESPONSE;
 
 	// The first element is the status
 	string = xmlGetProp (cursor, "code");
@@ -316,7 +316,7 @@ xmlNodePtr __oseacomm_xml_create_row (GList * row_data, xmlDocPtr doc)
 
 void __oseacomm_xml_dataset_destroy (gpointer data, gpointer usr_data)
 {
-	oseacomm_dataset_free ((CoyoteDataSet *) data);
+	oseacomm_dataset_free ((OseaCommDataSet *) data);
 }
 
 
@@ -329,11 +329,11 @@ void __oseacomm_xml_dataset_destroy (gpointer data, gpointer usr_data)
  * Return value: A new xml object used to build the message containing all xml information.
 **/
 
-CoyoteXmlObject * oseacomm_xml_new_object (void)
+OseaCommXmlObject * oseacomm_xml_new_object (void)
 {
-	CoyoteXmlObject *object;
+	OseaCommXmlObject *object;
 
-	object = g_new (CoyoteXmlObject, 1);
+	object = g_new (OseaCommXmlObject, 1);
 	object -> doc = xmlNewDoc ("1.0");
 	
 	object->doc->children = xmlNewDocRawNode (object->doc, NULL, "general_message", NULL);
@@ -347,9 +347,9 @@ CoyoteXmlObject * oseacomm_xml_new_object (void)
  * oseacomm_xml_destroy_object:
  * @object: object to be freed
  * 
- * Free up the structure CoyoteXmlObject and all the content inside it.
+ * Free up the structure OseaCommXmlObject and all the content inside it.
  **/
-void oseacomm_xml_destroy_object (CoyoteXmlObject * object)
+void oseacomm_xml_destroy_object (OseaCommXmlObject * object)
 {
 	xmlFreeDoc (object->doc);
 	g_free (object);
@@ -367,7 +367,7 @@ void oseacomm_xml_destroy_object (CoyoteXmlObject * object)
  * 
  * Attach to the object a service request, filling it with the given params.
  **/
-void oseacomm_xml_add_request_service  (CoyoteXmlObject * object, gchar * name_of_service, ...)
+void oseacomm_xml_add_request_service  (OseaCommXmlObject * object, gchar * name_of_service, ...)
 {
 	va_list args;
 
@@ -381,12 +381,12 @@ void oseacomm_xml_add_request_service  (CoyoteXmlObject * object, gchar * name_o
 }
 
 
-void oseacomm_xml_add_vrequest_service (CoyoteXmlObject *object, gchar *name_of_service, va_list args)
+void oseacomm_xml_add_vrequest_service (OseaCommXmlObject *object, gchar *name_of_service, va_list args)
 {
 	xmlNodePtr cursor;
 	gboolean first_param = TRUE;
 	gchar *attrib = NULL;
-	CoyoteXmlArgType type;
+	OseaCommXmlArgType type;
 	gpointer value = NULL;
 	
 	g_return_if_fail (object);
@@ -408,14 +408,14 @@ void oseacomm_xml_add_vrequest_service (CoyoteXmlObject *object, gchar *name_of_
 	
 	// parse the unknown-number-of params
 	while ((attrib = va_arg (args, gchar *))) {
-		type = va_arg (args, CoyoteXmlArgType);
+		type = va_arg (args, OseaCommXmlArgType);
 
 		switch (type) {
-		case COYOTE_XML_ARG_STRING:
+		case OSEACOMM_XML_ARG_STRING:
 			value = va_arg (args, gchar *);
 			break;
-		case COYOTE_XML_ARG_DATASET:
-			value = va_arg (args, CoyoteDataSet *);
+		case OSEACOMM_XML_ARG_DATASET:
+			value = va_arg (args, OseaCommDataSet *);
 			break;
 		}
 		
@@ -441,11 +441,11 @@ void oseacomm_xml_add_vrequest_service (CoyoteXmlObject *object, gchar *name_of_
  * oseacomm_xml_validate_message:
  * @message: 
  * 
- * Validates the message against the main dtd of LibCoyote.
+ * Validates the message against the main dtd of LibOseaComm.
  * 
  * Return value: TRUE if the validation was succesful, FALSE if not.
  **/
-gboolean oseacomm_xml_validate_message (CoyoteXmlMessage * message)
+gboolean oseacomm_xml_validate_message (OseaCommXmlMessage * message)
 {
 
 	xmlDtdPtr dtd;
@@ -515,7 +515,7 @@ gboolean oseacomm_xml_validate_message (CoyoteXmlMessage * message)
  * Moreover, this function parses a xml message
  * containing only one request or response service.
  *
- * In the other hand, each field contained in a CoyoteXmlServiceData
+ * In the other hand, each field contained in a OseaCommXmlServiceData
  * is explained: 
  *
  * "name" : this field represents the service request which is been
@@ -523,24 +523,24 @@ gboolean oseacomm_xml_validate_message (CoyoteXmlMessage * message)
  *
  * "protocol_version" : message's protocol version.
  *
- * "item_list" : a list where each element is a CoyoteDataSet
+ * "item_list" : a list where each element is a OseaCommDataSet
  * elment. See oseacomm_dataset module for more detail.
  *
- * Return value: a new CoyoteXmlServiceData structure or NULL if something fails.
+ * Return value: a new OseaCommXmlServiceData structure or NULL if something fails.
  **/
-CoyoteXmlServiceData * oseacomm_xml_parse_message (CoyoteXmlMessage *message)
+OseaCommXmlServiceData * oseacomm_xml_parse_message (OseaCommXmlMessage *message)
 {
 
 	xmlDocPtr document;
 	xmlNodePtr cursor;
 	xmlChar * string;
-	CoyoteXmlServiceData * result;
+	OseaCommXmlServiceData * result;
 	
 	
 	g_return_val_if_fail (message, NULL);
 
 	// Create the result object
-	result = g_new0 (CoyoteXmlServiceData, 1);
+	result = g_new0 (OseaCommXmlServiceData, 1);
 
 	// Load the xml document
 	document = xmlParseMemory ((xmlChar *) message->content, (message->len * sizeof (char)));
@@ -586,13 +586,13 @@ CoyoteXmlServiceData * oseacomm_xml_parse_message (CoyoteXmlMessage *message)
  * 
  * Return value: xml message to be sent
  **/
-CoyoteXmlMessage * oseacomm_xml_build_message (CoyoteXmlObject *object)
+OseaCommXmlMessage * oseacomm_xml_build_message (OseaCommXmlObject *object)
 {
-	CoyoteXmlMessage *message;
+	OseaCommXmlMessage *message;
 	g_return_val_if_fail (object, FALSE);
 	g_return_val_if_fail (object->doc, FALSE);
 
-	message = g_new (CoyoteXmlMessage, 1);
+	message = g_new (OseaCommXmlMessage, 1);
 	xmlDocDumpMemory (object->doc, (xmlChar **) &(message->content), &(message->len));
 
 	return message;
@@ -605,7 +605,7 @@ CoyoteXmlMessage * oseacomm_xml_build_message (CoyoteXmlObject *object)
  * 
  * Free up the message. The char pointer called 'content' is not freed and must be freed later.
  **/
-void oseacomm_xml_destroy_message (CoyoteXmlMessage *message )
+void oseacomm_xml_destroy_message (OseaCommXmlMessage *message )
 {
 	g_free (message);
 }
@@ -617,19 +617,19 @@ void oseacomm_xml_destroy_message (CoyoteXmlMessage *message )
  * @object: 
  * @status_code: 
  * @explanation: 
- * @Varargs: CoyoteDataSet list
+ * @Varargs: OseaCommDataSet list
  *
  * This function adds a response service named by @name_of_service to
  * the @object. @status_code and @explanation vars are the state
  * result from a previous request service.  @Varags is a list of list
  * of strings, so a call to this function should look like
- * ..,explanation, CoyoteDataSet, CoyoteDataSet, NULL) where each
- * CoyoteDateSet contains a single table. This tables will be sent as
+ * ..,explanation, OseaCommDataSet, OseaCommDataSet, NULL) where each
+ * OseaCommDateSet contains a single table. This tables will be sent as
  * logically separeted set of data.
  * 
  **/
-void oseacomm_xml_add_response_service (CoyoteXmlObject * object,
-				      CoyoteCodeType status_code,
+void oseacomm_xml_add_response_service (OseaCommXmlObject * object,
+				      OseaCommCodeType status_code,
 				      gchar * explanation,
 				      ...)
 {
@@ -644,14 +644,14 @@ void oseacomm_xml_add_response_service (CoyoteXmlObject * object,
 	return;
 }
 
-void oseacomm_xml_add_vresponse_service (CoyoteXmlObject * object,
-				       CoyoteCodeType status_code,
+void oseacomm_xml_add_vresponse_service (OseaCommXmlObject * object,
+				       OseaCommCodeType status_code,
 				       gchar * explanation,
 				       va_list args)
 {
 	xmlNodePtr cursor;
-	CoyoteDataSet * table = NULL;
-	CoyoteCode *code_information = NULL;
+	OseaCommDataSet * table = NULL;
+	OseaCommCode *code_information = NULL;
 
 	// Check for incorrect params.
 	g_return_if_fail (object);
@@ -685,7 +685,7 @@ void oseacomm_xml_add_vresponse_service (CoyoteXmlObject * object,
 	// parse the unknown-number-of params
 		
 	// For each recieved table
-	while ( (table = va_arg (args, CoyoteDataSet *))) {
+	while ( (table = va_arg (args, OseaCommDataSet *))) {
 		
 		cursor->next = __oseacomm_xml_create_table (table, object->doc);
 		cursor = cursor->next;
@@ -703,7 +703,7 @@ void oseacomm_xml_add_vresponse_service (CoyoteXmlObject * object,
  * Function to return the memory allocated by @data object. 
  *
  **/
-void oseacomm_xml_parse_destroy (CoyoteXmlServiceData * data)
+void oseacomm_xml_parse_destroy (OseaCommXmlServiceData * data)
 {
 	g_free (data->name);
 	g_free (data->protocol_version);

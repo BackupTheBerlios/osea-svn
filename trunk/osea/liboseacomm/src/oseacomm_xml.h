@@ -1,4 +1,4 @@
-//  LibCoyote:  Support library with xml and communication functions.
+//  LibOseaComm:  Support library with xml and communication functions.
 //  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -15,37 +15,37 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __COYOTE_XML_H__
-#define __COYOTE_XML_H__
+#ifndef __OSEACOMM_XML_H__
+#define __OSEACOMM_XML_H__
 
 #include <glib.h>
 #include "oseacomm_code.h"
 
-typedef struct _CoyoteXmlObject CoyoteXmlObject;
+typedef struct _OseaCommXmlObject OseaCommXmlObject;
 
-typedef struct _CoyoteXmlMessage CoyoteXmlMessage;
+typedef struct _OseaCommXmlMessage OseaCommXmlMessage;
 
-typedef struct _CoyoteXmlServiceData CoyoteXmlServiceData;
+typedef struct _OseaCommXmlServiceData OseaCommXmlServiceData;
 
-typedef struct _CoyoteXmlServiceNode CoyoteXmlServiceNode;
+typedef struct _OseaCommXmlServiceNode OseaCommXmlServiceNode;
 
-typedef enum {COYOTE_XML_SERVICE_REQUEST, COYOTE_XML_SERVICE_RESPONSE} CoyoteXmlServiceType;
+typedef enum {OSEACOMM_XML_SERVICE_REQUEST, OSEACOMM_XML_SERVICE_RESPONSE} OseaCommXmlServiceType;
 
-typedef enum {COYOTE_XML_ARG_STRING, COYOTE_XML_ARG_DATASET} CoyoteXmlArgType;
+typedef enum {OSEACOMM_XML_ARG_STRING, OSEACOMM_XML_ARG_DATASET} OseaCommXmlArgType;
 
-struct _CoyoteXmlMessage {
+struct _OseaCommXmlMessage {
 	gchar *content;
 	gint len;
 };
 
-struct _CoyoteXmlServiceNode {
+struct _OseaCommXmlServiceNode {
 	gchar * attrib;
-	CoyoteXmlArgType type;
+	OseaCommXmlArgType type;
 	gpointer value;
 };
 
-struct _CoyoteXmlServiceData {
-	CoyoteXmlServiceType type;
+struct _OseaCommXmlServiceData {
+	OseaCommXmlServiceType type;
 	gchar * name;
 	gchar * protocol_version;
 	gchar * status;
@@ -54,37 +54,37 @@ struct _CoyoteXmlServiceData {
 };
 
 
-CoyoteXmlObject *      oseacomm_xml_new_object           (void);
+OseaCommXmlObject *      oseacomm_xml_new_object           (void);
 
-void                   oseacomm_xml_destroy_object       (CoyoteXmlObject * object);
+void                   oseacomm_xml_destroy_object       (OseaCommXmlObject * object);
 
-void                   oseacomm_xml_add_request_service  (CoyoteXmlObject * object,
+void                   oseacomm_xml_add_request_service  (OseaCommXmlObject * object,
 							gchar * name_of_service, 
 							...);
 
-void                   oseacomm_xml_add_vrequest_service  (CoyoteXmlObject * object,
+void                   oseacomm_xml_add_vrequest_service  (OseaCommXmlObject * object,
 							 gchar * name_of_service, 
 							 va_list args);
 
-void                   oseacomm_xml_add_response_service (CoyoteXmlObject * object,
-							CoyoteCodeType status_code,
+void                   oseacomm_xml_add_response_service (OseaCommXmlObject * object,
+							OseaCommCodeType status_code,
 							gchar * explanation,
 							...);
 
-void                   oseacomm_xml_add_vresponse_service (CoyoteXmlObject * object,
-							 CoyoteCodeType status_code,
+void                   oseacomm_xml_add_vresponse_service (OseaCommXmlObject * object,
+							 OseaCommCodeType status_code,
 							 gchar * explanation,
 							 va_list args);
 
-gboolean               oseacomm_xml_validate_message     (CoyoteXmlMessage * message);
+gboolean               oseacomm_xml_validate_message     (OseaCommXmlMessage * message);
 				      
-CoyoteXmlServiceData * oseacomm_xml_parse_message        (CoyoteXmlMessage * message);
+OseaCommXmlServiceData * oseacomm_xml_parse_message        (OseaCommXmlMessage * message);
 
-void                   oseacomm_xml_parse_destroy        (CoyoteXmlServiceData * data);
+void                   oseacomm_xml_parse_destroy        (OseaCommXmlServiceData * data);
 
-CoyoteXmlMessage *     oseacomm_xml_build_message        (CoyoteXmlObject * object);
+OseaCommXmlMessage *     oseacomm_xml_build_message        (OseaCommXmlObject * object);
 
-void                   oseacomm_xml_destroy_message      (CoyoteXmlMessage * message);
+void                   oseacomm_xml_destroy_message      (OseaCommXmlMessage * message);
 
 #endif 
 

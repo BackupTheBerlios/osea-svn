@@ -3,9 +3,9 @@
 #include <glib.h>
 #include <unistd.h>
 #include <signal.h>
-#include <src/coyote.h>
+#include <src/oseacomm.h>
 
-#define MODULE_TEST_NAME "coyote_connection"
+#define MODULE_TEST_NAME "oseacomm_connection"
 
 typedef struct _TestNode {
 	gchar * test_description;
@@ -19,7 +19,7 @@ typedef struct _TestNode {
 gboolean server_init (RRChannel *channel,  const gchar *piggyback, GError **error)
 {
 	// initialize the config for the particular instance of the channel
-	channel->instance_config = coyote_simple_cfg_new ();
+	channel->instance_config = oseacomm_simple_cfg_new ();
 
 	rr_channel_set_aggregate (channel, FALSE);
 
@@ -35,22 +35,22 @@ gint launch_server (gchar *port) {
 	GError * error = NULL;
 	RRListener * server;
 	RRProfileRegistry * beep_profile;
-	CoyoteSimpleCfg * config;
+	OseaCommSimpleCfg * config;
 	
 	// Initialize road runner
-	if (!coyote_init (&argc, (gchar ***) &argv, &error)) 
-		g_error ("Error: failed to call coyote_init: %s\n", error->message);
+	if (!oseacomm_init (&argc, (gchar ***) &argv, &error)) 
+		g_error ("Error: failed to call oseacomm_init: %s\n", error->message);
 	
 	// Create the profile registry that will hold our profiles.
 	beep_profile = rr_profile_registry_new ();
 
 	// Create a config object
-	config = coyote_simple_cfg_new ();
+	config = oseacomm_simple_cfg_new ();
 	
-	coyote_simple_cfg_set_server_init (config, server_init, NULL);
+	oseacomm_simple_cfg_set_server_init (config, server_init, NULL);
 		
-	// Add to the supported profiles coyote_simple
-	rr_profile_registry_add_profile (beep_profile, TYPE_COYOTE_SIMPLE, config);  
+	// Add to the supported profiles oseacomm_simple
+	rr_profile_registry_add_profile (beep_profile, TYPE_OSEACOMM_SIMPLE, config);  
 	
 	// Start the server
 	server = rr_tcp_listener_new (beep_profile, "localhost", atoi(port), &error);
@@ -94,10 +94,10 @@ gboolean test1 (void)
 	if (!id)
 		launch_server(port);
 
-	if (!coyote_init (&argc, (gchar ***) &argv, &error)) 
+	if (!oseacomm_init (&argc, (gchar ***) &argv, &error)) 
 		return FALSE;
 	
-	connection = coyote_connection_new ("localhost", port, TYPE_COYOTE_SIMPLE);
+	connection = oseacomm_connection_new ("localhost", port, TYPE_OSEACOMM_SIMPLE);
 
 	if (!connection) {
 		kill (id, SIGKILL);
@@ -109,7 +109,7 @@ gboolean test1 (void)
 }
 
 
-TestNode test_suite []  = {{"coyote_connection_new", test1},{NULL, NULL}};
+TestNode test_suite []  = {{"oseacomm_connection_new", test1},{NULL, NULL}};
 
 /**
  * main:

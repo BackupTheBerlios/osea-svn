@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <glib.h>
-#include <src/coyote.h>
+#include <src/oseacomm.h>
 #include <unistd.h>
 
 #include <libintl.h>
 #include <locale.h>
 
 
-#define MODULE_TEST_NAME "coyote"
+#define MODULE_TEST_NAME "oseacomm"
 
 typedef struct _TestNode {
 	gchar * test_description;
@@ -19,13 +19,13 @@ typedef struct _TestNode {
 /**
  * test1:
  * 
- * This test will perform some checks around initializing coyote.
+ * This test will perform some checks around initializing oseacomm.
  * 
  **/
 gboolean test1 (void)
 {
 	gint argc = 1;
-	gchar *argv[] = {"test_coyote"};
+	gchar *argv[] = {"test_oseacomm"};
 	GError *error;
 	gboolean result;
 
@@ -33,14 +33,14 @@ gboolean test1 (void)
 
 	gchar **argv2 = (gchar **) argv;
 
-	result = coyote_init(&argc, &argv2, &error);
+	result = oseacomm_init(&argc, &argv2, &error);
 
 
 	return result;
 }
 
 
-TestNode test_suite []  = {{"coyote_init", test1}, {NULL, NULL}};
+TestNode test_suite []  = {{"oseacomm_init", test1}, {NULL, NULL}};
 
 /**
  * main:

@@ -5,9 +5,9 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <src/coyote.h>
+#include <src/oseacomm.h>
 
-#define MODULE_TEST_NAME "coyote_connection"
+#define MODULE_TEST_NAME "oseacomm_connection"
 
 typedef struct _TestNode {
 	gchar * test_description;
@@ -21,12 +21,12 @@ typedef struct _TestNode {
 gboolean server_init (RRChannel *channel,  const gchar *piggyback, GError **error)
 {
 	// initialize the config for the particular instance of the channel
-	channel->instance_config = coyote_simple_cfg_new ();
+	channel->instance_config = oseacomm_simple_cfg_new ();
 	return TRUE;
 }
 
 
-gint launch_server (gchar *port, CoyoteSimpleCfg *config) {
+gint launch_server (gchar *port, OseaCommSimpleCfg *config) {
 	
 	gint argc = 1;
 	gchar *argv[] = {"./server"};
@@ -36,8 +36,8 @@ gint launch_server (gchar *port, CoyoteSimpleCfg *config) {
 	RRProfileRegistry * beep_profile;
 	
 	// Initialize road runner
-	if (!coyote_init (&argc, (gchar ***) &argv, &error)) 
-		g_error ("Error: failed to call coyote_init: %s\n", error->message);
+	if (!oseacomm_init (&argc, (gchar ***) &argv, &error)) 
+		g_error ("Error: failed to call oseacomm_init: %s\n", error->message);
 	
 	// Create the profile registry that will hold our profiles.
 	beep_profile = rr_profile_registry_new ();
@@ -45,12 +45,12 @@ gint launch_server (gchar *port, CoyoteSimpleCfg *config) {
 	// Create a config object
 	if (!config) {
 		// If there is no config as a param, we create one
-		config = coyote_simple_cfg_new ();
-		coyote_simple_cfg_set_server_init (config, server_init, NULL);
+		config = oseacomm_simple_cfg_new ();
+		oseacomm_simple_cfg_set_server_init (config, server_init, NULL);
 	}
 		
-	// Add to the supported profiles coyote_simple
-	rr_profile_registry_add_profile (beep_profile, TYPE_COYOTE_SIMPLE, config);  
+	// Add to the supported profiles oseacomm_simple
+	rr_profile_registry_add_profile (beep_profile, TYPE_OSEACOMM_SIMPLE, config);  
 	
 	// Start the server
 	server = rr_tcp_listener_new (beep_profile, "localhost", atoi(port), &error);
@@ -75,7 +75,7 @@ gint launch_server (gchar *port, CoyoteSimpleCfg *config) {
 
 /**
  * test1:
- * This test checks "coyote_simple_start"
+ * This test checks "oseacomm_simple_start"
  * 
  * This test will create a listening server and will try to establish
  * a connection and create a channel
@@ -87,8 +87,8 @@ gboolean test_simple_start (void)
 	gchar *argv[] = {"./test_client"};
 	GError *error = NULL;
 	RRConnection * connection = NULL;
-	CoyoteSimple * coyote_simple = NULL;
-	CoyoteSimpleCfg * coyote_simple_cfg = NULL;
+	OseaCommSimple * oseacomm_simple = NULL;
+	OseaCommSimpleCfg * oseacomm_simple_cfg = NULL;
 	int status = 0;
 	pid_t id;
 	gchar *port = "55500";	
@@ -98,30 +98,30 @@ gboolean test_simple_start (void)
 
 	sleep (1);
 
-	if (!coyote_init (&argc, (gchar ***) &argv, &error)) 
+	if (!oseacomm_init (&argc, (gchar ***) &argv, &error)) 
 		return FALSE;
 	
-	connection = coyote_connection_new ("localhost", port, TYPE_COYOTE_SIMPLE);
+	connection = oseacomm_connection_new ("localhost", port, TYPE_OSEACOMM_SIMPLE);
 	if (! connection) {
 		kill (id, SIGKILL);
 		waitpid (id, &status, 0);
-		coyote_exit (&error);
+		oseacomm_exit (&error);
 		return FALSE;
 	} else {
 
-		coyote_simple_cfg = coyote_simple_cfg_new ();
-		coyote_simple = coyote_simple_start (connection, 
-						     coyote_simple_cfg,
+		oseacomm_simple_cfg = oseacomm_simple_cfg_new ();
+		oseacomm_simple = oseacomm_simple_start (connection, 
+						     oseacomm_simple_cfg,
 						     &error);
-		if (! coyote_simple) {
+		if (! oseacomm_simple) {
 			kill (id, SIGKILL);
 			waitpid (id, &status, 0);
-			coyote_exit (&error);
+			oseacomm_exit (&error);
 			return FALSE;
 		} else {			
 			kill (id, SIGKILL);
 			waitpid (id, &status, 0);
-			coyote_exit (&error);
+			oseacomm_exit (&error);
 			return TRUE;
 		}
 	}
@@ -130,7 +130,7 @@ gboolean test_simple_start (void)
 
 /**
  * test2:
- * This check tests "coyote_simple_stop"
+ * This check tests "oseacomm_simple_stop"
  *
  * 
  * This test will create a listening server and will try to establish
@@ -143,8 +143,8 @@ gboolean test_simple_stop (void)
 	gchar *argv[] = {"./test_client"};
 	GError *error = NULL;
 	RRConnection * connection = NULL;
-	CoyoteSimple * channel = NULL;
-	CoyoteSimpleCfg * coyote_simple_cfg = NULL;
+	OseaCommSimple * channel = NULL;
+	OseaCommSimpleCfg * oseacomm_simple_cfg = NULL;
 	int status = 0;
 	pid_t id;
 	gchar *port = "55501";	
@@ -158,39 +158,39 @@ gboolean test_simple_stop (void)
 
 	sleep (1);
 	
-	if (!coyote_init (&argc, (gchar ***) &argv, &error)) 
+	if (!oseacomm_init (&argc, (gchar ***) &argv, &error)) 
 		return FALSE;
 	
-	connection = coyote_connection_new ("localhost", port, TYPE_COYOTE_SIMPLE);
+	connection = oseacomm_connection_new ("localhost", port, TYPE_OSEACOMM_SIMPLE);
 
 	if (!connection) {
 		kill (id, SIGKILL);
 		waitpid (id, &status, 0);
-		coyote_exit (&error);
+		oseacomm_exit (&error);
 		return FALSE;
 	} else {
 		
-		coyote_simple_cfg = coyote_simple_cfg_new ();
+		oseacomm_simple_cfg = oseacomm_simple_cfg_new ();
 
-		channel = coyote_simple_start (connection, 
-						     coyote_simple_cfg,
+		channel = oseacomm_simple_start (connection, 
+						     oseacomm_simple_cfg,
 						     &error);
 
 		if (! channel) {
 			kill (id, SIGKILL);
 			waitpid (id, &status, 0);
-			coyote_exit (&error);
+			oseacomm_exit (&error);
 			return FALSE;
 		} else {
-			if (coyote_simple_close (channel, &error)) {
+			if (oseacomm_simple_close (channel, &error)) {
 				kill (id, SIGKILL);
 				waitpid (id, &status, 0);
-				coyote_exit (&error);
+				oseacomm_exit (&error);
 				return TRUE;
 			} else {
 				kill (id, SIGKILL);
 				waitpid (id, &status, 0);
-				coyote_exit (&error);
+				oseacomm_exit (&error);
 				return FALSE;
 			}
 		}
@@ -212,7 +212,7 @@ gboolean test_simple_cfg_server_init_callback (RRChannel *channel,  const gchar 
 
 /**
  * test_simple_cfg_server_init:
- * This check tests "coyote_simple_cfg_set_server_init"
+ * This check tests "oseacomm_simple_cfg_set_server_init"
  *
  * 
  * This test will create a listening server and will try to establish
@@ -225,44 +225,44 @@ gboolean test_simple_cfg_server_init (void)
 	gchar *argv[] = {"./test_client"};
 	GError *error = NULL;
 	RRConnection * connection = NULL;
-	CoyoteSimple * channel = NULL;
-	CoyoteSimpleCfg * coyote_simple_cfg = NULL;
+	OseaCommSimple * channel = NULL;
+	OseaCommSimpleCfg * oseacomm_simple_cfg = NULL;
 	pid_t id;
 	gchar *port = "55503";	
 
 
 	// Creating a configuration
-	coyote_simple_cfg = coyote_simple_cfg_new ();
-	coyote_simple_cfg_set_server_init (coyote_simple_cfg, test_simple_cfg_server_init_callback, NULL);
+	oseacomm_simple_cfg = oseacomm_simple_cfg_new ();
+	oseacomm_simple_cfg_set_server_init (oseacomm_simple_cfg, test_simple_cfg_server_init_callback, NULL);
 
 
 	id = fork();
 
 	if (!id) {
-		launch_server (port, coyote_simple_cfg);
+		launch_server (port, oseacomm_simple_cfg);
 		exit;
 	}
 
 	sleep (1);
 
-	if (!coyote_init (&argc, (gchar ***) &argv, &error)) 
+	if (!oseacomm_init (&argc, (gchar ***) &argv, &error)) 
 		return FALSE;
 	
-	connection = coyote_connection_new ("localhost", port, TYPE_COYOTE_SIMPLE);
+	connection = oseacomm_connection_new ("localhost", port, TYPE_OSEACOMM_SIMPLE);
 
 	if (!connection) {
 		kill (id, SIGKILL);
 		return FALSE;
 	} else {
-		channel = coyote_simple_start (connection, 
-					       coyote_simple_cfg,
+		channel = oseacomm_simple_start (connection, 
+					       oseacomm_simple_cfg,
 					       &error);
 		
 		if (! channel) {
 			kill (id, SIGKILL);
 			return FALSE;
 		} else {
-			coyote_simple_close (channel, &error);
+			oseacomm_simple_close (channel, &error);
 			kill (id, SIGKILL);
 			return TRUE;
 		}
@@ -270,8 +270,8 @@ gboolean test_simple_cfg_server_init (void)
 }
 
 
-TestNode test_suite []  = {{"coyote_simple_start", test_simple_start},
-                           {"coyote_simple_close", test_simple_stop}, {NULL, NULL}};
+TestNode test_suite []  = {{"oseacomm_simple_start", test_simple_start},
+                           {"oseacomm_simple_close", test_simple_stop}, {NULL, NULL}};
 
 /**
  * main:
