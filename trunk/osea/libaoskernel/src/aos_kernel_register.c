@@ -92,7 +92,7 @@ gboolean aos_kernel_register_get_servers (OseaClientDataFunc usr_function,
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 

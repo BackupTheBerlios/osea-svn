@@ -1,4 +1,4 @@
-//  LibAfdalKernel: interface library to the kernel daemonstdin: is not a tty
+//  LibAosKernel: interface library to the kernel daemonstdin: is not a tty
 
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
@@ -23,14 +23,14 @@
 #include <config.h>
 #include <time.h>
 
-#define LOG_DOMAIN "AFDAL_KERNEL"
+#define LOG_DOMAIN "AOS_KERNEL"
 
 
 void aos_kernel_print_version_info ()
 {
 	glong cd = COMPILATION_DATE;
 
-	g_print ("\tLibAfDalKernel version %s, compiled %s", VERSION, ctime(&cd));
+	g_print ("\tLibAosKernel version %s, compiled %s", VERSION, ctime(&cd));
 }
 
 

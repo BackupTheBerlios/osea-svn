@@ -1,5 +1,5 @@
 //
-//  LibAfdalKernel: interface library to the kernel daemon
+//  LibAosKernel: interface library to the kernel daemon
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -87,7 +87,7 @@ static  void __aos_kernel_server_list_process (RRChannel * channel,
  * @usr_function: function to be executed on server response.
  * @usr_data: user data to be passed to @user_function
  * 
- * List all installed servers at af-kernel.
+ * List all installed servers at os-kernel.
  * 
  * Return value: 
  **/
@@ -100,7 +100,7 @@ gboolean           aos_kernel_server_list     (gint           initial_server,
 	GString * init, * rows;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -130,7 +130,7 @@ gboolean           aos_kernel_server_list     (gint           initial_server,
  * @usr_function: function to be executed on server response.
  * @usr_data: user data to be passed to @user_function
  * 
- * Removes from af-kernel the server identified by @id.
+ * Removes from os-kernel the server identified by @id.
  * 
  * Return value: 
  **/
@@ -142,7 +142,7 @@ gboolean           aos_kernel_server_remove   (gint id,
 	gboolean  result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	

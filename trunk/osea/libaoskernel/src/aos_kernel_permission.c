@@ -1,5 +1,5 @@
 //
-//  LibAfdalKernel: interface library to the kernel daemon
+//  LibAosKernel: interface library to the kernel daemon
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -106,7 +106,7 @@ gboolean           aos_kernel_permission_list     (gint           initial_permis
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -148,7 +148,7 @@ gboolean           aos_kernel_permission_list_by_user        (gint           ini
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -196,7 +196,7 @@ gboolean           aos_kernel_permission_actual_list_by_user        (gint       
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -244,7 +244,7 @@ gboolean           aos_kernel_permission_from_group_list_by_user  (gint         
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -291,7 +291,7 @@ gboolean           aos_kernel_permission_list_by_group       (gint           ini
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -337,7 +337,7 @@ gboolean           aos_kernel_permission_user_set   (gint           id,
 	string_id = g_strdup_printf ("%d", id);
 	string_user_id = g_strdup_printf ("%d", user_id);
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -374,7 +374,7 @@ gboolean           aos_kernel_permission_user_unset (gint           id,
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -440,7 +440,7 @@ gboolean           aos_kernel_permission_group_set   (gint           id,
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -480,7 +480,7 @@ gboolean           aos_kernel_permission_group_unset (gint           id,
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 

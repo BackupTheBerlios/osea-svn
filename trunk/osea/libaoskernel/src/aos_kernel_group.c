@@ -1,5 +1,5 @@
 //
-//  LibAfdalKernel: interface library to the kernel daemon
+//  LibAosKernel: interface library to the kernel daemon
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -84,7 +84,7 @@ static  void __aos_kernel_group_list_process (RRChannel * channel,
  * @usr_function: function to be executed on server response.
  * @usr_data: user data to be passed to @user_function
  * 
- * List all available group at af-kernel. 
+ * List all available group at os-kernel. 
  * 
  * Return value: 
  **/
@@ -97,7 +97,7 @@ gboolean           aos_kernel_group_list     (gint           initial_group,
 	gchar * init, * rows;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -136,7 +136,7 @@ gboolean           aos_kernel_group_new      (gchar           * name,
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -165,7 +165,7 @@ gboolean           aos_kernel_group_remove   (gint id,
 	gboolean  result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -206,7 +206,7 @@ gboolean           aos_kernel_group_edit     (gint           id,
 	gboolean  result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -248,7 +248,7 @@ gboolean           aos_kernel_group_add_user     (gint           group_id,
 	gboolean  result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -289,7 +289,7 @@ gboolean          aos_kernel_group_remove_user   (gint           group_id,
 	gchar        * string_user_id;
 	gboolean       result;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -331,7 +331,7 @@ gboolean          aos_kernel_group_list_user   (gint           initial_group,
 	gchar * init, * rows, * id_group;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	

@@ -1,5 +1,5 @@
 //
-//  LibAfdalKernel: interface library to the kernel daemon
+//  LibAosKernel: interface library to the kernel daemon
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -96,7 +96,7 @@ gboolean           aos_kernel_user_list     (gint           initial_user,
 	GString * init, * rows;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -140,7 +140,7 @@ gboolean           aos_kernel_user_new      (gchar           * nick,
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -170,7 +170,7 @@ gboolean           aos_kernel_user_remove   (gint id,
 	gboolean       result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -211,7 +211,7 @@ gboolean           aos_kernel_user_edit     (gint           id,
 	gboolean  result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -253,7 +253,7 @@ gboolean          aos_kernel_user_list_group   (gint           initial_group,
 	gchar * init, * rows, * id_group;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 	if (! connection)
 		return FALSE;
 	

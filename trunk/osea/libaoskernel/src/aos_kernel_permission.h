@@ -1,5 +1,5 @@
 //
-//  LibAfdalKernel: interface library to the kernel daemon
+//  LibAosKernel: interface library to the kernel daemon
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
