@@ -6,10 +6,10 @@
 # of using the various options.
 
 # The name of the module, e.g. 'glib'.
-DOC_MODULE=af-arch
+DOC_MODULE=osea
 
 # The top-level SGML file. Change it if you want.
-DOC_MAIN_SGML_FILE=af-arch-docs.sgml
+DOC_MAIN_SGML_FILE=osea-docs.sgml
 
 # The directory containing the source code. Relative to $(srcdir).
 # gtk-doc will search all .c & .h files beneath here for inline comments
