@@ -1370,7 +1370,7 @@
 
 <widget class="GtkWindow" id="user_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">User properties - ASPL Fact</property>
+  <property name="title" translatable="yes">User properties - öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">True</property>
@@ -1974,7 +1974,7 @@
 
 <widget class="GtkWindow" id="group_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Group properties - ASPL Fact</property>
+  <property name="title" translatable="yes">Group properties - öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">True</property>

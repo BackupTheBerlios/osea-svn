@@ -1348,7 +1348,7 @@
 
 <widget class="GtkWindow" id="customer_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">VAT Customer Type - ASPL Fact</property>
+  <property name="title" translatable="yes">VAT Customer Type - öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">True</property>
@@ -1799,7 +1799,7 @@
 
 <widget class="GtkWindow" id="item_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">VAT Item Type - ASPL Fact</property>
+  <property name="title" translatable="yes">VAT Item Type - öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">True</property>

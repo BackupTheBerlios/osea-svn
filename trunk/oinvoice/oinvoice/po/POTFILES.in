@@ -1,6 +1,6 @@
 # List of source files containing translatable strings.
+[encoding: UTF-8]
 src/about_window.c
-src/af_data_model.c
 src/connection_progress_window.c
 src/connection_settings_window.c
 src/connection_settings_wizard.c

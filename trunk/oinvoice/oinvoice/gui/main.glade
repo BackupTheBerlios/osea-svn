@@ -5,7 +5,7 @@
 
 <widget class="GtkWindow" id="main_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">ASPL Fact</property>
+  <property name="title" translatable="yes">öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">False</property>
@@ -145,7 +145,7 @@
 
 <widget class="GtkWindow" id="about_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">About ASPL Fact</property>
+  <property name="title" translatable="yes">About öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">True</property>
@@ -197,7 +197,7 @@
 	      <child>
 		<widget class="GtkLabel" id="label40">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;/big&gt;&lt;b&gt;ASPL Fact ML4&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;</property>
+		  <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;/big&gt;&lt;b&gt;öInvoice ML4&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -287,7 +287,7 @@ Marcos Olmos &amp;lt;marcos@aspl.es&amp;gt;
 	  <child>
 	    <widget class="GtkLabel" id="label37">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_About ASPL Fact</property>
+	      <property name="label" translatable="yes">_About öInvoice</property>
 	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -419,7 +419,7 @@ Marcos Olmos &amp;lt;marcos@aspl.es&amp;gt;
 
 <widget class="GtkWindow" id="error_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">ASPL Fact</property>
+  <property name="title" translatable="yes">öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">False</property>
@@ -885,7 +885,7 @@ Please contact your administrator for notifying this problem.</property>
 
 <widget class="GtkWindow" id="session_expired_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">ASPL Fact. Session expired</property>
+  <property name="title" translatable="yes">öInvoice. Session expired</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">True</property>

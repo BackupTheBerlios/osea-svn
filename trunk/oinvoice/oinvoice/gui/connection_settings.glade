@@ -5,7 +5,7 @@
 
 <widget class="GtkWindow" id="connection_settings_window">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Connection settings - ASPL Fact</property>
+  <property name="title" translatable="yes">Connection settings - öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">True</property>
@@ -333,7 +333,7 @@
 
 <widget class="GtkWindow" id="connection_settings_wizard">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Connection settings wizard - ASPL Fact</property>
+  <property name="title" translatable="yes">Connection settings wizard - öInvoice</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">False</property>
@@ -364,7 +364,7 @@
 	      <child>
 		<widget class="GtkLabel" id="label24">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;ASPL Fact client configuration&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;</property>
+		  <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;öInvoice client configuration&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -419,9 +419,9 @@
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">
 
-This wizard will assist you to set up your ASPL Fact client program.
+This wizard will assist you to set up your öInvoice client program.
 
-You will need information about your ASPL Fact central server, that should be provided by your system manager.
+You will need information about your öInvoice central server, that should be provided by your system manager.
 
 </property>
 		  <property name="use_underline">False</property>
@@ -543,7 +543,7 @@ You will need information about your ASPL Fact central server, that should be pr
 		      <child>
 			<widget class="GtkLabel" id="label29">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">&lt;i&gt;Enter here the hostname or the IP address of the host where the ASPL Fact central server (kernel) is running.&lt;/i&gt;</property>
+			  <property name="label" translatable="yes">&lt;i&gt;Enter here the hostname or the IP address of the host where the öInvoice central server (kernel) is running.&lt;/i&gt;</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">True</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -667,7 +667,7 @@ You will need information about your ASPL Fact central server, that should be pr
 		      <child>
 			<widget class="GtkLabel" id="label32">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">&lt;i&gt;Enter here the port number ASPL Fact central server (kernel) is listening to. (The default value is 55000)&lt;/i&gt;</property>
+			  <property name="label" translatable="yes">&lt;i&gt;Enter here the port number öInvoice central server (kernel) is listening to. (The default value is 55000)&lt;/i&gt;</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">True</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -743,7 +743,7 @@ You will need information about your ASPL Fact central server, that should be pr
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">
 
-The client connection settings for communicate to ASPL Fact central server has been established.
+The client connection settings for communicate to öInvoice central server has been established.
 
 Press Apply to continue.
 
