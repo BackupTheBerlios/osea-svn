@@ -3,9 +3,9 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: libafdal
-Description: Common functions to libafdal* level.
-Requires: coyote
+Name: liboseaclient
+Description: öSea client functions
+Requires: liboseacomm
 Version: @VERSION@
-Libs: -L${libdir} -lafdal
+Libs: -L${libdir} -loseaclient
 Cflags: -I${includedir}

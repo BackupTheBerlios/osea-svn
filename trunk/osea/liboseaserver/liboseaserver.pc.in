@@ -3,9 +3,9 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: libafgs
-Description: Support library for all Aspl Fact servers
-Requires: coyote
+Name: liboseaserver
+Description: Support library for all öSea servers
+Requires: liboseacomm
 Version: @VERSION@
-Libs: -L${libdir} -lcoyote -lafgs 
+Libs: -L${libdir} -loseaserver
 Cflags: -I${includedir}

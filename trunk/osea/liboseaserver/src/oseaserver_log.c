@@ -159,7 +159,7 @@ void oseaserver_log_check_and_disable_glog ()
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);
 		g_log_set_handler ("oseaserver_database", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);
-		g_log_set_handler ("af-kernel_register_request", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
+		g_log_set_handler ("os-kernel_register_request", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);
 		g_log_set_handler ("oseaserver_main", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);

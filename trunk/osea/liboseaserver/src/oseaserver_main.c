@@ -227,7 +227,7 @@ void oseaserver_main_run_server (gchar                * server_name,
 	RRProfileRegistry * beep_profile;
 	RRListener        * server;
 	struct poptOption   oseaserver_main_popoptions[] = { 
-		{ "update-services", 'u', POPT_ARG_NONE, &oseaserver_main_update_services_option, 0, "Send a update-services message to af-kernel for refreshing permission data", NULL},
+		{ "update-services", 'u', POPT_ARG_NONE, &oseaserver_main_update_services_option, 0, "Send a update-services message to os-kernel for refreshing permission data", NULL},
 		{ "version", 'v', POPT_ARG_NONE, &oseaserver_main_version_option, 0, "Show version info", NULL},
 //		{ NULL, '\0', POPT_ARG_INCLUDE_TABLE, server_extra_popt_option, 0, "Specific server options", NULL},
 		POPT_AUTOHELP
@@ -239,7 +239,7 @@ void oseaserver_main_run_server (gchar                * server_name,
 		POPT_TABLEEND
 	};
 
-	if (! strcmp ("af-kernel", server_name)) {
+	if (! strcmp ("os-kernel", server_name)) {
 		is_accepting_connections = TRUE;
 		ctx = poptGetContext (server_name, *argc, (const gchar **) *argv, oseaserver_main_kernel_popoptions, 0);
 	} else
@@ -286,7 +286,7 @@ void oseaserver_main_run_server (gchar                * server_name,
 	oseaserver_services_set (services_provided);
 
 
-	if (strcmp ("af-kernel", server_name)) {
+	if (strcmp ("os-kernel", server_name)) {
 		// Check for --update-services param
 		
 		if (oseaserver_main_update_services_option) {

@@ -123,7 +123,7 @@ static  void __oseaserver_services_kernel_response_received (RRChannel * channel
 		kernel_ok_response = TRUE;
 	else {
 		kernel_ok_response = FALSE;
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,  "Af-kernel response: %s\n", oseaclient_data->text_response);
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,  "os-kernel response: %s\n", oseaclient_data->text_response);
 	}
 	
 	active_wait = FALSE;
@@ -208,7 +208,7 @@ gboolean oseaserver_services_update (const gchar *server_name, const gchar *serv
 	g_free (kernel_port);
 	
 	if (!connection) {
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to af-kernel in %s:%s", 
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to os-kernel in %s:%s", 
 		       kernel_hostname, kernel_port);
 		return FALSE;
 	}
