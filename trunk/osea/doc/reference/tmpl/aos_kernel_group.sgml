@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-afdal_kernel_group
+aos_kernel_group
 
 <!-- ##### SECTION Short_Description ##### -->
-This module allow to manage all group related services at af-kernel server.
+This module allow to manage all group related services at os-kernel server.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -14,7 +14,7 @@ This module allow to manage all group related services at af-kernel server.
 
 </para>
 
-<!-- ##### FUNCTION afdal_kernel_group_list ##### -->
+<!-- ##### FUNCTION aos_kernel_group_list ##### -->
 <para>
 
 </para>
@@ -26,7 +26,7 @@ This module allow to manage all group related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_group_new ##### -->
+<!-- ##### FUNCTION aos_kernel_group_new ##### -->
 <para>
 
 </para>
@@ -38,7 +38,7 @@ This module allow to manage all group related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_group_remove ##### -->
+<!-- ##### FUNCTION aos_kernel_group_remove ##### -->
 <para>
 
 </para>
@@ -49,7 +49,7 @@ This module allow to manage all group related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_group_edit ##### -->
+<!-- ##### FUNCTION aos_kernel_group_edit ##### -->
 <para>
 
 </para>
@@ -62,7 +62,7 @@ This module allow to manage all group related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_group_add_user ##### -->
+<!-- ##### FUNCTION aos_kernel_group_add_user ##### -->
 <para>
 
 </para>
@@ -74,7 +74,7 @@ This module allow to manage all group related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_group_remove_user ##### -->
+<!-- ##### FUNCTION aos_kernel_group_remove_user ##### -->
 <para>
 
 </para>
@@ -86,7 +86,7 @@ This module allow to manage all group related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_group_list_user ##### -->
+<!-- ##### FUNCTION aos_kernel_group_list_user ##### -->
 <para>
 
 </para>

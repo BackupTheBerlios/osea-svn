@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-afdal_kernel_register
+aos_kernel_register
 
 <!-- ##### SECTION Short_Description ##### -->
 This module allow to figure out which servers are registered.
@@ -14,7 +14,7 @@ This module allow to figure out which servers are registered.
 
 </para>
 
-<!-- ##### FUNCTION afdal_kernel_register_get_servers ##### -->
+<!-- ##### FUNCTION aos_kernel_register_get_servers ##### -->
 <para>
 
 </para>

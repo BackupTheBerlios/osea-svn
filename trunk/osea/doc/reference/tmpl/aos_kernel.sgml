@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-afdal_kernel_server
+aos_kernel_server
 
 <!-- ##### SECTION Short_Description ##### -->
-This module allow to manage all server related services at af-kernel server.
+This module allow to manage all server related services at os-kernel server.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -14,7 +14,7 @@ This module allow to manage all server related services at af-kernel server.
 
 </para>
 
-<!-- ##### FUNCTION afdal_kernel_server_list ##### -->
+<!-- ##### FUNCTION aos_kernel_server_list ##### -->
 <para>
 
 </para>
@@ -26,7 +26,7 @@ This module allow to manage all server related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_server_remove ##### -->
+<!-- ##### FUNCTION aos_kernel_server_remove ##### -->
 <para>
 
 </para>

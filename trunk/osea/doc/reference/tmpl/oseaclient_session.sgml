@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-afdal_session
+oseaclient_session
 
 <!-- ##### SECTION Short_Description ##### -->
 Functions for client and server session mainteinance
@@ -7,7 +7,7 @@ Functions for client and server session mainteinance
 <!-- ##### SECTION Long_Description ##### -->
 <para>
 This functions are used by clients and servers for connecting to
-af-kernel, obtaining session info and connecting to other servers.
+os-kernel, obtaining session info and connecting to other servers.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -15,7 +15,7 @@ af-kernel, obtaining session info and connecting to other servers.
 
 </para>
 
-<!-- ##### FUNCTION afdal_session_login ##### -->
+<!-- ##### FUNCTION oseaclient_session_login ##### -->
 <para>
 
 </para>
@@ -29,7 +29,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_logout ##### -->
+<!-- ##### FUNCTION oseaclient_session_logout ##### -->
 <para>
 
 </para>
@@ -39,7 +39,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_refresh_key ##### -->
+<!-- ##### FUNCTION oseaclient_session_refresh_key ##### -->
 <para>
 
 </para>
@@ -50,7 +50,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_refresh_session ##### -->
+<!-- ##### FUNCTION oseaclient_session_refresh_session ##### -->
 <para>
 
 </para>
@@ -61,7 +61,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_send_afkey ##### -->
+<!-- ##### FUNCTION oseaclient_session_send_afkey ##### -->
 <para>
 
 </para>
@@ -72,7 +72,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_register ##### -->
+<!-- ##### FUNCTION oseaclient_session_register ##### -->
 <para>
 
 </para>
@@ -88,7 +88,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_unregister ##### -->
+<!-- ##### FUNCTION oseaclient_session_unregister ##### -->
 <para>
 
 </para>
@@ -98,7 +98,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_server_exists ##### -->
+<!-- ##### FUNCTION oseaclient_session_server_exists ##### -->
 <para>
 
 </para>
@@ -107,7 +107,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_active_servers ##### -->
+<!-- ##### FUNCTION oseaclient_session_active_servers ##### -->
 <para>
 
 </para>
@@ -115,7 +115,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_server_free ##### -->
+<!-- ##### FUNCTION oseaclient_session_server_free ##### -->
 <para>
 
 </para>
@@ -123,7 +123,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @pserv: 
 
 
-<!-- ##### FUNCTION afdal_session_get_permission_list ##### -->
+<!-- ##### FUNCTION oseaclient_session_get_permission_list ##### -->
 <para>
 
 </para>
@@ -132,7 +132,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_free_permission_list ##### -->
+<!-- ##### FUNCTION oseaclient_session_free_permission_list ##### -->
 <para>
 
 </para>
@@ -140,7 +140,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @permissions: 
 
 
-<!-- ##### FUNCTION afdal_session_get_permission ##### -->
+<!-- ##### FUNCTION oseaclient_session_get_permission ##### -->
 <para>
 
 </para>
@@ -150,7 +150,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_get_connection ##### -->
+<!-- ##### FUNCTION oseaclient_session_get_connection ##### -->
 <para>
 
 </para>
@@ -160,7 +160,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_delete_connection ##### -->
+<!-- ##### FUNCTION oseaclient_session_delete_connection ##### -->
 <para>
 
 </para>
@@ -168,7 +168,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @server_name: 
 
 
-<!-- ##### FUNCTION afdal_session_new_connection ##### -->
+<!-- ##### FUNCTION oseaclient_session_new_connection ##### -->
 <para>
 
 </para>
@@ -178,7 +178,7 @@ af-kernel, obtaining session info and connecting to other servers.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_session_get_server_name ##### -->
+<!-- ##### FUNCTION oseaclient_session_get_server_name ##### -->
 <para>
 
 </para>

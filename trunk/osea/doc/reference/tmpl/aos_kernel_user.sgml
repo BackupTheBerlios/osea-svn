@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-afdal_kernel_user
+aos_kernel_user
 
 <!-- ##### SECTION Short_Description ##### -->
-This module allow to manage all user related services at af-kernel server.
+This module allow to manage all user related services at os-kernel server.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -14,7 +14,7 @@ This module allow to manage all user related services at af-kernel server.
 
 </para>
 
-<!-- ##### FUNCTION afdal_kernel_user_list ##### -->
+<!-- ##### FUNCTION aos_kernel_user_list ##### -->
 <para>
 
 </para>
@@ -26,7 +26,7 @@ This module allow to manage all user related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_user_new ##### -->
+<!-- ##### FUNCTION aos_kernel_user_new ##### -->
 <para>
 
 </para>
@@ -39,7 +39,7 @@ This module allow to manage all user related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_user_remove ##### -->
+<!-- ##### FUNCTION aos_kernel_user_remove ##### -->
 <para>
 
 </para>
@@ -50,7 +50,7 @@ This module allow to manage all user related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_user_edit ##### -->
+<!-- ##### FUNCTION aos_kernel_user_edit ##### -->
 <para>
 
 </para>
@@ -64,7 +64,7 @@ This module allow to manage all user related services at af-kernel server.
 @Returns: 
 
 
-<!-- ##### FUNCTION afdal_kernel_user_list_group ##### -->
+<!-- ##### FUNCTION aos_kernel_user_list_group ##### -->
 <para>
 
 </para>
