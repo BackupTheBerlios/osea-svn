@@ -1,6 +1,7 @@
-SUBDIRS = src test doc
+SUBDIRS = src 
+#test doc
 
-EXTRA_DIST = COPYING afdaltax.pc.in
+EXTRA_DIST = COPYING libaostax.pc.in
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = aostax.pc
+pkgconfig_DATA = libaostax.pc
