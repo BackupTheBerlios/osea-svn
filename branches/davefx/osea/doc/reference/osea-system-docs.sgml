@@ -1,0 +1,94 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!ENTITY af-arch-AfDalDataNode SYSTEM "sgml/afdal-datanode.sgml">
+<!ENTITY af-arch-AfDalKernelUser SYSTEM "sgml/afdal-kernel-user.sgml">
+<!ENTITY af-arch-AfDalKernelGroup SYSTEM "sgml/afdal-kernel-group.sgml">
+<!ENTITY af-arch-coyote SYSTEM "sgml/coyote.sgml">
+<!ENTITY af-arch-coyote-code SYSTEM "sgml/coyote_code.sgml">
+<!ENTITY af-arch-coyote-connection SYSTEM "sgml/coyote_connection.sgml">
+<!ENTITY af-arch-coyote-dataset SYSTEM "sgml/coyote_dataset.sgml">
+<!ENTITY af-arch-CoyoteSimple SYSTEM "sgml/coyote_simple.sgml">
+<!ENTITY af-arch-coyote-simple-cfg SYSTEM "sgml/coyote_simple_cfg.sgml">
+<!ENTITY af-arch-coyote-xml SYSTEM "sgml/coyote_xml.sgml">
+<!ENTITY af-arch-afdal SYSTEM "sgml/afdal.sgml">
+<!ENTITY af-arch-afdal-decimal SYSTEM "sgml/afdal_decimal.sgml">
+<!ENTITY af-arch-afdal-event-source SYSTEM "sgml/afdal_event_source.sgml">
+<!ENTITY af-arch-afdal-list SYSTEM "sgml/afdal_list.sgml">
+<!ENTITY af-arch-afdal-password SYSTEM "sgml/afdal_password.sgml">
+<!ENTITY af-arch-afdal-request SYSTEM "sgml/afdal_request.sgml">
+<!ENTITY af-arch-afdal-session SYSTEM "sgml/afdal_session.sgml">
+<!ENTITY af-arch-afdal-support SYSTEM "sgml/afdal_support.sgml">
+<!ENTITY af-arch-afgs SYSTEM "sgml/afgs.sgml">
+<!ENTITY af-arch-afgs-afkeys SYSTEM "sgml/afgs_afkeys.sgml">
+<!ENTITY af-arch-afgs-command SYSTEM "sgml/afgs_command.sgml">
+<!ENTITY af-arch-afgs-config SYSTEM "sgml/afgs_config.sgml">
+<!ENTITY af-arch-afgs-database SYSTEM "sgml/afgs_database.sgml">
+<!ENTITY af-arch-afgs-log SYSTEM "sgml/afgs_log.sgml">
+<!ENTITY af-arch-afgs-main SYSTEM "sgml/afgs_main.sgml">
+<!ENTITY af-arch-afgs-message SYSTEM "sgml/afgs_message.sgml">
+<!ENTITY af-arch-afgs-reg SYSTEM "sgml/afgs_reg.sgml">
+<!ENTITY af-arch-afgs-services SYSTEM "sgml/afgs_services.sgml">
+<!ENTITY af-arch-afgs-signal-handler SYSTEM "sgml/afgs_signal_handler.sgml">
+<!ENTITY af-arch-afdal-kernel SYSTEM "sgml/afdal_kernel.sgml">
+<!ENTITY af-arch-afdal-kernel-group SYSTEM "sgml/afdal_kernel_group.sgml">
+<!ENTITY af-arch-afdal-kernel-permission SYSTEM "sgml/afdal_kernel_permission.sgml">
+<!ENTITY af-arch-afdal-kernel-register SYSTEM "sgml/afdal_kernel_register.sgml">
+<!ENTITY af-arch-afdal-kernel-server SYSTEM "sgml/afdal_kernel_server.sgml">
+<!ENTITY af-arch-afdal-kernel-user SYSTEM "sgml/afdal_kernel_user.sgml">
+]>
+<book id="index">
+  <bookinfo>
+    <title>AF Architecture Reference Manual</title>
+  </bookinfo>
+
+  <chapter>
+    <title>AF Architecture Reference Manual</title>
+  </chapter>
+
+  <chapter>
+    <title>Coyote library</title>
+    &af-arch-coyote;
+    &af-arch-coyote-code;
+    &af-arch-coyote-connection;
+    &af-arch-coyote-dataset;
+    &af-arch-CoyoteSimple;
+    &af-arch-coyote-simple-cfg;
+    &af-arch-coyote-xml;
+  </chapter>
+  <chapter>
+    <title>Afdal library</title>
+    &af-arch-afdal;
+    &af-arch-afdal-decimal;
+    &af-arch-afdal-event-source;
+    &af-arch-afdal-list;
+    &af-arch-afdal-password;
+    &af-arch-afdal-request;
+    &af-arch-afdal-session;
+    &af-arch-afdal-support;
+    &af-arch-AfDalDataNode;
+  </chapter>
+  <chapter>
+    <title>Afgs library</title>
+    &af-arch-afgs;
+    &af-arch-afgs-afkeys;
+    &af-arch-afgs-command;
+    &af-arch-afgs-config;
+    &af-arch-afgs-database;
+    &af-arch-afgs-log;
+    &af-arch-afgs-main;
+    &af-arch-afgs-message;
+    &af-arch-afgs-reg;
+    &af-arch-afgs-services;
+    &af-arch-afgs-signal-handler;
+  </chapter>
+  <chapter>
+    <title>AfdalKernel library</title>
+    &af-arch-afdal-kernel;
+    &af-arch-afdal-kernel-group;
+    &af-arch-afdal-kernel-permission;
+    &af-arch-afdal-kernel-register;
+    &af-arch-afdal-kernel-server;
+    &af-arch-afdal-kernel-user;
+    &af-arch-AfDalKernelUser;
+    &af-arch-AfDalKernelGroup;
+  </chapter>
+</book>

@@ -1,0 +1,197 @@
+ASPL Fact
+=========
+
+System for commercial management.
+
+(c) 2003, Advanced Software Production Line.
+
+
+Requisites:
+===========
+
+Both servers and client need Roadrunner. You must install the last
+version of RoadRunner. Download it from http://rr.codefactory.se.  If
+you experiment problems compiling ASPL Fact against the last stable
+version, please checkout the CVS version and try with it.
+
+You must install the last version of LibGDA (0.12 or greater) in
+machines where servers will be installed. Download it from
+http://www.gnome-db.org, or use the last libgda package for your
+distribution.  If you experiment problems using ASPL Fact against the
+last stable version, please checkout the CVS version and try with it.
+
+
+Installing, configuring ASPL Fact system
+========================================
+
+Server side
+-----------
+
+1) Servers installation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+ASPL Fact server side consists in several different servers. Each one
+can be installed in a different machine.
+
+For running af-kernel, you will need to install the following
+components, in the next order:
+
+* libcoyote
+* libafdal
+* libafdalkernel
+* libafgs
+* af-kernel
+
+For running af-tax, you will need to install the following components,
+in the next order:
+
+* libcoyote
+* libafdal
+* libafdalkernel
+* libafgs
+* af-tax
+
+2) Database setup
+~~~~~~~~~~~~~~~~~
+
+After that, you must initialize database. ASPL Fact uses PostgreSQL as
+database management system. The database server can be installed in any
+machine, but it must be accesible from af-* servers.
+
+You can taylor this installation method for your machines. Here, our
+database server is at the same machine where the other servers run, and
+we've got root access. You can also contribute with other database
+installation methods for including them in this document.
+
+* First of all, you need to configure your postgresql daemon for it to
+  authenticate aspl-fact users against passwords using crypt
+  (postgresql <= 6.2) or md5 (postgresql >= 6.3).
+
+  Depending your preexisting PostgreSQL configuration, you will need
+  to customize this PostgreSQL 6.3 settings (this are the setting I
+  use for my machine, without any other application needing
+  PostgreSQL):
+
+  /etc/postgresql/pg_hba.conf
+  ---------------------------
+  # TYPE  DATABASE    USER        IP-ADDRESS        IP-MASK           METHOD
+ 
+    local   all       root                                            ident sameuser
+    local   all       postgres                                        ident sameuser
+    local   all       all                                             md5
+    host    all       all         127.0.0.1         255.255.255.255   md5
+    host    all       all         192.168.0.0       255.255.254.0     md5
+    host    all       all         0.0.0.0           255.255.255.255   reject
+
+  ---------
+
+  This configuration allows users root and postgres connecting against
+  database without a password, and makes all other users from
+  localhost and the LAN to connect using md5 as authenticating method
+  (so ASPL Fact users should be authenticated for connecting to the
+  database). Connections that not match with any of the previous rules
+  are rejected.
+
+
+* After changing pg_hba.conf, restart postgresql
+  ("/etc/init.d/postgresql restart" in debian)
+
+* Now you must create asplfact database. The installation script is in
+  af-kernel/data/create_database.sql. If you want to use another
+  database name, you shall change all database installation scripts.
+
+  For creating database, login as postgres user:
+
+  ----
+  root@kolbe:~# su - postgres
+  postgres@kolbe:~$ 
+  ----
+
+  Connect to PostgreSQL default database
+
+  ----
+  postgres@kolbe:~$ psql template1
+  Welcome to psql 7.3.2, the PostgreSQL interactive terminal.
+ 
+  Type:  \copyright for distribution terms
+         \h for help with SQL commands
+         \? for help on internal slash commands
+         \g or terminate with semicolon to execute query
+         \q to quit
+ 
+  template1=#
+  ----
+
+  Now, execute database creation script:
+
+  ----
+  template1=# \i /usr/src/aspl-fact/af-kernel/data/create_database.sql
+  ----
+
+  After creating that, logout from psql
+
+  ----
+  template1=# \q
+  postgres@kolbe:~$
+  ----
+
+  Now you must connect, as postgres user, to the just created
+  database:
+
+  ----
+  postgres@kolbe:$ psql asplfact
+  Welcome to psql 7.3.2, the PostgreSQL interactive terminal.
+ 
+  Type:  \copyright for distribution terms
+         \h for help with SQL commands
+         \? for help on internal slash commands
+         \g or terminate with semicolon to execute query
+         \q to quit
+ 
+  asplfact=#
+  ____
+
+  Now, you must install the corresponding tables in the database. So
+  you should install tables for every installed server:
+
+  ----
+  asplfact=# \i /usr/src/aspl-fact/af-tax/data/install.sql
+  asplfact=# \i /usr/src/aspl-fact/af-kernel/data/install.sql
+  ----
+ 
+  And so on with all the installed servers...
+  
+
+3) Setting up servers configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Now you must customize configuration for all the servers.
+  Copy af-*.cfg.example files to af-*.cfg, and edit them to show your
+  actual configuration.
+
+4) Start servers
+~~~~~~~~~~~~~~~~
+
+* Now you only need to start servers properly. The only requisite is
+  that you must start af-kernel first.
+
+
+
+
+Client side
+-----------
+
+In the client side, you must install the components following the next
+order:
+
+* libcoyote
+* libafdal
+* libafdalkernel
+* libafdaltax
+* aspl-fact
+
+After that, you can start aspl-fact.
+
+
+
+David Marín <david AT aspl.es>

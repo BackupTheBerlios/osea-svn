@@ -1,0 +1,7 @@
+<!DOCTYPE general_message SYSTEM "fact.dtd">
+<general_message>
+        <protocol_version>1.0.5555</protocol_version>
+        <request_service  name="hola">
+                        <param attrib="nombre" value="Marcos" />
+      </request_service>
+</general_message>
