@@ -39,7 +39,7 @@
 
 #define LOG_DOMAIN "os-tax"
 
-#define AF_TAX_SERVICES_VERSION 1
+#define OS_TAX_SERVICES_VERSION 1
 
 OseaServerServicesProvided  services_provided []  = {
 	{"list_vat_customer" ,   "Service for listing VAT-customer types", 
@@ -87,10 +87,10 @@ gint main (gint argc, gchar * argv[]) {
 			      VERSION,
 			      COMPILATION_DATE,
 			      &argc, &argv, 
-			      g_build_filename (SYSCONFDIR, "aspl-fact", "os-tax.cfg", NULL ),
+			      g_build_filename (SYSCONFDIR, "oinvoice", "os-tax.cfg", NULL ),
 			      accepted_keys,
 			      services_provided,
-			      AF_TAX_SERVICES_VERSION,
+			      OS_TAX_SERVICES_VERSION,
 			      NULL,
 			      OSEASERVER_MAIN_NO_EXTRA_OPTION);
 
