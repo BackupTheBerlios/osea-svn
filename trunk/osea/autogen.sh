@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PACKAGE="Af-Arch: N-tier modular architecture for business application development"
+PACKAGE="öSea system: N-tier open secure system for enterprise application development"
 
 (automake --version) < /dev/null > /dev/null 2>&1 || {
 	echo;
