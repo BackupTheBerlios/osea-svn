@@ -48,7 +48,7 @@ class OseaType:Int from OseaType:Simple:Object {
 
 	}	
 
-	public gboolean set (OseaTypeInt *self, gint value, GError **error)
+	public gboolean set (OseaType:Int *self (check null type), gint value, GError **error)
 	{
 		self->_priv->value = value;
 		OSEATYPE_OBJECT(self)->is_finished = TRUE;
@@ -58,7 +58,7 @@ class OseaType:Int from OseaType:Simple:Object {
 
 	}	
 
-	public gint get (OseaTypeInt *self, GError **error) 
+	public gint get (OseaType:Int *self (check null type), GError **error) 
 	{
 		if (! OSEATYPE_OBJECT(self)->is_finished) {
 			g_set_error (error, g_quark_from_static_string ("OseaTypeInt"), 100, "Cannot get value: not yet completed");
