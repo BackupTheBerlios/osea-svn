@@ -1,0 +1,25 @@
+# ASPL Fact Tax Server
+# ====================
+#
+# Config file
+#
+# Lines starting with # are comments.
+
+listening port = 55001
+listening hostname = localhost
+
+kernel server = localhost
+kernel port = 55000
+
+database server = localhost
+database port = 
+database name = asplfact
+database user = aftax
+database password = changeme
+
+log file = /tmp/af-tax.log
+log active = yes
+
+afkey expiration = 60
+
+# The file must end with a new line

@@ -1,0 +1,24 @@
+ASPL Fact Tax Server
+====================
+
+For install af-tax, you will need libcoyote and libafdal-kernel installed.
+
+Then you must create the tables needed for the program executing the
+SQL script data/install.sql as the PostgreSQL user.
+
+--
+
+postgres@kolbe:~$ psql -f /usr/src/af-tax/data/install.sql
+
+--
+
+After that, you should change aftax user's password:
+
+--
+
+postgres@kolbe:~$ pg_passwd ~/data/global/pg_pwd
+Username: aftax
+New password:
+
+--
+
