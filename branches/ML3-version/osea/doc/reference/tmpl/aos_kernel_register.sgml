@@ -1,0 +1,28 @@
+<!-- ##### SECTION Title ##### -->
+aos_kernel_register
+
+<!-- ##### SECTION Short_Description ##### -->
+This module allow to figure out which servers are registered.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION aos_kernel_register_get_servers ##### -->
+<para>
+
+</para>
+
+@usr_function: 
+@usr_data: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@connection: 
+
+

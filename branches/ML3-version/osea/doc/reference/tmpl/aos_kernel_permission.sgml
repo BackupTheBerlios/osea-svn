@@ -1,0 +1,154 @@
+<!-- ##### SECTION Title ##### -->
+aos_kernel_permission
+
+<!-- ##### SECTION Short_Description ##### -->
+This module allow to manage all permission related services at os-kernel server.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION aos_kernel_permission_list ##### -->
+<para>
+
+</para>
+
+@initial_permission: 
+@max_row_number: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_list_by_user ##### -->
+<para>
+
+</para>
+
+@initial_permission: 
+@max_row_number: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_actual_list_by_user ##### -->
+<para>
+
+</para>
+
+@initial_permission: 
+@max_row_number: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_from_group_list_by_user ##### -->
+<para>
+
+</para>
+
+@initial_permission: 
+@max_row_number: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_list_by_group ##### -->
+<para>
+
+</para>
+
+@initial_permission: 
+@max_row_number: 
+@group_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_user_set ##### -->
+<para>
+
+</para>
+
+@id: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_user_unset ##### -->
+<para>
+
+</para>
+
+@id: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_user_set_value ##### -->
+<para>
+
+</para>
+
+@id: 
+@user_id: 
+@value: 
+@usr_func: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_group_set ##### -->
+<para>
+
+</para>
+
+@id: 
+@group_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_group_unset ##### -->
+<para>
+
+</para>
+
+@id: 
+@group_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_permission_group_set_value ##### -->
+<para>
+
+</para>
+
+@id: 
+@user_id: 
+@value: 
+@usr_func: 
+@usr_data: 
+@Returns: 
+
+

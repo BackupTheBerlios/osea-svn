@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+aos_kernel_server
+
+<!-- ##### SECTION Short_Description ##### -->
+This module allow to manage all server related services at os-kernel server.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION aos_kernel_server_list ##### -->
+<para>
+
+</para>
+
+@initial_server: 
+@max_row_number: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_server_remove ##### -->
+<para>
+
+</para>
+
+@id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+

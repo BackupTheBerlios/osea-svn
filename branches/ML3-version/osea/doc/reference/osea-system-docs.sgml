@@ -1,0 +1,94 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!ENTITY osea-OseaClientDataNode SYSTEM "sgml/oseaclient-datanode.sgml">
+<!ENTITY osea-AosKernelUser SYSTEM "sgml/aos-kernel-user.sgml">
+<!ENTITY osea-AosKernelGroup SYSTEM "sgml/aos-kernel-group.sgml">
+<!ENTITY osea-oseacomm SYSTEM "sgml/oseacomm.sgml">
+<!ENTITY osea-oseacomm-code SYSTEM "sgml/oseacomm_code.sgml">
+<!ENTITY osea-oseacomm-connection SYSTEM "sgml/oseacomm_connection.sgml">
+<!ENTITY osea-oseacomm-dataset SYSTEM "sgml/oseacomm_dataset.sgml">
+<!ENTITY osea-OseaCommSimple SYSTEM "sgml/oseacomm_simple.sgml">
+<!ENTITY osea-oseacomm-simple-cfg SYSTEM "sgml/oseacomm_simple_cfg.sgml">
+<!ENTITY osea-oseacomm-xml SYSTEM "sgml/oseacomm_xml.sgml">
+<!ENTITY osea-oseaclient SYSTEM "sgml/oseaclient.sgml">
+<!ENTITY osea-oseaclient-decimal SYSTEM "sgml/oseaclient_decimal.sgml">
+<!ENTITY osea-oseaclient-event-source SYSTEM "sgml/oseaclient_event_source.sgml">
+<!ENTITY osea-oseaclient-list SYSTEM "sgml/oseaclient_list.sgml">
+<!ENTITY osea-oseaclient-password SYSTEM "sgml/oseaclient_password.sgml">
+<!ENTITY osea-oseaclient-request SYSTEM "sgml/oseaclient_request.sgml">
+<!ENTITY osea-oseaclient-session SYSTEM "sgml/oseaclient_session.sgml">
+<!ENTITY osea-oseaclient-support SYSTEM "sgml/oseaclient_support.sgml">
+<!ENTITY osea-oseaserver SYSTEM "sgml/oseaserver.sgml">
+<!ENTITY osea-oseaserver-afkeys SYSTEM "sgml/oseaserver_afkeys.sgml">
+<!ENTITY osea-oseaserver-command SYSTEM "sgml/oseaserver_command.sgml">
+<!ENTITY osea-oseaserver-config SYSTEM "sgml/oseaserver_config.sgml">
+<!ENTITY osea-oseaserver-database SYSTEM "sgml/oseaserver_database.sgml">
+<!ENTITY osea-oseaserver-log SYSTEM "sgml/oseaserver_log.sgml">
+<!ENTITY osea-oseaserver-main SYSTEM "sgml/oseaserver_main.sgml">
+<!ENTITY osea-oseaserver-message SYSTEM "sgml/oseaserver_message.sgml">
+<!ENTITY osea-oseaserver-reg SYSTEM "sgml/oseaserver_reg.sgml">
+<!ENTITY osea-oseaserver-services SYSTEM "sgml/oseaserver_services.sgml">
+<!ENTITY osea-oseaserver-signal-handler SYSTEM "sgml/oseaserver_signal_handler.sgml">
+<!ENTITY osea-aos-kernel SYSTEM "sgml/aos_kernel.sgml">
+<!ENTITY osea-aos-kernel-group SYSTEM "sgml/aos_kernel_group.sgml">
+<!ENTITY osea-aos-kernel-permission SYSTEM "sgml/aos_kernel_permission.sgml">
+<!ENTITY osea-aos-kernel-register SYSTEM "sgml/aos_kernel_register.sgml">
+<!ENTITY osea-aos-kernel-server SYSTEM "sgml/aos_kernel_server.sgml">
+<!ENTITY osea-aos-kernel-user SYSTEM "sgml/aos_kernel_user.sgml">
+]>
+<book id="index">
+  <bookinfo>
+    <title>öSea system Reference Manual</title>
+  </bookinfo>
+
+  <chapter>
+    <title>öSea system Reference Manual</title>
+  </chapter>
+
+  <chapter>
+    <title>OseaComm library</title>
+    &osea-oseacomm;
+    &osea-oseacomm-code;
+    &osea-oseacomm-connection;
+    &osea-oseacomm-dataset;
+    &osea-OseaCommSimple;
+    &osea-oseacomm-simple-cfg;
+    &osea-oseacomm-xml;
+  </chapter>
+  <chapter>
+    <title>OseaClient library</title>
+    &osea-oseaclient;
+    &osea-oseaclient-decimal;
+    &osea-oseaclient-event-source;
+    &osea-oseaclient-list;
+    &osea-oseaclient-password;
+    &osea-oseaclient-request;
+    &osea-oseaclient-session;
+    &osea-oseaclient-support;
+    &osea-OseaClientDataNode;
+  </chapter>
+  <chapter>
+    <title>OseaServer library</title>
+    &osea-oseaserver;
+    &osea-oseaserver-afkeys;
+    &osea-oseaserver-command;
+    &osea-oseaserver-config;
+    &osea-oseaserver-database;
+    &osea-oseaserver-log;
+    &osea-oseaserver-main;
+    &osea-oseaserver-message;
+    &osea-oseaserver-reg;
+    &osea-oseaserver-services;
+    &osea-oseaserver-signal-handler;
+  </chapter>
+  <chapter>
+    <title>AosKernel library</title>
+    &osea-aos-kernel;
+    &osea-aos-kernel-group;
+    &osea-aos-kernel-permission;
+    &osea-aos-kernel-register;
+    &osea-aos-kernel-server;
+    &osea-aos-kernel-user;
+    &osea-AosKernelUser;
+    &osea-AosKernelGroup;
+  </chapter>
+</book>

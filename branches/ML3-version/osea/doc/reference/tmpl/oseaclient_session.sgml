@@ -1,0 +1,190 @@
+<!-- ##### SECTION Title ##### -->
+oseaclient_session
+
+<!-- ##### SECTION Short_Description ##### -->
+Functions for client and server session mainteinance
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This functions are used by clients and servers for connecting to
+os-kernel, obtaining session info and connecting to other servers.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION oseaclient_session_login ##### -->
+<para>
+
+</para>
+
+@usr: 
+@passwd: 
+@kernel_hostname: 
+@kernel_port: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_logout ##### -->
+<para>
+
+</para>
+
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_refresh_key ##### -->
+<para>
+
+</para>
+
+@server: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_refresh_session ##### -->
+<para>
+
+</para>
+
+@passwd: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_send_afkey ##### -->
+<para>
+
+</para>
+
+@server: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_register ##### -->
+<para>
+
+</para>
+
+@name: 
+@version_number: 
+@host: 
+@port: 
+@kernel_hostname: 
+@kernel_port: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_unregister ##### -->
+<para>
+
+</para>
+
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_server_exists ##### -->
+<para>
+
+</para>
+
+@server_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_active_servers ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_server_free ##### -->
+<para>
+
+</para>
+
+@pserv: 
+
+
+<!-- ##### FUNCTION oseaclient_session_get_permission_list ##### -->
+<para>
+
+</para>
+
+@server_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_free_permission_list ##### -->
+<para>
+
+</para>
+
+@permissions: 
+
+
+<!-- ##### FUNCTION oseaclient_session_get_permission ##### -->
+<para>
+
+</para>
+
+@server_name: 
+@permission_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_get_connection ##### -->
+<para>
+
+</para>
+
+@server_name: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_delete_connection ##### -->
+<para>
+
+</para>
+
+@server_name: 
+
+
+<!-- ##### FUNCTION oseaclient_session_new_connection ##### -->
+<para>
+
+</para>
+
+@server_name: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oseaclient_session_get_server_name ##### -->
+<para>
+
+</para>
+
+@connection: 
+@error: 
+@Returns: 
+
+

@@ -1,0 +1,2633 @@
+2004-01-25  David Marin Carreno  <dmarin@dyr.es>
+
+	* AUTHORS: Updating
+
+	* doc/reference/Makefile.am, doc/reference/osea-system-sections.txt, doc/reference/src/empty-file, doc/reference/tmpl/aos_kernel.sgml, doc/reference/tmpl/aos_kernel_group.sgml, doc/reference/tmpl/aos_kernel_permission.sgml, doc/reference/tmpl/aos_kernel_register.sgml, doc/reference/tmpl/aos_kernel_user.sgml, doc/reference/tmpl/oseaclient_session.sgml:
+	Initial upload
+
+	* doc/reference/Makefile.am, doc/reference/osea-system-sections.txt, doc/reference/src/empty-file, doc/reference/tmpl/aos_kernel.sgml, doc/reference/tmpl/aos_kernel_group.sgml, doc/reference/tmpl/aos_kernel_permission.sgml, doc/reference/tmpl/aos_kernel_register.sgml, doc/reference/tmpl/aos_kernel_user.sgml, doc/reference/tmpl/oseaclient_session.sgml:
+	New file.
+
+	* doc/.cvsignore, doc/Makefile.am, doc/reference/osea-system-decl.txt, doc/reference/osea-system-docs.sgml, liboseaclient/debian/README.debian, liboseaclient/debian/changelog, liboseaclient/debian/control, liboseaclient/debian/copyright, liboseaclient/debian/liboseaclient0-0.files, liboseaclient/debian/liboseaclient0-doc.files, liboseaclient/debian/rules, liboseaclient/src/Makefile.am, liboseaclient/src/oseaclient.c, liboseaclient/src/oseaclient.h, liboseaclient/src/oseaclient_decimal.h, liboseaclient/src/oseaclient_event_source.c, liboseaclient/src/oseaclient_event_source.h, liboseaclient/src/oseaclient_keys.c, liboseaclient/src/oseaclient_keys.h, liboseaclient/src/oseaclient_list.c, liboseaclient/src/oseaclient_list.h, liboseaclient/src/oseaclient_password.c, liboseaclient/src/oseaclient_request.c, liboseaclient/src/oseaclient_request.h, liboseaclient/src/oseaclient_session.c, liboseaclient/src/oseaclient_support.c, liboseaclient/src/oseaclient_support.h, liboseaclient/test/.cvsignore, liboseaclient/test/Makefile.am:
+	Initial upload
+
+	* doc/.cvsignore, doc/Makefile.am, doc/reference/osea-system-decl.txt, doc/reference/osea-system-docs.sgml, liboseaclient/debian/README.debian, liboseaclient/debian/changelog, liboseaclient/debian/control, liboseaclient/debian/copyright, liboseaclient/debian/liboseaclient0-0.files, liboseaclient/debian/liboseaclient0-doc.files, liboseaclient/debian/rules, liboseaclient/src/Makefile.am, liboseaclient/src/oseaclient.c, liboseaclient/src/oseaclient.h, liboseaclient/src/oseaclient_decimal.h, liboseaclient/src/oseaclient_event_source.c, liboseaclient/src/oseaclient_event_source.h, liboseaclient/src/oseaclient_keys.c, liboseaclient/src/oseaclient_keys.h, liboseaclient/src/oseaclient_list.c, liboseaclient/src/oseaclient_list.h, liboseaclient/src/oseaclient_password.c, liboseaclient/src/oseaclient_request.c, liboseaclient/src/oseaclient_request.h, liboseaclient/src/oseaclient_session.c, liboseaclient/src/oseaclient_support.c, liboseaclient/src/oseaclient_support.h, liboseaclient/test/.cvsignore, liboseaclient/test/Makefile.am:
+	New file.
+
+	* libaoskernel/.cvsignore, libaoskernel/Makefile.am, libaoskernel/debian/README.debian, libaoskernel/debian/changelog, libaoskernel/debian/control, libaoskernel/debian/copyright, libaoskernel/debian/libaoskernel0-0.files, libaoskernel/debian/libaoskernel0-doc.files, libaoskernel/debian/rules, libaoskernel/libaoskernel.pc.in, libaoskernel/src/.cvsignore, libaoskernel/src/Makefile.am, libaoskernel/src/aos-kernel-group.gob, libaoskernel/src/aos-kernel-user.gob, libaoskernel/src/aos_kernel.c, libaoskernel/src/aos_kernel.h, libaoskernel/src/aos_kernel_group.c, libaoskernel/src/aos_kernel_group.h, libaoskernel/src/aos_kernel_permission.c, libaoskernel/src/aos_kernel_permission.h, libaoskernel/src/aos_kernel_register.c, libaoskernel/src/aos_kernel_register.h, libaoskernel/src/aos_kernel_server.c, libaoskernel/src/aos_kernel_server.h, libaoskernel/src/aos_kernel_user.c, libaoskernel/src/aos_kernel_user.h, libaoskernel/test/.cvsignore, libaoskernel/test/Makefile.am, libaoskernel/test/test_aos_kernel.c, libaoskernel/test/test_aos_kernel_group.c, libaoskernel/test/test_aos_kernel_permission.c, libaoskernel/test/test_aos_kernel_register.c, libaoskernel/test/test_aos_kernel_session.c, libaoskernel/test/test_aos_kernel_user.c, liboseaclient/.cvsignore, liboseaclient/Makefile.am, liboseaclient/liboseaclient.pc.in, liboseaclient/src/oseaclient_decimal.c, liboseaclient/src/oseaclient_password.h, liboseaclient/src/oseaclient_session.h, liboseaserver/src/Makefile.am, liboseaserver/src/oseaserver.c, liboseaserver/src/oseaserver_config.c, liboseaserver/src/oseaserver_keys.h, liboseaserver/src/oseaserver_log.c, liboseaserver/src/oseaserver_main.c, liboseaserver/src/oseaserver_message.h, liboseaserver/src/oseaserver_reg.c, liboseaserver/src/oseaserver_reg.h, liboseaserver/src/oseaserver_services.h, liboseaserver/test/Makefile.am, osea-manager/Changelog, osea-manager/Makefile.am, osea-manager/src/Makefile.am, osea-manager/src/auto_completion.c, osea-manager/src/auto_completion.h, osea-manager/src/commands.c, osea-manager/src/commands.h, osea-manager/src/connection.c, osea-manager/src/connection.h, osea-manager/src/group.c, osea-manager/src/group.h, osea-manager/src/help.c, osea-manager/src/help.h, osea-manager/src/main.c, osea-manager/src/permission.c, osea-manager/src/permission.h, osea-manager/src/servers.c, osea-manager/src/servers.h, osea-manager/src/user.c, osea-manager/src/user.h:
+	Initial upload
+
+	* libaoskernel/.cvsignore, libaoskernel/Makefile.am, libaoskernel/debian/README.debian, libaoskernel/debian/changelog, libaoskernel/debian/control, libaoskernel/debian/copyright, libaoskernel/debian/libaoskernel0-0.files, libaoskernel/debian/libaoskernel0-doc.files, libaoskernel/debian/rules, libaoskernel/libaoskernel.pc.in, libaoskernel/src/.cvsignore, libaoskernel/src/Makefile.am, libaoskernel/src/aos-kernel-group.gob, libaoskernel/src/aos-kernel-user.gob, libaoskernel/src/aos_kernel.c, libaoskernel/src/aos_kernel.h, libaoskernel/src/aos_kernel_group.c, libaoskernel/src/aos_kernel_group.h, libaoskernel/src/aos_kernel_permission.c, libaoskernel/src/aos_kernel_permission.h, libaoskernel/src/aos_kernel_register.c, libaoskernel/src/aos_kernel_register.h, libaoskernel/src/aos_kernel_server.c, libaoskernel/src/aos_kernel_server.h, libaoskernel/src/aos_kernel_user.c, libaoskernel/src/aos_kernel_user.h, libaoskernel/test/.cvsignore, libaoskernel/test/Makefile.am, libaoskernel/test/test_aos_kernel.c, libaoskernel/test/test_aos_kernel_group.c, libaoskernel/test/test_aos_kernel_permission.c, libaoskernel/test/test_aos_kernel_register.c, libaoskernel/test/test_aos_kernel_session.c, libaoskernel/test/test_aos_kernel_user.c, liboseaclient/.cvsignore, liboseaclient/Makefile.am, liboseaclient/liboseaclient.pc.in, liboseaclient/src/oseaclient_decimal.c, liboseaclient/src/oseaclient_password.h, liboseaclient/src/oseaclient_session.h, liboseaserver/src/Makefile.am, liboseaserver/src/oseaserver.c, liboseaserver/src/oseaserver_config.c, liboseaserver/src/oseaserver_keys.h, liboseaserver/src/oseaserver_log.c, liboseaserver/src/oseaserver_main.c, liboseaserver/src/oseaserver_message.h, liboseaserver/src/oseaserver_reg.c, liboseaserver/src/oseaserver_reg.h, liboseaserver/src/oseaserver_services.h, liboseaserver/test/Makefile.am, osea-manager/Changelog, osea-manager/Makefile.am, osea-manager/src/Makefile.am, osea-manager/src/auto_completion.c, osea-manager/src/auto_completion.h, osea-manager/src/commands.c, osea-manager/src/commands.h, osea-manager/src/connection.c, osea-manager/src/connection.h, osea-manager/src/group.c, osea-manager/src/group.h, osea-manager/src/help.c, osea-manager/src/help.h, osea-manager/src/main.c, osea-manager/src/permission.c, osea-manager/src/permission.h, osea-manager/src/servers.c, osea-manager/src/servers.h, osea-manager/src/user.c, osea-manager/src/user.h:
+	New file.
+
+	* liboseacomm/data/.cvsignore, liboseacomm/data/Makefile.am, liboseacomm/data/fact.dtd, liboseacomm/debian/README.debian, liboseacomm/debian/changelog, liboseacomm/debian/control, liboseacomm/debian/copyright, liboseacomm/debian/libcoyote0-0.files, liboseacomm/debian/libcoyote0-doc.files, liboseacomm/debian/rules, liboseacomm/src/.cvsignore, liboseacomm/src/Makefile.am, liboseacomm/src/oseacomm.c, liboseacomm/src/oseacomm_code.c, liboseacomm/src/oseacomm_code.h, liboseacomm/src/oseacomm_connection.c, liboseacomm/src/oseacomm_connection.h, liboseacomm/src/oseacomm_dataset.c, liboseacomm/src/oseacomm_dataset.h, liboseacomm/src/oseacomm_h, liboseacomm/src/oseacomm_simple.c, liboseacomm/src/oseacomm_simple.h, liboseacomm/src/oseacomm_simple_cfg.c, liboseacomm/src/oseacomm_simple_cfg.h, liboseacomm/src/oseacomm_xml.c, liboseacomm/src/oseacomm_xml.h, liboseacomm/test/.cvsignore, liboseacomm/test/Makefile.am, liboseacomm/test/test_coyote.c, liboseacomm/test/test_coyote_connection.c, liboseacomm/test/test_coyote_dataset.c, liboseacomm/test/test_coyote_simple.c, liboseacomm/test/test_coyote_xml.c, liboseacomm/test/test_coyote_xml_prueba.xml, liboseaserver/Changelog, liboseaserver/Makefile.am, liboseaserver/liboseaserver.pc.in, liboseaserver/src/oseaserver.h, liboseaserver/src/oseaserver_command.c, liboseaserver/src/oseaserver_command.h, liboseaserver/src/oseaserver_config.h, liboseaserver/src/oseaserver_database.c, liboseaserver/src/oseaserver_database.h, liboseaserver/src/oseaserver_keys.c, liboseaserver/src/oseaserver_log.h, liboseaserver/src/oseaserver_main.h, liboseaserver/src/oseaserver_message.c, liboseaserver/src/oseaserver_services.c, liboseaserver/src/oseaserver_signal_handler.c, liboseaserver/src/oseaserver_signal_handler.h:
+	Initial upload
+
+	* liboseacomm/data/.cvsignore, liboseacomm/data/Makefile.am, liboseacomm/data/fact.dtd, liboseacomm/debian/README.debian, liboseacomm/debian/changelog, liboseacomm/debian/control, liboseacomm/debian/copyright, liboseacomm/debian/libcoyote0-0.files, liboseacomm/debian/libcoyote0-doc.files, liboseacomm/debian/rules, liboseacomm/src/.cvsignore, liboseacomm/src/Makefile.am, liboseacomm/src/oseacomm.c, liboseacomm/src/oseacomm_code.c, liboseacomm/src/oseacomm_code.h, liboseacomm/src/oseacomm_connection.c, liboseacomm/src/oseacomm_connection.h, liboseacomm/src/oseacomm_dataset.c, liboseacomm/src/oseacomm_dataset.h, liboseacomm/src/oseacomm_h, liboseacomm/src/oseacomm_simple.c, liboseacomm/src/oseacomm_simple.h, liboseacomm/src/oseacomm_simple_cfg.c, liboseacomm/src/oseacomm_simple_cfg.h, liboseacomm/src/oseacomm_xml.c, liboseacomm/src/oseacomm_xml.h, liboseacomm/test/.cvsignore, liboseacomm/test/Makefile.am, liboseacomm/test/test_coyote.c, liboseacomm/test/test_coyote_connection.c, liboseacomm/test/test_coyote_dataset.c, liboseacomm/test/test_coyote_simple.c, liboseacomm/test/test_coyote_xml.c, liboseacomm/test/test_coyote_xml_prueba.xml, liboseaserver/Changelog, liboseaserver/Makefile.am, liboseaserver/liboseaserver.pc.in, liboseaserver/src/oseaserver.h, liboseaserver/src/oseaserver_command.c, liboseaserver/src/oseaserver_command.h, liboseaserver/src/oseaserver_config.h, liboseaserver/src/oseaserver_database.c, liboseaserver/src/oseaserver_database.h, liboseaserver/src/oseaserver_keys.c, liboseaserver/src/oseaserver_log.h, liboseaserver/src/oseaserver_main.h, liboseaserver/src/oseaserver_message.c, liboseaserver/src/oseaserver_services.c, liboseaserver/src/oseaserver_signal_handler.c, liboseaserver/src/oseaserver_signal_handler.h:
+	New file.
+
+	* ChangeLog, Makefile.am, README, autogen.sh, configure.ac, liboseacomm/.cvsignore, liboseacomm/Makefile.am, liboseacomm/liboseacomm.pc.in, os-kernel/.cvsignore, os-kernel/Makefile.am, os-kernel/data/Makefile.am, os-kernel/data/af-kernel.cfg.example, os-kernel/data/create_database.sql, os-kernel/data/install.sql, os-kernel/data/uninstall.sql, os-kernel/debian/README.debian, os-kernel/debian/changelog, os-kernel/debian/control, os-kernel/debian/copyright, os-kernel/debian/rules, os-kernel/po/LINGUAS, os-kernel/po/Makefile.in.in, os-kernel/po/POTFILES.in, os-kernel/po/es.po, os-kernel/src/.cvsignore, os-kernel/src/Makefile.am, os-kernel/src/os_kernel.c, os-kernel/src/os_kernel_crypto.c, os-kernel/src/os_kernel_crypto.h, os-kernel/src/os_kernel_err_answer.h, os-kernel/src/os_kernel_group_request.c, os-kernel/src/os_kernel_group_request.h, os-kernel/src/os_kernel_keys.c, os-kernel/src/os_kernel_keys.h, os-kernel/src/os_kernel_login_request.c, os-kernel/src/os_kernel_login_request.h, os-kernel/src/os_kernel_logout_request.c, os-kernel/src/os_kernel_logout_request.h, os-kernel/src/os_kernel_permission_request.c, os-kernel/src/os_kernel_permission_request.h, os-kernel/src/os_kernel_refresh_session_request.c, os-kernel/src/os_kernel_refresh_session_request.h, os-kernel/src/os_kernel_register_request.c, os-kernel/src/os_kernel_register_request.h, os-kernel/src/os_kernel_registry.c, os-kernel/src/os_kernel_registry.h, os-kernel/src/os_kernel_server_request.c, os-kernel/src/os_kernel_server_request.h, os-kernel/src/os_kernel_session.c, os-kernel/src/os_kernel_session.h, os-kernel/src/os_kernel_update_services_request.c, os-kernel/src/os_kernel_update_services_request.h, os-kernel/src/os_kernel_user_request.c, os-kernel/src/os_kernel_user_request.h, osea.pc.in:
+	Initial upload
+
+	* ChangeLog, Makefile.am, README, autogen.sh, configure.ac, liboseacomm/.cvsignore, liboseacomm/Makefile.am, liboseacomm/liboseacomm.pc.in, os-kernel/.cvsignore, os-kernel/Makefile.am, os-kernel/data/Makefile.am, os-kernel/data/af-kernel.cfg.example, os-kernel/data/create_database.sql, os-kernel/data/install.sql, os-kernel/data/uninstall.sql, os-kernel/debian/README.debian, os-kernel/debian/changelog, os-kernel/debian/control, os-kernel/debian/copyright, os-kernel/debian/rules, os-kernel/po/LINGUAS, os-kernel/po/Makefile.in.in, os-kernel/po/POTFILES.in, os-kernel/po/es.po, os-kernel/src/.cvsignore, os-kernel/src/Makefile.am, os-kernel/src/os_kernel.c, os-kernel/src/os_kernel_crypto.c, os-kernel/src/os_kernel_crypto.h, os-kernel/src/os_kernel_err_answer.h, os-kernel/src/os_kernel_group_request.c, os-kernel/src/os_kernel_group_request.h, os-kernel/src/os_kernel_keys.c, os-kernel/src/os_kernel_keys.h, os-kernel/src/os_kernel_login_request.c, os-kernel/src/os_kernel_login_request.h, os-kernel/src/os_kernel_logout_request.c, os-kernel/src/os_kernel_logout_request.h, os-kernel/src/os_kernel_permission_request.c, os-kernel/src/os_kernel_permission_request.h, os-kernel/src/os_kernel_refresh_session_request.c, os-kernel/src/os_kernel_refresh_session_request.h, os-kernel/src/os_kernel_register_request.c, os-kernel/src/os_kernel_register_request.h, os-kernel/src/os_kernel_registry.c, os-kernel/src/os_kernel_registry.h, os-kernel/src/os_kernel_server_request.c, os-kernel/src/os_kernel_server_request.h, os-kernel/src/os_kernel_session.c, os-kernel/src/os_kernel_session.h, os-kernel/src/os_kernel_update_services_request.c, os-kernel/src/os_kernel_update_services_request.h, os-kernel/src/os_kernel_user_request.c, os-kernel/src/os_kernel_user_request.h, osea.pc.in:
+	New file.
+
+	* COPYING: Initial upload
+
+	* COPYING: New file.
+
+	* AUTHORS, NEWS: Initial upload
+
+	* AUTHORS, NEWS: New file.
+
+2003-12-06  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* configure.ac: Added pkg-config files to AC_OUTPUT section.
+
+	* libafdal/Makefile.am, libafdalkernel/Makefile.am, libafgs/Makefile.am, libcoyote/Makefile.am:
+	Added again pkg-config files.
+
+	* libafdal/src/Makefile.am: Giving priority to gob files.
+
+	* libafdal/src/afdal-datanode.c, libafdal/src/afdal-datanode.h:
+	Removing auto generated files.
+
+	* libafdal/src/Makefile.am:
+	Removing unnecesary references to libcoyote.
+
+	* af-kernel/src/Makefile.am, aspl-clm/src/Makefile.am:
+	Modified makefile.am to avoid library reference like -lname. Now af-kernel
+	and aspl-clm can be compiled and test before install libafdal,
+	libafdalkernel, libafgs and libcoyote.
+
+	* libafdalkernel/afdalkernel.pc.in:
+	Removed erroneous reference to -lafdal. This must be at Requiere section as
+	afdal.
+
+	* libafdalkernel/src/Makefile.am, libafdalkernel/test/Makefile.am:
+	Removed internal library references like -llibrary, and change to file.la
+	references, so the project libafdalkernel can be compiled even before
+	install libafdal and libcoyote.
+
+	* Makefile.am, configure.ac: Fixing some bad references to Makefiles.am
+	Added link creating to projects can reach other ones throught the same name
+	in #include directives.
+
+	* libafdal/src/afdal.h, libafdal/src/afdal_password.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h, libafdal/src/afdal_session.c:
+	Cleaning up and tyding source code to get it compiled before install
+	libcoyote.
+
+	* libafdal/src/afdal-datanode.gob: Adding new_wrapper method.
+
+	* libafdal/src/afdal-datanode.gob:
+	Adding virtual method edit_wrapper. This method will hide the details about
+	edit service.
+
+	* configure.ac: removing makefile.am references doesn't exists.
+
+	* autogen.sh: Adding main autogen.sh file.
+
+2003-12-04  David Marin Carreno  <david@aspl.es>
+
+	* AUTHORS, COPYING, ChangeLog, Makefile.am, NEWS, af-arch.pc.in, af-kernel/src/Makefile.am, aspl-clm/src/Makefile.am, configure.ac, libafdal/Makefile.am, libafdal/src/Makefile.am, libafdal/test/Makefile.am, libafdalkernel/Makefile.am, libafdalkernel/src/Makefile.am, libafdalkernel/test/Makefile.am, libafgs/Makefile.am, libafgs/src/Makefile.am, libafgs/test/Makefile.am, libcoyote/Makefile.am, libcoyote/src/Makefile.am, libcoyote/test/Makefile.am:
+	Now the whole af-architecture compiles with one only automake/autoconf.
+	Not yet pulished
+
+	* clean-compile-and-install.sh, compile-and-install.sh:
+	Removing compile-and-install scripts: they don't work properly
+
+2003-12-04  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_group.h, libafdalkernel/src/afdal_kernel_permission.h, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/src/afdal_kernel_server.h, libafdalkernel/src/afdal_kernel_user.h:
+	Adding _INTERFACE_ to the #define line of all these files, due to the match
+	between these and the files generated by gob.
+
+2003-12-03  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_simple.c:
+	Removing incoming message limit. This security issue will be supported
+	properly by af-sec project.
+
+	* libafdal/src/afdal_decimal.c, libafdal/src/afdal_decimal.h:
+	Updating afdal decimal_new function.
+
+2003-12-03  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal-kernel-group.gob, libafdalkernel/src/afdal-kernel-user.gob:
+	Adding .gob files for afdal_kernel_group and user
+
+2003-12-02  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_list.c, libafdal/src/afdal_list.h:
+	Adding some functions to afdal_list
+
+2003-12-01  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/doc/reference/libafdal-docs.sgml: Adding new documents
+
+	* libafdalkernel/configure.ac, libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.h, libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_group.h, libafdalkernel/src/afdal_kernel_user.c, libafdalkernel/src/afdal_kernel_user.h:
+	Migrating AfDalKernelUser and AfDalKernelGroup to g_object
+
+	* clean-compile-and-install.sh: Fixing bug
+
+	* compile-and-install.sh: Fixing bug...
+
+	* compile-and-install.sh: Removing cleaning from script
+
+	* clean-compile-and-install.sh:
+	Adding script for cleaning, compiling and installing
+
+	* libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h, libafdal/src/afdal-datanode.c, libafdal/src/afdal-datanode.gob, libafdal/src/afdal-datanode.h:
+	Converting AfDalTaxVatCustomer & AfDalTaxVatItem to g_objects.
+
+2003-12-01  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/ChangeLog, libafdalkernel/ChangeLog, libafgs/ChangeLog, libcoyote/ChangeLog:
+	Updating ChangeLog
+
+2003-12-01  David Marin Carreno  <david@aspl.es>
+
+	* compile-and-install.sh:
+	Adding script for cleaning, compiling and installing the system
+
+2003-12-01  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/src/afdal.h: Added new module afdal_decimal to main header.
+
+	* libafdal/src/Makefile.am: Added new module.
+
+	* libafdal/src/afdal_list.h: Source code indentation.
+
+	* libafdal/ChangeLog: Updating changelog.
+
+	* libafdal/src/afdal_decimal.c, libafdal/src/afdal_decimal.h:
+	Added new module to manage decimal values.
+
+2003-12-01  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal-datanode.gob: Fixing the .h include
+
+	* libafdal/src/Makefile.am, libafdal/src/afdal-datanode.c, libafdal/src/afdal-datanode.gob, libafdal/src/afdal-datanode.h, libafdal/src/afdal.h, libafdal/configure.ac:
+	Adding AfDalDataNode common g_object ancestor for all afdal* returned types.
+
+2003-11-26  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_support.c:
+	Fixing ugly buggg in afdal_support_get_number: it always returned 0.
+
+2003-11-25  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_support.c, libafdal/src/afdal_support.h:
+	Adding string-comparing routine
+
+2003-11-24  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/configure.ac, libafdalkernel/configure.ac, libafgs/configure.ac, af-kernel/configure.ac, aspl-clm/configure.ac, libafdal/configure.ac:
+	Upgrading version number
+
+2003-11-19  David Marin Carreno  <david@aspl.es>
+
+	* libafgs/doc/reference/afgs.types:
+	Adding neccessary file for make dist
+
+	* libafdal/doc/reference/tmpl/afdal.sgml, libafdal/doc/reference/tmpl/afdal_event_source.sgml, libafdal/doc/reference/tmpl/afdal_session.sgml:
+	Updating documentation
+
+2003-11-19  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_log.c:
+	Added more message to ignore at fake_log_handler.
+
+2003-11-17  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_server.c, libafdalkernel/src/afdal_kernel_user.c:
+	More clean-up updates.
+
+	* libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_server.c, libafdalkernel/src/afdal_kernel_user.c:
+	Clean-up update.
+
+	* libafdal/src/Makefile.am, libafdal/src/afdal.h:
+	Added new module afdal_support.
+
+	* libafdal/src/afdal_session.c: Added some checks.
+
+	* libafdal/src/afdal_support.c, libafdal/src/afdal_support.h:
+	Added new module which hold libafdal* support function.
+
+2003-11-16  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.h: Removed some #include not needed.
+
+2003-11-13  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_database.c, libafgs/src/afgs_main.c, af-kernel/configure.ac:
+	*** empty log message ***
+
+	* libafgs/configure.ac: Adding popt library support.
+
+2003-11-12  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/doc/reference/tmpl/coyote_connection.sgml, libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_dataset.h:
+	Adding coyote_dataset_set
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_register_request.h, af-kernel/src/af_kernel_registry.c, af-kernel/src/af_kernel_registry.h:
+	Fixing bug #149:
+	Af-kernel now saves its registry in database
+
+	* libcoyote/src/coyote_dataset.c:
+	Changing g_print by g_printerr in coyote_dataset_print
+
+2003-11-11  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_database.c: *** empty log message ***
+
+	* libafgs/src/afgs_signal_handler.c, libafgs/src/afgs_signal_handler.h:
+	Adding new module to manage default signal handling.
+
+	* libafgs/src/afgs_command.c, libafgs/src/afgs_command.h:
+	Code indentation.
+
+	* libafgs/src/afgs_main.c, libafgs/src/afgs_main.h:
+	Adding default signal handler.
+
+	* libafgs/src/afgs.h, libafgs/src/Makefile.am:
+	Added new module afgs_signal_handler.
+
+2003-11-11  David Marin Carreno  <david@aspl.es>
+
+	* libafgs/src/afgs_command.c:
+	Make workaround for bug in gda_value_copy. We must remove this
+	workaround after a new gda version!!
+
+2003-11-11  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_crypto.c:
+	Adding ssl support for 0.96 and 0.97 versions.
+
+2003-11-10  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/configure.ac, af-kernel/src/af_kernel_group_request.c:
+	Minor changes.
+
+	* af-kernel/src/af_kernel.c: Changes due to libafgs api change.
+	Now, all server don't need to define which g_log message they have to mask.
+
+	* libafgs/src/afgs_services.h:
+	Added AFGS_SERVICES_TABLE_END constant to make easy to finish an afgs
+	service table.
+
+	* libafgs/src/afgs_log.c, libafgs/src/afgs_log.h:
+	Added afgs_log_check_and_disable_glog function to check if AF_DEBUG environ
+	var is set and then disable all g_log message. This function is common to
+	all servers.
+
+2003-10-28  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_session.c: Removing commented (and obsolete) code.
+
+	* libafdal/src/afdal_session.c, libafdal/stamp-h.in:
+	Updating session_refresh. Now it calls to "login" service, because
+	"session_refresh" service was removed.
+
+2003-10-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_main.c: Updating comments.
+
+2003-10-27  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_config.c, libafgs/src/afgs_config.h, libafgs/src/afgs_log.c, libafgs/src/afgs_log.h, libafgs/src/afgs_main.c, libafgs/src/afgs_main.h:
+	* Adding new function afgs_config_check_permissions to afgs_config module
+	for secure purpose.
+	* Added afgs_log_vwrite function.
+	* Added support for joining external popt option tables.
+
+	* af-kernel/src/af_kernel.c, af-kernel/data/af-kernel.cfg.example:
+	* Updating af-kernel.cfg.example file.
+	* Adding support to af-kernel for adding superuser in case of emergency.
+
+2003-10-22  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_connection.c, libcoyote/src/coyote_connection.h:
+	Add coyote_connection_get_client_name function to support loggin ip on logs.
+
+	* libafgs/src/afgs_log.c, libafgs/src/afgs_services.c:
+	Add support to log which ip-client-service is runned.
+
+	* af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_keys.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_refresh_session_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_server_request.c, af-kernel/src/af_kernel_update_services_request.c, af-kernel/src/af_kernel_user_request.c:
+	Remove some unuseful log that is made by libafgs.
+
+	* aspl-clm/src/user.h:
+	Including header function: user_list_foreach_function.
+
+2003-10-22  David Marin Carreno  <david@aspl.es>
+
+	* aspl-clm/src/user.c: Fixing a compiling bug
+
+2003-10-22  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/src/afdal_event_source.c, libafdal/src/afdal_password.c, libafdal/src/afdal_request.c, libafdal/src/afdal_session.c:
+	Fix some warnings and compilation errors.
+
+2003-10-21  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/data/install.sql, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_session.c:
+	Fixing some bugs...
+
+	* af-kernel/data/install.sql, af-kernel/data/uninstall.sql, af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_session.c, af-kernel/src/af_kernel_session.h:
+	Adding support for kernel_session table.
+	Removing service refresh_session (I should read docs before implementing
+	anything)
+
+2003-10-07  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_permission.h, libafdalkernel/src/afdal_kernel_permission.c:
+	Adding depends to afdal_kernel_permission
+
+	* af-kernel/src/af_kernel_permission_request.c:
+	Enabling getting back of permission depends.
+
+2003-10-06  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel.c:
+	Adding support for descriptions while auto-registering services
+
+	* af-kernel/src/af_kernel.c: Adding descriptions to services
+
+	* libafdal/src/afdal_request.c, libafdal/src/afdal_session.c, libafdal/src/afdal_session.h:
+	Fixing bug #122.
+	Now afdal try to reconnect automagically when a server reboots.
+
+	* aspl-clm/src/group.c:
+	Fixing bug #130: answer message in service "list group user"
+
+	* af-kernel/configure.ac: Removing "debug" configure option
+
+	* libafdal/src/afdal_event_source.c, libafdal/src/afdal_request.c, libafdalkernel/doc/reference/tmpl/afdal_kernel.sgml, af-kernel/src/af_kernel.c, aspl-clm/src/main.c, libafdal/configure.ac, libafdal/doc/reference/tmpl/afdal.sgml, libafdal/doc/reference/tmpl/afdal_request.sgml, libafdal/doc/reference/tmpl/afdal_session.sgml:
+	Adding support for "AF_DEBUG" environment variable.
+	Fixing race condition in afdal_event_process.
+
+2003-10-03  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_event_source.c:
+	Hehe. It's good marking "__afdal_event_source_thread_is_active" to TRUE
+	when starting the thread.
+
+	* libafdal/src/afdal_event_source.c, libafdal/src/afdal_event_source.h, libafdal/src/afdal_password.c, libafdal/src/afdal_request.c, libafdal/src/afdal_session.c:
+	Hehe! We've got a new thread for launching events from libafdal.
+
+	* aspl-clm/src/connection.c, aspl-clm/src/group.c, aspl-clm/src/main.c:
+	Adding callback for asking password
+
+	* aspl-clm/configure.ac, aspl-clm/src/Makefile.am, aspl-clm/src/auto_completion.h, aspl-clm/src/connection.c, aspl-clm/src/group.c, aspl-clm/src/main.c, aspl-clm/src/permission.c, aspl-clm/src/servers.c, aspl-clm/src/user.c:
+	Changing libreadline detection routines for making it to work in other
+	distributions too.
+
+	* libafgs/src/afgs_main.c: Adding afdal_init function call
+
+	* aspl-clm/src/main.c: Adding afdal_init call
+
+	* libafdal/src/afdal.h, libafdal/src/afdal.c:
+	Adding afdal_init function
+
+2003-10-02  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_keys.c, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_update_services_request.c, af-kernel/src/af_kernel_user_request.c:
+	Adding escaping backslashes to multilined strings
+
+	* af-kernel/src/af_kernel.c:
+	Uploading backslashes in multilined strings.
+
+2003-09-22  David Marin Carreno  <david@aspl.es>
+
+	* aspl-clm/src/connection.c:
+	Now, the password is not shown in the prompt
+
+2003-09-17  David Marin Carreno  <david@aspl.es>
+
+	* aspl-clm/src/Makefile.am, aspl-clm/src/main.c:
+	Adding compiling date show in --version option
+
+	* aspl-clm/src/Makefile.am, libafdal/src/afdal.h, libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.h:
+	Adding compiling time info to --version
+
+	* libafdalkernel/src/afdal_kernel.c: Adding print_version_info
+
+	* af-kernel/stamp-h.in: Removing unnecessary file
+
+	* libafgs/src/afgs_main.c, libafdal/src/Makefile.am, libafdal/src/afdal.c:
+	Adding libafdal support for showing version
+
+	* libafgs/src/Makefile.am, libafgs/src/afgs.h, libafgs/src/afgs_main.c:
+	Adding version info printing in afgs
+
+	* libafgs/src/afgs.c: Adding version_info printing
+
+	* libafgs/src/afgs_main.c, libafgs/src/afgs_main.h, af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c:
+	Adding support for --version option in servers.
+	Adding support for showing compilation date in version info (in servers)
+
+	* af-kernel/configure.ac, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_register_request.c:
+	Cleaning messages in terminal.
+
+	* libafgs/src/afgs_afkeys.c: Changing g_print's for g_log's
+
+	* libafdal/src/afdal_list.c:
+	Fixing segmentation fault in afdal_list_remove (copy-paste error)
+
+2003-09-16  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/src/afdal_list.c: Adding some type checks.
+
+2003-09-16  David Marin Carreno  <david@aspl.es>
+
+	* libafgs/src/afgs_main.c: Documenting
+
+	* af-kernel/configure.ac: Ups... CTX was uppercase...
+
+	* af-kernel/configure.ac: Adding function for checking openssl version
+
+	* libafdal/src/afdal_session.c: Fixing compile warnings
+
+2003-09-16  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_dataset.c: fix a buggy comment
+
+2003-09-16  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/ChangeLog, af-kernel/ChangeLog, aspl-clm/ChangeLog, libafdal/ChangeLog, libafdalkernel/ChangeLog:
+	Updating Changelogs
+
+	* libafgs/ChangeLog: Updating changelog
+
+	* libafgs/src/afgs_afkeys.c, libafgs/src/afgs_main.c, libafgs/src/afgs_main.h, af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_service_process.h:
+	Server launched by Libafgs finished.
+	Af-kernel now also uses afgs for launching server.
+
+	* libafgs/src/Makefile.am, libafgs/src/afgs.h, libafgs/src/afgs_config.c, libafgs/src/afgs_main.c, libafgs/src/afgs_main.h, libafgs/src/afgs_services.c, libafgs/src/afgs_services.h:
+	Adding support for startings servers
+
+2003-09-14  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_request.c:
+	Fixed all problems with refresh_session process :-) (At least I think so)
+
+2003-09-13  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_session.c, af-kernel/data/af-kernel.cfg.example, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_refresh_session_request.c, af-kernel/src/af_kernel_session.c:
+	Fixing problems when refreshing session: now it seems to work perfectly.
+	Programmed password-asking callback in aspl-fact for refreshing session
+	(still with problems with transient windows).
+
+2003-09-12  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_password.c, libafdal/src/afdal_password.h, libafdal/src/afdal_request.c:
+	Removing AfDal support for asking password (default callback).
+	The user-program should program this callback and pass it to libafdal.
+
+2003-09-11  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_code.c: Removing COYOTE_CODE_AFKEY_EXPIRED:
+	there was a COYOTE_CODE_KEY_EXPIRED before.
+
+	* libafdal/src/Makefile.am, libafdal/src/afdal.h, libafdal/src/afdal_password.c, libafdal/src/afdal_password.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h, libafdal/src/afdal_session.c, libafdal/src/afdal_session.h:
+	Adding support for asking for a password when session has expired.
+	(It doesn't work yet, but here is the code...)
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_refresh_session_request.c:
+	Adding "set_connection_key" service.
+	Changing parameter name for refresh_session.
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.h, af-kernel/src/af_kernel_refresh_session_request.c, af-kernel/src/af_kernel_refresh_session_request.h:
+	Adding support for refreshing sessions
+
+	* af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_login_request.h, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_session.c, af-kernel/src/af_kernel_session.h:
+	Now server sessions don't expire.
+	And a session only has 1 active session
+
+	* af-kernel/src/af_kernel_unregister_request.c, af-kernel/src/af_kernel_unregister_request.h:
+	2 ghost files out
+
+2003-09-10  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_list.c, libafdal/src/afdal_request.c, libafdal/src/afdal_session.c, libafdal/src/afdal_session.h:
+	Refreshing af-keys is now a very cool reality.
+
+2003-09-09  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_session.h, libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_server.c, libafdalkernel/src/afdal_kernel_user.c, libafgs/src/afgs_afkeys.c, libafgs/src/afgs_services.c, libcoyote/src/coyote_code.h, libafdal/src/afdal_list.c, libafdal/src/afdal_list.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h, libafdal/src/afdal_session.c:
+	We start to have af-key refreshing.
+	At the moment, the kernel answers with the new key, but the client doesn't
+	process it yet. (Men at work)
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_keys.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_session.c, af-kernel/src/af_kernel_session.h:
+	Refreshing af-keys (not tested yet, but fully implemented).
+
+	* af-kernel/src/af_kernel_crypto.c: Fixing a bug in hexadecimal form.
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_crypto.c, af-kernel/src/af_kernel_crypto.h, af-kernel/src/af_kernel_keys.c, af-kernel/src/af_kernel_keys.h, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_login_request.h, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_session.c, af-kernel/src/af_kernel_session.h, af-kernel/src/af_kernel_user_request.c, af-kernel/configure.ac, af-kernel/data/af-kernel.cfg.example:
+	Moving to libssl to do all crypto stuff.
+	Adding support for maintaining session info.
+	Moving all crypto stuff to af_kernel_crypto module.
+
+2003-09-08  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/configure.ac, libcoyote/src/coyote_simple_cfg.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h, libafdal/src/afdal_session.c, libafdalkernel/configure.ac, libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_server.c, libafdalkernel/src/afdal_kernel_user.c, af-kernel/configure.ac, aspl-clm/configure.ac, libafdal/doc/reference/tmpl/afdal.sgml:
+	Adding support in afdal_request_close_and_return_initial_data for
+	managing AFKEY_EXPIRED messages (not yet finished).
+
+	* libafgs/src/afgs_afkeys.c:
+	My mum always says that multiple-sentence-ifs should have
+	braces after them.
+
+	* libafgs/configure.ac, libafgs/src/afgs_afkeys.c:
+	Fixing big problem (SEGV) if afkey expiration is not set.
+
+2003-09-07  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_code.c, libcoyote/src/coyote_code.h, af-kernel/data/af-kernel.cfg.example, af-kernel/src/af_kernel.c, libafgs/src/afgs_afkeys.c, libafgs/src/afgs_afkeys.h:
+	Adding afkey-expiration detection in servers
+
+2003-09-06  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_service_process.c, libafgs/src/afgs_services.c, libafgs/src/afgs_services.h:
+	Adding support for accumulating two or more services in only one permission.
+
+	* libafdal/src/afdal_list.c, libafdal/src/afdal_list.h:
+	He, he. I forgot adding afdal_list.* ;-)
+
+2003-09-04  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_afkeys.c, libafdal/src/afdal_session.c:
+	Fixing bugs in afdal_keys creation and destruction
+
+2003-09-03  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_session.h, libafdal/src/afdal_session.c:
+	Adding afdal_session_get_permission function
+
+2003-09-02  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/doc/reference/tmpl/afdal_kernel_permission.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_server.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_user.sgml, libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_server.c, libafdalkernel/src/afdal_kernel_user.c, libafdalkernel/test/test_afdal_kernel_group.c, libafdalkernel/test/test_afdal_kernel_permission.c, libafdalkernel/test/test_afdal_kernel_user.c, libcoyote/doc/reference/tmpl/coyote_simple.sgml, libafdal/configure.ac, libafdal/doc/reference/tmpl/afdal_afkeys.sgml, libafdal/doc/reference/tmpl/afdal_event_source.sgml, libafdal/doc/reference/tmpl/afdal_session.sgml, libafdal/src/Makefile.am, libafdal/src/afdal.c, libafdal/src/afdal.h, libafdal/src/afdal_afkeys.c, libafdal/src/afdal_session.c, libafdalkernel/doc/reference/tmpl/afdal_kernel_group.sgml, aspl-clm/src/commands.c, aspl-clm/src/group.c, aspl-clm/src/permission.c, aspl-clm/src/servers.c, aspl-clm/src/user.c:
+	Replacing GTree's in afdal_data structures by the new
+	and customized AfDalList.
+
+	Fixing some warnings (due to missing includes).
+
+2003-07-18  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_command.c: Added a better query error detection.
+
+2003-05-14  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* aspl-clm/src/Makefile.am: Solving config problem.
+
+	* aspl-clm/NEWS: Adding news file.
+
+	* aspl-clm/src/Makefile.am, af-kernel/src/Makefile.am, README:
+	Adding headers files to Makefile.am in order to get them inserted into tgz
+	created by using make dist.
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/doc/reference/tmpl/afdal_kernel.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_group.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_permission.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_register.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_request.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_server.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_session.sgml, libafdalkernel/doc/reference/tmpl/afdal_kernel_user.sgml:
+	Added more documentation.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/doc/reference/tmpl/afdal_session.sgml: Adding descriptions
+
+	* libafdal/doc/reference/libafdal-docs.sgml, libafdal/doc/reference/tmpl/afdal.sgml, libafdal/doc/reference/tmpl/afdal_afkeys.sgml, libafdal/doc/reference/tmpl/afdal_event_source.sgml, libafdal/doc/reference/tmpl/afdal_request.sgml, libafdal/doc/reference/tmpl/afdal_session.sgml, libafdal/doc/reference/tmpl/libafdal-unused.sgml:
+	Adding templates for gtk-doc documentation
+
+	* libafdal/src/afdal_session.c: Updating gtk-doc
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_server.c, libafdalkernel/src/afdal_kernel_user.c, libafdalkernel/doc/reference/libafdalkernel-docs.sgml:
+	Added documentation.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_session.c: Updating gtk-doc
+
+2003-04-30  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* aspl-clm/src/main.c: Autocompletion code commented.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_event_source.c: Updating gtk-doc
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/doc/reference/afgs-docs.sgml: Updating doc.
+
+	* libafgs/src/afgs_afkeys.h, libafgs/doc/reference/afgs-docs.sgml:
+	Small code indentation.
+
+	* libafgs/src/afgs_services.c: Added some documentation.
+
+	* libafgs/src/afgs_message.c: Documentation checks
+
+	* libafgs/src/afgs_command.c: Documentation checks.
+
+	* libafgs/src/afgs_afkeys.c: Added documentation.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/ChangeLog, libafgs/ChangeLog, libafdalkernel/ChangeLog, libafdal/ChangeLog, aspl-clm/ChangeLog, af-kernel/ChangeLog:
+	Updating changelogs
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_permission_request.h, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_permission.h:
+	Adding service for obtaining permissions from the groups a user belongs to
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_server_request.c:
+	Updating list server request parameters.
+
+	* aspl-clm/src/Makefile.am, aspl-clm/src/commands.c, aspl-clm/src/main.c:
+	Added new module servers.
+
+	* aspl-clm/src/servers.c, aspl-clm/src/servers.h:
+	Added new module to manage servers.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel_server_request.c:
+	Fixing warning (string.h not included)
+
+	* af-kernel/src/af_kernel_server_request.c, af-kernel/src/af_kernel_permission_request.c:
+	Fixing SQL bug: limit must be after order by
+
+	* af-kernel/configure.ac, af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c:
+	Adding support for libpopt in af-kernel
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_register_request.h, af-kernel/src/af_kernel_server_request.c, af-kernel/src/af_kernel_update_services_request.h, af-kernel/src/af_kernel_user_request.c:
+	Change parameter server_id to id at server_remove service.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* aspl-clm/configure.ac: Improving readline detection
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.h:
+	Added new module afdal_kernel_server to get it compiled.
+
+	* libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h:
+	Api type change due to collision name with afdal_kernel_server module.
+
+	* libafdalkernel/src/afdal_kernel_server.c, libafdalkernel/src/afdal_kernel_server.h:
+	Added new modules to interface with af-kernel server services.
+
+	* af-kernel/src/af_kernel_server_request.c, af-kernel/src/af_kernel_server_request.h:
+	New modules added to manage server removing and listing.
+
+	* af-kernel/data/install.sql: Changes on table kernel_permission.
+	Change delete flag from restrict to cascade.
+
+	Changes on table kernel_user_have.
+	Change delete flag from restrict to cascade.
+
+	Changes on table kernel_group_have.
+	Change delete flag from restrict to cascade.
+
+	Changes on table kernel_depends.
+	Change delete flag from restrict to cascade.
+
+	Changes on table kernel_belongs.
+	Change delete flag from restrict to cascade.
+
+	* libafdalkernel/test/test_afdal_kernel_user.c:
+	Removed to GError var to avoid warnings message.
+
+	* libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_permission.h:
+	Small api name change.
+
+2003-04-29  David Marin Carreno  <david@aspl.es>
+
+	* libafgs/src/afgs_services.c:
+	Not sending services that don't need af-keys.
+
+	* af-kernel/Makefile.am, af-kernel/configure.ac:
+	Removing i18n attempt files
+
+2003-04-29  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_permission.h:
+	Added new interface function for service permission_list_by_actual_user.
+
+2003-04-29  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/intltool-extract.in, af-kernel/intltool-merge.in, af-kernel/intltool-update.in:
+	Adding support for i18n
+
+	* af-kernel/po/Makefile.in.in, af-kernel/po/es.po: Updating...
+
+2003-04-28  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/po/POTFILES.in, af-kernel/po/es.po, af-kernel/Makefile.am, af-kernel/configure.ac:
+	Adding support for i18n (preliminary)
+
+2003-04-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_user.h: code indentation.
+
+2003-04-28  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_user.c: Sorry!!! Fixing compiling bug
+
+	* libafdalkernel/src/afdal_kernel_user.c, libafdalkernel/src/afdal_kernel_user.h:
+	Adding service for obtaining the list of a user's group
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_permission_request.h, af-kernel/src/af_kernel_user_request.c, af-kernel/src/af_kernel_user_request.h:
+	Added some services:
+	- For getting actual user permissions
+	- For getting list of user's groups
+
+2003-04-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_user_request.c: Small code indentation.
+
+	* libafgs/src/Makefile.am, libafgs/src/afgs.h, libafgs/src/afgs_log.c:
+	Added new module afgs_log.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_update_services_request.c, af-kernel/src/af_kernel_user_request.c:
+	Added some log.
+
+	* libafgs/src/afgs_log.c, libafgs/src/afgs_log.h:
+	Adding new module which contains all log functionality.
+
+	* af-kernel/data/af-kernel.cfg.example:
+	Adding new config value 'log active'.
+
+	* af-kernel/data/af-kernel.cfg.example:
+	Adding new config value: 'log file'.
+
+	* libafdal/src/afdal_event_source.c, libafdal/src/afdal_event_source.h:
+	Updating afda_event_source module to have all enhancements which has
+	event_source module at aspl-fact source code.
+
+2003-04-27  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/src/afdal_session.c:
+	Solved bug at afdal_session_active_servers. This function didn't create
+	active servers list properly.
+
+	* af-kernel/data/install.sql: Changes on kernel_group table:
+	 name attribute has now UNIQUE flag. This is to avoid several groups
+	 with the same name.
+
+	* af-kernel/doc/af_kernel_er_diagram.dia: Updating diagram.
+
+	* af-kernel/src/af_kernel_permission_request.c:
+	Bug fixed on permission_list_by_user. This service was only giving user's
+	permission without keeping in mind those permissions which belongs to the
+	group which the user is member.
+
+	* af-kernel/src/af_kernel_user_request.c:
+	Bug fix on user_remove service. We didn't remove all references between the
+	user and its permission and groups which user belongs.
+
+	* af-kernel/src/af_kernel_group_request.c:
+	bug fix on remove group service.
+
+2003-04-25  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_permission.c:
+	Added #include directive to avoid a warning.
+
+2003-04-25  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_register_request.c:
+	Changing callings to afgs_afkey_set_key to afgs_afkey_set_key_simple
+
+	* libafgs/src/afgs_afkeys.c, libafgs/src/afgs_afkeys.h:
+	Adding new service process function for establishing AF-keys.
+	Renaming old function set_afkey to set_afkey_simple.
+
+	* libafdal/src/afdal_session.c, libafdal/src/afdal_session.h:
+	Sending AF-key while establishing connections
+
+2003-04-23  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_command.c: Removed static database connection.
+
+2003-04-23  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel_register_request.c: Fixing little bug
+
+	* libafgs/src/afgs_message.c: Adding g_list_first (perhaps it's needed)
+
+2003-04-23  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_reg.c: Removed unused variable.
+
+	* libafgs/src/afgs_services.c, libafgs/src/afgs_services.h:
+	Some updates due to api change.
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Recovered old code which sends session_id and server datasets.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_update_services_request.c:
+	Updating af-kernel.
+	Now it really support install mode for update-services service.
+
+2003-04-23  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_permission.h:
+	Adding afdal_kernel_permission_(user|group)_set_value functions
+
+2003-04-23  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libafgs/src/afgs_services.c, libafgs/src/afgs_services.h:
+	Adding update services function.
+
+2003-04-23  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs.h, libafgs/src/afgs_services.h:
+	Updating AfgsServicesProvided type.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_service_process.h:
+	Updating kernel server to use afgs_service_process function instead of
+	af_kernel_services_process.
+
+2003-04-23  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libafgs/src/afgs_reg.c:
+	Coment "waiting_loop = g_main_loop_new (NULL, TRUE);" line.
+
+2003-04-23  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_services.c, libafgs/src/afgs_services.h:
+	Added afgs_services_process function.
+
+	* libafgs/src/Makefile.am, libafgs/src/afgs_services.c, libafgs/src/afgs_services.h:
+	Implemented coyote-permission conversion.
+
+2003-04-23  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libafgs/src/afgs_config.c:
+	Adding the need of free the result at get function.
+
+	* libafgs/src/afgs_services.c, libafgs/src/afgs_services.h:
+	New modules for services update.
+
+2003-04-23  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Removed old code at af_kernel_unregister_request function.
+	Now it uses the standard new way to process request.
+
+2003-04-15  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/configure.ac: Removed reference to libafdalkernel.
+
+	* libafgs/src/afgs_reg.c, libafgs/src/afgs_reg.h:
+	Removed all references to afdalkernel. Now we only depend on afdal.
+
+	* af-kernel/src/af_kernel_update_services_request.c:
+	Implemented update_services request to work in install mode.
+
+	* af-kernel/data/install.sql: Change on table kernel_user_have:
+	Make user_id and permission_id primary key both.
+
+	Change on table kernel_group_have:
+	Make group_id and permission_id primary key both.
+
+	Change on table kernel_depends:
+	Make id_permission and id_depends primary key both.
+
+	* af-kernel/src/af_kernel_permission_request.c:
+	Updating all services which list permissions. All permissions are
+	ordered by server name and permission name.
+
+2003-04-15  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel_user_request.c:
+	If the client program sends no password when editing a user,
+	the kernel doesn't update it
+
+2003-04-15  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/data/install.sql:
+	Added NOT NULL flag on id references that are foreing key.
+
+	* af-kernel/src/af_kernel_update_services_request.c, af-kernel/src/af_kernel_user_request.c:
+	password ciphered on new_user and edit_user services and update_services
+	begining.
+
+	* af-kernel/data/install.sql:
+	Change on kernel_server attribute name. Added UNIQUE flag, because
+	servers name are diferent always.
+
+	* af-kernel/src/af_kernel_user_request.c, af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_service_process.c:
+	General code update due to api change on libafgs library.
+
+	* libafgs/src/afgs_message.c: Bug fixed on afgs_message_check_params.
+
+	* libafgs/src/afgs_message.c, libafgs/src/afgs_message.h:
+	Api change on afgs_message_check_params function. Now it returns a GList *,
+	due to incoming parameters can be string or datasets.
+
+	* libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_session.c:
+	Added new AFDAL CODE: AFDAL_UPDATE_SERVICES_NEEDED:
+	This code will be used to report servers they need to update them services.
+
+2003-04-11  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_update_services_request.c, af-kernel/src/af_kernel_update_services_request.h:
+	Added new module to manage update-services service.
+
+	* libafdal/src/afdal_session.c: Added more log.
+
+	* libcoyote/src/coyote_code.c, libcoyote/src/coyote_code.h:
+	Added new coyote code error.
+
+	* libafgs/src/afgs_command.c, libafgs/src/afgs_command.h, libafgs/src/afgs_reg.c:
+	Api change to returns dataset instead of datamodel.
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_keys.c, af-kernel/src/af_kernel_keys.h, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_user_request.c:
+	General update due to libafgs api change.
+
+	* af-kernel/src/af_kernel_service_process.c:
+	Added support to assign all permissions to default aspl user.
+
+	* aspl-clm/src/group.c, aspl-clm/src/permission.c, aspl-clm/src/user.c:
+	Make more verbose aspl-clm on negative servers reponses.
+
+	* libafgs/src/afgs_afkeys.c:
+	Added and tested afgs_afkeys_check_service_permission function.
+	It allows servers to test if an afkey allows service execution to an user.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c:
+	First version with af-key checks. Now, af-kernel doesn't executed anything
+	without enought permissions.
+
+	* libcoyote/src/coyote_code.c, libcoyote/src/coyote_code.h:
+	Modifying coyote code internal implementation to something with tabular
+	shape.
+
+2003-04-11  David Marin Carreno  <david@aspl.es>
+
+	* libafgs/NEWS: Adding (needed for automatic make)
+
+2003-04-11  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/configure.ac, libafgs/src/Makefile.am, libafgs/src/afgs.h, libafgs/src/afgs_afkeys.c, libafgs/src/afgs_afkeys.h:
+	Uploading code needed by davefx to working with af-kernel.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_user_request.c:
+	Added mecanism to detect if a provided afkey allows a user to execute a
+	service.
+	Fixed bug due to don't close database connections.
+
+	* libafgs/src/afgs_afkeys.c, libafgs/src/afgs_afkeys.h:
+	Added new module to manage afkeys.
+
+	* libafdal/src/Makefile.am:
+	Added new module afdal_afkeys to get it compiled.
+
+	* libafdal/src/afdal_session.c, libafdal/src/afdal_session.h:
+	Added functions to get permission list from particular server.
+	Code indentation.
+
+	* libafdal/src/afdal_afkeys.c, libafdal/src/afdal_afkeys.h:
+	New module for internal af-key managing.
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel_login_request.c:
+	Used new module af_kernel_keys to generate all needed keys by aspl-fact.
+
+	* af-kernel/src/af_kernel_keys.h, af-kernel/src/af_kernel_keys.c:
+	Added new module to create af-keys.
+
+2003-04-10  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Code update to conform af_kernel_login_request api change.
+
+	* af-kernel/src/af_kernel_service_process.c:
+	Adding more enviroment checks. af-kernel inserts an user 'aspl' with
+	password 'test' if there is no users on database.
+
+	* af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_login_request.h:
+	Adding functions to create md5sums from strings.
+	Updated login process to use database users.
+
+	* af-kernel/data/install.sql:
+	Modifying passwd type on table kernel_user to CHAR(32), MD5 lenght.
+
+2003-04-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_group_request.h, af-kernel/src/af_kernel_service_process.c:
+	Added more services to manage group services.
+
+	* aspl-clm/src/commands.c: Added more allowed services.
+
+	* libafdalkernel/src/afdal_kernel_group.c:
+	Added list group users functions.
+
+2003-04-09  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/data/fact.dtd, libcoyote/doc/reference/tmpl/coyote_simple.sgml, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h, libcoyote/test/test_coyote_xml.c, libafdal/src/afdal_session.c, libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_user.c:
+	Modifiying CoyoteXml service request parts to include datasets in request
+	messages.
+
+	Modification in all the calls to these functions in order to
+	support the new call method (adding the coyote xml arg type to the params).
+
+	Modification of the coyote xml test to chechk the new implementation.
+
+2003-04-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* aspl-clm/src/Makefile.am, aspl-clm/src/permission.c:
+	Added more code to manage permissions.
+
+	* aspl-clm/src/commands.c: Added more services to allow.
+	Added an score algorithm to know which command to execute.
+
+	* aspl-clm/src/group.c, aspl-clm/src/group.h:
+	Added new module to manage groups.
+
+	* libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_group.h:
+	Added more groups and users functions to interface with af-kernel services.
+
+	* af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_group_request.h, af-kernel/src/af_kernel_service_process.c:
+	More groups and user services improvements.
+
+2003-04-09  David Marin Carreno  <david@aspl.es>
+
+	* libafgs/src/afgs_reg.c, libafdal/src/afdal_session.c, libafdal/src/afdal_session.h, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/test/Makefile.am, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_login_request.h, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_register_request.h:
+	Removing all connection from afdal*
+	Upgrading register service & callback for returning session info.
+
+2003-04-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/data/install.sql:
+	Updated kernel_belong table. Remove attribute id and make user_id and
+	group_id both primary key.
+
+	* af-kernel/data/install.sql: Added a forgiven table kernel_belongs.
+
+	* af-kernel/data/uninstall.sql: Added new table kernel_belongs.
+
+2003-04-09  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/test/test_afdal_kernel_group.c, libafdalkernel/test/test_afdal_kernel_permission.c, libafdalkernel/test/test_afdal_kernel_user.c:
+	Updating tests for use correctly the modified afdal_kernel functions
+
+2003-04-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* aspl-clm/src/connection.c, aspl-clm/src/connection.h, aspl-clm/src/main.c, aspl-clm/src/permission.c, aspl-clm/src/user.c:
+	Modified source code to conform new libafdal api.
+
+2003-04-09  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_permission.c: fixing compile error
+
+	* libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_group.h, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_permission.h, libafdalkernel/src/afdal_kernel_user.c, libafdalkernel/src/afdal_kernel_user.h:
+	Removing RRConnection *connection from all interfaces
+
+2003-04-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* aspl-clm/src/connection.c, aspl-clm/src/main.c:
+	Updated the way to make connections to central server.
+
+	* af-kernel/src/af_kernel_permission_request.c:
+	Solved problems in permission services.
+
+	* aspl-clm/src/permission.h, aspl-clm/src/user.c, aspl-clm/src/Makefile.am, aspl-clm/src/commands.c, aspl-clm/src/permission.c:
+	Added 'unset perm user' command.
+
+	* aspl-clm/src/help.c:
+	Updated module to print out new commands_allowed structure.
+
+	* aspl-clm/src/commands.c, aspl-clm/src/commands.h:
+	Added more fields to commands_allowed structure.
+
+	* aspl-clm/src/permission.c, aspl-clm/src/permission.h:
+	added module to manage permission stuff.
+
+2003-04-09  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_session.c:
+	Initializing coyote in afdal_session_login
+
+2003-04-09  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/data/fact.dtd:
+	Modifiying dtd in order to including tables in a request service. Backward
+	compatibility.
+
+2003-04-09  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/test/Makefile.am: Removing test_afdal_kernel_session
+
+	* libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.h:
+	Removing afdal_kernel_session (replaced by afdal_kernel_session)
+
+	* libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.h:
+	Removing afdal_kernel_session (replaced by afdal_session)
+
+	* README: Updating order of compilation
+
+	* libafdal/src/Makefile.am, libafdal/src/afdal.h, libafdal/src/afdal_event_source.c, libafdal/src/afdal_event_source.h, libafdal/src/afdal_session.c:
+	Adding afdal_event_source
+
+2003-04-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_service_process.c:
+	Make service_process function more verbose.
+
+	* af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_permission_request.h, af-kernel/src/af_kernel_service_process.c:
+	Added more permission services. Now we can set and unset permissions to groups.
+
+	* libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_permission.h:
+	Added more functions to manage permissions with groups and users.
+
+	* af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_permission_request.h:
+	Added services to list permissiones by user or group.
+
+	* af-kernel/src/af_kernel_logout_request.c:
+	Modifying logout to allways response ok.
+
+2003-04-09  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_session.c, libafdal/src/afdal_session.h:
+	Adding support for session maintainance in libafdal
+
+2003-04-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/test/test_afdal_kernel_permission.c:
+	Tested permission_list service.
+
+	* af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_permission_request.h, af-kernel/src/af_kernel_service_process.c:
+	Added capability to list permission.
+
+	* libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.h, libafdalkernel/src/afdal_kernel_group.h, libafdalkernel/src/afdal_kernel_permission.c, libafdalkernel/src/afdal_kernel_permission.h, libafdalkernel/test/Makefile.am, libafdalkernel/test/test_afdal_kernel_permission.c:
+	Added new module to interface with kernel permission services.
+	MOdified afda_kernel headers to include new module.
+	Added test unit to check afdal_kernel_permission module.
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_group_request.h, af-kernel/src/af_kernel_service_process.c:
+	Updating modules to manages groups.
+
+	* af-kernel/src/af_kernel_permission_request.c, af-kernel/src/af_kernel_permission_request.h:
+	Adding new modules to manage permissions.
+
+	* af-kernel/data/install.sql:
+	Removed permission_id from kernel_permission table.
+
+2003-04-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_login_request.c:
+	Rewrited af_kernel_login_process function.
+
+2003-04-08  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/Makefile.am, libafdal/src/afdal.c, libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h, libafdal/src/afdal_session.c, libafdal/src/afdal_session.h:
+	Adding architectural functions for maintaining sessions, connections and
+	af_keys (not finished yet)
+
+2003-04-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/test/Makefile.am, libafdalkernel/test/test_afdal_kernel_group.c:
+	Added support to interface with kernel groups services.
+
+	* af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_service_process.c:
+	Added support to manage groups.
+
+	* af-kernel/data/install.sql: Type update.
+
+2003-04-08  David Marin Carreno  <david@aspl.es>
+
+	* aspl-clm/configure.ac: Updating version number
+
+2003-04-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.h:
+	Added afdal_kernel_group.h module.
+
+	* libafdalkernel/src/afdal_kernel_group.c, libafdalkernel/src/afdal_kernel_group.h:
+	New module added to interface with user and group kernel services.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_register_request.h:
+	Removed af-kernel registration to af_kernel.c module.
+
+2003-04-08  David Marin Carreno  <david@aspl.es>
+
+	* README: Updating to ML3
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_register_request.c:
+	Fixing bug #112
+
+2003-04-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel_register_request.c:
+	Added support to register af-kernel as a available server.
+
+2003-04-08  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_session.c, libcoyote/src/coyote_simple.c, libafdal/src/afdal_request.c:
+	Fixing bug #112: Memory leak in coyote_simple_frame_available
+
+2003-04-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_config.c: Updating afgs_config_get documentation.
+
+	* af-kernel/src/af_kernel_group_request.c, af-kernel/src/af_kernel_group_request.h:
+	New module to manage groups.
+
+	* af-kernel/doc/af_kernel_er_diagram.dia, af-kernel/src/af_kernel_service_process.c:
+	Modifying services_provided to support service identification and
+	more atributes.
+
+	* af-kernel/data/install.sql:
+	Adding permission_id to kernel_permission table.
+
+2003-04-07  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/test/test_afdal_kernel_register.c, libafgs/configure.ac, libafgs/src/afgs_reg.c, libafgs/src/afgs_reg.h:
+	Adding support for sending version number in register request
+
+2003-04-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_service_process.h:
+	Added support to automatically register all avaliable services as avaliable
+	permissions.
+
+	* af-kernel/data/install.sql:
+	Modified type for attrbute name at kernel_permission table from
+	VARCHAR(10) to VARCHAR(30).
+
+	* af-kernel/doc/af_kernel_er_diagram.dia: Diagram update.
+
+	* af-kernel/data/install.sql, af-kernel/data/uninstall.sql:
+	Added new table to hold satellite server.
+
+2003-04-06  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* aspl-clm/src/commands.c, aspl-clm/src/connection.c:
+	Added more user commands. list user, del user.
+
+	* aspl-clm/src/main.c:
+	Added handlers to avoid g_log message from libraries.
+
+	* aspl-clm/src/user.c, aspl-clm/src/user.h: Code to remove users.
+
+	* libafdal/src/afdal_request.c: Removing spurious g_print.
+
+	* aspl-clm/src/Makefile.am, aspl-clm/src/main.c, aspl-clm/configure.ac:
+	Stable version that can add new users.
+
+	* aspl-clm/src/auto_completion.c, aspl-clm/src/auto_completion.h:
+	Module for autocompletions capabilities.
+
+	* aspl-clm/src/help.c, aspl-clm/src/help.h:
+	Module which contains help functionality.
+
+	* aspl-clm/src/user.c, aspl-clm/src/user.h: Module to handler users.
+
+	* aspl-clm/src/connection.c, aspl-clm/src/connection.h:
+	Module to handle connections.
+
+	* aspl-clm/src/commands.c, aspl-clm/src/commands.h:
+	Module to handle allowed commands.
+
+2003-04-05  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* aspl-clm/src/Makefile.am, aspl-clm/src/main.c, aspl-clm/AUTHORS, aspl-clm/COPYING, aspl-clm/Changelog, aspl-clm/Makefile.am, aspl-clm/README, aspl-clm/autogen.sh, aspl-clm/configure.ac:
+	Initial source project skel for aspl-clm.
+
+	* af-kernel/src/af_kernel_user_request.c:
+	Implemented list_user service.
+
+	* af-kernel/src/af_kernel_service_process.c:
+	Added "list_user" as known services.
+
+	* libafdalkernel/test/test_afdal_kernel_user.c:
+	Added more check to test list_user service.
+
+	* libafdalkernel/src/afdal_kernel_user.c, libafdalkernel/src/afdal_kernel_user.h:
+	Added list_user service.
+
+	* libafdalkernel/test/test_afdal_kernel_user.c:
+	Improved test to check edit_user service.
+
+	* af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_user_request.c:
+	New service add: edit_user.
+	With libafgs support library create services is like: "Sota, caballo y rey".
+
+	* libafdalkernel/test/test_afdal_kernel_user.c:
+	Improved test unit to check afdal_kernel_user_remove function.
+
+	* af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_user_request.c:
+	Added remove_user service.
+
+	* libcoyote/src/coyote_code.h: Code indentation.
+
+	* libcoyote/src/coyote_simple.c:
+	Added support to configure close_confirmation callback.
+
+	* af-kernel/src/af_kernel_user_request.c:
+	Working version for new_user service.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_unregister_request.c:
+	Removed all calls to af_config and af_database modules.
+
+	* af-kernel/src/Makefile.am: Removed files af_config.c af_database.c.
+
+	* libafdalkernel/src/afdal_kernel.h: Added afdal_kernel_user.h header.
+
+	* libafdalkernel/src/Makefile.am: Added afdal_kernel_user module.
+
+	* libafdalkernel/src/afdal_kernel_user.h:
+	Added #include "afdal_kernel.h"
+
+	* libafdalkernel/src/afdal_kernel_user.c:
+	module implementation for afdal_kernel_user.h
+
+	* libafdalkernel/test/test_afdal_kernel_user.c:
+	Test unit for afdal_kernel_user.c
+
+	* libafdalkernel/test/Makefile.am:
+	Added new test unit test_afdal_kernel_user.
+
+	* libafgs/src/afgs_command.c:
+	Several bug fixed while allocating memory.
+
+	* af-kernel/src/af_config.c, af-kernel/src/af_config.h, af-kernel/src/af_database.c, af-kernel/src/af_database.h:
+	Modules removed. Code moved to libafgs.
+
+	* af-kernel/src/af_kernel.c:
+	Change calls from af_kernel_err_answer to afgs_message_erro_answer.
+
+	* af-kernel/src/Makefile.am: Removed af_kernel_err_answer.c module
+
+	* af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_unregister_request.c:
+	Fixed call from send_error to reply_error due to a LibCoyote api change.
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Fixed call send_error to reply_error due to LibCoyote api change.
+
+	* af-kernel/src/af_kernel.c:
+	Added support to threat close_indication signal.
+
+	* af-kernel/src/af_kernel_err_answer.c:
+	Module removed. Code moved to libafgs library.
+
+	* af-kernel/doc/af_kernel_er_diagram.dia:
+	Added diagram which represents the af-kernel ER database model.
+
+	* af-kernel/src/Makefile.am:
+	Added GCRYPT_FLAGS to get af-kernel compiled.
+
+	* af-kernel/src/af_kernel_user_request.c, af-kernel/src/af_kernel_user_request.h:
+	Added new module to threat incomming user request
+
+	* libafgs/afgs.pc.in: Fixed missing -lafgs flags.
+
+	* af-kernel/configure.ac:
+	Adding tests to figure out if libgcrypt is already installed.
+
+	* af-kernel/data/install.sql:
+	Added UNIQUE flag to nick attribute on kernel_user table. It cannot be
+	posible to have several user with the same nick name.
+
+	* libafgs/src/afgs_command.c, libafgs/src/afgs_command.h:
+	Added a convenience function to translate GdaDataModel to CoyoteDataSet.
+
+	* libafgs/src/afgs_message.c, libafgs/src/afgs_message.h:
+	Api change to split in two functions afgs_message_answer.
+	Now, we have a function to send negatives replies and a diferent one
+	to send afirmative replies which accepts variable number of dataset.
+
+2003-04-04  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/data/install.sql:
+	Adding permissions to implicit created sequences.
+
+	* af-kernel/data/uninstall.sql:
+	Removed BEGIN AND COMMIT WORK sentences. Uninstall script is more
+	powerful without them.
+
+	* libafdalkernel/src/afdal_kernel_user.h:
+	Api interface to manage users.
+
+	* af-kernel/data/install.sql:
+	Updated sql install.sql script to conform af_kernel_er_diagram.dia.
+
+	* af-kernel/data/uninstall.sql: Added uninstall.sql script.
+
+	* af-kernel/data/install.sql: Updating af-kernel sql table structure.
+
+	* libafgs/src/afgs_config.c, libafgs/src/afgs_config.h:
+	Api change to support diferent config files.
+
+	* libafgs/src/afgs_message.c:
+	Update message call ..send_error to reply_error.
+
+2003-04-03  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafgs/src/afgs_command.c: Added module documentation.
+
+	* libafgs/doc/reference/afgs-docs.sgml: Adding command module.
+
+	* libafgs/src/Makefile.am, libafgs/configure.ac:
+	Configure files updated to get afgs_command module compiled.
+
+	* libafgs/src/afgs_command.c, libafgs/src/afgs_command.h:
+	Added new module to make programmers like easy while working with sql
+	querys.
+
+	* libafgs/src/Makefile.am, libafgs/src/afgs.h:
+	Updating files to get compiled afgs_message module.
+
+	* libafgs/src/afgs_message.c, libafgs/src/afgs_message.h:
+	Added new module to carry out all related stuff with messages.
+
+	* libafgs/doc/reference/afgs-docs.sgml: Update sgml skell.
+
+	* libcoyote/src/coyote_simple.h, libcoyote/src/coyote_simple.c:
+	Changing api name from send error to reply error.
+
+	* libafgs/doc/reference/afgs-docs.sgml: Updating sgml skell..
+
+	* libafgs/src/afgs_reg.c: Adding api documentation.
+
+	* libafgs/src/afgs_database.c: Adding gtk-doc documentation.
+
+	* libafgs/src/afgs_config.c: afgs_config documentation.
+
+	* libafgs/configure.ac, libafgs/src/Makefile.am:
+	Updating configure script to get all new files working.
+
+	* libafgs/src/afgs.h, libafgs/src/afgs_config.c, libafgs/src/afgs_config.h, libafgs/src/afgs_database.c, libafgs/src/afgs_database.h, libafgs/src/afgs_reg.c, libafgs/src/afgs_reg.h:
+	Adding af-tax and af-kernel common modules.
+
+	* libafgs/doc/reference/afgs-docs.sgml: *** empty log message ***
+
+	* libafgs/doc/Makefile.am, libafgs/doc/reference/Makefile.am, libafgs/src/Makefile.am, libafgs/test/Makefile.am, libafgs/AUTHORS, libafgs/COPYING, libafgs/Changelog, libafgs/Makefile.am, libafgs/README, libafgs/afgs.pc.in, libafgs/autogen.sh, libafgs/configure.ac:
+	Aspl fact servers support library initial skel.
+
+2003-03-17  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/ChangeLog, af-kernel/configure.ac, libafdalkernel/src/afdal_kernel_session.c:
+	Fixing segfault.
+	Increasing version number.
+
+2003-03-10  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/configure.ac, libafdal/configure.ac, libafdalkernel/configure.ac, libcoyote/configure.ac:
+	Increasing version number
+
+	* libafdalkernel/ChangeLog: Updating changelotg
+
+	* libafdal/ChangeLog, libcoyote/ChangeLog: Updating changelog
+
+	* libafdal/doc/reference/libafdal.types:
+	Adding file for source distribution
+
+2003-03-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/debian/control, af-kernel/debian/copyright, af-kernel/debian/changelog:
+	*** empty log message ***
+
+2003-03-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/debian/control, libafdalkernel/debian/copyright, libafdalkernel/debian/changelog, libafdal/debian/control, libcoyote/debian/control, libcoyote/debian/changelog, libcoyote/debian/copyright, libafdal/debian/copyright, libafdal/debian/changelog:
+	*** empty log message ***
+
+2003-03-07  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_request.c: Fixing memory leak
+
+	* libcoyote/src/coyote_xml.c:
+	Fixing memory leaks caused by xmlGetProp misunderstanding
+
+	* libcoyote/src/coyote_xml.c: Fixing another memory leak
+
+	* libcoyote/src/coyote_xml.c: Fixing memory leak
+
+	* af-kernel/src/af_config.c: Fixing introduced bug
+
+2003-03-06  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/test/test_afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.h:
+	*** empty log message ***
+
+2003-03-06  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel_service_process.h, libafdalkernel/src/afdal_kernel_session.h, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_register_request.h, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_session.c:
+	Tidying code
+
+2003-03-06  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_logout_request.c:
+	Small code clean ups.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_err_answer.c, af-kernel/src/af_database.c:
+	Small code clean up.
+
+	* af-kernel/src/af_kernel.c: Small code clean ups.
+
+	* af-kernel/src/af_config.c, af-kernel/src/af_kernel.c:
+	Small code clean ups.
+	Added some flags to add support or not to NLS in af_kernel.c
+
+2003-03-05  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/af_database.c, af-kernel/src/af_database.h:
+	Auditing af_database at af-kernel.
+
+2003-03-05  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/configure.ac: Updating from af-kernel.c to af_kernel.c
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_config.c, af-kernel/src/af_database.h, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_err_answer.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_unregister_request.c:
+	Changing file names from af-* to af_*
+
+2003-03-05  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Eliminating the last prinf.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_register_request.c:
+	Eliminating printf's along the code.
+
+	* libcoyote/test/test_coyote_xml.c:
+	Removing printf's and spanish comments.
+
+	* libcoyote/test/test_coyote_simple.c:
+	Removing tests about language support that never had to be been inserted.
+
+	* libcoyote/test/test_coyote.c: Removing spanish messages in the test.
+
+2003-03-05  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal.c, libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h:
+	Updating copyright messages
+
+2003-03-05  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/af-kernel_status_codes.h:
+	Removing af-kernel_status_codes.
+	It is not necessary any more.
+
+	* af-kernel/src/af_kernel_service_process.c:
+	Removing use of af-kernel_status_codes.
+	Adding use of the new code types of coyote code.
+
+2003-03-05  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote.c, libcoyote/src/coyote.h, libcoyote/src/coyote_code.c, libcoyote/src/coyote_code.h, libcoyote/src/coyote_connection.c, libcoyote/src/coyote_connection.h, libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_dataset.h, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Updating copyright messages.
+	Implementing coyote_xml_parse_destroy
+
+2003-03-05  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/af_kernel.c:
+	Adding use of new code types: XML_VALIDATION_PROBLEM and XML_PARSE_PROBLEM.
+
+	* libcoyote/src/coyote_code.c, libcoyote/src/coyote_code.h:
+	Adding supporting for new codes:
+	COYOTE_CODE_UNKNOWN_SERVICE (changed from undefined service)
+	COYOTE_CODE_XML_VALIDATION_PROBLEM
+	COYOTE_CODE_XML_PARSE_PROBLEM
+	COYOTE_CODE_XML_INCORRECT_PARAMETER
+
+2003-03-05  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_simple.c: Removing an unneeded #define
+
+2003-03-05  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.h:
+	Change function type from AfDalFunc to AfDalDataFunc.
+
+2003-03-05  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_xml.c: Fixing memory leak
+
+2003-03-04  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_session.c:
+	Adding afdal_kernel_destroy
+
+	* libafdal/src/afdal.c: Freeing text_responses as well
+
+	* libafdal/src/afdal.c, libafdal/src/afdal.h:
+	Adding support for freeing memory used by AfDal
+
+2003-03-04  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/src/Makefile.am, libafdal/src/afdal.c, libafdal/src/afdal.h:
+	Added function to free data.
+
+2003-03-01  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_dataset.h, libcoyote/src/coyote_simple_cfg.h:
+	Added debug function to print out CoyoteDataSet contents.
+
+2003-02-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_register.c: k
+
+	* libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h:
+	Adding support for multidata.
+
+2003-02-28  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/po/POTFILES.in: Adding POTFILES.in
+
+	* af-kernel/po/LINGUAS, af-kernel/po/es.po: Updating locale files
+
+	* af-kernel/src/af_kernel.c: Adding locale support...
+
+2003-02-28  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* libafdal/src/afdal.h: Change a type that was wrong
+
+2003-02-28  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/po/es.po: Adding es.po
+
+2003-02-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/src/afdal.h: Commiting new user type function.
+
+2003-02-27  David Marin Carreno  <david@aspl.es>
+
+	* README: Updating installation method
+
+2003-02-26  David Marin Carreno  <david@aspl.es>
+
+	* libafdal/src/afdal_request.h, libafdal/src/afdal.h:
+	Removing compile warnings
+
+2003-02-26  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/debian/README.debian, libafdal/debian/changelog, libafdal/debian/control, libafdal/debian/copyright, libafdal/debian/libafdal0-0.files, libafdal/debian/libafdal0-doc.files, libafdal/debian/rules:
+	Debian package config files.
+
+	* libafdal/src/afdal_request.c:
+	Bug fixed on afdal_request.c module. When an incomming error message is
+	recieved a segfault arrises. Fixed.
+	Added documentation to afdal_tax_vat_customer.c
+
+2003-02-25  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Added GStaticMutex to control de access to the global variable
+
+2003-02-25  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/test/test_afdal_kernel_session.c: Updating test.
+
+	* libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/test/Makefile.am, libafdalkernel/test/test_afdal_kernel_register.c:
+	Added a new common library called libafdal to simplify libafdal* library
+	level.
+
+2003-02-24  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h:
+	Fix some function flags.
+
+	* libafdalkernel/configure.ac, libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.h, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.h, libafdalkernel/test/test_afdal_kernel.c, libafdalkernel/test/test_afdal_kernel_register.c:
+	Mofications to create request and request process function by using libafdal
+	common library.
+
+	* libafdalkernel/src/afdal_kernel_request.c, libafdalkernel/src/afdal_kernel_request.h:
+	Removed files moved out side to libafdal common library.
+
+	* libafdal/doc/reference/libafdal-docs.sgml, libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h:
+	Added documentation.
+
+	* libafdal/test/.cvsignore, libafdal/test/Makefile.am, libafdal/src/Makefile.am, libafdal/src/afdal.h, libafdal/src/afdal_request.c, libafdal/src/afdal_request.h, libafdal/doc/reference/Makefile.am, libafdal/doc/reference/libafdal-docs.sgml, libafdal/.cvsignore, libafdal/AUTHORS, libafdal/COPYING, libafdal/ChangeLog, libafdal/Makefile.am, libafdal/NEWS, libafdal/README, libafdal/afdal.pc.in, libafdal/autogen.sh, libafdal/configure.ac, libafdal/doc/Makefile.am, libafdal/stamp-h.in:
+	Initial libafdal version. This library provides all common functions to
+	libafdal* library level.
+
+	* libcoyote/test/Makefile.am, libcoyote/test/test_coyote.c, libcoyote/test/test_coyote_dataset.c, libcoyote/test/test_coyote_simple.c, libcoyote/test/test_coyote_xml.c, libcoyote/src/Makefile.am, libcoyote/src/coyote_connection.c, libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_xml.c, libcoyote/doc/reference/tmpl/coyote.sgml, libcoyote/doc/reference/tmpl/coyote_connection.sgml, libcoyote/doc/reference/tmpl/coyote_simple.sgml, libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_request.c, libafdalkernel/src/afdal_kernel_request.h, libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/test/Makefile.am, libafdalkernel/test/test_afdal_kernel_register.c, af-kernel/src/Makefile.am, af-kernel/src/af_config.c, af-kernel/src/af_database.c, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_service_process.c:
+	Added -Wall flag to configure.in system.
+	Fixed a lot of ugly warnings due to -Wall flag.
+	Added support to create new vat_customer_type.
+
+2003-02-21  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.h:
+	Changing from CoyoteDataSet to GTree of AfDalKernelServer's in
+	return function of afdal_kernel_login
+
+2003-02-21  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_err_answer.c, af-kernel/src/af_kernel_err_answer.h, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_service_process.c:
+	Changes due to new interface in coyote, due to new implementation in
+	coyote_code. Eliminating references to af-kernel-status-codes.
+
+	* libcoyote/test/test_coyote.c, libcoyote/test/test_coyote_simple.c, libcoyote/test/test_coyote_xml.c, libcoyote/src/coyote.h, libcoyote/src/coyote_code.c, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Creating coyote_code. Adding support to coyote_xml in order to use the new
+	coyote_code code. Modifying tests with the new calls to the new interface of
+	coyote_xml and coyote_code.
+
+2003-02-20  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/test/test_afdal_kernel_register.c:
+	Changing from CoyoteDataSet to GTree of AfDalKernelServers
+
+	* libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h:
+	Changing from CoyoteDataSet to GTree of AfDalKernelServer's
+
+2003-02-20  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* libcoyote/doc/reference/coyote_simple.sgml:
+	Description for coyote_simple module
+
+	* libcoyote/doc/reference/coyote_dataset.sgml:
+	Description for coyote_dataset module
+
+	* libcoyote/doc/reference/coyote_connection.sgml:
+	Description for coyote_connecition module
+
+	* libcoyote/doc/reference/coyote.sgml: Description of the module coyote
+
+	* libcoyote/doc/reference/coyote-docs.sgml:
+	Added coyote_dataset so the documentation could be done
+
+2003-02-20  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/test/test_coyote_dataset.c, libcoyote/src/coyote_dataset.c:
+	Added support for looking up on CoyoteDataSet.
+	Test unit for coyote_dataset_lookup_row function.
+
+2003-02-20  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_dataset.h:
+	Adding coyote_dataset_lookup_row
+
+2003-02-19  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* libafdalkernel/test/test_afdal_kernel_register.c:
+	Added unregister test
+
+	* libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/src/afdal_kernel_register.c:
+	Changes in unregister interface
+
+	* af-kernel/src/af_kernel_service_process.c:
+	Deleted #include "af-kernel_unregister_request"
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Unregister included in this module due to the static gtree that has the active servers
+
+	* af-kernel/src/Makefile.am: Remove unregister modules
+
+	* af-kernel/src/af_kernel_register_request.h:
+	Unregister included in this module due to the static gtree that has the active servers
+
+2003-02-19  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_code.c, libcoyote/src/coyote_code.h:
+	Reestructuring the code module.
+	Eliminating languages references.
+
+2003-02-19  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* af-kernel/src/af_kernel_logout_request.c: Some bugs fixed
+
+2003-02-18  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/doc/reference/libafdal-docs.sgml, libafdalkernel/doc/reference/libafdal.types, libafdalkernel/doc/reference/libafdalkernel-docs.sgml, libafdalkernel/doc/reference/libafdalkernel.types:
+	Changing libafdal files for libafdalkernel files
+
+	* libafdalkernel/doc/reference/Makefile.am, libafdalkernel/configure.ac:
+	Fixing bugs in support files
+
+2003-02-18  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* af-kernel/src/af_kernel_service_process.c: Include service unregister
+
+	* af-kernel/src/Makefile.am:
+	Compilation support for af-kernel_unregister and af-kernel_logout
+
+	* af-kernel/src/af_kernel_unregister_request.c, af-kernel/src/af_kernel_unregister_request.h:
+	NOT IMPLEMENTED YET
+
+	* af-kernel/src/af_kernel_logout_request.c, af-kernel/src/af_kernel_logout_request.h:
+	Copy-Paste of login. (UNIMPLEMENTED)
+
+	* af-kernel/src/af_kernel_service_process.c: Support for logout added
+
+	* libcoyote/doc/reference/tmpl/coyote.sgml, libcoyote/doc/reference/tmpl/coyote_connection.sgml, libcoyote/doc/reference/tmpl/coyote_simple.sgml:
+	Description added to the documents template.
+
+2003-02-18  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.h, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/src/afdal_kernel_request.c, libafdalkernel/src/afdal_kernel_request.h:
+	Bug fixes: minor changes around #include directives.
+	Modified some request to use the same callback when a response arrives.
+
+2003-02-18  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/data/fact.dtd: Tables can be empty
+
+	* libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_session.c:
+	Validating response messages before parsing them
+
+2003-02-18  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_xml.c: Bug fix around creating data_sets.
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_register_request.c:
+	General bug fixes around registering services.
+
+2003-02-18  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_session.c:
+	afdal_kernel_session adds active_servers data to the session variable
+
+	* libcoyote/src/coyote_xml.c:
+	Adding debugging messages in received datasets
+
+2003-02-18  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_xml.c:
+	Fixing a bug around creating request without params.
+
+	* libafdalkernel/test/test_afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_request.c:
+	Fixing some bugs around get_servers request.
+
+2003-02-18  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_connection.c:
+	Restoring old behaviour of coyote_connection
+
+2003-02-17  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_connection.c, libcoyote/src/coyote_dataset.c, af-kernel/src/af_kernel_login_request.c:
+	Going on in ML2 development: now I'm trying to get a "session status" window
+	in "About..." window (client application).
+
+2003-02-17  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_simple.c, libcoyote/src/coyote_xml.h, libafdalkernel/test/test_afdal_kernel_register.c, af-kernel/src/af_config.h, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_register_request.h, af-kernel/src/af_kernel_service_process.c, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h:
+	Added support for registering new servers and list that ones that are up.
+
+	* libafdalkernel/test/Makefile.am, libafdalkernel/test/test_afdal_kernel.c, libafdalkernel/test/test_afdal_kernel_register.c:
+	Added a unit test to check afdal_kernel_register functionalities.
+
+	* libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.h, libafdalkernel/test/test_afdal_kernel.c:
+	More updates in data type definitions.
+
+2003-02-17  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_xml.c:
+	Adding debug information while creating service requests
+
+	* libafdalkernel/src/afdal_kernel_register.c: Updating documentation
+
+	* af-kernel/src/af_kernel_register_request.c:
+	Fixing segfault when using an uncreated CoyoteXmlObject
+
+	* libafdalkernel/src/afdal_kernel_request.c, libafdalkernel/src/afdal_kernel_session.c:
+	Fixing problem with va_lists in coyote_xml_add_request_service call
+
+2003-02-17  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Added v-functions to process coyote_xml functions which recieves va_list
+	arguments.
+
+2003-02-17  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel_request.c, libafdalkernel/src/afdal_kernel_session.c, libcoyote/src/coyote_xml.c:
+	Adding debug messages while making services requests
+
+	* libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h, libafdalkernel/src/afdal_kernel_register.c, libafdalkernel/src/afdal_kernel_register.h, libafdalkernel/src/afdal_kernel_request.c, libafdalkernel/src/afdal_kernel_request.h, libafdalkernel/src/afdal_kernel_session.c, libafdalkernel/src/afdal_kernel_session.h:
+	Reorganizing code in libafdal_kernel
+
+	* af-kernel/src/af_kernel_register_request.c, af-kernel/src/af_kernel_register_request.h:
+	Adding register_request process
+
+	* af-kernel/src/af_database.c, af-kernel/src/af_database.h:
+	Adding database module
+
+	* af-kernel/data/Makefile.am: Adding cfg file while installing
+
+	* af-kernel/configure.ac, af-kernel/data/install.sql, af-kernel/src/Makefile.am, af-kernel/src/af_config.c, af-kernel/src/af_config.h, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_service_process.c:
+	Adding database and register service support
+
+	* libcoyote/config.h: Removing unneeded file
+
+2003-02-16  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h:
+	Added new function to register modules into the system
+	Added an internal convenience function to avoid make redundant code:
+	 __afdal_kernel_common_request.
+
+	* af-kernel/data/Makefile.am: Makefile.am for data af-kernel directory.
+
+	* libcoyote/test/test_coyote_dataset.c, libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_dataset.h:
+	Add a convience function to add data to data_set structure more quickly.
+	This function is coyote_dataset_add_nth.
+	Added a new to test unit to check coyote_dataset_add_nth.
+
+	* libcoyote/doc/reference/coyote-docs.sgml, libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Added library documentation for coyote_dataset module.
+
+	* libcoyote/test/test_coyote_xml.c, libcoyote/src/coyote_xml.c:
+	Modified coyote_xml in order to get support for CoyoteDataSet.
+	Modified test_coyote_xml test unit module to perform tests by using
+	CoyoteDataSet instead of GList *.
+
+2003-02-15  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/data/create_database.sql:
+	Fixing error in database creation script
+
+2003-02-15  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_dataset.c, libcoyote/test/test_coyote_dataset.c:
+	bug fix around memory allocation at coyote_dataset module.
+	Added final unit test for coyote_dataset module.
+
+2003-02-14  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/test/Makefile.am, libcoyote/test/test_coyote_dataset.c, libcoyote/test/test_coyote_xml.c, libcoyote/src/Makefile.am, libcoyote/src/coyote.h, libcoyote/src/coyote_dataset.c, libcoyote/src/coyote_dataset.h, libcoyote/src/coyote_xml.h, libcoyote/data/fact.dtd, libcoyote/doc/reference/Makefile.am, libcoyote/config.h, libcoyote/configure.ac:
+	dtd modified: added table support
+	Added a new module coyote_dataset.
+
+	* af-kernel/data/install.sql:
+	sql script to initialize afkernel database.
+
+2003-02-13  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_config.c:
+	Now, config files can include spaces in empty lines
+
+	* af-kernel/data/af-kernel.cfg.example, af-kernel/src/Makefile.am, af-kernel/src/af_config.c, af-kernel/src/af_config.h, af-kernel/src/af_kernel.c, af-kernel/Makefile.am, af-kernel/configure.ac:
+	Adding config file support
+
+2003-02-12  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/data/create_database.sql: Adding database creation script
+
+	* af-kernel/README: Adding instructions for installing database
+
+2003-02-10  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_code.c:
+	Adding gtk documentation for the coyote_code module.
+
+	* libcoyote/doc/reference/coyote-docs.sgml:
+	Adding coyote_code documentation to the main coyote sgml.
+
+2003-02-10  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/configure.ac, libafdalkernel/configure.ac, libcoyote/configure.ac:
+	Changing version to ML2 or 0.0.2
+
+2003-02-10  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_code.h, libcoyote/src/Makefile.am, libcoyote/src/coyote_code.c:
+	Added coyote_code module. Doc pending.
+	Makefile modified for compiling of coyote_code.
+
+2003-02-10  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/test/test_coyote.c, libcoyote/test/test_coyote_connection.c, libcoyote/test/test_coyote_simple.c, libcoyote/test/test_coyote_xml.c:
+	Added {NULL, NULL} last node to test_suite.
+
+2003-02-10  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/ChangeLog: Updating changelog...
+
+	* libafdalkernel/ChangeLog, af-kernel/ChangeLog: Updating changelog
+
+	* af-kernel/configure.ac: Changing version number from 0.1 to 0.0.1
+
+	* af-kernel/AUTHORS: Adding authors file
+
+	* libcoyote/config.h, libafdalkernel/AUTHORS:
+	Changing version number from 0.1 to 0.0.1
+	Updating AUTHORS files
+
+	* libcoyote/AUTHORS: Updating authors file
+
+	* libafdalkernel/configure.ac: Changing version from 0.1 to 0.0.1
+
+	* libafdalkernel/doc/reference/libafdal.types:
+	Adding neccesary files for make dist
+
+	* libcoyote/Makefile.am, af-kernel/COPYING, af-kernel/Makefile.am, libafdalkernel/COPYING, libafdalkernel/Makefile.am:
+	Changing LICENSE files by COPYING files
+
+	* libcoyote/LICENSE: Removing LICENSE file...
+
+	* libcoyote/COPYING: Updating GPL...
+
+	* libcoyote/LICENSE: Adding GPL license
+
+	* libcoyote/COPYING: Adding GPL
+
+	* libcoyote/doc/reference/coyote.types:
+	Adding new file for releasing ML1
+
+	* libcoyote/configure.ac: Changing version number
+
+2003-02-07  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote_simple.h: Reordering functions...
+
+	* af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_err_answer.c, af-kernel/src/af_kernel_login_request.c:
+	Removing "name_service" field in all coyote_xml_add_response_service instances
+
+	* libcoyote/test/test_coyote_xml.c, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h, libcoyote/data/fact.dtd:
+	Removing "name" field in response_service (RR gives us the possibility of
+	knowing what service_request we are answering)
+
+	So now, a message only can have a single request or response inside.
+
+2003-01-31  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/doc/reference/coyote-docs.sgml, libcoyote/src/coyote.c, libcoyote/src/coyote.h, libcoyote/src/coyote_connection.c, libcoyote/src/coyote_simple_cfg.c:
+	Adding coyote_exit function
+
+	* libcoyote/test/test_coyote_simple.c:
+	Addings waits, sleeps and other tools for ensuring correct
+	server-client communications and test behaviour.
+
+2003-01-31  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/test/test_coyote_simple.c: Oops, missing "}".  FIXED.
+
+2003-01-31  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/test/test_coyote_simple.c: Completing tests...
+
+2003-01-31  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/test/test_coyote_simple.c:
+	Filling test_simple_cfg_server_init test.
+
+	* libcoyote/test/test_coyote_simple.c:
+	Modifying the launch server function. Now it receives a configuration for
+	conf_simple_cfg.
+
+2003-01-31  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/test/test_coyote_simple.c: completing...
+
+	* libcoyote/test/Makefile.am, libcoyote/test/test_coyote.c, libcoyote/test/test_coyote_connection.c, libcoyote/test/test_coyote_simple.c:
+	Adding tests...
+
+2003-01-31  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_simple_cfg.c: Removing unnecessary functions.
+
+	* libcoyote/src/coyote_simple.c:
+	Changing coyote_simple_server_init and socyote_simple_close_indication in
+	order to check for instance config first and, if this is not present, then
+	check for the global configuration, but not for both anyway.
+
+2003-01-31  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel.c:
+	Now is coyote_simple who makes 	rr_channel_set_aggregate (channel, FALSE)
+	(in servers)
+
+	* libcoyote/src/coyote_simple.c:
+	Now is coyote_simple who makes rr_channel_set_aggregate (channel, FALSE);
+
+2003-01-30  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.c, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple_cfg.h, af-kernel/src/Makefile.am, af-kernel/src/af-kernel_status_codes.h, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_err_answer.c, af-kernel/src/af_kernel_err_answer.h, af-kernel/src/af_kernel_login_request.c:
+	Reorganizing functions in coyote_simple: now it behaves the same if the
+	received frame are ERR, RPY, MSG or ANS.
+
+	Coyote_simple will not manage the message buffer if frame_available_cb is
+	defined, and will refuse messages if frame_available_cb and
+	complete_message_cb are undefined.
+
+	When it manages the message buffer, there are some limits: 2KB for MSG and
+	ERR, and 10KB for RPY and ANS. If the message exceeds this length, it will
+	truncated.
+
+	* libcoyote/src/coyote_simple.c:
+	Improving coherence in coyote_simple_frame_available: now it behaves
+	the same always (with any message type) and... I have broken nothing!
+
+	* libcoyote/src/coyote_simple.c:
+	Disabling roadrunner frame autoaggregation
+
+	* af-kernel/src/af_kernel.c:
+	Unsetting frame auto-aggregation in roadrunner: now we control frame collation
+
+2003-01-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/debian/control: Error in control file
+
+	* af-kernel/debian/control: Adding build dependence: libcoyote0-dev
+
+	* libafdalkernel/debian/control:
+	Changing build dependency to libcoyote0-dev
+
+	* libafdalkernel/debian/control: Adding build depend libcoyote0
+
+	* libcoyote/debian/changelog: Cambiando número de versión en paquete
+
+	* libafdalkernel/debian/changelog:
+	Cambiando número de versión de paquete
+
+	* af-kernel/debian/changelog: Cambiando número de versión
+
+	* af-kernel/debian/README.debian, af-kernel/debian/changelog, af-kernel/debian/control, af-kernel/debian/copyright, af-kernel/debian/rules:
+	Adding debian control files
+
+2003-01-23  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/Makefile.am, libafdalkernel/configure.ac:
+	Adding documentation
+
+	* libafdalkernel/doc/reference/libafdal-docs.sgml: Adding sgml document
+
+2003-01-16  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/doc/Makefile.am, libafdalkernel/doc/reference/Makefile.am:
+	Adding documentation support files
+
+	* libcoyote/Makefile.am, libcoyote/configure.ac, libcoyote/doc/reference/Makefile.am:
+	Adding automatic doc generation
+
+	* libcoyote/doc/reference/coyote-docs.sgml:
+	Adding a functional coyote-docs.sgml
+
+2003-01-16  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote.h, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Interface fixes.
+
+2003-01-16  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/ChangeLog, libcoyote/ChangeLog, af-kernel/ChangeLog:
+	Updating changelog
+
+2003-01-16  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.c, libcoyote/src/coyote_simple_cfg.c:
+	Actualización de documentación de api.
+
+2003-01-15  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_connection.c: Comentadas funciones de coyote.
+
+	* libcoyote/src/coyote.c: Comentarios.
+
+	* libcoyote/src/coyote_simple.c:
+	Documentadas funciones de coyote_simple.
+
+	* af-kernel/src/af_kernel_login_request.c, libafdalkernel/test/test_afdal_kernel.c:
+	Actualización de código para incluir en el servidor
+	de kernel la autentificación del usuario.
+
+2003-01-15  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* README: Incluyendo la url a roadrunner.
+
+2003-01-13  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/debian/control, libcoyote/debian/libcoyote0-0.files:
+	Actualiación de información necesaria para contruir ambos paquetes.
+
+	* libafdalkernel/test/test_afdal_kernel.c: Borrada una f.
+
+	* libafdalkernel/debian/README.debian, libafdalkernel/debian/changelog, libafdalkernel/debian/control, libafdalkernel/debian/copyright, libafdalkernel/debian/libafdalkernel0-0.files, libafdalkernel/debian/libafdalkernel0-doc.files, libafdalkernel/debian/rules:
+	Ficheros para instalar paquetes debian.
+
+	* libcoyote/debian/control, libcoyote/debian/libcoyote0-0.files, libcoyote/debian/libcoyote0-doc.files, libcoyote/debian/libcoyote0.1-0.files, libcoyote/debian/libcoyote0.1-doc.files:
+	Actualización de ficheros.
+
+	* libcoyote/debian/README.debian, libcoyote/debian/changelog, libcoyote/debian/control, libcoyote/debian/copyright, libcoyote/debian/libcoyote0.1-0.files, libcoyote/debian/libcoyote0.1-doc.files, libcoyote/debian/rules:
+	Ficheros para generar el paquete debian.
+
+2003-01-13  David Marin Carreno  <david@aspl.es>
+
+	* README: Readme file
+
+	* af-kernel/src/af_kernel.c, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h:
+	* Server completely operative: deleting default callbacks in
+	  coyote_simple_cfg (Sorry...)
+	* The fault wasn't in Roadrunner: changing call to blocking rr_channel_close
+	  by rr_manager_channel_close_nonblock (coyote_simple).
+	* Adding a new "Logged in" window, with textual message.
+	* Solutioning segfault in af-kernel... (I think I deleted a g_new by
+	  error...)
+
+2003-01-12  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h:
+	Adding support for cancelling login action
+
+2003-01-12  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_simple_cfg.c: Solucionados warnings.
+
+2003-01-12  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af-kernel_status_codes.h, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_service_process.c, libafdalkernel/src/Makefile.am, libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h, libcoyote/src/Makefile.am, libcoyote/src/coyote_connection.c, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h:
+	* Adding af-kernel status codes header
+
+	* Fixing the "client-lock-when-closing-channel" problem: it wasn't our fault
+	  (it was RoadRunner).
+
+	* Adding default callbacks in coyote_simple_cfg so we it show log messages if
+	  a event is not processed by anyone.
+
+	* Added a "cancel" button to client connection progress window (not yet
+	  functional)
+
+2003-01-10  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_login_request.h, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_service_process.h, libafdalkernel/src/afdal_kernel.c, libafdalkernel/test/test_afdal_kernel.c, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h:
+	Ultima actualización de código antes de marcharme.
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_login_request.c, af-kernel/src/af_kernel_login_request.h, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_service_process.h:
+	Actualización de código para incluir la funcionalidad de login.
+
+	* af-kernel/src/af_kernel_service_process.c:
+	Actualiación. Borrada función de login.
+
+2003-01-10  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel_service_process.c: Continuing
+
+2003-01-10  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/af_kernel.c:
+	Eliminando comentarios despues de las pruebas.
+
+	* af-kernel/src/af_kernel.c:
+	Ultima version del codigo de af-kernel.c Probando el envío masivo de tramas.
+
+2003-01-10  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/af_kernel.c: Changing typo in include
+
+2003-01-10  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h:
+	Cambios en las funciones de inicializacion de cfg.
+
+2003-01-10  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/src/coyote.h: Adding roadrunner include
+
+	* af-kernel/src/af_kernel_service_process.c: Now it must work
+
+	* af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_service_process.h:
+	Continueing...
+
+2003-01-10  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/af_kernel.c:
+	Finalizando la funcion af_kernel_frame_available. Ahora ya pasa los mensajes
+	a la funcion message_process. Se ha comprobado que pasa el mensaje correcto.
+
+2003-01-10  David Marin Carreno  <david@aspl.es>
+
+	* af-kernel/src/Makefile.am, af-kernel/src/af_kernel.c, af-kernel/src/af_kernel_service_process.c, af-kernel/src/af_kernel_service_process.h:
+	Adding af-kernel_service_process module
+
+	* libafdalkernel/src/afdal_kernel.c: Updating doc in afdal_kernel_login
+
+	* libafdalkernel/src/afdal_kernel.c:
+	Adding "AFDAL_KERNEL" in error messages
+
+2003-01-10  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_simple_cfg.c:
+	Actualización de código para incluir funcionalidad de callback para
+	server_init.
+
+	* libcoyote/src/coyote_simple.c:
+	Añadido soporte para ejecutar server_init.
+
+2003-01-10  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.c: Changing g_error by g_printerr!!!!
+
+2003-01-10  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/configure.ac: Actualización de configuración .
+
+	* libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h, libafdalkernel/test/test_afdal_kernel.c:
+	Actualización de código para incluir puntero de datos de usuario en callback
+	de recepción de respuestas.
+
+	* libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h:
+	Actualiación de código para incluir un puntero de datos de usuarios para
+	callback complete_message.
+
+2003-01-09  David Marin Carreno  <david@aspl.es>
+
+	* doc/.cvsignore, libafdalkernel/.cvsignore, libafdalkernel/src/.cvsignore, libafdalkernel/test/.cvsignore, libcoyote/.cvsignore, libcoyote/data/.cvsignore, libcoyote/src/.cvsignore, libcoyote/test/.cvsignore, af-kernel/src/.cvsignore:
+	Removing unneeded files
+
+	* af-kernel/.cvsignore: Adding new files
+
+	* af-kernel/.cvsignore, libafdalkernel/stamp-h, libafdalkernel/config.h, libafdalkernel/config.h.in, libafdalkernel/configure, libafdalkernel/libtool, libafdalkernel/src/Makefile, libafdalkernel/src/Makefile.in, libafdalkernel/test/Makefile, libafdalkernel/test/Makefile.in, libafdalkernel/.cvsignore, libafdalkernel/Makefile, libafdalkernel/Makefile.in, libafdalkernel/aclocal.m4, libafdalkernel/afdalkernel.pc, libafdalkernel/config.log, libafdalkernel/config.status, af-kernel/Makefile.in, af-kernel/config.h, af-kernel/config.h.in, af-kernel/stamp-h, af-kernel/src/Makefile.in, af-kernel/libtool, af-kernel/src/Makefile, af-kernel/Makefile, af-kernel/aclocal.m4, af-kernel/config.log, af-kernel/config.status, af-kernel/configure:
+	Removing unneeded files
+
+2003-01-09  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* af-kernel/src/Makefile, af-kernel/src/Makefile.in, af-kernel/src/af_kernel.c:
+	Incluyendo código para empezar a hacer comprobaciones ante la llegada de un
+	frame y para que inserte en el buffer. Lo dejo en una rama que no ejecuta
+	pues, de momento, no tengo idea de cómo hacer que se efectúe la llamada a
+	server_init, que hace algo que yo necesito.
+
+2003-01-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/config.log, libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h, libafdalkernel/test/test_afdal_kernel.c:
+	Actualización de código para llamar con los datos correctos al
+	usuario de libafdalkernel.
+
+2003-01-09  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h:
+	Añadiendo a la estrutura de simple_cfg los campos para almacenar el buffer
+	de datos y su longitud.
+
+2003-01-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_xml.c, libcoyote/test/test_coyote_xml.c:
+	Actualización de código y pruebas.
+
+2003-01-09  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_xml.c:
+	Depurada la funcion de parseo de xml. Algun problema en los punteros, se
+	llamaba a la funcion equivocada y las condiciones de los for hacian que se
+	quedara en un bucle infinito.
+
+2003-01-09  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_xml.h, libcoyote/test/test_coyote_xml.c:
+	Actualización de código para prueba de conversión de mensajes xml.
+
+	* libcoyote/test/test_coyote_xml.c:
+	Código para parseo de mensajes y pruebas.
+
+2003-01-09  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/test/test_coyote_xml.c:
+	Ahora pasamos mensajes del tipo CoyoteXmlMessage.
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Modificando las funciones validate_message y parse_message para que reciban
+	un tipo CoyoteXmlMessage, de cara a conocer el tamaño del mensaje y poder
+	leer de memoria la cadena con xmlParseMemory, en vez de con xmlParseDoc.
+	xmlParseMemory requiere conocer la longitud, que viene en el tipo.
+
+2003-01-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Actualización antes de marcharme.
+
+2003-01-08  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_xml.c:
+	Quitando algunos assert's que deben ser respuestas fallidas, más bien.
+
+	* libcoyote/test/test_coyote_xml.c, libcoyote/src/coyote_xml.c:
+	Finalizada funcion de validacion contra dtd.
+	Completada la prueba con la validacion de un dtd creado.
+	Documentada la funcion de validacion con gtk-doc.
+
+2003-01-08  David Marin Carreno  <david@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.c:
+	Now, it sends a correct user and password
+
+2003-01-08  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/data/fact.dtd:
+	CDATA no es un buen candidato para almacenar el contenido de un elemento.
+	Este "pequeño" detalle nos ha hecho perder unas 3 horas.
+
+2003-01-08  David Marin Carreno  <david@aspl.es>
+
+	* libcoyote/data/Makefile.in, libcoyote/src/Makefile, libcoyote/src/Makefile.in, libcoyote/src/coyote_connection.c, libcoyote/Makefile, libcoyote/Makefile.in, libcoyote/aclocal.m4, libcoyote/config.log, libcoyote/config.status, libcoyote/configure, libcoyote/coyote.pc, libcoyote/data/Makefile, libcoyote/libtool, libcoyote/stamp-h, libcoyote/stamp-h.in:
+	Removing autogenerated files.
+	Changing g_error to g_printerr
+
+2003-01-08  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/data/Makefile, libcoyote/data/Makefile.in, libcoyote/data/fact.dtd:
+	Corrigiendo los errores en el dtd. es data (CDATA), y no data (#CDATA), ni
+	data CDATA #IMPLIED.
+
+	* libcoyote/src/Makefile, libcoyote/src/Makefile.am:
+	Creando variable llamada DTD_DIR para obtener la localizacion del fichero
+	dtd.
+
+	* libcoyote/data/Makefile, libcoyote/data/Makefile.am:
+	Se instalara en libcoyote, en vez de en coyote.
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Cabeceras para las funciones de validación contra DTD y parseado.
+
+2003-01-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/Makefile, libcoyote/src/Makefile.in, libcoyote/Makefile, libcoyote/Makefile.am, libcoyote/Makefile.in, libcoyote/aclocal.m4, libcoyote/config.log, libcoyote/config.status, libcoyote/configure, libcoyote/configure.ac, libcoyote/libtool:
+	Eliminado soporte de gtk-doc.
+
+2003-01-08  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/config.log, libcoyote/configure, libcoyote/configure.ac, libcoyote/doc/reference/coyote-docs.sgml:
+	Me rindo. Gtk-DOC no funciona.
+
+	* libcoyote/doc/reference/coyote-docs.sgml, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_xml.c:
+	Modificaciones en la documentacion de las funciones.
+
+	* libcoyote/doc/reference/Makefile.am: Nueva version.
+
+2003-01-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h, libcoyote/test/test_coyote_xml.c:
+	Incluida funcionalidad para crear respuestas.
+
+2003-01-08  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/doc/reference/Makefile.am, libcoyote/doc/reference/coyote-docs.sgml:
+	Añadiendo la definicion sgml para ver si obtenemos un buen estilo.
+
+2003-01-08  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/data/fact.dtd:
+	Actualización de dtd para incluir response_service.
+
+2003-01-08  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/Makefile, libcoyote/Makefile.in, libcoyote/aclocal.m4, libcoyote/config.log, libcoyote/config.status, libcoyote/configure, libcoyote/data/Makefile, libcoyote/libtool, libcoyote/src/Makefile, libcoyote/src/Makefile.in, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h, libcoyote/src/coyote_xml.c:
+	Cambios relacionados con la generación automática de la documentación.
+
+	* libcoyote/Makefile.am, libcoyote/configure.ac:
+	Modificaciones para generar la documentacion correspondiente.
+
+	* libcoyote/doc/reference/Makefile.am, libcoyote/doc/Makefile.am:
+	Makefiles para generar la documentacion.
+
+	* libcoyote/doc/reference/Makefile.am: Trabajando en gtk-doc.
+
+	* libcoyote/src/coyote_xml.c:
+	Actualizando la documentacion gtk-doc de la funcion
+	coyote_xml_add_request_service.
+
+	* libafdalkernel/src/afdal_kernel.c, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h, libcoyote/test/test_coyote_xml.c:
+	Cambiando el interfaz de coyote_xml_add_request_service para que no tenga
+	que recibir el número de parámetros, sino que los reciba, junto a un NULL al
+	final del todo.
+
+2003-01-07  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/test/test_coyote_xml.c: Avances en la prueba de coyote_xml:
+	Ya se prueba exhaustivamente el añadido de servicios.
+
+	* libcoyote/src/coyote_xml.c:
+	Documentando la funcion coyote_xml_add_request_service.
+	Tambien la he completado (faltaba el nombre del servicio como atributo de la
+	etiqueta request_service.
+
+	* libafdalkernel/Makefile, libafdalkernel/Makefile.in, libafdalkernel/aclocal.m4, libafdalkernel/config.log, libafdalkernel/config.status, libafdalkernel/configure, libafdalkernel/libtool, libafdalkernel/src/Makefile, libafdalkernel/src/Makefile.in, libafdalkernel/src/afdal_kernel.c, libafdalkernel/test/Makefile, libafdalkernel/test/Makefile.in, libcoyote/config.log, libcoyote/data/Makefile, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h, libcoyote/test/test_coyote_xml.c:
+	Finalizando la funcion coyote_xml_add_request_service.
+	Ahora soporta un número indeterminado de parametros y los coloca bien en su
+	sitio.
+	El interfaz de esa funcion ha cambiado, y ahora es necesario incluir el
+	número de parámetros que va a recibir.
+
+2003-01-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/test/test_afdal_kernel.c:
+	Cambiado el modo de inclusión.
+
+2003-01-07  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Añadidas las funciones para liberar objetos y mensajes.
+
+2003-01-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.c, libafdalkernel/test/test_afdal_kernel.c:
+	Cambio motivado por cambio de api en coyote_xml.
+	Actualización del código de prueba.
+
+	* libcoyote/Makefile, libcoyote/Makefile.in, libcoyote/aclocal.m4, libcoyote/config.log, libcoyote/config.status, libcoyote/configure, libcoyote/coyote.pc, libcoyote/libtool, libcoyote/src/Makefile, libcoyote/src/Makefile.in, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Añadida funcionalidad de ejecutar callbacks de usuarios de la librería.
+
+	* af-kernel/src/af_kernel.c: Actualización de código de servidor.
+	Todo lo que recibe lo responde, así solo hay que empezar a meter
+	la lógica necesaria para realizar respuestas serias.
+
+2003-01-07  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Nuevo interfaz para la contruccion de los mensajes.
+
+2003-01-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/Makefile, libafdalkernel/Makefile.am, libafdalkernel/Makefile.in, libafdalkernel/config.log, libafdalkernel/config.status, libafdalkernel/configure, libafdalkernel/configure.ac, libafdalkernel/src/afdal_kernel.c, libafdalkernel/test/Makefile, libafdalkernel/test/Makefile.am, libafdalkernel/test/Makefile.in:
+	Actualización de código para utilizar coyote_xml
+	Actualización de ficheros de configuración para realizar el test bien.
+
+2003-01-07  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* libcoyote/test/test_coyote_xml.c: Ha cambiado el interfaz.
+
+	* libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Cambiando interfaz para contruir mensajes en vez de enviarlos.
+
+	* libcoyote/data/Makefile, libcoyote/data/Makefile.am, libcoyote/data/Makefile.in, libcoyote/src/coyote_xml.h:
+	Makefiles para el directorio data.
+
+	* libcoyote/Makefile, libcoyote/Makefile.am, libcoyote/Makefile.in, libcoyote/config.log, libcoyote/config.status, libcoyote/configure, libcoyote/configure.ac, libcoyote/coyote.pc, libcoyote/src/Makefile:
+	Trabajos para incluir el directorio data.
+
+	* libcoyote/test/test_coyote_xml_prueba.xml: Fichero XML de prueba.
+
+	* libcoyote/data/fact.dtd: Fichero de definicion DTD para ASPL-FACT.
+
+	* libcoyote/src/Makefile, libcoyote/src/coyote.h, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h, libcoyote/test/Makefile.am, libcoyote/test/test_coyote_xml.c, libcoyote/Makefile, libcoyote/Makefile.am, libcoyote/Makefile.in, libcoyote/aclocal.m4, libcoyote/config.log, libcoyote/config.status, libcoyote/configure, libcoyote/configure.ac, libcoyote/libtool:
+	Incluyendo pruebas de xml.
+
+	* libcoyote/src/Makefile, libcoyote/src/Makefile.am, libcoyote/src/Makefile.in, libcoyote/src/coyote_xml.c, libcoyote/src/coyote_xml.h:
+	Comenzando el desarrollo de coyote_xml.
+
+2003-01-04  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple_cfg.c:
+	Primera versión de coyote que llama a la librería usuario.
+
+	* af-kernel/src/af_kernel.c:
+	Primera versión de kernel que recibe peticiones y responde.
+
+	* libafdalkernel/src/afdal_kernel.c, libafdalkernel/test/test_afdal_kernel.c:
+	Primera versión de libafdal funcionando.
+
+2003-01-03  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel.c, libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h, libafdalkernel/test/Makefile, libafdalkernel/test/test_afdal_kernel.c, libcoyote/src/coyote.c, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h:
+	Ultima actualización antes de marcharme.
+
+	* af-kernel/Makefile, af-kernel/Makefile.am, af-kernel/Makefile.in, af-kernel/NEWS, af-kernel/README, af-kernel/aclocal.m4, af-kernel/autogen.sh, af-kernel/config.h, af-kernel/config.h.in, af-kernel/config.log, af-kernel/config.status, af-kernel/configure, af-kernel/configure.ac, af-kernel/libtool, af-kernel/src/Makefile, af-kernel/src/Makefile.am, af-kernel/src/Makefile.in, af-kernel/src/af_kernel.c, af-kernel/stamp-h, af-kernel/stamp-h.in:
+	Código inicial de servidor.
+	Añadidos ficheros necesarios para compilar el servidor.
+
+	* libcoyote/src/coyote_simple_cfg.h: Solucionado error de tipos.
+
+	* libcoyote/Makefile, libcoyote/config.log, libcoyote/config.status, libcoyote/src/Makefile, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple_cfg.h:
+	Correción de api.
+
+	* libcoyote/config.log, libcoyote/src/Makefile, libcoyote/src/Makefile.am, libcoyote/src/Makefile.in, libcoyote/src/coyote.h, libcoyote/src/coyote_connection.c, libcoyote/src/coyote_connection.h:
+	Añadido nuevo módulo que contendrá las facilidades de creado de conexión.
+
+	* libcoyote/src/coyote_simple_cfg.c, libcoyote/src/coyote_simple_cfg.h, libcoyote/config.log, libcoyote/src/Makefile, libcoyote/src/Makefile.am, libcoyote/src/Makefile.in, libcoyote/src/coyote.h, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h:
+	Actualización general para incluir soporte de configuración
+	del perfil desde fuera del módulo coyote_simple.
+
+2002-12-31  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* af-kernel/src/af_kernel.c: Código inicial del servidor.
+
+	* libafdalkernel/AUTHORS, libafdalkernel/COPYING, libafdalkernel/ChangeLog, libafdalkernel/Makefile, libafdalkernel/Makefile.am, libafdalkernel/Makefile.in, libafdalkernel/NEWS, libafdalkernel/README, libafdalkernel/aclocal.m4, libafdalkernel/afdalkernel.pc, libafdalkernel/afdalkernel.pc.in, libafdalkernel/autogen.sh, libafdalkernel/config.h, libafdalkernel/config.h.in, libafdalkernel/config.log, libafdalkernel/config.status, libafdalkernel/configure, libafdalkernel/configure.ac, libafdalkernel/libtool, libafdalkernel/src/Makefile, libafdalkernel/src/Makefile.am, libafdalkernel/src/Makefile.in, libafdalkernel/stamp-h, libafdalkernel/stamp-h.in, libafdalkernel/test/test_afdal_kernel.c:
+	Código antes de marcharme.
+
+	* libafdalkernel/src/afdal_kernel.c, libafdalkernel/src/afdal_kernel.h:
+	Actualización de código antes de irme.
+
+	* libcoyote/coyote.pc, libcoyote/src/Makefile, libcoyote/src/Makefile.am, libcoyote/src/Makefile.in, libcoyote/src/coyote.c, libcoyote/src/coyote.h, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h:
+	Actualización general antes de marcharme.
+	Añadido fichero con inicialización de libreria coyote.c
+
+	* libcoyote/coyote.pc.in:
+	Actualización de fichero para pkg-config. Corregidos flags.
+
+2002-12-27  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libcoyote/src/coyote_simple.c: Actualización.
+
+	* libcoyote/AUTHORS, libcoyote/COPYING, libcoyote/ChangeLog, libcoyote/LICENSE, libcoyote/Makefile, libcoyote/Makefile.am, libcoyote/Makefile.in, libcoyote/NEWS, libcoyote/README, libcoyote/aclocal.m4, libcoyote/autogen.sh, libcoyote/config.h, libcoyote/config.h.in, libcoyote/config.log, libcoyote/config.status, libcoyote/configure, libcoyote/configure.ac, libcoyote/coyote.pc, libcoyote/coyote.pc.in, libcoyote/libtool, libcoyote/src/Makefile, libcoyote/src/Makefile.am, libcoyote/src/Makefile.in, libcoyote/src/coyote.h, libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h, libcoyote/stamp-h, libcoyote/stamp-h.in:
+	Versión inicial de libcoyote.
+	Añadidos ficheros necesarios para construir el paquete.
+
+2002-12-26  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* libafdalkernel/src/afdal_kernel.h: *** empty log message ***
+
+	* libafdalkernel/src/afdal_kernel.c: Módulo inicial.
+
+	* libcoyote/src/coyote_simple.c, libcoyote/src/coyote_simple.h:
+	Versión inicial de la librería. Montando estructura.
+

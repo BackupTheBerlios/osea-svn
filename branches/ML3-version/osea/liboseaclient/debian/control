@@ -1,0 +1,29 @@
+Source: libafdal
+Section: devel
+Priority: optional
+Maintainer: Francis Brosnan Blázquez <francis@aspl.es>
+Standards-Version: 3.5.8
+Build-Depends: debmake, libcoyote0-dev (>= 0.0.2), librr0.9-dev, 
+ libglib2.0-dev, libxml2-dev
+
+Package: libafdal0-dev
+Architecture: any
+Depends: libafdal0-0 (>= 0.0.2), libcoyote0-dev (>= 0.0.2), 
+ librr0.9-dev, libglib2.0-dev, libxml2-dev
+Description: LibAfDal development files.
+ LibAfDal is a library to make life easy to libafdal* level developers.
+ It has all common function of libafdal* level.
+
+Package: libafdal0-doc
+Architecture: any
+Depends: lynx | www-browser
+Description: LibAfDal reference manual
+ LibAfDal is a library to make life easy to libafdal* level developers.
+ It has all common function of libafdal* level.
+
+Package: libafdal0-0
+Architecture: any
+Depends: ${shlibs:Depends}, libcoyote0-0 (>= 0.0.2)
+Description: LibAfDal common functions library for libafdal* level.
+ LibAfDal is a library to make life easy to libafdal* level developers.
+ It has all common function of libafdal* level.
