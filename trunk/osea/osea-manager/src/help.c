@@ -1,5 +1,6 @@
 //  ASPL Clm: Command Line Manager for ASPL Fact system
-//  Copyright (C) 2002, 2003  Advanced Software Production Line, S.L.
+//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2004 David Marín Carreño
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -39,8 +40,9 @@ gboolean help_print (gchar * line, gpointer data)
 
 void help_initial_help ()
 {
-	g_print ("ASPL Clm: Command Line Manager for ASPL Fact system\n");
-	g_print ("Copyright (C) 2002, 2003  Advanced Software Production Line, S.L.\n\n");
+	g_print ("öSea Manager: Command Line Manager for öSea system\n");
+	g_print ("Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.\n");
+        g_print ("Copyright (C) 2004 David Marín Carreño\n\n");
 	g_print ("Type 'help' or '?' for help\n");
 
 	return;

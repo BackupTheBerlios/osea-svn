@@ -1,5 +1,6 @@
 //  Aspl-rule server: Daemon for server side for rule report system
-//  Copyright (C) 2002, 2003  Advanced Software Production Line, S.L.
+//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2004 David Marín Carreño
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
