@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libafdalcustomer
+Description: Support library interface to customer server.
+Requires: coyote
+Version: @VERSION@
+Libs: -L${libdir} -lafdalcustomer
+Cflags: -I${includedir}

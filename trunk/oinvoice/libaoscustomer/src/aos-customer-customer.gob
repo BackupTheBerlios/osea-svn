@@ -1,0 +1,137 @@
+%alltop{
+/*
+ *
+ *  LibAfdalCustomer: interface library to the customer daemon
+ *  Copyright (C) 2003 Advanced Software Production Line, S.L.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <afdal/afdal.h>
+%}
+
+%{
+#include "afdal-customer-customer.h"
+
+#ifdef HAVE_LOCALE_H
+#include <locale.h>
+#endif
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#define _(String) gettext (String)
+#else
+#define _(String) (String)
+#endif
+
+%}
+
+class AfDal:Customer:Customer from AfDal:DataNode {
+ 	public int id = 0;
+        property INT id
+                (nick = _("Datanode Identification"),
+                 blurb = _("Unique identification for this datanode"),
+                 minimum = 0,
+                 maximum = INT_MAX,
+                 /* initially set to 0, even though we have already
+                  * set the default above */
+                 default_value = 0,
+		 export,
+                 link);
+
+        public char *legal_id = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING legal_id
+                (nick = _("Legal ID"),
+                 blurb = _("Legal ID for this customer"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+
+        public char *name = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING name
+                (nick = _("Name"),
+                 blurb = _("Name for this customer"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+
+        public char *surname = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING surname
+                (nick = _("Surname"),
+                 blurb = _("Surname for this customer"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+
+        public char *salesman = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING salesman
+                (nick = _("Salesman"),
+                 blurb = _("Salesman for this customer"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+
+        public char *customer_ref = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING customer_ref
+                (nick = _("Reference"),
+                 blurb = _("Reference for this customer"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+
+ 	public int vat_customer_type = 0;
+        property INT vat_customer_type
+                (nick = _("VAT Customer type"),
+                 blurb = _("VAT customer type related to this customer"),
+                 minimum = 0,
+                 maximum = INT_MAX,
+                 /* initially set to 0, even though we have already
+                  * set the default above */
+                 default_value = 0,
+		 export,
+                 link);
+		
+ 	public int enum_values_id = 0;
+        property INT enum_values_id
+                (nick = _("Enum_Value ID"),
+                 blurb = _("Identification for the type of this customer's legal_id"),
+                 minimum = 0,
+                 maximum = INT_MAX,
+                 /* initially set to 0, even though we have already
+                  * set the default above */
+                 default_value = 0,
+		 export,
+		 link);
+	
+
+        public AfDalCustomerCustomer * create (void)
+        {
+		AfDalCustomerCustomer * result;
+		
+		result = GET_NEW;
+
+                return result;
+        }
+
+}
