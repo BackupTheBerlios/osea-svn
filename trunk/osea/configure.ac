@@ -107,10 +107,10 @@ os-kernel/src/Makefile
 os-kernel/data/Makefile
 osea-manager/Makefile
 osea-manager/src/Makefile
-liboseacomm/oseacomm.pc
-liboseaclient/oseaclient.pc
-liboseaserver/oseaserver.pc
-libaoskernel/aoskernel.pc
+liboseacomm/liboseacomm.pc
+liboseaclient/liboseaclient.pc
+liboseaserver/liboseaserver.pc
+libaoskernel/libaoskernel.pc
 doc/Makefile
 doc/reference/Makefile
 ])
