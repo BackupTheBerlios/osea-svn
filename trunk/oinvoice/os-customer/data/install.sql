@@ -18,13 +18,13 @@
 BEGIN WORK;
 
 -- Create server user and group:
-CREATE USER af_customer PASSWORD 'changeme';
-CREATE GROUP af_customer; 
-ALTER GROUP af_customer ADD USER af_customer;
-ALTER GROUP af_customer ADD USER asplfact;
+CREATE USER os_customer PASSWORD 'changeme';
+CREATE GROUP os_customer; 
+ALTER GROUP os_customer ADD USER os_customer;
+ALTER GROUP os_customer ADD USER asplfact;
 
 -- Entities definition
-CREATE TABLE af_customer_enum_values (
+CREATE TABLE os_customer_enum_values (
 	id                   SERIAL PRIMARY KEY, 
 	enum_type            VARCHAR(250),
 	enum_order_in_type   INT,
@@ -35,7 +35,7 @@ CREATE TABLE af_customer_enum_values (
                              'Web Data Type'))
 );
 
-CREATE TABLE af_customer_address (
+CREATE TABLE os_customer_address (
 	id                   SERIAL PRIMARY KEY, 
 	enum_values_id       INT NOT NULL ,
 	customer_id          INT NOT NULL ,
@@ -46,7 +46,7 @@ CREATE TABLE af_customer_address (
 	country              VARCHAR(250)
 );
 
-CREATE TABLE af_customer_telephone (
+CREATE TABLE os_customer_telephone (
 	id                   SERIAL PRIMARY KEY, 
 	enum_values_id       INT NOT NULL ,
 	customer_id          INT NOT NULL ,
@@ -54,21 +54,21 @@ CREATE TABLE af_customer_telephone (
 	description          VARCHAR(250)
 );
 
-CREATE TABLE af_customer_inet_data (
+CREATE TABLE os_customer_inet_data (
 	id                   SERIAL PRIMARY KEY, 
 	enum_values_id       INT NOT NULL ,
 	customer_id          INT NOT NULL ,
 	inet_data            VARCHAR(250)
 );
 
-CREATE TABLE af_customer_contact (
+CREATE TABLE os_customer_contact (
 	id                   SERIAL PRIMARY KEY, 
 	customer_id          INT NOT NULL ,
 	name                 VARCHAR(250),
 	position             VARCHAR(250)
 );
 
-CREATE TABLE af_customer_customer (
+CREATE TABLE os_customer_customer (
 	id                   SERIAL PRIMARY KEY, 
 	enum_values_id       INT NOT NULL ,
 	legal_id             VARCHAR(250),
@@ -80,52 +80,52 @@ CREATE TABLE af_customer_customer (
 );
 
 -- Relationships definition
-ALTER TABLE af_customer_enum_values OWNER TO af_customer;
-ALTER TABLE af_customer_enum_values_id_seq OWNER TO af_customer;
-ALTER TABLE af_customer_address OWNER TO af_customer;
-ALTER TABLE af_customer_address_id_seq OWNER TO af_customer;
-ALTER TABLE af_customer_telephone OWNER TO af_customer;
-ALTER TABLE af_customer_telephone_id_seq OWNER TO af_customer;
-ALTER TABLE af_customer_inet_data OWNER TO af_customer;
-ALTER TABLE af_customer_inet_data_id_seq OWNER TO af_customer;
-ALTER TABLE af_customer_contact OWNER TO af_customer;
-ALTER TABLE af_customer_contact_id_seq OWNER TO af_customer;
-ALTER TABLE af_customer_customer OWNER TO af_customer;
-ALTER TABLE af_customer_customer_id_seq OWNER TO af_customer;
-REVOKE ALL ON af_customer_enum_values,
-              af_customer_enum_values_id_seq,
-              af_customer_address,
-              af_customer_address_id_seq,
-              af_customer_telephone,
-              af_customer_telephone_id_seq,
-              af_customer_inet_data,
-              af_customer_inet_data_id_seq,
-              af_customer_contact,
-              af_customer_contact_id_seq,
-              af_customer_customer,
-              af_customer_customer_id_seq FROM PUBLIC;
-GRANT ALL ON af_customer_enum_values,
-             af_customer_enum_values_id_seq,
-             af_customer_address,
-             af_customer_address_id_seq,
-             af_customer_telephone,
-             af_customer_telephone_id_seq,
-             af_customer_inet_data,
-             af_customer_inet_data_id_seq,
-             af_customer_contact,
-             af_customer_contact_id_seq,
-             af_customer_customer,
-             af_customer_customer_id_seq TO af_customer;
-GRANT SELECT ON af_customer_enum_values,
-                af_customer_enum_values_id_seq,
-                af_customer_address,
-                af_customer_address_id_seq,
-                af_customer_telephone,
-                af_customer_telephone_id_seq,
-                af_customer_inet_data,
-                af_customer_inet_data_id_seq,
-                af_customer_contact,
-                af_customer_contact_id_seq,
-                af_customer_customer,
-                af_customer_customer_id_seq TO GROUP af_customer;
+ALTER TABLE os_customer_enum_values OWNER TO os_customer;
+ALTER TABLE os_customer_enum_values_id_seq OWNER TO os_customer;
+ALTER TABLE os_customer_address OWNER TO os_customer;
+ALTER TABLE os_customer_address_id_seq OWNER TO os_customer;
+ALTER TABLE os_customer_telephone OWNER TO os_customer;
+ALTER TABLE os_customer_telephone_id_seq OWNER TO os_customer;
+ALTER TABLE os_customer_inet_data OWNER TO os_customer;
+ALTER TABLE os_customer_inet_data_id_seq OWNER TO os_customer;
+ALTER TABLE os_customer_contact OWNER TO os_customer;
+ALTER TABLE os_customer_contact_id_seq OWNER TO os_customer;
+ALTER TABLE os_customer_customer OWNER TO os_customer;
+ALTER TABLE os_customer_customer_id_seq OWNER TO os_customer;
+REVOKE ALL ON os_customer_enum_values,
+              os_customer_enum_values_id_seq,
+              os_customer_address,
+              os_customer_address_id_seq,
+              os_customer_telephone,
+              os_customer_telephone_id_seq,
+              os_customer_inet_data,
+              os_customer_inet_data_id_seq,
+              os_customer_contact,
+              os_customer_contact_id_seq,
+              os_customer_customer,
+              os_customer_customer_id_seq FROM PUBLIC;
+GRANT ALL ON os_customer_enum_values,
+             os_customer_enum_values_id_seq,
+             os_customer_address,
+             os_customer_address_id_seq,
+             os_customer_telephone,
+             os_customer_telephone_id_seq,
+             os_customer_inet_data,
+             os_customer_inet_data_id_seq,
+             os_customer_contact,
+             os_customer_contact_id_seq,
+             os_customer_customer,
+             os_customer_customer_id_seq TO os_customer;
+GRANT SELECT ON os_customer_enum_values,
+                os_customer_enum_values_id_seq,
+                os_customer_address,
+                os_customer_address_id_seq,
+                os_customer_telephone,
+                os_customer_telephone_id_seq,
+                os_customer_inet_data,
+                os_customer_inet_data_id_seq,
+                os_customer_contact,
+                os_customer_contact_id_seq,
+                os_customer_customer,
+                os_customer_customer_id_seq TO GROUP os_customer;
 COMMIT WORK;
