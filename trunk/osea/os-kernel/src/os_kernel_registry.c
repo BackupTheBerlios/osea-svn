@@ -24,7 +24,7 @@
 #include <liboseaserver/oseaserver.h>
 #include "os_kernel_keys.h"
 
-#define LOG_DOMAIN "af-kernel_registry"
+#define LOG_DOMAIN "os-kernel_registry"
 
 
 gboolean       os_kernel_registry_insert (gchar * name, gchar * host, gchar *port) 
@@ -67,9 +67,9 @@ OseaCommDataSet * os_kernel_registry_generate_session_info_table (gchar *user, g
 		af_key = os_kernel_keys_generate (user, server_name);
 		oseacomm_dataset_set (result, af_key, i, 3);
 
-		// Check if af_key is af-kernel key for user
-		if (!g_strcasecmp (oseacomm_dataset_get (result, i,0), "af-kernel")) {
-			// Store af-kernel af-key generated to use it before
+		// Check if af_key is os-kernel key for user
+		if (!g_strcasecmp (oseacomm_dataset_get (result, i,0), "os-kernel")) {
+			// Store os-kernel af-key generated to use it before
 			*kernel_afkey = g_strdup(af_key);
 		}
 

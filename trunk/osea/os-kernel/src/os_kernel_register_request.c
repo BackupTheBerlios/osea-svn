@@ -27,7 +27,7 @@
 #include "os_kernel_login_request.h"
 #include "os_kernel_session.h"
 
-#define LOG_DOMAIN "af-kernel_register_request"
+#define LOG_DOMAIN "os-kernel_register_request"
 
 
 gboolean os_kernel_register_check_version (RRChannel * channel, gint msg_no, gchar * server_name, gchar * server_version) 
@@ -160,7 +160,7 @@ gboolean os_kernel_register_request (OseaCommXmlServiceData *data, gpointer user
 
 /* gboolean os_kernel_register_build_active_servers (gchar * key,  AfKernelActiveServer * value, gpointer data)  */
 /* { */
-/* 	OseaCommDataSet * data_set = (CoyoteDataSet *) data; */
+/* 	OseaCommDataSet * data_set = (OseaCommDataSet *) data; */
 /* 	gint i, j; */
 
 /* 	if (oseacomm_dataset_get_height (data_set)) { */

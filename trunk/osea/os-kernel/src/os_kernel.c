@@ -39,7 +39,7 @@
 #include "os_kernel_crypto.h"
 #include "os_kernel_registry.h"
 
-#define LOG_DOMAIN "af-kernel"
+#define LOG_DOMAIN "os-kernel"
 
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
@@ -68,7 +68,7 @@ OseaServerServicesProvided services_provided []  = {
 	{"update_services",               "", os_kernel_update_services               , FALSE, NULL, NULL, NULL},
 	{"refresh_key",                   "", os_kernel_keys_request                  , FALSE, NULL, NULL, NULL},
 //	{"refresh_session",               "", os_kernel_refresh_session_request       , FALSE, NULL, NULL, NULL},
-/* 	{"get_servers",                   "Service for listing all the servers registered in af-kernel",  */
+/* 	{"get_servers",                   "Service for listing all the servers registered in os-kernel",  */
 /* 	 os_kernel_register_list_request, TRUE,  NULL, NULL, NULL}, */
 
 /* Services for user/group/permission managing */
@@ -114,9 +114,9 @@ OseaServerServicesProvided services_provided []  = {
 	 os_kernel_permission_actual_list_by_user, TRUE, NULL,  "permission_list", NULL},
 	{"permission_list_by_group",      "", 
 	 os_kernel_permission_list_by_group      , TRUE, NULL,  "permission_list", NULL},
-	{"server_list",                   "Service for obtain all the servers with permissions hosted in af-kernel", 
+	{"server_list",                   "Service for obtain all the servers with permissions hosted in os-kernel", 
 	 os_kernel_server_list                   , TRUE, NULL,  NULL, NULL},
-	{"server_remove",                 "Service for removing all the permissions of a given server hosted in af-kernel", 
+	{"server_remove",                 "Service for removing all the permissions of a given server hosted in os-kernel", 
 	 os_kernel_server_remove                 , TRUE, NULL,  NULL, NULL},
 	OSEASERVER_SERVICES_TABLE_END
 };
@@ -135,15 +135,15 @@ void __os_kernel_process_check ()
 	gchar                * clear_passwd2;
 
 
-	// Check if af-kernel has installed its services
-	dataset = oseaserver_command_execute_single_query ("SELECT version FROM kernel_server WHERE name = 'af-kernel'");
+	// Check if os-kernel has installed its services
+	dataset = oseaserver_command_execute_single_query ("SELECT version FROM kernel_server WHERE name = 'os-kernel'");
 
 	if (oseacomm_dataset_get_height (dataset) == 0 ) {
 		oseacomm_dataset_free (dataset);
 		
-		oseaserver_command_execute_non_query ("INSERT INTO kernel_server (name,version,description) VALUES ('af-kernel',1,'Kernel server')");
+		oseaserver_command_execute_non_query ("INSERT INTO kernel_server (name,version,description) VALUES ('os-kernel',1,'Kernel server')");
 		
-		dataset = oseaserver_command_execute_single_query ("SELECT id FROM kernel_server WHERE name = 'af-kernel'");
+		dataset = oseaserver_command_execute_single_query ("SELECT id FROM kernel_server WHERE name = 'os-kernel'");
 		
 		// Af-kernel hasn't installed anything yet
 
@@ -214,7 +214,7 @@ void __os_kernel_process_check ()
 	if (!hostname)
 		g_error ("Error: couldn't find 'listening hostname' key in config file");
 	
-	os_kernel_registry_insert ("af-kernel", hostname, port);
+	os_kernel_registry_insert ("os-kernel", hostname, port);
 
 	return;
 }
@@ -235,13 +235,13 @@ gint main (gint argc, gchar * argv[]) {
 
 	oseaserver_log_check_and_disable_glog ();
 
-	oseaserver_main_run_server ("af-kernel",
+	oseaserver_main_run_server ("os-kernel",
 			      "AF Architecture Main server",
 			      VERSION,
 			      COMPILATION_DATE,
 			      &argc,
 			      &argv,
-			      g_build_filename (SYSCONFDIR, "aspl-fact", "af-kernel.cfg", NULL ), 
+			      g_build_filename (SYSCONFDIR, "oinvoice", "os-kernel.cfg", NULL ), 
 			      accepted_keys,
 			      services_provided,
 			      0,

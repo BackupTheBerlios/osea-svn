@@ -15,8 +15,8 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AF_KERNEL_REGISTRY__
-#define __AF_KERNEL_REGISTRY__
+#ifndef __OS_KERNEL_REGISTRY__
+#define __OS_KERNEL_REGISTRY__
 
 #include <glib.h>
 #include <liboseacomm/oseacomm.h>
