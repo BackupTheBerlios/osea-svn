@@ -1,0 +1,66 @@
+
+
+%alltop{
+/*
+ *
+ *  LibAosCustomer: interface library to the customer daemon
+ *  Copyright (C) 2003 Advanced Software Production Line, S.L.
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-message.h"
+#include "oseatype-object.h"
+%}
+
+%{
+
+
+%}
+
+class OseaType:Message:Query from OseaType:Message {
+	
+	public OseaTypeMessageQuery * new (gchar * function_name, 
+			 OseaTypeObject * object,
+			 ...)
+	{
+		OseaTypeObject * message_element;
+		va_list args;
+		OseaTypeMessageQuery * result = GET_NEW;
+
+		OSEATYPE_MESSAGE(result)->elements = g_ptr_array_new ();
+
+		g_ptr_array_add (OSEATYPE_MESSAGE(result)->elements,
+				 oseatype_string_new (function_name));
+
+		va_start (args, object);
+
+		while ((message_element = va_arg (args, OseaTypeObject *))) {
+			g_ptr_array_add (OSEATYPE_MESSAGE(result)->elements,
+					 message_element);
+		}
+
+		va_end (args);
+
+		return result;
+	}	 
+
+}

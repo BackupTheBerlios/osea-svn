@@ -1,0 +1,87 @@
+
+
+%alltop{
+/*
+ *
+ *  LibAosCustomer: interface library to the customer daemon
+ *  Copyright (C) 2003 Advanced Software Production Line, S.L.
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+%}
+
+%{
+#include "oseatype.h"
+#include "oseatype-message.h"
+#include "oseatype-message-element-array.h"
+
+%}
+
+class OseaType:Message from G:Object {
+	
+	private gboolean is_finished = FALSE;
+	property BOOLEAN is_finished
+		(nick = "Is finished",
+		 blurb = "Boolean that says if the message has been fully emitted or received",
+		 minimum = FALSE,
+		 maximum = TRUE,
+		 default_value = FALSE,
+		 link);
+
+	private gint length = 0;
+	property INT length
+		(nick = "Message length",
+		 blurb = "Number of logical elements in the message",
+		 minimum = 0,
+		 maximum = OSEATYPE_MESSAGE_MAX_LENGTH,
+		 link);
+
+	private gint finished_elements_no = 0;
+	property INT finished_elements_no
+		(nick = "Finished elements number",
+		 blurb = "Number of logical elements in the message already emitted/received",
+		 minimum = 0,
+		 maximum = OSEATYPE_MESSAGE_MAX_LENGTH,
+		 link);
+
+	private gint in_progress_element = -1;
+	property INT in_progress_element
+		(nick = "Element in progress",
+		 blurb = "Index of the message logical element currently being emitted/received",
+		 minimum = -1,
+		 maximum = OSEATYPE_MESSAGE_MAX_LENGTH,
+		 link);
+		
+	protected GPtrArray *elements = NULL
+		destroywith oseatype_message_element_array_free;
+	property POINTER elements
+		(nick = "Array of elements",
+		 blurb = "Array of logical elements of the message",
+		 link);
+		 
+
+        virtual gchar * serialize (self)
+        {
+		g_critical ("You must redefine this function");
+        }
+
+}
