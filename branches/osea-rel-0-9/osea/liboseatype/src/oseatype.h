@@ -1,4 +1,4 @@
-//  LibOseaType:  Support library with xml and communication functions.
+//  LibOseaType:  Support library with classes for message composition
 //  Copyright (C) 2004 David Marín Carreño
 //
 //  This program is free software; you can redistribute it and/or modify

@@ -3,8 +3,7 @@
 %alltop{
 /*
  *
- *  LibAosCustomer: interface library to the customer daemon
- *  Copyright (C) 2003 Advanced Software Production Line, S.L.
+ *  LibOseaType: Classes for message composition
  *  Copyright (C) 2004 David Marín Carreño
  *
  *  This program is free software; you can redistribute it and/or modify

@@ -7,12 +7,12 @@ liboseatypeincludedir = $(includedir)/liboseatype
 lib_LTLIBRARIES = liboseatype.la
 
 liboseatype_la_SOURCES = oseatype.c \
-	oseatype-object.c \
+	oseatype-object.c oseatype-boolean.c oseatype-char.c oseatype-int.c\
 	oseatype-message.c oseatype-message-query.c
 
 
 liboseatypeinclude_HEADERS = oseatype.h \
-	oseatype-object.h \
+	oseatype-object.h oseatype-boolean.h oseatype-char.h oseatype-int.h\
 	oseatype-message.h oseatype-message-query.h
 
 liboseatype_la_LIBADD = \

@@ -26,34 +26,30 @@ requires 2.0.0
 
 %header{
 #include <glib.h>
+#include "oseatype-object.h"
 %}
 
 %{
 
 %}
 
-class OseaType:Object from G:Object {
+class OseaType:Char from OseaType:Object {
 	
-	private gboolean is_finished = FALSE;
-	property BOOLEAN is_finished
-		(nick = "Is finished",
-		 blurb = "Boolean that says if the message has been fully emitted or received",
-		 minimum = FALSE,
-		 maximum = TRUE,
-		 default_value = FALSE,
+	public gchar value;
+	property CHAR value
+		(nick = "Value",
+		 blurb = "Object actual value",
+		 export,
 		 link);
 
-	private gboolean in_progress = FALSE;
-	property BOOLEAN in_progress
-		(nick = "Element is in progress",
-		 blurb = "Index of the message logical element currently being emitted/received",
-		 minimum = FALSE,
-		 maximum = TRUE,
-		 link);
-				 
-        virtual gchar * serialize (self)
-        {
-		g_critical ("You must redefine this function");
-        }
+
+	public OseaTypeObject * new (gchar value)
+	{
+		OseaTypeChar * result = GET_NEW;
+		result->value = value;
+
+		return OSEATYPE_OBJECT(result);
+
+	}	
 
 }
