@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -24,9 +24,9 @@
  * oseaclient_nul_free:
  * @data: 
  * 
- * Frees AfDalNulData @data.
+ * Frees OseaClientNulData @data.
  **/
-void    oseaclient_nul_free    (AfDalNulData * data)
+void    oseaclient_nul_free    (OseaClientNulData * data)
 {
 	g_free (data->text_response);
 	g_free (data);
@@ -37,9 +37,9 @@ void    oseaclient_nul_free    (AfDalNulData * data)
  * oseaclient_simple_free:
  * @data: 
  * 
- * Frees AfDalSimpleData @data.
+ * Frees OseaClientSimpleData @data.
  **/
-void    oseaclient_simple_free (AfDalSimpleData * data)
+void    oseaclient_simple_free (OseaClientSimpleData * data)
 {
 	g_free (data->text_response);
 	g_free (data);
@@ -51,10 +51,10 @@ void    oseaclient_simple_free (AfDalSimpleData * data)
  * @data: 
  * @destroy_list: 
  *
- * Frees AfDalData @data. If @destroy_list is FALSE, it won't destroy
- * the AfDalList contained in @data.
+ * Frees OseaClientData @data. If @destroy_list is FALSE, it won't destroy
+ * the OseaClientList contained in @data.
  **/
-void    oseaclient_data_free   (AfDalData * data, gboolean destroy_list)
+void    oseaclient_data_free   (OseaClientData * data, gboolean destroy_list)
 {
 	g_free (data->text_response);
 	if (destroy_list)
@@ -67,7 +67,7 @@ void    oseaclient_data_free   (AfDalData * data, gboolean destroy_list)
 
 void __destroy_list (gpointer data, gpointer user_data)
 {
-	oseaclient_list_destroy ( (AfDalList *) data );	
+	oseaclient_list_destroy ( (OseaClientList *) data );	
 	return;
 }
 
@@ -76,11 +76,11 @@ void __destroy_list (gpointer data, gpointer user_data)
  * @data: 
  * @destroy_trees: 
  * 
- * Frees AfDalMultiData @data and the GList contained in @data. If
- * @destroy_trees is FALSE, it won't destroy the AfDalLists contained in
+ * Frees OseaClientMultiData @data and the GList contained in @data. If
+ * @destroy_trees is FALSE, it won't destroy the OseaClientLists contained in
  * the GList, but it will do destroy the GList.
  **/
-void    oseaclient_multi_free  (AfDalMultiData * data, gboolean destroy_lists)
+void    oseaclient_multi_free  (OseaClientMultiData * data, gboolean destroy_lists)
 {
 	g_free (data->text_response);
 	if (destroy_lists)
@@ -95,7 +95,7 @@ void oseaclient_print_version_info ()
 {
 	glong cd = COMPILATION_DATE;
 
-	g_print ("\tLibAfDal version %s, compiled %s", VERSION, ctime(&cd));
+	g_print ("\tLibOseaClient version %s, compiled %s", VERSION, ctime(&cd));
 }
 
 void oseaclient_init ()

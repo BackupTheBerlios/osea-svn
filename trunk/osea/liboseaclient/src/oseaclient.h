@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,69 +16,69 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFDAL_H__
-#define __AFDAL_H__
+#ifndef __OSEACLIENT_H__
+#define __OSEACLIENT_H__
 
 #include <glib.h>
 #include <librr/rr.h>
 #include <coyote/coyote.h>
 
-typedef enum {AFDAL_ERROR, 
-	      AFDAL_OK, 
-	      AFDAL_UPDATE_SERVICES_NEEDED,
-	      AFDAL_SESSION_EXPIRED
-} AfDalState;
+typedef enum {OSEACLIENT_ERROR, 
+	      OSEACLIENT_OK, 
+	      OSEACLIENT_UPDATE_SERVICES_NEEDED,
+	      OSEACLIENT_SESSION_EXPIRED
+} OseaClientState;
 
 #include "oseaclient_list.h"
 
-struct __AfDalMultiData {
-	AfDalState state;
+struct __OseaClientMultiData {
+	OseaClientState state;
 	gchar     * text_response;
 	GList     * multi_data;
 };
 
-struct __AfDalData {
-	AfDalState  state;
+struct __OseaClientData {
+	OseaClientState  state;
 	gchar     * text_response;
-	AfDalList     * data;  
+	OseaClientList     * data;  
 };
 
-struct __AfDalSimpleData {
-	AfDalState  state;
+struct __OseaClientSimpleData {
+	OseaClientState  state;
 	gchar     * text_response;
 	gint        id;
 };
 
-struct __AfDalNulData {
-	AfDalState  state;
+struct __OseaClientNulData {
+	OseaClientState  state;
 	gchar     * text_response;
 };
 
-typedef enum {AFDAL_REQUEST_MULTI_DATA,
-	      AFDAL_REQUEST_DATA, 
-	      AFDAL_REQUEST_SIMPLE_DATA, 
-	      AFDAL_REQUEST_NUL_DATA} AfDalRequestReturnData;
+typedef enum {OSEACLIENT_REQUEST_MULTI_DATA,
+	      OSEACLIENT_REQUEST_DATA, 
+	      OSEACLIENT_REQUEST_SIMPLE_DATA, 
+	      OSEACLIENT_REQUEST_NUL_DATA} OseaClientRequestReturnData;
 
-typedef struct __AfDalMultiData  AfDalMultiData;
-typedef struct __AfDalData       AfDalData;
-typedef struct __AfDalSimpleData AfDalSimpleData;
-typedef struct __AfDalNulData    AfDalNulData;
-
-
-typedef gboolean (* AfDalMultiFunc)   (AfDalMultiData  * data, gpointer usr_data);
-typedef gboolean (* AfDalDataFunc)    (AfDalData       * data, gpointer usr_data);
-typedef gboolean (* AfDalSimpleFunc)  (AfDalSimpleData * data, gpointer usr_data);
-typedef gboolean (* AfDalNulFunc)     (AfDalNulData    * data, gpointer usr_data);
-typedef gboolean (* AfDalFunc)        (gpointer          data, gpointer usr_data);
+typedef struct __OseaClientMultiData  OseaClientMultiData;
+typedef struct __OseaClientData       OseaClientData;
+typedef struct __OseaClientSimpleData OseaClientSimpleData;
+typedef struct __OseaClientNulData    OseaClientNulData;
 
 
-void    oseaclient_nul_free    (AfDalNulData * data);
+typedef gboolean (* OseaClientMultiFunc)   (OseaClientMultiData  * data, gpointer usr_data);
+typedef gboolean (* OseaClientDataFunc)    (OseaClientData       * data, gpointer usr_data);
+typedef gboolean (* OseaClientSimpleFunc)  (OseaClientSimpleData * data, gpointer usr_data);
+typedef gboolean (* OseaClientNulFunc)     (OseaClientNulData    * data, gpointer usr_data);
+typedef gboolean (* OseaClientFunc)        (gpointer          data, gpointer usr_data);
 
-void    oseaclient_simple_free (AfDalSimpleData * data);
 
-void    oseaclient_data_free   (AfDalData * data, gboolean destroy_list);
+void    oseaclient_nul_free    (OseaClientNulData * data);
 
-void    oseaclient_multi_free  (AfDalMultiData * data, gboolean destroy_lists);
+void    oseaclient_simple_free (OseaClientSimpleData * data);
+
+void    oseaclient_data_free   (OseaClientData * data, gboolean destroy_list);
+
+void    oseaclient_multi_free  (OseaClientMultiData * data, gboolean destroy_lists);
 
 void    oseaclient_print_version_info ();
 
@@ -92,6 +92,6 @@ void    oseaclient_init ();
 #include "oseaclient-datanode.h"
 #include "oseaclient-detaileddatanode.h"
 #include "oseaclient_decimal.h"
-#include "oseaclient_afkeys.h"
+#include "oseaclient_keys.h"
 
 #endif

@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -21,29 +21,29 @@
 #define LOG_DOMAIN "oseaclient_session"
 
 
-typedef struct __AfDalSessionPrivateServer {
+typedef struct __OseaClientSessionPrivateServer {
 	gchar        * name;
 	gchar        * host;
 	gchar        * port;
 	gchar        * af_key;
 	RRConnection * connection;
-} AfDalSessionPrivateServer;
+} OseaClientSessionPrivateServer;
 
 
-typedef struct __AfDalSession {
+typedef struct __OseaClientSession {
 	gchar      * session_id;
-	AfDalList  * server_info;
+	OseaClientList  * server_info;
 	gchar      * user;
-} AfDalSession;
+} OseaClientSession;
 
-static AfDalSession         session = { NULL, NULL, NULL };
-static AfDalSessionServer * server_myself = NULL;
+static OseaClientSession         session = { NULL, NULL, NULL };
+static OseaClientSessionServer * server_myself = NULL;
 static gboolean             coyote_initialized = FALSE;
 static GList              * active_servers = NULL;
 
 void __oseaclient_session_server_destroy (gpointer data)
 {
-	AfDalSessionPrivateServer *server = (AfDalSessionPrivateServer *) data;
+	OseaClientSessionPrivateServer *server = (OseaClientSessionPrivateServer *) data;
 	GError *error;
 	
 	g_free (server->name);
@@ -72,18 +72,18 @@ gchar * __oseaclient_session_extract_session_id (CoyoteDataSet * dataset)
 	return g_strdup (coyote_dataset_get (dataset, 0, 0));
 }
 
-AfDalList * __oseaclient_session_extract_server_info (CoyoteDataSet * data, RRConnection *kernel_connection)
+OseaClientList * __oseaclient_session_extract_server_info (CoyoteDataSet * data, RRConnection *kernel_connection)
 {
-	AfDalSessionPrivateServer * server;
-	AfDalList                 * result;
+	OseaClientSessionPrivateServer * server;
+	OseaClientList                 * result;
 	gint i;
 
 	g_return_val_if_fail (data, NULL);
 	
-	result = oseaclient_list_new_full ((GCompareFunc) g_strcasecmp, NULL, __afdal_session_server_destroy);
+	result = oseaclient_list_new_full ((GCompareFunc) g_strcasecmp, NULL, __oseaclient_session_server_destroy);
 
 	for (i=0; i < coyote_dataset_get_height (data); i++) {
-		server = g_new0 (AfDalSessionPrivateServer,1);
+		server = g_new0 (OseaClientSessionPrivateServer,1);
 
 		server->name = g_strdup (coyote_dataset_get (data, i, 0));
 		
@@ -108,8 +108,8 @@ static  void __oseaclient_session_login_process (RRChannel * channel,
 					    gpointer    data, 
 					    gpointer    custom_data)
 {
-	AfDalMultiData  * oseaclient_multidata = NULL;
-	AfDalNulData    * oseaclient_data = NULL;
+	OseaClientMultiData  * oseaclient_multidata = NULL;
+	OseaClientNulData    * oseaclient_data = NULL;
 	GList           * list = NULL;
 	CoyoteDataSet   * session_id_dataset = NULL;
 	CoyoteDataSet   * server_info_dataset = NULL;
@@ -119,22 +119,22 @@ static  void __oseaclient_session_login_process (RRChannel * channel,
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_multidata = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_MULTI_DATA, channel,
+	oseaclient_multidata = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_MULTI_DATA, channel,
 								       frame, message, NULL, &list, &data, &custom_data);
 
 	g_return_if_fail (oseaclient_multidata);
 	
-	oseaclient_data = g_new0 (AfDalNulData, 1);
-	oseaclient_data->state = afdal_multidata->state;
-	oseaclient_data->text_response = g_strdup (afdal_multidata->text_response);
-	oseaclient_multi_free (afdal_multidata, FALSE);
+	oseaclient_data = g_new0 (OseaClientNulData, 1);
+	oseaclient_data->state = oseaclient_multidata->state;
+	oseaclient_data->text_response = g_strdup (oseaclient_multidata->text_response);
+	oseaclient_multi_free (oseaclient_multidata, FALSE);
 
 	// If everything was OK, we must process the list of datasets
 	// for extracting session_id and server_info
 
 
 
-	if (oseaclient_data->state == AFDAL_OK) {
+	if (oseaclient_data->state == OSEACLIENT_OK) {
 
 		session_id_dataset = (CoyoteDataSet *) g_list_nth_data (list, 0);
 		server_info_dataset = (CoyoteDataSet *) g_list_nth_data (list, 1);
@@ -152,7 +152,7 @@ static  void __oseaclient_session_login_process (RRChannel * channel,
 
 
 	// Call to user defined callback.	
-	oseaclient_request_call_user_function (AFDAL_REQUEST_NUL_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_NUL_DATA, data, custom_data, oseaclient_data);
 
 	return;
 }
@@ -178,7 +178,7 @@ gboolean        oseaclient_session_login   (gchar * usr,
 				       gchar * passwd,
 				       gchar * kernel_hostname,
 				       gchar * kernel_port,
-				       AfDalNulFunc usr_function,
+				       OseaClientNulFunc usr_function,
 				       gpointer usr_data)
 {
 	RRConnection * connection;
@@ -207,8 +207,8 @@ gboolean        oseaclient_session_login   (gchar * usr,
 		g_free (session.user);
 	session.user = g_strdup (usr);
 
-	return oseaclient_request (connection, __afdal_session_login_process, 
-			      (AfDalFunc) usr_function, usr_data,
+	return oseaclient_request (connection, __oseaclient_session_login_process, 
+			      (OseaClientFunc) usr_function, usr_data,
 			      "login", 
 			      "user", COYOTE_XML_ARG_STRING, usr, 
 			      "password", COYOTE_XML_ARG_STRING, passwd, NULL);
@@ -236,14 +236,14 @@ void __oseaclient_session_logout_process (RRChannel * channel,
 				     gpointer data, 
 				     gpointer custom_data)
 {
-	AfDalNulData     * oseaclient_data = NULL;
+	OseaClientNulData     * oseaclient_data = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_NUL_DATA,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_NUL_DATA,
 								  channel,
 								  frame,
 								  message,
@@ -255,10 +255,10 @@ void __oseaclient_session_logout_process (RRChannel * channel,
 
 	// Now we program a event for destroying all session info, and activate it
 	
-	oseaclient_event_source_launch (__afdal_session_destroy_session_info, NULL);
+	oseaclient_event_source_launch (__oseaclient_session_destroy_session_info, NULL);
 
 	// Call to user defined callback.	
-	oseaclient_request_call_user_function (AFDAL_REQUEST_NUL_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_NUL_DATA, data, custom_data, oseaclient_data);
 
 
 	return;
@@ -274,7 +274,7 @@ void __oseaclient_session_logout_process (RRChannel * channel,
  * 
  * Return value: TRUE if the query was executed, or FALSE if it wasn't
  **/
-gboolean        oseaclient_session_logout  (AfDalNulFunc usr_function,
+gboolean        oseaclient_session_logout  (OseaClientNulFunc usr_function,
 				       gpointer usr_data)
 {
 	RRConnection * connection = NULL;
@@ -284,8 +284,8 @@ gboolean        oseaclient_session_logout  (AfDalNulFunc usr_function,
 	if (! connection)
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for af-kernel");
 
-	return oseaclient_request (connection, __afdal_session_logout_process, 
-			      (AfDalFunc) usr_function, usr_data,
+	return oseaclient_request (connection, __oseaclient_session_logout_process, 
+			      (OseaClientFunc) usr_function, usr_data,
 			      "logout", 
 			      "session_id", COYOTE_XML_ARG_STRING, session.session_id, 
 			      NULL);
@@ -302,12 +302,12 @@ static  void __oseaclient_session_refresh_key_process (RRChannel * channel,
 						  gpointer    data, 
 						  gpointer    custom_data)
 {
-	AfDalNulData              * oseaclient_nul_data = NULL;
-	AfDalData                 * oseaclient_data = NULL;
+	OseaClientNulData              * oseaclient_nul_data = NULL;
+	OseaClientData                 * oseaclient_data = NULL;
 	CoyoteDataSet             * af_key_dataset = NULL;
 	gchar                     * new_af_key = NULL;
-	AfDalAfKey                * key = NULL;
-	AfDalSessionPrivateServer * server = NULL;
+	OseaClientAfKey                * key = NULL;
+	OseaClientSessionPrivateServer * server = NULL;
 	gchar                     * tmp;
 	
 	g_return_if_fail (channel);
@@ -315,21 +315,21 @@ static  void __oseaclient_session_refresh_key_process (RRChannel * channel,
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_DATA, channel,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_DATA, channel,
 								  frame, message, &af_key_dataset, 
 								  NULL, &data, &custom_data);
 
 	if (! oseaclient_data)
 		return;
 
-	oseaclient_nul_data = g_new0 (AfDalNulData, 1);
-	oseaclient_nul_data->state = afdal_data->state;
-	oseaclient_nul_data->text_response = g_strdup (afdal_data->text_response);
-	oseaclient_data_free (afdal_data, FALSE);
+	oseaclient_nul_data = g_new0 (OseaClientNulData, 1);
+	oseaclient_nul_data->state = oseaclient_data->state;
+	oseaclient_nul_data->text_response = g_strdup (oseaclient_data->text_response);
+	oseaclient_data_free (oseaclient_data, FALSE);
 	
 	// If everything was OK, we must process new af_key and set it to corresponding server
 	
-	if (oseaclient_nul_data->state == AFDAL_OK) {
+	if (oseaclient_nul_data->state == OSEACLIENT_OK) {
 		new_af_key = g_strdup (coyote_dataset_get (af_key_dataset, 0, 0));
 		key =  ___oseaclient_afkeys_parse (new_af_key);
 		
@@ -347,7 +347,7 @@ static  void __oseaclient_session_refresh_key_process (RRChannel * channel,
 
 
 	// Call to user defined callback.	
-	oseaclient_request_call_user_function (AFDAL_REQUEST_NUL_DATA, data, custom_data, afdal_nul_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_NUL_DATA, data, custom_data, oseaclient_nul_data);
 
 	return;
 }
@@ -370,7 +370,7 @@ static  void __oseaclient_session_refresh_key_process (RRChannel * channel,
  * Return value: TRUE if the query was executed, or FALSE if it wasn't
  **/
 gboolean        oseaclient_session_refresh_key          (gchar * server,
-						    AfDalNulFunc usr_function,
+						    OseaClientNulFunc usr_function,
 						    gpointer usr_data)
 {
 	RRConnection * connection = NULL;
@@ -380,8 +380,8 @@ gboolean        oseaclient_session_refresh_key          (gchar * server,
 	if (! connection)
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for af-kernel");
 
-	return oseaclient_request (connection, __afdal_session_refresh_key_process, 
-			      (AfDalFunc) usr_function, usr_data,
+	return oseaclient_request (connection, __oseaclient_session_refresh_key_process, 
+			      (OseaClientFunc) usr_function, usr_data,
 			      "refresh_key", 
 			      "session_id", COYOTE_XML_ARG_STRING, session.session_id,
 			      "server_name", COYOTE_XML_ARG_STRING, server,
@@ -396,8 +396,8 @@ static  void __oseaclient_session_refresh_session_process (RRChannel * channel,
 						      gpointer    data, 
 						      gpointer    custom_data)
 {
-	AfDalMultiData  * oseaclient_multidata = NULL;
-	AfDalNulData    * oseaclient_nul_data = NULL;
+	OseaClientMultiData  * oseaclient_multidata = NULL;
+	OseaClientNulData    * oseaclient_nul_data = NULL;
 	GList           * list = NULL;
 	CoyoteDataSet   * session_id_dataset = NULL;
 	CoyoteDataSet   * server_info_dataset = NULL;
@@ -407,22 +407,22 @@ static  void __oseaclient_session_refresh_session_process (RRChannel * channel,
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_multidata = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_MULTI_DATA, channel,
+	oseaclient_multidata = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_MULTI_DATA, channel,
 								       frame, message, NULL, &list, &data, &custom_data);
 
 
 	if (! oseaclient_multidata)
 		return;
 
-	oseaclient_nul_data = g_new0 (AfDalNulData, 1);
-	oseaclient_nul_data->state = afdal_multidata->state;
-	oseaclient_nul_data->text_response = g_strdup (afdal_multidata->text_response);
-	oseaclient_multi_free (afdal_multidata, FALSE);
+	oseaclient_nul_data = g_new0 (OseaClientNulData, 1);
+	oseaclient_nul_data->state = oseaclient_multidata->state;
+	oseaclient_nul_data->text_response = g_strdup (oseaclient_multidata->text_response);
+	oseaclient_multi_free (oseaclient_multidata, FALSE);
 
 	// If everything was OK, we must process the list of datasets
 	// for extracting session_id and server_info
 
-	if (oseaclient_nul_data->state == AFDAL_OK) {
+	if (oseaclient_nul_data->state == OSEACLIENT_OK) {
 
 		session_id_dataset = (CoyoteDataSet *) g_list_nth_data (list, 0);
 		server_info_dataset = (CoyoteDataSet *) g_list_nth_data (list, 1);
@@ -444,7 +444,7 @@ static  void __oseaclient_session_refresh_session_process (RRChannel * channel,
 
 
 	// Call to user defined callback.	
-	oseaclient_request_call_user_function (AFDAL_REQUEST_NUL_DATA, data, custom_data, afdal_nul_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_NUL_DATA, data, custom_data, oseaclient_nul_data);
 
 	return;
 
@@ -453,7 +453,7 @@ static  void __oseaclient_session_refresh_session_process (RRChannel * channel,
 
 #warning DOCUMENT ME
 gboolean        oseaclient_session_refresh_session   (gchar * passwd,
-						 AfDalNulFunc usr_function,
+						 OseaClientNulFunc usr_function,
 						 gpointer usr_data)
 {
 	RRConnection * connection;
@@ -467,8 +467,8 @@ gboolean        oseaclient_session_refresh_session   (gchar * passwd,
 		return FALSE;
 	}
 	
-	return oseaclient_request (connection, __afdal_session_refresh_session_process, 
-			      (AfDalFunc) usr_function, usr_data,
+	return oseaclient_request (connection, __oseaclient_session_refresh_session_process, 
+			      (OseaClientFunc) usr_function, usr_data,
 			      "login", 
 			      "user", COYOTE_XML_ARG_STRING, session.user, 
 			      "password", COYOTE_XML_ARG_STRING, passwd, 
@@ -488,8 +488,8 @@ static  void __oseaclient_session_register_process (RRChannel * channel,
 					       gpointer    custom_data)
 {
 
-	AfDalMultiData  * oseaclient_multidata = NULL;
-	AfDalNulData    * oseaclient_data = NULL;
+	OseaClientMultiData  * oseaclient_multidata = NULL;
+	OseaClientNulData    * oseaclient_data = NULL;
 	GList           * list = NULL;
 	CoyoteDataSet   * session_id_dataset = NULL;
 	CoyoteDataSet   * server_info_dataset = NULL;	
@@ -499,22 +499,22 @@ static  void __oseaclient_session_register_process (RRChannel * channel,
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_multidata = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_MULTI_DATA, channel,
+	oseaclient_multidata = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_MULTI_DATA, channel,
 								       frame, message, NULL, &list, &data, &custom_data);
 
 	if (! oseaclient_multidata)
 		return;
 
-	oseaclient_data = g_new0 (AfDalNulData, 1);
-	oseaclient_data->state = afdal_multidata->state;
-	oseaclient_data->text_response = g_strdup (afdal_multidata->text_response);
-	oseaclient_multi_free (afdal_multidata, FALSE);
+	oseaclient_data = g_new0 (OseaClientNulData, 1);
+	oseaclient_data->state = oseaclient_multidata->state;
+	oseaclient_data->text_response = g_strdup (oseaclient_multidata->text_response);
+	oseaclient_multi_free (oseaclient_multidata, FALSE);
 
 	// If everything was OK, we must process the list of datasets
 	// for extracting session_id and server_info
 
 	switch (oseaclient_data->state) {
-	case AFDAL_OK:
+	case OSEACLIENT_OK:
 		session_id_dataset = (CoyoteDataSet *) g_list_nth_data (list, 0);
 		server_info_dataset = (CoyoteDataSet *) g_list_nth_data (list, 1);
 		
@@ -527,8 +527,8 @@ static  void __oseaclient_session_register_process (RRChannel * channel,
 		g_list_free (list);
 
 		break;
-	case AFDAL_ERROR:
-	case AFDAL_UPDATE_SERVICES_NEEDED:
+	case OSEACLIENT_ERROR:
+	case OSEACLIENT_UPDATE_SERVICES_NEEDED:
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Register failed: not retrieving session info: %s", 
 		       oseaclient_data->text_response);
 		break;
@@ -538,7 +538,7 @@ static  void __oseaclient_session_register_process (RRChannel * channel,
 
 
 	// Call to user defined callback.	
-	oseaclient_request_call_user_function (AFDAL_REQUEST_NUL_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_NUL_DATA, data, custom_data, oseaclient_data);
 
 	return;
 }
@@ -566,7 +566,7 @@ gboolean        oseaclient_session_register (gchar * name,
 					gchar * port,
 					gchar * kernel_hostname,
 					gchar * kernel_port,
-					AfDalNulFunc usr_function, 
+					OseaClientNulFunc usr_function, 
 					gpointer usr_data)
 {
 	RRConnection * connection;
@@ -586,7 +586,7 @@ gboolean        oseaclient_session_register (gchar * name,
 	if (server_myself)
 		oseaclient_session_server_free (server_myself);
 
-	server_myself = g_new0 (AfDalSessionServer, 1);
+	server_myself = g_new0 (OseaClientSessionServer, 1);
 	server_myself->name = name;
 	server_myself->host = host;
 	server_myself->port = port;
@@ -605,8 +605,8 @@ gboolean        oseaclient_session_register (gchar * name,
 		return FALSE;
 	}
 
-	result = oseaclient_request (connection, __afdal_session_register_process,
-				(AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, __oseaclient_session_register_process,
+				(OseaClientFunc) usr_function, usr_data,
 				"register", 
 				"name", COYOTE_XML_ARG_STRING, name, 
 				"version", COYOTE_XML_ARG_STRING, version_string,
@@ -627,14 +627,14 @@ void __oseaclient_session_unregister_process (RRChannel * channel,
 					 gpointer data, 
 					 gpointer custom_data)
 {
-	AfDalNulData     * oseaclient_data = NULL;
+	OseaClientNulData     * oseaclient_data = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_NUL_DATA,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_NUL_DATA,
 								  channel,
 								  frame,
 								  message,
@@ -646,11 +646,11 @@ void __oseaclient_session_unregister_process (RRChannel * channel,
 
 	// Now we program a event for destroying all session info, and activate it
 	
-	oseaclient_event_source_launch ( __afdal_session_destroy_session_info, NULL);
+	oseaclient_event_source_launch ( __oseaclient_session_destroy_session_info, NULL);
 
 
 	// Call to user defined callback.	
-	oseaclient_request_call_user_function (AFDAL_REQUEST_NUL_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_NUL_DATA, data, custom_data, oseaclient_data);
 
 
 	return;
@@ -666,7 +666,7 @@ void __oseaclient_session_unregister_process (RRChannel * channel,
  * 
  * Return value: TRUE if the query was executed, or FALSE if it wasn't
  **/
-gboolean        oseaclient_session_unregister  (AfDalNulFunc usr_function,
+gboolean        oseaclient_session_unregister  (OseaClientNulFunc usr_function,
 					   gpointer usr_data)
 {
 	RRConnection * connection = NULL;
@@ -676,8 +676,8 @@ gboolean        oseaclient_session_unregister  (AfDalNulFunc usr_function,
 	if (! connection)
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for af-kernel");
 
-	return oseaclient_request (connection, __afdal_session_unregister_process, 
-			      (AfDalFunc) usr_function, usr_data,
+	return oseaclient_request (connection, __oseaclient_session_unregister_process, 
+			      (OseaClientFunc) usr_function, usr_data,
 			      "unregister", 
 			      "name", COYOTE_XML_ARG_STRING, server_myself->name,
 			      "host", COYOTE_XML_ARG_STRING, server_myself->host,
@@ -712,8 +712,8 @@ gboolean        oseaclient_session_server_exists (gchar *server_name)
 
 gboolean __oseaclient_session_extract_active_servers (gpointer key, gpointer value, gpointer data)
 {
-	AfDalSessionPrivateServer       * server = (AfDalSessionPrivateServer *) value;
-	AfDalSessionServer              * pserv  = g_new0 (AfDalSessionServer, 1);
+	OseaClientSessionPrivateServer       * server = (OseaClientSessionPrivateServer *) value;
+	OseaClientSessionServer              * pserv  = g_new0 (OseaClientSessionServer, 1);
 
 	
 
@@ -734,7 +734,7 @@ gboolean __oseaclient_session_extract_active_servers (gpointer key, gpointer val
  * 
  * Returns the list of the active servers in the kernel when we logged in
  * 
- * Return value: a GList of AfDalSessionServer
+ * Return value: a GList of OseaClientSessionServer
  **/
 
 GList         * oseaclient_session_active_servers ()
@@ -744,7 +744,7 @@ GList         * oseaclient_session_active_servers ()
 
 	active_servers = NULL;
 	
-	oseaclient_list_foreach (session.server_info, __afdal_session_extract_active_servers, NULL);
+	oseaclient_list_foreach (session.server_info, __oseaclient_session_extract_active_servers, NULL);
 
 	return active_servers;
 }
@@ -756,7 +756,7 @@ GList         * oseaclient_session_active_servers ()
  * 
  * Frees the memory used by @pserv.
  **/
-void            oseaclient_session_server_free (AfDalSessionServer *pserv)
+void            oseaclient_session_server_free (OseaClientSessionServer *pserv)
 {
 	g_return_if_fail (pserv);
 
@@ -781,7 +781,7 @@ void            oseaclient_session_server_free (AfDalSessionServer *pserv)
  **/
 gboolean __oseaclient_session_send_afkey (gchar *server_name)
 {
-	AfDalSessionPrivateServer  * server = NULL;
+	OseaClientSessionPrivateServer  * server = NULL;
 
 	g_return_val_if_fail (session.server_info, FALSE);
 
@@ -810,18 +810,18 @@ gboolean __oseaclient_session_send_afkey (gchar *server_name)
  * Return value: 
  **/
 gboolean        oseaclient_session_send_afkey          (gchar * server_name,
-						   AfDalNulFunc usr_function,
+						   OseaClientNulFunc usr_function,
 						   gpointer usr_data)
 {
-	AfDalSessionPrivateServer  * server = NULL;
+	OseaClientSessionPrivateServer  * server = NULL;
 
 	server = oseaclient_list_lookup (session.server_info, server_name);
 	g_return_val_if_fail (server, FALSE);	
 
 	g_return_val_if_fail (server->connection, FALSE);
 
-	return oseaclient_request (server->connection, afdal_request_process_nul_data, 
-			      (AfDalFunc) usr_function, usr_data,
+	return oseaclient_request (server->connection, oseaclient_request_process_nul_data, 
+			      (OseaClientFunc) usr_function, usr_data,
 			      "set_connection_key", 
 			      "af-key", COYOTE_XML_ARG_STRING, server->af_key,
 			      NULL);
@@ -841,7 +841,7 @@ gboolean        oseaclient_session_send_afkey          (gchar * server_name,
 
 RRConnection  * oseaclient_session_get_connection (gchar *server_name, GError **error)
 {
-	AfDalSessionPrivateServer  * server = NULL;
+	OseaClientSessionPrivateServer  * server = NULL;
 
 	g_return_val_if_fail (session.server_info, NULL);
 
@@ -863,7 +863,7 @@ RRConnection  * oseaclient_session_get_connection (gchar *server_name, GError **
 
 void     oseaclient_session_delete_connection (gchar *server_name)
 {
-	AfDalSessionPrivateServer  * server = NULL;
+	OseaClientSessionPrivateServer  * server = NULL;
 
 	g_return_if_fail (session.server_info);
 
@@ -889,14 +889,14 @@ RRConnection  * oseaclient_session_new_connection (gchar *server_name, GError **
 
 gchar  * oseaclient_session_get_server_name (RRConnection *connection, GError **error)
 {
-	AfDalSessionPrivateServer  * server = NULL;
+	OseaClientSessionPrivateServer  * server = NULL;
 
 	g_return_val_if_fail (session.server_info, NULL);
 
 	oseaclient_list_first (session.server_info);
 
 	do {
-		server = (AfDalSessionPrivateServer *) oseaclient_list_data (session.server_info);
+		server = (OseaClientSessionPrivateServer *) oseaclient_list_data (session.server_info);
 
 		if (connection == server->connection)
 			return g_strdup (server->name);
@@ -918,8 +918,8 @@ gchar  * oseaclient_session_get_server_name (RRConnection *connection, GError **
  **/
 GList         * oseaclient_session_get_permission_list (gchar * server_name)
 {
-	AfDalSessionPrivateServer * server = NULL;
-	AfDalAfKey                * af_key;
+	OseaClientSessionPrivateServer * server = NULL;
+	OseaClientAfKey                * af_key;
 	GList                     * result;
 
 	// Check for correct incomming parameter
@@ -953,8 +953,8 @@ GList         * oseaclient_session_get_permission_list (gchar * server_name)
  **/
 gboolean        oseaclient_session_get_permission       (gchar * server_name, gchar * permission_name)
 {
-	AfDalSessionPrivateServer * server = NULL;
-	AfDalAfKey                * af_key;
+	OseaClientSessionPrivateServer * server = NULL;
+	OseaClientAfKey                * af_key;
 	GList                     * permission_list;
 	gboolean                    result = FALSE;
 

@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,13 +16,13 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#include "oseaclient_afkeys.h"
+#include "oseaclient_keys.h"
 #include <stdlib.h>
 #include <string.h>
 
-AfDalAfKey * ___oseaclient_afkeys_parse   (gchar * af_key)
+OseaClientAfKey * ___oseaclient_afkeys_parse   (gchar * af_key)
 {
-	AfDalAfKey  * result_key;
+	OseaClientAfKey  * result_key;
 	gchar      ** splited_string;
 	gchar      ** argv_permission;
 	gint          int_time_stamp;
@@ -51,7 +51,7 @@ AfDalAfKey * ___oseaclient_afkeys_parse   (gchar * af_key)
 	}
 	
 	// Get af-key user and associated server
-	result_key = g_new0 (AfDalAfKey, 1);
+	result_key = g_new0 (OseaClientAfKey, 1);
 
 	result_key->user = g_strdup (splited_string[0]);
 	result_key->satellite_server = g_strdup (splited_string[1]);
@@ -73,7 +73,7 @@ AfDalAfKey * ___oseaclient_afkeys_parse   (gchar * af_key)
 	return result_key; 
 }
 
-void         ___oseaclient_afkeys_destroy (AfDalAfKey * af_key, 
+void         ___oseaclient_afkeys_destroy (OseaClientAfKey * af_key, 
 				      gboolean     free_permission_list)
 {
 	GList *cursor;

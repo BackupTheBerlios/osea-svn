@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 
 #include "oseaclient_list.h"
 
-struct __AfDalList {
+struct __OseaClientList {
 	GList            * list;	
 	GList            * id_list;
 	GList            * cursor;
@@ -32,13 +32,13 @@ struct __AfDalList {
  * oseaclient_list_new:
  * @: 
  * 
- * Creates a new empty AfDalList structure.
+ * Creates a new empty OseaClientList structure.
  * 
- * Return value: a new AfDalList.
+ * Return value: a new OseaClientList.
  **/
-AfDalList * oseaclient_list_new (GCompareFunc compare_func)
+OseaClientList * oseaclient_list_new (GCompareFunc compare_func)
 {
-	AfDalList *result = g_new0(AfDalList, 1);
+	OseaClientList *result = g_new0(OseaClientList, 1);
 	
 	result->compare_func = compare_func;
 	
@@ -48,20 +48,20 @@ AfDalList * oseaclient_list_new (GCompareFunc compare_func)
 /**
  * oseaclient_list_new_full: 
  * @value_destroy_func: a function to free the memory allocated for
- * the key used when removing the entry from the AfDalList or NULL if
+ * the key used when removing the entry from the OseaClientList or NULL if
  * you don't want to supply such a function.
  * 
- * Creates a new AfDalList like oseaclient_list_new() and allows to specify
+ * Creates a new OseaClientList like oseaclient_list_new() and allows to specify
  * a function to free the memory allocated for the key that get called
- * when removing the entry from the AfDalList.
+ * when removing the entry from the OseaClientList.
  * 
- * Return value: a new AfDalList.
+ * Return value: a new OseaClientList.
  **/
-AfDalList * oseaclient_list_new_full (GCompareFunc   compare_func,
+OseaClientList * oseaclient_list_new_full (GCompareFunc   compare_func,
 				 GDestroyNotify key_destroy_func, 
 				 GDestroyNotify value_destroy_func)
 {
-	AfDalList *result = g_new0 (AfDalList, 1);
+	OseaClientList *result = g_new0 (OseaClientList, 1);
 
 	result->compare_func = compare_func;
 	result->destroy_func = value_destroy_func;
@@ -72,13 +72,13 @@ AfDalList * oseaclient_list_new_full (GCompareFunc   compare_func,
 
 /**
  * oseaclient_list_insert:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * @key: the key to insert.
  * @value: the value corresponding to the key.
  * 
- * Inserts a key/value pair into a AfDalList.
+ * Inserts a key/value pair into a OseaClientList.
  **/
-void        oseaclient_list_insert (AfDalList *list, gpointer key, gpointer value)
+void        oseaclient_list_insert (OseaClientList *list, gpointer key, gpointer value)
 {
 	g_return_if_fail (list);
 
@@ -92,7 +92,7 @@ void        oseaclient_list_insert (AfDalList *list, gpointer key, gpointer valu
 
 /**
  * oseaclient_list_index:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * @key: the key to look up.
  * 
  * Gets the position of the element containing the given key (starting
@@ -101,7 +101,7 @@ void        oseaclient_list_insert (AfDalList *list, gpointer key, gpointer valu
  * Return value: the index of the element containing the key, or -1 if
  * the key is not found.
  **/
-gint        oseaclient_list_index  (AfDalList *list, gpointer key)
+gint        oseaclient_list_index  (OseaClientList *list, gpointer key)
 {
 	GList * cursor;
 	gint    iterator = 0;
@@ -125,14 +125,14 @@ gint        oseaclient_list_index  (AfDalList *list, gpointer key)
 
 /**
  * oseaclient_list_lookup:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * @key: the key to look up.
  * 
  * Gets the value corresponding to the given key.
  * 
  * Return value: the value corresponding to the key.
  **/
-gpointer    oseaclient_list_lookup (AfDalList *list, gpointer key)
+gpointer    oseaclient_list_lookup (OseaClientList *list, gpointer key)
 {
 	gint    index;
 	GList * cursor;  
@@ -152,14 +152,14 @@ gpointer    oseaclient_list_lookup (AfDalList *list, gpointer key)
 
 /**
  * oseaclient_list_nth_data:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * @n: the position of the element, counting from 0. 
  * 
  * Gets the data of the element at the given position.
  * 
- * Return value: the element, or NULL if the position is off the end of the AfDalList.
+ * Return value: the element, or NULL if the position is off the end of the OseaClientList.
  **/
-gpointer    oseaclient_list_nth_data (AfDalList *list, gint n)
+gpointer    oseaclient_list_nth_data (OseaClientList *list, gint n)
 {
 	g_return_val_if_fail (list, NULL);
 
@@ -168,13 +168,13 @@ gpointer    oseaclient_list_nth_data (AfDalList *list, gint n)
 
 /**
  * oseaclient_list_length:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * 
- * Gets the number of elements in an AfDalList.
+ * Gets the number of elements in an OseaClientList.
  * 
- * Return value: the number of elements in the AfDalList.
+ * Return value: the number of elements in the OseaClientList.
  **/
-guint       oseaclient_list_length (AfDalList *list)
+guint       oseaclient_list_length (OseaClientList *list)
 {
 	g_return_val_if_fail (list, -1);
 
@@ -183,14 +183,14 @@ guint       oseaclient_list_length (AfDalList *list)
 
 /**
  * oseaclient_list_remove:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * @key: the key of the element to remove.
  * 
- * Removes an element from an AfDalList. If two elements have the
+ * Removes an element from an OseaClientList. If two elements have the
  * same key, only the first is removed. If none of the elements
- * have the given key, the AfDalList is unchanged.
+ * have the given key, the OseaClientList is unchanged.
  **/
-void        oseaclient_list_remove (AfDalList *list, gpointer key)
+void        oseaclient_list_remove (OseaClientList *list, gpointer key)
 {
 	gint index;
 
@@ -229,7 +229,7 @@ void        oseaclient_list_remove (AfDalList *list, gpointer key)
  * 
  * 
  **/
-void        oseaclient_list_foreach (AfDalList *list, GTraverseFunc func, gpointer user_data)
+void        oseaclient_list_foreach (OseaClientList *list, GTraverseFunc func, gpointer user_data)
 {
 
 
@@ -256,19 +256,19 @@ void        oseaclient_list_foreach (AfDalList *list, GTraverseFunc func, gpoint
 
 /**
  * oseaclient_list_replace:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * @key: the key to insert.
  * @new_value: the value corresponding to the key.
  * 
- * Inserts a new key and value into a AfDalList similar to
+ * Inserts a new key and value into a OseaClientList similar to
  * oseaclient_list_insert(). The difference is that if the key already
- * exists in the AfDalList, its value gets replaced by the new
+ * exists in the OseaClientList, its value gets replaced by the new
  * value. If you supplied a value_destroy_func when creating the
- * AfDalList, the old value is freed using that function. If you supplied
- * a key_destroy_func when creating the AfDalList, the old key is freed
+ * OseaClientList, the old value is freed using that function. If you supplied
+ * a key_destroy_func when creating the OseaClientList, the old key is freed
  * using that function.
  **/
-void        oseaclient_list_replace (AfDalList *list, gpointer key, gpointer new_value)
+void        oseaclient_list_replace (OseaClientList *list, gpointer key, gpointer new_value)
 {
 
 
@@ -301,15 +301,15 @@ void        oseaclient_list_replace (AfDalList *list, gpointer key, gpointer new
 
 /**
  * oseaclient_list_destroy:
- * @list: an AfDalList.
+ * @list: an OseaClientList.
  * 
- * Destroys the AfDalList. If values are dynamically allocated, you
- * should either free them first or create the AfDalList using
+ * Destroys the OseaClientList. If values are dynamically allocated, you
+ * should either free them first or create the OseaClientList using
  * oseaclient_list_new_full(). In the latter case the destroy functions you
  * supplied will be called on all keys and values before destroying
- * the AfDalList.
+ * the OseaClientList.
  **/
-void        oseaclient_list_destroy (AfDalList *list)
+void        oseaclient_list_destroy (OseaClientList *list)
 {
 
 	gint i;
@@ -330,7 +330,7 @@ void        oseaclient_list_destroy (AfDalList *list)
 	
 }
 
-void        oseaclient_list_first   (AfDalList *list)
+void        oseaclient_list_first   (OseaClientList *list)
 {
 	g_return_if_fail (list);
 
@@ -338,7 +338,7 @@ void        oseaclient_list_first   (AfDalList *list)
 	list->cursor_position = 0;
 }
 
-gpointer    oseaclient_list_data    (AfDalList *list)
+gpointer    oseaclient_list_data    (OseaClientList *list)
 {
 	g_return_val_if_fail (list, NULL);
 	g_return_val_if_fail (list->cursor, NULL);
@@ -346,7 +346,7 @@ gpointer    oseaclient_list_data    (AfDalList *list)
 	return list->cursor->data;
 }
 
-gboolean    oseaclient_list_next    (AfDalList *list) 
+gboolean    oseaclient_list_next    (OseaClientList *list) 
 {
 	g_return_val_if_fail (list, FALSE);
 
@@ -358,7 +358,7 @@ gboolean    oseaclient_list_next    (AfDalList *list)
 		return FALSE;	
 }
 
-gboolean    oseaclient_list_set_cursor_position (AfDalList *list, gint cursor_position)
+gboolean    oseaclient_list_set_cursor_position (OseaClientList *list, gint cursor_position)
 {
 	g_return_val_if_fail (list, FALSE);
 	g_return_val_if_fail (cursor_position, FALSE);
@@ -370,7 +370,7 @@ gboolean    oseaclient_list_set_cursor_position (AfDalList *list, gint cursor_po
 }
 
 
-gint        oseaclient_list_get_cursor_position (AfDalList *list)
+gint        oseaclient_list_get_cursor_position (OseaClientList *list)
 {
 	g_return_val_if_fail (list, -1);
 

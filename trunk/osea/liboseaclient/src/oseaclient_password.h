@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -21,17 +21,17 @@
 #include <glib.h>
 #include "oseaclient.h"
 
-typedef void    (* AfDalPasswordNotifyCallback) (gchar *password, gpointer user_data);
+typedef void    (* OseaClientPasswordNotifyCallback) (gchar *password, gpointer user_data);
 
 typedef struct {
-	AfDalPasswordNotifyCallback notify_cb;
+	OseaClientPasswordNotifyCallback notify_cb;
 	gpointer user_data;
-} AfDalPasswordData;
+} OseaClientPasswordData;
 
-typedef gboolean (* AfDalPasswordCallback)       (AfDalPasswordData * pwd_data);
+typedef gboolean (* OseaClientPasswordCallback)       (OseaClientPasswordData * pwd_data);
 
-void      oseaclient_password_set_callback (AfDalPasswordCallback cb);
+void      oseaclient_password_set_callback (OseaClientPasswordCallback cb);
 
-gboolean  oseaclient_password_get          (AfDalPasswordNotifyCallback notify_cb, gpointer user_data);
+gboolean  oseaclient_password_get          (OseaClientPasswordNotifyCallback notify_cb, gpointer user_data);
 
 #endif

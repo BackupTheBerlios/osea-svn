@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,8 +16,8 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFDAL_EVENT_SOURCE_H__
-#define __AFDAL_EVENT_SOURCE_H__
+#ifndef __OSEACLIENT_EVENT_SOURCE_H__
+#define __OSEACLIENT_EVENT_SOURCE_H__
 
 #include <glib.h>
 

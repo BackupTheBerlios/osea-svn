@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -19,26 +19,26 @@
 #include "oseaclient_password.h"
 #include <unistd.h>
 
-gboolean    oseaclient_password_get_default_callback (AfDalPasswordData *pwd_data);
+gboolean    oseaclient_password_get_default_callback (OseaClientPasswordData *pwd_data);
 
-static AfDalPasswordCallback __oseaclient_password_callback = NULL;
+static OseaClientPasswordCallback __oseaclient_password_callback = NULL;
 
-void    oseaclient_password_set_callback (AfDalPasswordCallback cb)
+void    oseaclient_password_set_callback (OseaClientPasswordCallback cb)
 {
 	__oseaclient_password_callback = cb;
 
 	return;
 }
 
-gboolean    oseaclient_password_get (AfDalPasswordNotifyCallback notify_cb, gpointer user_data)
+gboolean    oseaclient_password_get (OseaClientPasswordNotifyCallback notify_cb, gpointer user_data)
 {
-	AfDalPasswordData *pwd_data = g_new0 (AfDalPasswordData, 1);
+	OseaClientPasswordData *pwd_data = g_new0 (OseaClientPasswordData, 1);
 	
 	pwd_data->notify_cb = notify_cb;
 	pwd_data->user_data = user_data;
 
 	if (__oseaclient_password_callback) {
-		oseaclient_event_source_launch ((GSourceFunc) __afdal_password_callback, pwd_data);
+		oseaclient_event_source_launch ((GSourceFunc) __oseaclient_password_callback, pwd_data);
 		return TRUE;
 	}
 	

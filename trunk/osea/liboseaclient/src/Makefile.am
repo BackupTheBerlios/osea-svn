@@ -5,35 +5,35 @@ INCLUDES = -g -I$(top_srcdir) $(LIBRARIES_CFLAGS) -DCOMPILATION_DATE=`date +%s` 
 
 libafdalincludedir = $(includedir)/afdal
 
-lib_LTLIBRARIES = libafdal.la
+lib_LTLIBRARIES = liboseaclient.la
 
-libafdal_la_SOURCES =	\
-	afdal-datanode.c \
-	afdal-detaileddatanode.c \
-	afdal.c \
-	afdal_list.c \
-	afdal_request.c \
-	afdal_session.c \
-        afdal_event_source.c \
-	afdal_afkeys.c \
-	afdal_password.c \
-	afdal_support.c \
-	afdal_decimal.c
+liboseaclient_la_SOURCES =	\
+	oseaclient-detaileddatanode.c \
+	oseaclient-datanode.c \
+	oseaclient.c \
+	oseaclient_list.c \
+	oseaclient_request.c \
+	oseaclient_session.c \
+        oseaclient_event_source.c \
+	oseaclient_keys.c \
+	oseaclient_password.c \
+	oseaclient_support.c \
+	oseaclient_decimal.c
 
 libafdalinclude_HEADERS =	\
-	afdal-datanode.h \
-	afdal-detaileddatanode.h \
-	afdal.h	\
-	afdal_list.h \
-	afdal_request.h \
-	afdal_session.h \
-	afdal_event_source.h \
-	afdal_afkeys.h \
-	afdal_password.h \
-	afdal_support.h \
-	afdal_decimal.h
+	oseaclient-datanode.h \
+	oseaclient-detaileddatanode.h \
+	oseaclient.h	\
+	oseaclient_list.h \
+	oseaclient_request.h \
+	oseaclient_session.h \
+	oseaclient_event_source.h \
+	oseaclient_keys.h \
+	oseaclient_password.h \
+	oseaclient_support.h \
+	oseaclient_decimal.h
 
-libafdal_la_LIBADD = \
+liboseaclient_la_LIBADD = \
 	$(LIBRARIES_LIBS)
 
-EXTRA_DIST = afdal_data_node.gob
+EXTRA_DIST = oseaclient_data_node.gob

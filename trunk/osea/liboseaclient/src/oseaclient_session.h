@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,38 +16,38 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFDAL_KERNEL_SESSION_H__
-#define __AFDAL_KERNEL_SESSION_H__
+#ifndef __OSEACLIENT_KERNEL_SESSION_H__
+#define __OSEACLIENT_KERNEL_SESSION_H__
 
 #include "oseaclient.h"
 
-typedef struct __AfDalSessionServer {
+typedef struct __OseaClientSessionServer {
 	gchar * name;
 	gchar * host;
 	gchar * port;
-}AfDalSessionServer;
+}OseaClientSessionServer;
 
 
 gboolean        oseaclient_session_login                (gchar * usr,
 						    gchar * passwd,
 						    gchar * kernel_hostname,
 						    gchar * kernel_port,
-						    AfDalNulFunc usr_function,
+						    OseaClientNulFunc usr_function,
 						    gpointer usr_data);
 
-gboolean        oseaclient_session_logout               (AfDalNulFunc usr_function,
+gboolean        oseaclient_session_logout               (OseaClientNulFunc usr_function,
 						    gpointer usr_data);
 
 gboolean        oseaclient_session_refresh_key          (gchar * server,
-						    AfDalNulFunc usr_function,
+						    OseaClientNulFunc usr_function,
 						    gpointer usr_data);
 
 gboolean        oseaclient_session_refresh_session      (gchar * passwd,
-						    AfDalNulFunc usr_function,
+						    OseaClientNulFunc usr_function,
 						    gpointer usr_data);
 
 gboolean        oseaclient_session_send_afkey           (gchar * server,
-						    AfDalNulFunc usr_function,
+						    OseaClientNulFunc usr_function,
 						    gpointer usr_data);
 
 gboolean        oseaclient_session_register             (gchar * name, 
@@ -56,17 +56,17 @@ gboolean        oseaclient_session_register             (gchar * name,
 						    gchar * port,
 						    gchar * kernel_hostname,
 						    gchar * kernel_port,
-						    AfDalNulFunc usr_function, 
+						    OseaClientNulFunc usr_function, 
 						    gpointer usr_data);
 
-gboolean        oseaclient_session_unregister           (AfDalNulFunc usr_function,
+gboolean        oseaclient_session_unregister           (OseaClientNulFunc usr_function,
 						    gpointer usr_data);
 
 gboolean        oseaclient_session_server_exists        (gchar *server_name);
 
 GList         * oseaclient_session_active_servers       ();
 
-void            oseaclient_session_server_free          (AfDalSessionServer *pserv);
+void            oseaclient_session_server_free          (OseaClientSessionServer *pserv);
 
 GList         * oseaclient_session_get_permission_list  (gchar * server_name);
 

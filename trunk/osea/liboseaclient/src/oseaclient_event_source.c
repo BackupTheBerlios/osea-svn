@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -27,7 +27,7 @@ typedef struct __oseaclient_event_source_item {
 	gboolean active;
 	GSourceFunc callback;
 	gpointer userdata;
-} AfdalEventSourceItem;
+} OseaClientEventSourceItem;
 
 static GList        * oseaclient_event_source_list = NULL;
 static GStaticMutex   oseaclient_event_source_mutex = G_STATIC_MUTEX_INIT;
@@ -40,14 +40,14 @@ static GStaticMutex   __oseaclient_event_source_thread_launch_mutex = G_STATIC_M
 static gboolean __oseaclient_event_prepare (GSource *source, gint *timeout)
 {
 	GList           * ptr = NULL;
-	AfdalEventSourceItem * src_item;
+	OseaClientEventSourceItem * src_item;
 
 	*timeout = -1;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
 	for ( ptr = g_list_first (oseaclient_event_source_list); ptr; ptr = g_list_next (ptr)) {
 
-		src_item = (AfdalEventSourceItem *) ptr->data;
+		src_item = (OseaClientEventSourceItem *) ptr->data;
 
 		if (src_item->source == source) {
 			g_static_mutex_unlock (&oseaclient_event_source_mutex);
@@ -62,11 +62,11 @@ static gboolean __oseaclient_event_prepare (GSource *source, gint *timeout)
 static gboolean __oseaclient_event_check (GSource *source)
 {
 	GList           * ptr = NULL;
-	AfdalEventSourceItem * src_item;
+	OseaClientEventSourceItem * src_item;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
 	for ( ptr = g_list_first (oseaclient_event_source_list); ptr; ptr = g_list_next (ptr)) {
-		src_item = (AfdalEventSourceItem *) ptr->data;
+		src_item = (OseaClientEventSourceItem *) ptr->data;
 		if (src_item->source == source) {
 			g_static_mutex_unlock (&oseaclient_event_source_mutex);
 			return src_item->active;
@@ -81,15 +81,15 @@ static gboolean __oseaclient_event_check (GSource *source)
 static gboolean __oseaclient_event_dispatch (GSource *source, GSourceFunc callback, gpointer data)
 {
 	GList           * ptr = NULL;
-	AfdalEventSourceItem * src_item;
+	OseaClientEventSourceItem * src_item;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
 
 	for ( ptr = g_list_first (oseaclient_event_source_list); ptr; ptr = g_list_next (ptr)) {
-		src_item = (AfdalEventSourceItem *) ptr->data;
+		src_item = (OseaClientEventSourceItem *) ptr->data;
 
 		if (src_item->source == source) {
-			oseaclient_event_source_list = g_list_remove (afdal_event_source_list, src_item);
+			oseaclient_event_source_list = g_list_remove (oseaclient_event_source_list, src_item);
 
 			g_static_mutex_unlock (&oseaclient_event_source_mutex);
 			
@@ -150,7 +150,7 @@ void __oseaclient_event_source_launch_thread ()
 		
 		g_static_mutex_lock (&__oseaclient_event_source_thread_launch_mutex);
 
-		g_thread_create (__oseaclient_event_source_thread, __afdal_event_source_main_context, FALSE, NULL);
+		g_thread_create (__oseaclient_event_source_thread, __oseaclient_event_source_main_context, FALSE, NULL);
 
 
 		/* We lock until the thread is created and completely running with its own main_context loop */
@@ -173,19 +173,19 @@ void __oseaclient_event_source_launch_thread ()
  **/
 void oseaclient_event_source_add_signal (gchar *signal_name)
 {
-	AfdalEventSourceItem * source_item;
+	OseaClientEventSourceItem * source_item;
 	GSource         * source;
 
 	source = g_source_new (&oseaclient_event_source_funcs, sizeof(GSource));	
 
-	source_item = g_new0 (AfdalEventSourceItem, 1);
+	source_item = g_new0 (OseaClientEventSourceItem, 1);
 
 	source_item -> source = source;
 	source_item -> name = g_strdup(signal_name);
 	source_item -> active = FALSE;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
-	oseaclient_event_source_list = g_list_append (afdal_event_source_list, source_item);
+	oseaclient_event_source_list = g_list_append (oseaclient_event_source_list, source_item);
 	g_static_mutex_unlock (&oseaclient_event_source_mutex);
 
 	return;
@@ -206,12 +206,12 @@ void oseaclient_event_source_add_signal (gchar *signal_name)
 guint oseaclient_event_source_set_callback (gchar *signal_name, GSourceFunc callback)
 {
 	GList           * ptr = NULL;
-	AfdalEventSourceItem * src_item;
+	OseaClientEventSourceItem * src_item;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
 	for ( ptr = g_list_first (oseaclient_event_source_list); ptr; ptr = g_list_next (ptr)) {
 
-		src_item = (AfdalEventSourceItem *) ptr->data;
+		src_item = (OseaClientEventSourceItem *) ptr->data;
 
 		if (!strcmp (src_item->name, signal_name)) {
 
@@ -248,12 +248,12 @@ guint oseaclient_event_source_set_callback (gchar *signal_name, GSourceFunc call
 void oseaclient_event_source_emit_signal (gchar *signal_name, gpointer data)
 {
 	GList           * ptr = NULL;
-	AfdalEventSourceItem * src_item;
+	OseaClientEventSourceItem * src_item;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
 	for ( ptr = g_list_first (oseaclient_event_source_list); ptr; ptr = g_list_next (ptr)) {
 
-		src_item = (AfdalEventSourceItem *) ptr->data;
+		src_item = (OseaClientEventSourceItem *) ptr->data;
 
 		if (!strcmp (src_item->name, signal_name)) {
 			g_source_set_callback (src_item->source, src_item->callback, data, NULL);
@@ -293,11 +293,11 @@ void oseaclient_event_source_remove_signal (gchar *signal_name)
 gboolean oseaclient_event_source_exist (gchar *signal_name)
 {
 	GList           * ptr = NULL;
-	AfdalEventSourceItem * src_item;
+	OseaClientEventSourceItem * src_item;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
 	for ( ptr = g_list_first (oseaclient_event_source_list); ptr; ptr = g_list_next (ptr)) {
-		src_item = (AfdalEventSourceItem *) ptr->data;
+		src_item = (OseaClientEventSourceItem *) ptr->data;
 		if (!strcmp (src_item->name, signal_name)) {
 			g_static_mutex_unlock (&oseaclient_event_source_mutex);
 			return TRUE;
@@ -322,12 +322,12 @@ gboolean oseaclient_event_source_exist (gchar *signal_name)
 gchar  * oseaclient_event_source_arm_signal    (gchar * signal_basename, GSourceFunc func)
 {
 	gchar           * signal_name = g_strdup_printf ("group_transaction %d",  ++oseaclient_event_source_transaction_number);
-	AfdalEventSourceItem * source_item;
+	OseaClientEventSourceItem * source_item;
 	GSource         * source;
 
 	source = g_source_new (&oseaclient_event_source_funcs, sizeof(GSource));	
 
-	source_item = g_new0 (AfdalEventSourceItem, 1);
+	source_item = g_new0 (OseaClientEventSourceItem, 1);
 
 	source_item -> source = source;
 	source_item -> name = g_strdup(signal_name);
@@ -335,7 +335,7 @@ gchar  * oseaclient_event_source_arm_signal    (gchar * signal_basename, GSource
 	source_item -> callback = func;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
-	oseaclient_event_source_list = g_list_append (afdal_event_source_list, source_item);
+	oseaclient_event_source_list = g_list_append (oseaclient_event_source_list, source_item);
 	g_static_mutex_unlock (&oseaclient_event_source_mutex);
 
 	if (g_source_get_context (source_item->source)) 
@@ -358,12 +358,12 @@ gchar  * oseaclient_event_source_arm_signal    (gchar * signal_basename, GSource
 void    oseaclient_event_source_launch    (GSourceFunc func, gpointer data)
 {
 	gchar           * signal_name = g_strdup_printf ("group_transaction %d",  ++oseaclient_event_source_transaction_number);
-	AfdalEventSourceItem * source_item;
+	OseaClientEventSourceItem * source_item;
 	GSource         * source;
 
 	source = g_source_new (&oseaclient_event_source_funcs, sizeof(GSource));	
 
-	source_item = g_new0 (AfdalEventSourceItem, 1);
+	source_item = g_new0 (OseaClientEventSourceItem, 1);
 
 	source_item -> source = source;
 	source_item -> name = g_strdup(signal_name);
@@ -373,7 +373,7 @@ void    oseaclient_event_source_launch    (GSourceFunc func, gpointer data)
 	source_item -> active = TRUE;
 
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
-	oseaclient_event_source_list = g_list_append (afdal_event_source_list, source_item);
+	oseaclient_event_source_list = g_list_append (oseaclient_event_source_list, source_item);
 	g_static_mutex_unlock (&oseaclient_event_source_mutex);
 
 	if (g_source_get_context (source_item->source)) 
@@ -395,12 +395,12 @@ void    oseaclient_event_source_launch    (GSourceFunc func, gpointer data)
 void    oseaclient_event_source_print_pool ()
 {
 	GList           * ptr = NULL;
-	AfdalEventSourceItem * src_item;
+	OseaClientEventSourceItem * src_item;
 
 	g_print ("\n\nPrinting signal pool\n");
 	g_static_mutex_lock (&oseaclient_event_source_mutex);
 	for ( ptr = g_list_first (oseaclient_event_source_list); ptr; ptr = g_list_next (ptr)) {
-		src_item = (AfdalEventSourceItem *) ptr->data;
+		src_item = (OseaClientEventSourceItem *) ptr->data;
 		g_print ("%s\n", src_item->name);
 	}
 	g_static_mutex_unlock (&oseaclient_event_source_mutex);

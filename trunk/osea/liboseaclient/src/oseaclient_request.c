@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -21,16 +21,16 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#define LOG_DOMAIN  "AFDAL_REQUEST"
+#define LOG_DOMAIN  "OSEACLIENT_REQUEST"
 
 
 typedef struct {
 	gpointer                       user_data;
 	CoyoteXmlMessage             * concrect_message;
-	AfDalFunc                      user_function;
+	OseaClientFunc                      user_function;
 	CoyoteSimpleCfgCompleteMessage return_function;
 	gchar                        * server;
-} AfdalRequestUserData;
+} OseaClientRequestUserData;
 
 RRChannel    * oseaclient_request_fake_channel = NULL;
 
@@ -38,23 +38,23 @@ gboolean       oseaclient_request_session_expired_callback_is_active = FALSE;
 GList        * oseaclient_request_waiting_for_session_queue = NULL;
 GStaticMutex   oseaclient_request_session_expired_callback_is_active_mutex = G_STATIC_MUTEX_INIT;
 
-gboolean oseaclient_request_start_afkey_refresh (gpointer afdal_request_user_data);
-gboolean __oseaclient_request_start_afkey_refresh (AfDalNulData *data, gpointer afdal_request_user_data);
-gboolean __oseaclient_request_start_afkey_refresh_2 (gpointer afdal_request_user_data);
-gboolean __oseaclient_request_start_afkey_refresh_2_process (AfDalNulData *data, gpointer afdal_request_user_data);
-gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer afdal_request_user_data);
-void     oseaclient_refresh_start_afkey_refresh_return_error (gchar *message, AfdalRequestUserData * request_user_data);
-gpointer oseaclient_request_return_from_failed_afkey_refresh (AfDalRequestReturnData type,
+gboolean oseaclient_request_start_afkey_refresh (gpointer oseaclient_request_user_data);
+gboolean __oseaclient_request_start_afkey_refresh (OseaClientNulData *data, gpointer oseaclient_request_user_data);
+gboolean __oseaclient_request_start_afkey_refresh_2 (gpointer oseaclient_request_user_data);
+gboolean __oseaclient_request_start_afkey_refresh_2_process (OseaClientNulData *data, gpointer oseaclient_request_user_data);
+gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer oseaclient_request_user_data);
+void     oseaclient_refresh_start_afkey_refresh_return_error (gchar *message, OseaClientRequestUserData * request_user_data);
+gpointer oseaclient_request_return_from_failed_afkey_refresh (OseaClientRequestReturnData type,
 							 GString * message, 
 							 CoyoteDataSet ** returned_dataset,
 							 GList         ** returned_datasets,
 							 gpointer * data,
 							 gpointer * custom_data);
 
-gboolean oseaclient_request_start_session_refresh (gpointer afdal_request_user_data);
-void __oseaclient_request_start_session_refresh (gchar * password, gpointer afdal_request_user_data);
-gboolean __oseaclient_request_start_session_refresh_process (AfDalNulData *data, gpointer afdal_request_user_data);
-void     oseaclient_request_cancel_session_refresh_process (AfdalRequestUserData * request_user_data);
+gboolean oseaclient_request_start_session_refresh (gpointer oseaclient_request_user_data);
+void __oseaclient_request_start_session_refresh (gchar * password, gpointer oseaclient_request_user_data);
+gboolean __oseaclient_request_start_session_refresh_process (OseaClientNulData *data, gpointer oseaclient_request_user_data);
+void     oseaclient_request_cancel_session_refresh_process (OseaClientRequestUserData * request_user_data);
 
 
 /**
@@ -75,7 +75,7 @@ void     oseaclient_request_cancel_session_refresh_process (AfdalRequestUserData
  **/
 gboolean   oseaclient_request                     (RRConnection * connection,
 					      CoyoteSimpleCfgCompleteMessage return_function,
-					      AfDalFunc usr_function, 
+					      OseaClientFunc usr_function, 
 					      gpointer usr_data,
 					      gchar * service_name,
 					      ...)
@@ -90,14 +90,14 @@ gboolean   oseaclient_request                     (RRConnection * connection,
 	CoyoteXmlObject  * abstract_message = NULL;
 	CoyoteXmlMessage * concrect_message = NULL;
 	
-	AfdalRequestUserData * request_user_data = NULL;
+	OseaClientRequestUserData * request_user_data = NULL;
 
 	gchar                * server_name = NULL;
 	gint                   try_number = 0;
 
 	va_start (args, service_name);
 	
-	request_user_data = g_new0 (AfdalRequestUserData, 1);
+	request_user_data = g_new0 (OseaClientRequestUserData, 1);
 	request_user_data->user_data = usr_data;
 	request_user_data->return_function = return_function;
 	request_user_data->user_function = usr_function;
@@ -164,29 +164,29 @@ gboolean   oseaclient_request                     (RRConnection * connection,
 
 /**
  * oseaclient_request_close_and_return_initial_data:
- * @type: Type of oseaclient user space data: AFDAL_REQUEST_DATA,
- * AFDAL_REQUEST_SIMPLE_DATA, AFDAL_REQUEST_NUL_DATA 
+ * @type: Type of oseaclient user space data: OSEACLIENT_REQUEST_DATA,
+ * OSEACLIENT_REQUEST_SIMPLE_DATA, OSEACLIENT_REQUEST_NUL_DATA 
  * @channel: channel where @message was recieved.
  * @frame: recieved frame
  * @message: 
  * @returned_dataset: recieved dataset from coyote_xml level. This out
  * variable is set to the recieved dataset when @type is set to
- * AFDAL_REQUEST_DATA. 
+ * OSEACLIENT_REQUEST_DATA. 
  * 
  * Convenience function meant to be used to write process request
  * functions more quickly and maintainable.
  * This function trusts in incoming message to be process as @type
- * variable says, so is @type is set to AFDAL_REQUEST_DATA, function
+ * variable says, so is @type is set to OSEACLIENT_REQUEST_DATA, function
  * will expect to find a coyote_dataset from coyote level and will
- * return a AfdalData pointer to the caller.
+ * return a OseaClientData pointer to the caller.
  * If this sound to you very dificult, please see
  * oseaclient_request_process_data/simple_data/nul_data to get an clear
  * idea on what I am saying to you.
  * 
- * Return value: Return an AfDalData, AfDalSimpleData, AfDalNulData
+ * Return value: Return an OseaClientData, OseaClientSimpleData, OseaClientNulData
  * according to @type value.
  **/
-gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnData type,
+gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestReturnData type,
 							RRChannel * channel,
 							RRFrame * frame,
 							GString * message, 
@@ -196,15 +196,15 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 							gpointer * custom_data)
 {
 	GError * error = NULL;
-	AfDalData        * user_data = NULL;
-	AfDalSimpleData  * user_simple_data = NULL;
-	AfDalNulData     * user_nul_data = NULL;
-	AfDalMultiData   * user_multi_data = NULL;
+	OseaClientData        * user_data = NULL;
+	OseaClientSimpleData  * user_simple_data = NULL;
+	OseaClientNulData     * user_nul_data = NULL;
+	OseaClientMultiData   * user_multi_data = NULL;
 	CoyoteXmlMessage     * coyote_message = NULL;
 	CoyoteXmlServiceData * xml_data = NULL;
 	RRConnection         * connection = NULL;
 
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) (*custom_data);	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) (*custom_data);	
 	
 	if (channel == oseaclient_request_fake_channel)
 		return oseaclient_request_return_from_failed_afkey_refresh (type, message, returned_dataset,
@@ -215,17 +215,17 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 
 	// Selects apropiate user level data to return
 	switch (type) {
-	case AFDAL_REQUEST_MULTI_DATA:
-		user_multi_data = g_new0 (AfDalMultiData, 1);
+	case OSEACLIENT_REQUEST_MULTI_DATA:
+		user_multi_data = g_new0 (OseaClientMultiData, 1);
 		break;
-	case AFDAL_REQUEST_DATA:
-		user_data = g_new0 (AfDalData, 1);
+	case OSEACLIENT_REQUEST_DATA:
+		user_data = g_new0 (OseaClientData, 1);
 		break;
-	case AFDAL_REQUEST_SIMPLE_DATA:
-		user_simple_data = g_new0 (AfDalSimpleData, 1);
+	case OSEACLIENT_REQUEST_SIMPLE_DATA:
+		user_simple_data = g_new0 (OseaClientSimpleData, 1);
 		break;
-	case AFDAL_REQUEST_NUL_DATA:
-		user_nul_data = g_new0 (AfDalNulData, 1);
+	case OSEACLIENT_REQUEST_NUL_DATA:
+		user_nul_data = g_new0 (OseaClientNulData, 1);
 		break;
 	}
 	
@@ -253,20 +253,20 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 		g_free (coyote_message);
 
 		switch (type) {
-		case AFDAL_REQUEST_MULTI_DATA:
-			user_multi_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_MULTI_DATA:
+			user_multi_data->state = OSEACLIENT_ERROR;
 			user_multi_data->text_response = g_strdup ("Validation failed: we are going to die");			
 			return user_multi_data;
-		case AFDAL_REQUEST_DATA:
-			user_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_DATA:
+			user_data->state = OSEACLIENT_ERROR;
 			user_data->text_response = g_strdup ("Validation failed: we are going to die");
 			return user_data;
-		case AFDAL_REQUEST_SIMPLE_DATA:
-			user_simple_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_SIMPLE_DATA:
+			user_simple_data->state = OSEACLIENT_ERROR;
 			user_simple_data->text_response = g_strdup ("Validation failed: we are going to die");
 			return user_simple_data;
-		case AFDAL_REQUEST_NUL_DATA:
-			user_nul_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_NUL_DATA:
+			user_nul_data->state = OSEACLIENT_ERROR;
 			user_nul_data->text_response = g_strdup ("Validation failed: we are going to die");
 			return user_nul_data;
 		}
@@ -285,23 +285,23 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 		g_free (request_user_data);
 				
 		switch (type) {
-		case AFDAL_REQUEST_MULTI_DATA:
-			user_multi_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_MULTI_DATA:
+			user_multi_data->state = OSEACLIENT_ERROR;
 			user_multi_data->text_response = g_strdup ("Failed to parse message: we are going to die");
 			return user_multi_data;
 
-		case AFDAL_REQUEST_DATA:
-			user_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_DATA:
+			user_data->state = OSEACLIENT_ERROR;
 			user_data->text_response = g_strdup ("Failed to parse message: we are going to die");
 			return user_data;
 
-		case AFDAL_REQUEST_SIMPLE_DATA:
-			user_simple_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_SIMPLE_DATA:
+			user_simple_data->state = OSEACLIENT_ERROR;
 			user_simple_data->text_response = g_strdup ("Failed to parse message: we are going to die");
 			return user_simple_data;
 
-		case AFDAL_REQUEST_NUL_DATA:
-			user_nul_data->state = AFDAL_ERROR;
+		case OSEACLIENT_REQUEST_NUL_DATA:
+			user_nul_data->state = OSEACLIENT_ERROR;
 			user_nul_data->text_response = g_strdup ("Failed to parse message: we are going to die");
 			return user_nul_data;
 		}
@@ -314,38 +314,38 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 		g_free (request_user_data);
 				
 		switch (type) {
-		case AFDAL_REQUEST_MULTI_DATA:
+		case OSEACLIENT_REQUEST_MULTI_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
-				user_multi_data->state = AFDAL_UPDATE_SERVICES_NEEDED;
+				user_multi_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
-				user_multi_data->state = AFDAL_OK;
+				user_multi_data->state = OSEACLIENT_OK;
 			user_multi_data->text_response = g_strdup (xml_data->status_message);
 			if (returned_datasets) 
 				(*returned_datasets) = xml_data->item_list;
 			return user_multi_data;
-		case AFDAL_REQUEST_DATA:
+		case OSEACLIENT_REQUEST_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
-				user_data->state = AFDAL_UPDATE_SERVICES_NEEDED;
+				user_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
-				user_data->state = AFDAL_OK;
+				user_data->state = OSEACLIENT_OK;
 			user_data->text_response = g_strdup (xml_data->status_message);
 			if (returned_dataset)
 				(*returned_dataset) = xml_data->item_list->data;
 			return user_data;
 			
-		case AFDAL_REQUEST_SIMPLE_DATA:
+		case OSEACLIENT_REQUEST_SIMPLE_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
-				user_simple_data->state = AFDAL_UPDATE_SERVICES_NEEDED;
+				user_simple_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
-				user_simple_data->state = AFDAL_OK;
+				user_simple_data->state = OSEACLIENT_OK;
 			user_simple_data->id = atoi(coyote_dataset_get((xml_data->item_list->data),0,0));
 			return user_simple_data;
 
-		case AFDAL_REQUEST_NUL_DATA:
+		case OSEACLIENT_REQUEST_NUL_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
-				user_nul_data->state = AFDAL_UPDATE_SERVICES_NEEDED;
+				user_nul_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
-				user_nul_data->state = AFDAL_OK;
+				user_nul_data->state = OSEACLIENT_OK;
 			return user_nul_data;
 		}
 		return NULL;
@@ -358,7 +358,7 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 		if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_KEY_EXPIRED) {			
 			request_user_data->server = oseaclient_session_get_server_name (connection, NULL);
 			g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Refreshing af key...");
-			oseaclient_event_source_launch (afdal_request_start_afkey_refresh, request_user_data);
+			oseaclient_event_source_launch (oseaclient_request_start_afkey_refresh, request_user_data);
 			return NULL;
 		}
 
@@ -368,32 +368,32 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 				
 		switch (type) {
 
-		case AFDAL_REQUEST_MULTI_DATA:
+		case OSEACLIENT_REQUEST_MULTI_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
-				user_multi_data->state = AFDAL_SESSION_EXPIRED;
+				user_multi_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
-				user_multi_data->state = AFDAL_ERROR;
+				user_multi_data->state = OSEACLIENT_ERROR;
 			user_multi_data->text_response = g_strdup (xml_data->status_message);
 			return user_multi_data;
-		case AFDAL_REQUEST_DATA:
+		case OSEACLIENT_REQUEST_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
-				user_data->state = AFDAL_SESSION_EXPIRED;
+				user_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
-				user_data->state = AFDAL_ERROR;
+				user_data->state = OSEACLIENT_ERROR;
 			user_data->text_response = g_strdup (xml_data->status_message);
 			return user_data;
-		case AFDAL_REQUEST_SIMPLE_DATA:
+		case OSEACLIENT_REQUEST_SIMPLE_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
-				user_simple_data->state = AFDAL_SESSION_EXPIRED;
+				user_simple_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
-				user_simple_data->state = AFDAL_ERROR;
+				user_simple_data->state = OSEACLIENT_ERROR;
 			user_simple_data->text_response = g_strdup (xml_data->status_message);
 			return user_simple_data;
-		case AFDAL_REQUEST_NUL_DATA:
+		case OSEACLIENT_REQUEST_NUL_DATA:
 			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
-				user_nul_data->state = AFDAL_SESSION_EXPIRED;
+				user_nul_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
-				user_nul_data->state = AFDAL_ERROR;
+				user_nul_data->state = OSEACLIENT_ERROR;
 			user_nul_data->text_response = g_strdup (xml_data->status_message);
 			return user_nul_data;
 		}
@@ -405,10 +405,10 @@ gpointer   oseaclient_request_close_and_return_initial_data (AfDalRequestReturnD
 
 
 
-gboolean oseaclient_request_start_afkey_refresh (gpointer afdal_request_user_data)
+gboolean oseaclient_request_start_afkey_refresh (gpointer oseaclient_request_user_data)
 {
 	/* Ask for a af-key refresh, calling step 2 for processing it */
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;	
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Asking af-kernel for new af-key...");
 	      
@@ -421,11 +421,11 @@ gboolean oseaclient_request_start_afkey_refresh (gpointer afdal_request_user_dat
 	return FALSE;
 }
 
-gboolean __oseaclient_request_start_afkey_refresh (AfDalNulData *data, gpointer afdal_request_user_data)
+gboolean __oseaclient_request_start_afkey_refresh (OseaClientNulData *data, gpointer oseaclient_request_user_data)
 {
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;	
 
-	if (data->state == AFDAL_ERROR) {
+	if (data->state == OSEACLIENT_ERROR) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't refresh af-key");
 		g_free (request_user_data->server);
 		g_free (request_user_data);
@@ -434,17 +434,17 @@ gboolean __oseaclient_request_start_afkey_refresh (AfDalNulData *data, gpointer 
 		return FALSE;
 	}
 
-	if (data->state == AFDAL_SESSION_EXPIRED) {
+	if (data->state == OSEACLIENT_SESSION_EXPIRED) {
 		g_static_mutex_lock (& oseaclient_request_session_expired_callback_is_active_mutex);
 
 		if (oseaclient_request_session_expired_callback_is_active) {
-			oseaclient_request_waiting_for_session_queue = g_list_append (afdal_request_waiting_for_session_queue,
+			oseaclient_request_waiting_for_session_queue = g_list_append (oseaclient_request_waiting_for_session_queue,
 										 request_user_data);
 			g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Password dialog already shown. Putting action in queue.");
 		} else {
 			g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Session expired. Asking password to user...");
 			oseaclient_request_session_expired_callback_is_active = TRUE;
-			oseaclient_event_source_launch (afdal_request_start_session_refresh, request_user_data);
+			oseaclient_event_source_launch (oseaclient_request_start_session_refresh, request_user_data);
 		}
 		g_static_mutex_unlock (& oseaclient_request_session_expired_callback_is_active_mutex);
 		oseaclient_nul_free (data);
@@ -454,14 +454,14 @@ gboolean __oseaclient_request_start_afkey_refresh (AfDalNulData *data, gpointer 
 	oseaclient_nul_free (data);
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Af-Kernel gave us the new key");
-	oseaclient_event_source_launch (__afdal_request_start_afkey_refresh_2, request_user_data);
+	oseaclient_event_source_launch (__oseaclient_request_start_afkey_refresh_2, request_user_data);
 	return FALSE;
 }
 
 
-gboolean __oseaclient_request_start_afkey_refresh_2 (gpointer afdal_request_user_data)
+gboolean __oseaclient_request_start_afkey_refresh_2 (gpointer oseaclient_request_user_data)
 {
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Sending new af-key to server...");
 
@@ -474,11 +474,11 @@ gboolean __oseaclient_request_start_afkey_refresh_2 (gpointer afdal_request_user
 }
 
 
-gboolean __oseaclient_request_start_afkey_refresh_2_process (AfDalNulData *data, gpointer afdal_request_user_data)
+gboolean __oseaclient_request_start_afkey_refresh_2_process (OseaClientNulData *data, gpointer oseaclient_request_user_data)
 {
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;	
 
-	if (data->state == AFDAL_ERROR) {
+	if (data->state == OSEACLIENT_ERROR) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Server couldn't get new af-key");
 		g_free (request_user_data->server);
 		g_free (request_user_data);
@@ -489,16 +489,16 @@ gboolean __oseaclient_request_start_afkey_refresh_2_process (AfDalNulData *data,
 
 	oseaclient_nul_free (data);
 
-	oseaclient_event_source_launch (__afdal_request_start_afkey_refresh_3, request_user_data);
+	oseaclient_event_source_launch (__oseaclient_request_start_afkey_refresh_3, request_user_data);
 
 	return FALSE;
 }
 
 
-gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer afdal_request_user_data)
+gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer oseaclient_request_user_data)
 {
 	/* Sending original petition, with original callback function */
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;
 	CoyoteSimple    * channel = NULL;
 	CoyoteSimpleCfg * config = NULL;
 	RRMessage       * rr_message = NULL;
@@ -538,7 +538,7 @@ gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer afdal_request_user
 	return FALSE;
 }
 
-void oseaclient_refresh_start_afkey_refresh_return_error (gchar *message, AfdalRequestUserData * request_user_data)
+void oseaclient_refresh_start_afkey_refresh_return_error (gchar *message, OseaClientRequestUserData * request_user_data)
 {
 	GString              * string = g_string_new (message);
 
@@ -551,55 +551,55 @@ void oseaclient_refresh_start_afkey_refresh_return_error (gchar *message, AfdalR
 	return;
 }
 
-gpointer   oseaclient_request_return_from_failed_afkey_refresh (AfDalRequestReturnData type,
+gpointer   oseaclient_request_return_from_failed_afkey_refresh (OseaClientRequestReturnData type,
 							   GString * message, 
 							   CoyoteDataSet ** returned_dataset,
 							   GList         ** returned_datasets,
 							   gpointer * data,
 							   gpointer * custom_data)
 {
-	AfDalData        * user_data = NULL;
-	AfDalSimpleData  * user_simple_data = NULL;
-	AfDalNulData     * user_nul_data = NULL;
-	AfDalMultiData   * user_multi_data = NULL;
+	OseaClientData        * user_data = NULL;
+	OseaClientSimpleData  * user_simple_data = NULL;
+	OseaClientNulData     * user_nul_data = NULL;
+	OseaClientMultiData   * user_multi_data = NULL;
 
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) (*custom_data);	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) (*custom_data);	
 	
 	(*custom_data) = request_user_data->user_data;
 
 	// Selects apropiate user level data to return
 	switch (type) {
-	case AFDAL_REQUEST_MULTI_DATA:
-		user_multi_data = g_new0 (AfDalMultiData, 1);
+	case OSEACLIENT_REQUEST_MULTI_DATA:
+		user_multi_data = g_new0 (OseaClientMultiData, 1);
 		break;
-	case AFDAL_REQUEST_DATA:
-		user_data = g_new0 (AfDalData, 1);
+	case OSEACLIENT_REQUEST_DATA:
+		user_data = g_new0 (OseaClientData, 1);
 		break;
-	case AFDAL_REQUEST_SIMPLE_DATA:
-		user_simple_data = g_new0 (AfDalSimpleData, 1);
+	case OSEACLIENT_REQUEST_SIMPLE_DATA:
+		user_simple_data = g_new0 (OseaClientSimpleData, 1);
 		break;
-	case AFDAL_REQUEST_NUL_DATA:
-		user_nul_data = g_new0 (AfDalNulData, 1);
+	case OSEACLIENT_REQUEST_NUL_DATA:
+		user_nul_data = g_new0 (OseaClientNulData, 1);
 		break;
 	}
 	
 	coyote_xml_destroy_message (request_user_data->concrect_message);
 				
 	switch (type) {
-	case AFDAL_REQUEST_MULTI_DATA:
-		user_multi_data->state = AFDAL_ERROR;
+	case OSEACLIENT_REQUEST_MULTI_DATA:
+		user_multi_data->state = OSEACLIENT_ERROR;
 		user_multi_data->text_response = g_strdup (message->str);			
 		return user_multi_data;
-	case AFDAL_REQUEST_DATA:
-		user_data->state = AFDAL_ERROR;
+	case OSEACLIENT_REQUEST_DATA:
+		user_data->state = OSEACLIENT_ERROR;
 		user_data->text_response = g_strdup (message->str);
 		return user_data;
-	case AFDAL_REQUEST_SIMPLE_DATA:
-		user_simple_data->state = AFDAL_ERROR;
+	case OSEACLIENT_REQUEST_SIMPLE_DATA:
+		user_simple_data->state = OSEACLIENT_ERROR;
 		user_simple_data->text_response = g_strdup (message->str);
 		return user_simple_data;
-	case AFDAL_REQUEST_NUL_DATA:
-		user_nul_data->state = AFDAL_ERROR;
+	case OSEACLIENT_REQUEST_NUL_DATA:
+		user_nul_data->state = OSEACLIENT_ERROR;
 		user_nul_data->text_response = g_strdup (message->str);
 		return user_nul_data;
 	}
@@ -613,12 +613,12 @@ gpointer   oseaclient_request_return_from_failed_afkey_refresh (AfDalRequestRetu
 
 
 
-gboolean oseaclient_request_start_session_refresh (gpointer afdal_request_user_data)
+gboolean oseaclient_request_start_session_refresh (gpointer oseaclient_request_user_data)
 {
 	/* Ask for a af-key refresh, calling step 2 for processing it */
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;	
 
-	if (! oseaclient_password_get (__afdal_request_start_session_refresh, request_user_data))
+	if (! oseaclient_password_get (__oseaclient_request_start_session_refresh, request_user_data))
 		oseaclient_refresh_start_afkey_refresh_return_error ("Couldn't refresh session. Callback not defined.",
 								request_user_data);
 	      
@@ -628,9 +628,9 @@ gboolean oseaclient_request_start_session_refresh (gpointer afdal_request_user_d
 
 
 
-void __oseaclient_request_start_session_refresh (gchar * password, gpointer afdal_request_user_data)
+void __oseaclient_request_start_session_refresh (gchar * password, gpointer oseaclient_request_user_data)
 {
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;	
 
 	if (!password) {
 		/* User has cancelled session*/
@@ -650,9 +650,9 @@ void __oseaclient_request_start_session_refresh (gchar * password, gpointer afda
 	return;
 }
 
-gboolean __oseaclient_request_start_session_refresh_process (AfDalNulData *data, gpointer afdal_request_user_data)
+gboolean __oseaclient_request_start_session_refresh_process (OseaClientNulData *data, gpointer oseaclient_request_user_data)
 {
-	AfdalRequestUserData * request_user_data = (AfdalRequestUserData *) oseaclient_request_user_data;	
+	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;	
 	GList                * cursor = g_list_first (oseaclient_request_waiting_for_session_queue);
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "OK. Got new session ID.");
@@ -664,13 +664,13 @@ gboolean __oseaclient_request_start_session_refresh_process (AfDalNulData *data,
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Relaunching actual petition ");
 
-	oseaclient_event_source_launch (__afdal_request_start_afkey_refresh_3, request_user_data);
+	oseaclient_event_source_launch (__oseaclient_request_start_afkey_refresh_3, request_user_data);
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Actual petition relaunched");
 
 	while (cursor) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Launching deferred operation.");
-		oseaclient_event_source_launch (__afdal_request_start_afkey_refresh_3, cursor->data);
+		oseaclient_event_source_launch (__oseaclient_request_start_afkey_refresh_3, cursor->data);
 		cursor = cursor->next;
 	}
 
@@ -684,9 +684,9 @@ gboolean __oseaclient_request_start_session_refresh_process (AfDalNulData *data,
 	return FALSE;
 }
 
-void     oseaclient_request_cancel_session_refresh_process (AfdalRequestUserData * request_user_data)
+void     oseaclient_request_cancel_session_refresh_process (OseaClientRequestUserData * request_user_data)
 {
-	AfdalRequestUserData * rud = NULL;
+	OseaClientRequestUserData * rud = NULL;
 	GList                * cursor = NULL;
 
 	g_static_mutex_lock (& oseaclient_request_session_expired_callback_is_active_mutex);
@@ -697,7 +697,7 @@ void     oseaclient_request_cancel_session_refresh_process (AfdalRequestUserData
 	g_free (request_user_data);
 
 	while (cursor) {
-		rud = (AfdalRequestUserData *) cursor->data;
+		rud = (OseaClientRequestUserData *) cursor->data;
 		g_free (rud->server);
 		coyote_xml_destroy_message (rud->concrect_message);
 		g_free (rud);
@@ -716,42 +716,42 @@ void     oseaclient_request_cancel_session_refresh_process (AfdalRequestUserData
 
 /**
  * oseaclient_request_call_user_function:
- * @type:  * @type: Type of oseaclient user space data: AFDAL_REQUEST_DATA,
- * AFDAL_REQUEST_SIMPLE_DATA, AFDAL_REQUEST_NUL_DATA 
+ * @type:  * @type: Type of oseaclient user space data: OSEACLIENT_REQUEST_DATA,
+ * OSEACLIENT_REQUEST_SIMPLE_DATA, OSEACLIENT_REQUEST_NUL_DATA 
  * @handler: user space function to be executed
  * @user_data: user space data to be passed to @handler.
- * @oseaclient_data: afdal level data to be passed to @handler.
+ * @oseaclient_data: oseaclient level data to be passed to @handler.
  * 
  * Convenience function to make life easy to those who are writing
  * liboseaclient* function. It's more dificult to explain what does this
  * function do, so please see
  * @oseaclient_request_process_data/simple_data/nul_data function.
  **/
-void oseaclient_request_call_user_function (AfDalRequestReturnData type, gpointer handler,
+void oseaclient_request_call_user_function (OseaClientRequestReturnData type, gpointer handler,
 				       gpointer user_data, gpointer oseaclient_data)
 {
-	AfDalDataFunc   data_handler;
-	AfDalSimpleFunc simple_handler;
-	AfDalNulFunc    nul_handler;
-	AfDalMultiFunc  multi_handler;
+	OseaClientDataFunc   data_handler;
+	OseaClientSimpleFunc simple_handler;
+	OseaClientNulFunc    nul_handler;
+	OseaClientMultiFunc  multi_handler;
 	gboolean        result = FALSE;
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Executing user handler");
 	switch (type) {
-	case AFDAL_REQUEST_DATA:
-		data_handler = (AfDalDataFunc) handler;
+	case OSEACLIENT_REQUEST_DATA:
+		data_handler = (OseaClientDataFunc) handler;
 		result = data_handler (oseaclient_data, user_data);
 		break;
-	case AFDAL_REQUEST_SIMPLE_DATA:
-		simple_handler = (AfDalSimpleFunc) handler;
+	case OSEACLIENT_REQUEST_SIMPLE_DATA:
+		simple_handler = (OseaClientSimpleFunc) handler;
 		result = simple_handler (oseaclient_data, user_data);
 		break;
-	case AFDAL_REQUEST_NUL_DATA:
-		nul_handler = (AfDalNulFunc) handler;
+	case OSEACLIENT_REQUEST_NUL_DATA:
+		nul_handler = (OseaClientNulFunc) handler;
 		result = nul_handler (oseaclient_data, user_data);
 		break;
-	case AFDAL_REQUEST_MULTI_DATA:
-		multi_handler = (AfDalMultiFunc) handler;
+	case OSEACLIENT_REQUEST_MULTI_DATA:
+		multi_handler = (OseaClientMultiFunc) handler;
 		result = multi_handler (oseaclient_data, user_data);
 		break;
 	}
@@ -802,14 +802,14 @@ void oseaclient_request_call_user_function (AfDalRequestReturnData type, gpointe
 						     gpointer data, 
 						     gpointer custom_data)
 {
-	AfDalSimpleData  * oseaclient_data = NULL;
+	OseaClientSimpleData  * oseaclient_data = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_SIMPLE_DATA,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_SIMPLE_DATA,
 								  channel,
 								  frame,
 								  message,
@@ -819,7 +819,7 @@ void oseaclient_request_call_user_function (AfDalRequestReturnData type, gpointe
 		return;
 
 	// Call to user defined callback.
-	oseaclient_request_call_user_function (AFDAL_REQUEST_SIMPLE_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_SIMPLE_DATA, data, custom_data, oseaclient_data);
 
 	return;
 }
@@ -844,14 +844,14 @@ void oseaclient_request_call_user_function (AfDalRequestReturnData type, gpointe
 					       gpointer data, 
 					       gpointer custom_data)
 {
-	AfDalNulData         * oseaclient_data = NULL;
+	OseaClientNulData         * oseaclient_data = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	oseaclient_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_NUL_DATA,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_NUL_DATA,
 								  channel,
 								  frame,
 								  message,
@@ -862,7 +862,7 @@ void oseaclient_request_call_user_function (AfDalRequestReturnData type, gpointe
 		return;
 
 	// Call to user defined callback.
-	oseaclient_request_call_user_function (AFDAL_REQUEST_NUL_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_NUL_DATA, data, custom_data, oseaclient_data);
 
 	return;
 }

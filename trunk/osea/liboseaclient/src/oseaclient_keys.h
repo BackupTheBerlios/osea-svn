@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,23 +16,23 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFDAL_AFKEYS_H__
-#define __AFDAL_AFKEYS_H__
+#ifndef __OSEACLIENT_AFKEYS_H__
+#define __OSEACLIENT_AFKEYS_H__
 #include "oseaclient.h"
 
 
 
-typedef struct __AfDalAfKey {
+typedef struct __OseaClientAfKey {
 	gchar * user;
 	gchar * satellite_server;
 	gint    time_stamp;
 	GList * permission_list;
-}AfDalAfKey;
+}OseaClientAfKey;
 
 
-AfDalAfKey * ___oseaclient_afkeys_parse   (gchar * af_key);
+OseaClientAfKey * ___oseaclient_afkeys_parse   (gchar * af_key);
 
-void         ___oseaclient_afkeys_destroy (AfDalAfKey * af_key, 
+void         ___oseaclient_afkeys_destroy (OseaClientAfKey * af_key, 
 				      gboolean     free_permission_list);
 
 #endif
