@@ -21,4 +21,4 @@ AC_SUBST(AOSCUSTOMER_LIBS)
 AC_OUTPUT([
 Makefile
 src/Makefile
-aoscustomer.pc])
+libaoscustomer.pc])

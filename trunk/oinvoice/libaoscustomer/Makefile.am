@@ -1,4 +1,4 @@
 SUBDIRS = src 
-EXTRA_DIR = COPYING aoscustomer.pc.in
+EXTRA_DIR = COPYING libaoscustomer.pc.in
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = aoscustomer.pc
+pkgconfig_DATA = libaoscustomer.pc
