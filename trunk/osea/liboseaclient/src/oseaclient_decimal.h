@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -15,17 +15,17 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef __AFDAL_DECIMAL_H__
+#ifndef __OSEACLIENT_DECIMAL_H__
 #define __AFDAl_DECIMAL_H__
 
 #include "oseaclient.h"
 
-typedef struct __AfDalDecimal AfDalDecimal;
+typedef struct __OseaClientDecimal OseaClientDecimal;
 
-gchar        * oseaclient_decimal_stringfy (AfDalDecimal * decimal);
+gchar        * oseaclient_decimal_stringfy (OseaClientDecimal * decimal);
 
-void           oseaclient_decimal_free     (AfDalDecimal * decimal);
+void           oseaclient_decimal_free     (OseaClientDecimal * decimal);
 
-AfDalDecimal * oseaclient_decimal_new      (gchar * value);
+OseaClientDecimal * oseaclient_decimal_new      (gchar * value);
 
 #endif

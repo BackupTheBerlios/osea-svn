@@ -1,4 +1,4 @@
-//  LibAfdal: common functions to liboseaclient* level.
+//  LibOseaClient: common functions to liboseaclient* level.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify

@@ -59,7 +59,7 @@ void     oseaclient_request_cancel_session_refresh_process (OseaClientRequestUse
 
 /**
  * oseaclient_request:
- * @connection: an already created conection to a af-kernel server
+ * @connection: an already created conection to a os-kernel server
  * @return_function: Function to be executed by oseacomm when an xml message arrives from the other peer.
  * @usr_function: User space function to be executed by liboseaclient when an xml message has been processed.
  * @usr_data: User space data to be passed to @usr_function.
@@ -410,12 +410,12 @@ gboolean oseaclient_request_start_afkey_refresh (gpointer oseaclient_request_use
 	/* Ask for a af-key refresh, calling step 2 for processing it */
 	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;	
 
-	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Asking af-kernel for new af-key...");
+	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Asking os-kernel for new af-key...");
 	      
 	if (! oseaclient_session_refresh_key (request_user_data->server,
 				   __oseaclient_request_start_afkey_refresh,
 				   oseaclient_request_user_data))
-		oseaclient_refresh_start_afkey_refresh_return_error ("Couldn't refresh key: not found valid connection to af-kernel",
+		oseaclient_refresh_start_afkey_refresh_return_error ("Couldn't refresh key: not found valid connection to os-kernel",
 								request_user_data);
 
 	return FALSE;
@@ -468,7 +468,7 @@ gboolean __oseaclient_request_start_afkey_refresh_2 (gpointer oseaclient_request
 	if (! oseaclient_session_send_afkey (request_user_data->server,
 					__oseaclient_request_start_afkey_refresh_2_process,
 					request_user_data))
-		oseaclient_refresh_start_afkey_refresh_return_error ("Couldn't refresh key: not found valid connection to af-kernel",
+		oseaclient_refresh_start_afkey_refresh_return_error ("Couldn't refresh key: not found valid connection to os-kernel",
 								request_user_data);		
 	return FALSE;
 }
@@ -643,7 +643,7 @@ void __oseaclient_request_start_session_refresh (gchar * password, gpointer osea
 	if (! oseaclient_session_refresh_session (password,
 					     __oseaclient_request_start_session_refresh_process,
 					     oseaclient_request_user_data))
-		oseaclient_refresh_start_afkey_refresh_return_error ("Couldn't refresh key: not found valid connection to af-kernel",
+		oseaclient_refresh_start_afkey_refresh_return_error ("Couldn't refresh key: not found valid connection to os-kernel",
 								request_user_data);
 
 

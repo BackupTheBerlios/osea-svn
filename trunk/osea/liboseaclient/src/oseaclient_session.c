@@ -87,7 +87,7 @@ OseaClientList * __oseaclient_session_extract_server_info (OseaCommDataSet * dat
 
 		server->name = g_strdup (oseacomm_dataset_get (data, i, 0));
 		
-		if (! g_strcasecmp ("af-kernel", server->name))
+		if (! g_strcasecmp ("os-kernel", server->name))
 			server->connection = kernel_connection;
 
 		server->host = g_strdup (oseacomm_dataset_get (data, i, 1));
@@ -163,12 +163,12 @@ static  void __oseaclient_session_login_process (RRChannel * channel,
  * oseaclient_session_login:
  * @usr: login user
  * @passwd: password associated
- * @kernel_hostname: hostname where af-kernel lives
- * @kernel_port: port where af-kernel is listening
+ * @kernel_hostname: hostname where os-kernel lives
+ * @kernel_port: port where os-kernel is listening
  * @usr_function: function to be executed when the server response arrives.
  * @usr_data: user data passed to user_function.
  * 
- * This function tries to login to the af-kernel defined by @kernel_hostname and @kernel_port, using login @usr and password @passwd. 
+ * This function tries to login to the os-kernel defined by @kernel_hostname and @kernel_port, using login @usr and password @passwd. 
  * When server's response arrives @usr_function will be
  * called with the given @usr_data.
  * 
@@ -198,7 +198,7 @@ gboolean        oseaclient_session_login   (gchar * usr,
 	connection = oseacomm_connection_new (kernel_hostname, kernel_port, TYPE_OSEACOMM_SIMPLE);
 
 	if (! connection) {
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to af-kernel in %s:%s", 
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to os-kernel in %s:%s", 
 		       kernel_hostname, kernel_port);
 		return FALSE;
 	}
@@ -279,10 +279,10 @@ gboolean        oseaclient_session_logout  (OseaClientNulFunc usr_function,
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 
 	if (! connection)
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for af-kernel");
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for os-kernel");
 
 	return oseaclient_request (connection, __oseaclient_session_logout_process, 
 			      (OseaClientFunc) usr_function, usr_data,
@@ -375,10 +375,10 @@ gboolean        oseaclient_session_refresh_key          (gchar * server,
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 
 	if (! connection)
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for af-kernel");
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for os-kernel");
 
 	return oseaclient_request (connection, __oseaclient_session_refresh_key_process, 
 			      (OseaClientFunc) usr_function, usr_data,
@@ -460,10 +460,10 @@ gboolean        oseaclient_session_refresh_session   (gchar * passwd,
 
 	g_return_val_if_fail (passwd, FALSE);
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 
 	if (! connection) {
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to af-kernel.");
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to os-kernel.");
 		return FALSE;
 	}
 	
@@ -549,13 +549,13 @@ static  void __oseaclient_session_register_process (RRChannel * channel,
  * @version_number: server version
  * @host: server's listening host
  * @port: server's listening port
- * @kernel_hostname: hostname where af-kernel lives
- * @kernel_port: port where af-kernel is listening
+ * @kernel_hostname: hostname where os-kernel lives
+ * @kernel_port: port where os-kernel is listening
  * @usr_function: function to be executed when the server response arrives
  * @usr_data: user data passed to user_function
  * 
  * This function tries to register the given server (@name and @version_number) 
- * in the af-kernel defined by @kernel_hostname and @kernel_port.  When server's 
+ * in the os-kernel defined by @kernel_hostname and @kernel_port.  When server's 
  * response arrives @usr_function will be called the given @usr_data.
  * 
  * Return value: TRUE if register request is sent or FALSE if not.
@@ -600,7 +600,7 @@ gboolean        oseaclient_session_register (gchar * name,
 	connection = oseacomm_connection_new (kernel_hostname, kernel_port, TYPE_OSEACOMM_SIMPLE);
 
 	if (! connection) {
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to af-kernel in %s:%s", 
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to os-kernel in %s:%s", 
 		       kernel_hostname, kernel_port);
 		return FALSE;
 	}
@@ -671,10 +671,10 @@ gboolean        oseaclient_session_unregister  (OseaClientNulFunc usr_function,
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("os-kernel", NULL);
 
 	if (! connection)
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for af-kernel");
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't find connection for os-kernel");
 
 	return oseaclient_request (connection, __oseaclient_session_unregister_process, 
 			      (OseaClientFunc) usr_function, usr_data,

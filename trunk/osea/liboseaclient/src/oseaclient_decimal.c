@@ -1,5 +1,5 @@
 //
-//  LibAfdal: common functions to liboseaclient* level and architectural functions.
+//  LibOseaClient: common functions to liboseaclient* level and architectural functions.
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -17,20 +17,20 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "oseaclient.h"
 
-struct __AfDalDecimal {
+struct __OseaClientDecimal {
 	gchar * number;
 	glong   precision;
 	glong   width;
 };
 
 
-gchar * oseaclient_decimal_stringfy (AfDalDecimal * decimal) {
+gchar * oseaclient_decimal_stringfy (OseaClientDecimal * decimal) {
 	g_return_val_if_fail (decimal, NULL);
 
 	return g_strdup (decimal->number);
 }
 
-void    oseaclient_decimal_free (AfDalDecimal * decimal) {
+void    oseaclient_decimal_free (OseaClientDecimal * decimal) {
 	g_return_if_fail (decimal);
 	
 
@@ -40,9 +40,9 @@ void    oseaclient_decimal_free (AfDalDecimal * decimal) {
 	return;
 }
 
-AfDalDecimal * oseaclient_decimal_new      (gchar * value)
+OseaClientDecimal * oseaclient_decimal_new      (gchar * value)
 {
-	AfDalDecimal  * result = NULL;
+	OseaClientDecimal  * result = NULL;
 	gchar        ** aux_strings;
 	
 	
@@ -55,7 +55,7 @@ AfDalDecimal * oseaclient_decimal_new      (gchar * value)
 	g_return_val_if_fail (aux_strings[1], NULL);
 
 
-	result = g_new0 (AfDalDecimal, 1);
+	result = g_new0 (OseaClientDecimal, 1);
 	result->number = g_strdup (value);
 	result->width  = strlen (aux_strings[0]) + strlen (aux_strings[1]);
 	result->precision = strlen (aux_strings[1]);
