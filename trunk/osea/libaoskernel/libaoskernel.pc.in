@@ -3,9 +3,9 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: libafdalkernel
+Name: libaoskernel
 Description: Support library interface to kernel server.
-Requires: coyote afdal
+Requires: liboseacomm liboseaclient
 Version: @VERSION@
-Libs: -L${libdir} -lafdalkernel
+Libs: -L${libdir} -laoskernel
 Cflags: -I${includedir}
