@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PACKAGE="ASPL Fact Tax server"
+PACKAGE="öInvoice Tax server"
 
 (automake --version) < /dev/null > /dev/null 2>&1 || {
 	echo;

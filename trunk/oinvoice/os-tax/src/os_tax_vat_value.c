@@ -17,8 +17,8 @@
 
 
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaserver/afgs.h>
+#include <liboseacomm/oseacomm.h>
+#include <liboseaserver/oseaserver.h>
 #include "os_tax_vat_value.h"
 
 
@@ -148,7 +148,7 @@ gboolean os_tax_vat_value_list (OseaCommXmlServiceData *data, gpointer user_data
 	values_dataset2 = oseacomm_dataset_new ();
 	for (i = 0; i < rows; i++) {
 		for (j = 0; j < width; j++) {
-			oseacomm_dataset_add (values_dataset2, (gchar *) coyote_dataset_get (values_dataset, i + (j * rows), 0));
+			oseacomm_dataset_add (values_dataset2, (gchar *) oseacomm_dataset_get (values_dataset, i + (j * rows), 0));
 		}
 		
 		if (i == (rows - 1)) 

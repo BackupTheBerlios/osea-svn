@@ -19,7 +19,7 @@
 #define __AF_TAX_VAT_CUSTOMER_H__
 
 #include <glib.h>
-#include <oseacomm/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
 gboolean os_tax_vat_customer_list    (OseaCommXmlServiceData * data, 
 				      gpointer               user_data, 

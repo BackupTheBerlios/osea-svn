@@ -17,8 +17,8 @@
 
 
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaserver/afgs.h>
+#include <liboseacomm/oseacomm.h>
+#include <liboseaserver/oseaserver.h>
 #include "os_tax_vat_item.h"
 
 

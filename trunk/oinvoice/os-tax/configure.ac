@@ -1,9 +1,9 @@
-AC_INIT(src/af_tax.c)
+AC_INIT(src/os_tax.c)
 
-AFTAX_VERSION=0.0.90
-AC_SUBST(AFTAX_VERSION)
+OSTAX_VERSION=0.0.90
+AC_SUBST(OSTAX_VERSION)
 
-AM_INIT_AUTOMAKE(aftax, $AFTAX_VERSION)
+AM_INIT_AUTOMAKE(ostax, $OSTAX_VERSION)
 
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
@@ -12,10 +12,10 @@ AC_PROG_CC
 AC_ISC_POSIX
 AC_HEADER_STDC
 
-PKG_CHECK_MODULES(AFTAX, coyote afdal afgs glib-2.0 libgda >= 0.11)
+PKG_CHECK_MODULES(OSTAX, oseacomm oseaclient oseaserver glib-2.0 libgda >= 0.11)
 
-AC_SUBST(AFTAX_CFLAGS)
-AC_SUBST(AFTAX_LIBS)
+AC_SUBST(OSTAX_CFLAGS)
+AC_SUBST(OSTAX_LIBS)
 
 AC_CHECK_HEADER(popt.h, , AC_MSG_ERROR(*** cannot find popt.h header); exit)
 AC_CHECK_LIB(popt, poptGetNextOpt, , AC_MSG_ERROR(*** Cannot find popt library))

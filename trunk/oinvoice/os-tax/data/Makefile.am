@@ -1,5 +1,5 @@
-cfgdir = $(sysconfdir)/aspl-fact
-cfg_DATA = af-tax.cfg.example
+cfgdir = $(sysconfdir)/oinvoice
+cfg_DATA = os-tax.cfg.example
 
 EXTRA_DIST = $(cfg_DATA) install.sql uninstall.sql
 

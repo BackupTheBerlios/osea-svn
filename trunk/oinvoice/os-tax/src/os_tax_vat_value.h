@@ -15,11 +15,11 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AF_TAX_VAT_VALUE_H__
-#define __AF_TAX_VAT_VALUE_H__
+#ifndef __OS_TAX_VAT_VALUE_H__
+#define __OS_TAX_VAT_VALUE_H__
 
 #include <glib.h>
-#include <oseacomm/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
 gboolean os_tax_vat_value_get  (OseaCommXmlServiceData * data, 
 				gpointer               user_data, 

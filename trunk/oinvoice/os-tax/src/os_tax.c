@@ -30,8 +30,8 @@
 #include <glib.h>
 #include <locale.h>
 #include <librr/rr.h>
-#include <oseacomm/coyote.h>
-#include <oseaserver/afgs.h>
+#include <liboseacomm/oseacomm.h>
+#include <liboseaserver/oseaserver.h>
 #include <popt.h>
 #include "os_tax_vat_customer.h"
 #include "os_tax_vat_item.h"

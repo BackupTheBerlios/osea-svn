@@ -17,9 +17,9 @@
 
 
 #include <glib.h>
-#include <oseacomm/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include "os_tax_vat_customer.h"
-#include <oseaserver/afgs.h>
+#include <liboseaserver/oseaserver.h>
 
 #define LOG_DOMAIN "os_tax_vat_customer"
 

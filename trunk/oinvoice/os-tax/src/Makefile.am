@@ -1,15 +1,15 @@
 INCLUDES = \
-	$(AFTAX_CFLAGS) -DSYSCONFDIR=\""$(sysconfdir)"\" -DCOMPILATION_DATE=`date +%s` -Wall
+	$(OSTAX_CFLAGS) -DSYSCONFDIR=\""$(sysconfdir)"\" -DCOMPILATION_DATE=`date +%s` -Wall
 
-bin_PROGRAMS = af-tax
+bin_PROGRAMS = os-tax
 
-af_tax_SOURCES = \
-	af_tax.c \
-	af_tax_vat_customer.c af_tax_vat_customer.h \
-	af_tax_vat_item.c af_tax_vat_item.h \
-	af_tax_vat_value.c af_tax_vat_value.h
+os_tax_SOURCES = \
+	os_tax.c \
+	os_tax_vat_customer.c os_tax_vat_customer.h \
+	os_tax_vat_item.c os_tax_vat_item.h \
+	os_tax_vat_value.c os_tax_vat_value.h
 
-af_tax_LDADD = \
-	$(AFTAX_LIBS) -lpopt
+os_tax_LDADD = \
+	$(OSTAX_LIBS) -lpopt
 
 
