@@ -189,7 +189,7 @@ class OseaType:List from OseaType:Compound:Object {
 		}
 
 		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
-		OSEATYPE_OBJECT(object)->parent = self;
+		OSEATYPE_OBJECT(object)->parent = OSEATYPE_OBJECT(self);
 		oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
 
 		if (oco->current_length == oco->total_length) {
@@ -398,7 +398,7 @@ class OseaType:List from OseaType:Compound:Object {
 				return NULL;			
 		}
 		
-		result = OSEATYPE_OBJECT (g_ptr_array_index (self->_priv->array, index));				
+		result = OSEATYPE_OBJECT (g_ptr_array_index (self->_priv->array, index));
 
 		self->_priv->array = g_ptr_array_remove_index (self->_priv->array, index);
 
@@ -412,6 +412,11 @@ class OseaType:List from OseaType:Compound:Object {
 		
 		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
 		
+		oseatype_object_lock_access (OSEATYPE_OBJECT(result));
+		OSEATYPE_OBJECT(result)->parent = NULL;
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(result));
+		
+
 		return result;
 	}
 

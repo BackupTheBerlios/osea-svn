@@ -160,6 +160,8 @@ int main(int argc, char **argv)
 					     OSEATYPE_OBJECT(integer), 
 					     GINT_TO_POINTER(1), &err))
 		abort_execution (err, 25);
+	
+
 
 	if (oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list), 
 					     OSEATYPE_OBJECT(integer), 
@@ -178,24 +180,22 @@ int main(int argc, char **argv)
 
 	
 	if (value_next_element (list) != 10) return 28;
-	if (value_next_element (list) != 20) return 29;
-	if (value_next_element (list) != 30) return 30;
+	if (value_next_element (list) != 20) return 28;
+	if (value_next_element (list) != 30) return 28;
+
+	if (! (integer = OSEATYPE_INT (
+		       oseatype_compound_object_extract_element (OSEATYPE_COMPOUND_OBJECT(list), 
+								 GINT_TO_POINTER(0), &err))))
+		abort_execution (err, 29);
 	
 	g_object_unref (G_OBJECT(list));
 	list = NULL;
 
-
-
-
-
 	// Third, we are going to write and starting reading before finishing
 
 
-	integer = OSEATYPE_INT(oseatype_int_new());
 	list = OSEATYPE_LIST(oseatype_list_new_defined (-1, G_OBJECT_TYPE_NAME(integer)));
 
-	if (! oseatype_int_set (integer, 10, &err))
-		abort_execution (err, 31);
 	if (! oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list), 
 					       OSEATYPE_OBJECT(integer), 
 					       GINT_TO_POINTER(-1), &err)) {
