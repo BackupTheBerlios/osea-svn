@@ -65,12 +65,18 @@ class OseaType:Object from G:Object {
 		return NULL;
         }
 
-	public gboolean oseatype_object_try_access (self)
+	public gboolean try_access (self)
 	{
 		return g_mutex_trylock (self->access_mutex);
 	}
 
-	public void oseatype_object_release_access_lock (self)
+	public void lock_access (self)
+	{
+	        g_mutex_lock (self->access_mutex);
+		return;
+	}
+
+	public void release_access_lock (self)
 	{
 		g_mutex_unlock (self->access_mutex);
 		return;
