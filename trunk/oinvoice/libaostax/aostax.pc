@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libaostax
+Description: Support library interface to oInvoice tax server.
+Requires: oseacomm oseaclient
+Version: 0.0.90
+Libs: -L${libdir} -laostax
+Cflags: -I${includedir}

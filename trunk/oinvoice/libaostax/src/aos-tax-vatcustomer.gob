@@ -1,0 +1,134 @@
+%alltop{
+/*
+ *
+ *  LibAfdalTax: interface library to the tax daemon
+ *  Copyright (C) 2002  Advanced Software Production Line, S.L.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+#include <liboseaclient/oseaclient.h>
+
+%}
+
+requires 2.0.0
+
+%{
+#include "aos-tax-vatcustomer.h"
+#include "aos_tax_vat_customer.h"
+
+#ifdef HAVE_LOCALE_H
+#include <locale.h>
+#endif
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#define _(String) gettext (String)
+#else
+#define _(String) (String)
+#endif
+
+%}
+
+class Aos:Tax:VatCustomer from OseaClient:DataNode {
+ 	public int id = 0;
+        property INT id
+                (nick = _("Datanode Identification"),
+                 blurb = _("Unique identification for this datanode"),
+                 minimum = 0,
+                 maximum = INT_MAX,
+                 /* initially set to 0, even though we have already
+                  * set the default above */
+                 default_value = 0,
+		 export,
+                 link);
+	
+        /* the reference of this VAT Customer Type */
+        public char *reference = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING reference
+                (nick = _("Reference"),
+                 blurb = _("Unique reference of this VAT Customer Type"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+	
+        /* the name of this VAT Customer Type */
+        public char *name = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING name
+                (nick = _("Name"),
+                 blurb = _("Name of this VAT Customer Type"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+
+        /* the description of this VAT Customer Type */
+        public char *description = {g_strdup ("NOT DEFINED")}
+                destroywith g_free;
+        property STRING description
+                (nick = _("Description"),
+                 blurb = _("Description for this VAT Customer Type"),
+                 default_value = "NOT DEFINED",
+		 export,
+		 link);
+
+        public AosTaxVatCustomer * new (gint id, gchar *reference, gchar *name, gchar *description)
+        {
+		AosTaxVatCustomer * result;
+		
+		result = GET_NEW;
+
+		result->id = id;
+		result->reference = g_strdup(reference);
+		result->name = g_strdup(name);
+		result->description = g_strdup(description);
+                return result;
+        }
+
+	override (OseaClient:DataNode) 
+	gboolean edit_wrapper (self, OseaClientNulFunc usr_function, gpointer usr_data) {
+		return aos_tax_vat_customer_edit (self->id,
+						    self->reference, 
+						    self->name, 
+						    self->description,
+					            usr_function,
+					            usr_data);
+	}
+
+	override (OseaClient:DataNode) 
+	gboolean new_wrapper (self, OseaClientNulFunc usr_function, gpointer usr_data) {
+		return aos_tax_vat_customer_new (self->reference, 
+						   self->name, 
+						   self->description,
+						   usr_function,
+						   usr_data);
+	}
+
+/*	override (OseaClient:DataNode) 
+        AosTaxVatCustomer * copy (self) {
+		AosTaxVatCustomer * result;
+
+		result = GET_NEW;
+
+		result->id = self->id;
+		result->reference = g_strdup (self->reference);
+		result->name = g_strdup (self->name);
+		result->description = g_strdup (self->description);
+		
+		return result;
+		} */
+
+}
