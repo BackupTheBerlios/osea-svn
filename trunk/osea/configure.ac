@@ -5,7 +5,7 @@
 # (c) 2004 David Marín Carreño
 #
 
-AC_INIT(liboseaclient/src/liboseaclient.h)
+AC_INIT(liboseaclient/src/oseaclient.h)
 
 OSEA_VERSION=0.0.90
 AC_SUBST(OSEA_VERSION)
