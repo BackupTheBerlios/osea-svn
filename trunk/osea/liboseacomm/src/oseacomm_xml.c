@@ -456,7 +456,7 @@ gboolean oseacomm_xml_validate_message (OseaCommXmlMessage * message)
 
 	g_return_val_if_fail (message, FALSE);
 
-	dtd_file_name = g_build_filename (PACKAGE_DTD_DIR, "liboseacomm", "fact.dtd", NULL );
+	dtd_file_name = g_build_filename (PACKAGE_DTD_DIR, "liboseacomm", "oseacomm.dtd", NULL );
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Using dtd file: %s", dtd_file_name);
 	if (!dtd_file_name) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Cannot find the dtd file to validate messages");
