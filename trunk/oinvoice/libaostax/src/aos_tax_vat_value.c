@@ -1,4 +1,4 @@
-//  LibAfdalTax: interface library to the tax daemonstdin: is not a tty
+//  LibAosTax: interface library to the tax daemonstdin: is not a tty
 
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
@@ -214,7 +214,7 @@ void __aos_tax_vat_value_list_process (RRChannel *channel, RRFrame *frame,
  * @usr_function: function to be executed on server response.
  * @usr_data: user data to be passed to @user_function
  * 
- * List all available values at af-tax. 
+ * List all available values at os-tax. 
  * 
  * Return value: 
  **/
@@ -223,7 +223,7 @@ gboolean           aos_tax_vat_value_list        (OseaClientMultiFunc  usr_funct
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-tax", NULL);
+	connection = oseaclient_session_get_connection ("os-tax", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -268,7 +268,7 @@ gboolean           aos_tax_vat_value_set         (gint            id_customer,
 	g_string_sprintf (identifier_item, "%d", id_item);
 	g_string_sprintf (str_value, "%ld", value);
 	
-	connection = oseaclient_session_get_connection ("af-tax", NULL);
+	connection = oseaclient_session_get_connection ("os-tax", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -308,7 +308,7 @@ gboolean           aos_tax_vat_value_get         (gint           id_customer,
 	GString * identifier_item = NULL;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-tax", NULL);
+	connection = oseaclient_session_get_connection ("os-tax", NULL);
 	if (! connection)
 		return FALSE;
 

@@ -1,4 +1,4 @@
-//  LibAfdalTax: interface library to the tax daemonstdin: is not a tty
+//  LibAosTax: interface library to the tax daemonstdin: is not a tty
 
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
@@ -22,13 +22,13 @@
 #include <config.h>
 #include <time.h>
 
-#define LOG_DOMAIN "AFDAL_TAX"
+#define LOG_DOMAIN "AOS_TAX"
 
-void afdal_tax_print_version_info ()
+void aos_tax_print_version_info ()
 {
 	glong cd = COMPILATION_DATE;
 
-	g_print ("\tLibAfDalTax version %s, compiled %s", VERSION, ctime(&cd));
+	g_print ("\tLibAosTax version %s, compiled %s", VERSION, ctime(&cd));
 }
 
 

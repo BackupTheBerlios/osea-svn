@@ -1,5 +1,5 @@
 //
-//  LibAfdalTax: interface library to the tax daemon
+//  LibAosTax: interface library to the tax daemon
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify

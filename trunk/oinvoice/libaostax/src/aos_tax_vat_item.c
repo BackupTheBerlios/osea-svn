@@ -1,4 +1,4 @@
-//  LibAfdalTax: interface library to the tax daemonstdin: is not a tty
+//  LibAosTax: interface library to the tax daemonstdin: is not a tty
 
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
@@ -106,7 +106,7 @@ static void __aos_tax_vat_item_list_process (RRChannel * channel,
  * @usr_function: function to be executed when the server response arrives.
  * @usr_data: user data passed to @usr_function
  * 
- * This function require af-tax server for a VAT-Item-Type list,
+ * This function require os-tax server for a VAT-Item-Type list,
  * beginning with the item-type whose identifier is @id, and
  * with @max_row_number as maximum number of item-types.
  * 
@@ -119,7 +119,7 @@ gboolean aos_tax_vat_item_list (gint initial_item, gint max_row_number,
 	GString *init, *rows;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-tax", NULL);
+	connection = oseaclient_session_get_connection ("os-tax", NULL);
 	if (! connection)
 		return FALSE;
 	
@@ -165,7 +165,7 @@ gboolean aos_tax_vat_item_new (gchar * reference,
 {
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-tax", NULL);
+	connection = oseaclient_session_get_connection ("os-tax", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -205,7 +205,7 @@ gboolean aos_tax_vat_item_edit (gint                       id,
 	gboolean  result;
 	RRConnection * connection = NULL;
 	
-	connection = oseaclient_session_get_connection ("af-tax", NULL);
+	connection = oseaclient_session_get_connection ("os-tax", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -245,7 +245,7 @@ gboolean aos_tax_vat_item_remove (gint id,
 	gboolean  result;
 	RRConnection * connection = NULL;
 
-	connection = oseaclient_session_get_connection ("af-tax", NULL);
+	connection = oseaclient_session_get_connection ("os-tax", NULL);
 	if (! connection)
 		return FALSE;
 	
