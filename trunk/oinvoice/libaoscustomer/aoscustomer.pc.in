@@ -3,9 +3,9 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: libafdalcustomer
+Name: aoscustomer
 Description: Support library interface to customer server.
-Requires: coyote
+Requires: oseacomm
 Version: @VERSION@
-Libs: -L${libdir} -lafdalcustomer
+Libs: -L${libdir} -laoscustomer
 Cflags: -I${includedir}

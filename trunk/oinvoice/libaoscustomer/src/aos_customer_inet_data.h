@@ -1,4 +1,4 @@
-//  customer: LibAfDal layer for client-side
+//  customer: LibOseaClient layer for client-side
 //  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
 
 //  This program is free software; you can redistribute it and/or modify 
@@ -15,38 +15,38 @@
 //  along with this program; if not, write to the Free Software 
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-#ifndef __AFDAL_CUSTOMER_INET_DATA_H__
-#define __AFDAL_CUSTOMER_INET_DATA_H__
+#ifndef __AOS_CUSTOMER_INET_DATA_H__
+#define __AOS_CUSTOMER_INET_DATA_H__
 
-#include "afdal_customer.h"
+#include "aos_customer.h"
 
-typedef struct __AfDalCustomerInet_data {
+typedef struct __AosCustomerInet_data {
 	gint                id;
 	gint                enum_values_id;
 	gint                customer_id;
 	gchar              *inet_data;
-} AfDalCustomerInet_data;
+} AosCustomerInet_data;
 
-gboolean            afdal_customer_inet_data_new (gchar * inet_data,
+gboolean            aos_customer_inet_data_new (gchar * inet_data,
 						  gint customer_id,
 						  gint enum_values_id,
-						  AfDalSimpleFunc usr_function,
+						  OseaClientSimpleFunc usr_function,
 						  gpointer usr_data);
 
-gboolean            afdal_customer_inet_data_remove (gint inet_data_id,
-						     AfDalNulFunc usr_function,
+gboolean            aos_customer_inet_data_remove (gint inet_data_id,
+						     OseaClientNulFunc usr_function,
 						     gpointer usr_data);
 
-gboolean            afdal_customer_inet_data_edit (gint inet_data_id,
+gboolean            aos_customer_inet_data_edit (gint inet_data_id,
 						   gchar * new_inet_data,
 						   gint new_customer_id,
 						   gint new_enum_values_id,
-						   AfDalNulFunc usr_function,
+						   OseaClientNulFunc usr_function,
 						   gpointer usr_data);
 
-gboolean            afdal_customer_inet_data_list (gint max_row_number,
+gboolean            aos_customer_inet_data_list (gint max_row_number,
 						   gint initial_inet_data,
-						   AfDalDataFunc usr_function,
+						   OseaClientDataFunc usr_function,
 						   gpointer usr_data);
 
 #endif

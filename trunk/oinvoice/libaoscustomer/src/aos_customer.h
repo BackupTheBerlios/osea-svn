@@ -15,18 +15,18 @@
 //  along with this program; if not, write to the Free Software 
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-#ifndef __AFDAL_CUSTOMER_H__
-#define __AFDAL_CUSTOMER_H__
+#ifndef __AOS_CUSTOMER_H__
+#define __AOS_CUSTOMER_H__
 
 #include <glib.h>
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
-#include "afdal-customer-customer.h"
-#include "afdal_customer_enum_values.h"
-#include "afdal_customer_address.h"
-#include "afdal_customer_telephone.h"
-#include "afdal_customer_inet_data.h"
-#include "afdal_customer_contact.h"
-#include "afdal_customer_customer.h"
+#include "aos-customer-customer.h"
+#include "aos_customer_enum_values.h"
+#include "aos_customer_address.h"
+#include "aos_customer_telephone.h"
+#include "aos_customer_inet_data.h"
+#include "aos_customer_contact.h"
+#include "aos_customer_customer.h"
 
 #endif

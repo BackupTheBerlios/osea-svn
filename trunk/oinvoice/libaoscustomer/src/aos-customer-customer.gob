@@ -1,7 +1,7 @@
 %alltop{
 /*
  *
- *  LibAfdalCustomer: interface library to the customer daemon
+ *  LibOseaclientCustomer: interface library to the customer daemon
  *  Copyright (C) 2003 Advanced Software Production Line, S.L.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -23,11 +23,11 @@
 requires 2.0.0
 
 %header{
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 %}
 
 %{
-#include "afdal-customer-customer.h"
+#include "aos-customer-customer.h"
 
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
@@ -42,7 +42,7 @@ requires 2.0.0
 
 %}
 
-class AfDal:Customer:Customer from AfDal:DataNode {
+class Aos:Customer:Customer from OseaClient:DataNode {
  	public int id = 0;
         property INT id
                 (nick = _("Datanode Identification"),
@@ -125,9 +125,9 @@ class AfDal:Customer:Customer from AfDal:DataNode {
 		 link);
 	
 
-        public AfDalCustomerCustomer * create (void)
+        public AosCustomerCustomer * create (void)
         {
-		AfDalCustomerCustomer * result;
+		AosCustomerCustomer * result;
 		
 		result = GET_NEW;
 

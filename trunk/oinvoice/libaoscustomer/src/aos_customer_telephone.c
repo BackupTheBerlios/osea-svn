@@ -1,4 +1,4 @@
-//  customer: LibAfDal layer for client-side
+//  customer: LibOseaClient layer for client-side
 //  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
 
 //  This program is free software; you can redistribute it and/or modify 
@@ -15,13 +15,13 @@
 //  along with this program; if not, write to the Free Software 
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-#include "afdal_customer_telephone.h"
+#include "aos_customer_telephone.h"
 
-gboolean afdal_customer_telephone_new (gchar * phone,
+gboolean aos_customer_telephone_new (gchar * phone,
 				       gchar * description,
 				       gint customer_id,
 				       gint enum_values_id,
-				       AfDalSimpleFunc usr_function,
+				       OseaClientSimpleFunc usr_function,
 				       gpointer usr_data)
 {
 	RRConnection       *connection = NULL;
@@ -29,50 +29,50 @@ gboolean afdal_customer_telephone_new (gchar * phone,
 	gchar              *enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = afdal_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("af_customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
-	result = afdal_request (connection, afdal_request_process_simple_data, (AfDalFunc)
+	result = oseaclient_request (connection, oseaclient_request_process_simple_data, (OseaClientFunc)
 				usr_function, usr_data,
 				"telephone_new",
-				"phone", COYOTE_XML_ARG_STRING, phone, "description",
-				COYOTE_XML_ARG_STRING, description, "customer_id",
-				COYOTE_XML_ARG_STRING, customer_id_to_string, "enum_values_id",
-				COYOTE_XML_ARG_STRING, enum_values_id_to_string, NULL);
+				"phone", OSEACOMM_XML_ARG_STRING, phone, "description",
+				OSEACOMM_XML_ARG_STRING, description, "customer_id",
+				OSEACOMM_XML_ARG_STRING, customer_id_to_string, "enum_values_id",
+				OSEACOMM_XML_ARG_STRING, enum_values_id_to_string, NULL);
 	g_free (customer_id_to_string);
 	g_free (enum_values_id_to_string);
 	return result;
 }
 
-gboolean afdal_customer_telephone_remove (gint telephone_id,
-					  AfDalNulFunc usr_function,
+gboolean aos_customer_telephone_remove (gint telephone_id,
+					  OseaClientNulFunc usr_function,
 					  gpointer usr_data)
 {
 	RRConnection       *connection = NULL;
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = afdal_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("af_customer", NULL);
 	if (!connection)
 		return FALSE;
 	telephone_id_to_string = g_strdup_printf ("%d", telephone_id);
-	result = afdal_request (connection, afdal_request_process_nul_data, (AfDalFunc)
+	result = oseaclient_request (connection, oseaclient_request_process_nul_data, (OseaClientFunc)
 				usr_function, usr_data,
 				"telephone_remove",
-				"telephone_id", COYOTE_XML_ARG_STRING, telephone_id_to_string,
+				"telephone_id", OSEACOMM_XML_ARG_STRING, telephone_id_to_string,
 				NULL);
 	g_free (telephone_id_to_string);
 	return result;
 }
 
-gboolean afdal_customer_telephone_edit (gint telephone_id,
+gboolean aos_customer_telephone_edit (gint telephone_id,
 					gchar * new_phone,
 					gchar * new_description,
 					gint new_customer_id,
 					gint new_enum_values_id,
-					AfDalNulFunc usr_function,
+					OseaClientNulFunc usr_function,
 					gpointer usr_data)
 {
 	RRConnection       *connection = NULL;
@@ -81,20 +81,20 @@ gboolean afdal_customer_telephone_edit (gint telephone_id,
 	gchar              *new_enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = afdal_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("af_customer", NULL);
 	if (!connection)
 		return FALSE;
 	telephone_id_to_string = g_strdup_printf ("%d", telephone_id);
 	new_customer_id_to_string = g_strdup_printf ("%d", new_customer_id);
 	new_enum_values_id_to_string = g_strdup_printf ("%d", new_enum_values_id);
-	result = afdal_request (connection, afdal_request_process_nul_data, (AfDalFunc)
+	result = oseaclient_request (connection, oseaclient_request_process_nul_data, (OseaClientFunc)
 				usr_function, usr_data,
 				"telephone_edit",
-				"telephone_id", COYOTE_XML_ARG_STRING, telephone_id_to_string,
-				"new_phone", COYOTE_XML_ARG_STRING, new_phone, "new_description",
-				COYOTE_XML_ARG_STRING, new_description, "new_customer_id",
-				COYOTE_XML_ARG_STRING, new_customer_id_to_string,
-				"new_enum_values_id", COYOTE_XML_ARG_STRING,
+				"telephone_id", OSEACOMM_XML_ARG_STRING, telephone_id_to_string,
+				"new_phone", OSEACOMM_XML_ARG_STRING, new_phone, "new_description",
+				OSEACOMM_XML_ARG_STRING, new_description, "new_customer_id",
+				OSEACOMM_XML_ARG_STRING, new_customer_id_to_string,
+				"new_enum_values_id", OSEACOMM_XML_ARG_STRING,
 				new_enum_values_id_to_string, NULL);
 	g_free (telephone_id_to_string);
 	g_free (new_customer_id_to_string);
@@ -102,9 +102,9 @@ gboolean afdal_customer_telephone_edit (gint telephone_id,
 	return result;
 }
 
-void __afdal_customer_telephone_list_destroy (gpointer data)
+void __aos_customer_telephone_list_destroy (gpointer data)
 {
-	AfDalCustomerTelephone *telephone = (AfDalCustomerTelephone *) data;
+	AosCustomerTelephone *telephone = (AosCustomerTelephone *) data;
 
 	g_free (telephone->phone);
 	g_free (telephone->description);
@@ -112,56 +112,56 @@ void __afdal_customer_telephone_list_destroy (gpointer data)
 	return;
 }
 
-AfDalList          *__afdal_customer_telephone_list_create_afdal_list (CoyoteDataSet * data)
+OseaClientList          *__aos_customer_telephone_list_create_oseaclient_list (OseaCommDataSet * data)
 {
-	AfDalCustomerTelephone *telephone;
-	AfDalList          *result;
+	AosCustomerTelephone *telephone;
+	OseaClientList          *result;
 	gint                i;
 
-	result = afdal_list_new_full (afdal_support_compare_id, NULL,
-				      __afdal_customer_telephone_list_destroy);
-	for (i = 0; i < coyote_dataset_get_height (data); i++) {
-		telephone = g_new0 (AfDalCustomerTelephone, 1);
-		telephone->id = afdal_support_get_number (coyote_dataset_get (data, i, 0));
+	result = oseaclient_list_new_full (oseaclient_support_compare_id, NULL,
+				      __aos_customer_telephone_list_destroy);
+	for (i = 0; i < oseacomm_dataset_get_height (data); i++) {
+		telephone = g_new0 (AosCustomerTelephone, 1);
+		telephone->id = oseaclient_support_get_number (oseacomm_dataset_get (data, i, 0));
 		telephone->enum_values_id =
-			afdal_support_get_number (coyote_dataset_get (data, i, 1));
+			oseaclient_support_get_number (oseacomm_dataset_get (data, i, 1));
 		telephone->customer_id =
-			afdal_support_get_number (coyote_dataset_get (data, i, 2));
-		telephone->phone = g_strdup (coyote_dataset_get (data, i, 3));
-		telephone->description = g_strdup (coyote_dataset_get (data, i, 4));
-		afdal_list_insert (result, GINT_TO_POINTER (telephone->id), telephone);
+			oseaclient_support_get_number (oseacomm_dataset_get (data, i, 2));
+		telephone->phone = g_strdup (oseacomm_dataset_get (data, i, 3));
+		telephone->description = g_strdup (oseacomm_dataset_get (data, i, 4));
+		oseaclient_list_insert (result, GINT_TO_POINTER (telephone->id), telephone);
 	}
 	return result;
 }
 
-static void __afdal_customer_telephone_list_process (RRChannel * channel,
+static void __aos_customer_telephone_list_process (RRChannel * channel,
 						     RRFrame * frame,
 						     GString * message,
 						     gpointer data,
 						     gpointer custom_data)
 {
-	AfDalData          *afdal_data = NULL;
-	CoyoteDataSet      *dataset = NULL;
+	OseaClientData          *oseaclient_data = NULL;
+	OseaCommDataSet      *dataset = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 	g_return_if_fail (data);
-	//Close the channel properly and get the incoming coyote dataset
-	afdal_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_DATA, channel,
+	//Close the channel properly and get the incoming oseacomm dataset
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_DATA, channel,
 								  frame, message, &dataset, NULL,
 								  &data, &custom_data);
-	if (!afdal_data)
+	if (!oseaclient_data)
 		return;
 	// Translate incoming string data into typed-data
-	afdal_data->data = __afdal_customer_telephone_list_create_afdal_list (dataset);
+	oseaclient_data->data = __aos_customer_telephone_list_create_oseaclient_list (dataset);
 	// Call to user defined callback
-	afdal_request_call_user_function (AFDAL_REQUEST_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_DATA, data, custom_data, oseaclient_data);
 	return;
 }
 
-gboolean afdal_customer_telephone_list (gint max_row_number,
+gboolean aos_customer_telephone_list (gint max_row_number,
 					gint initial_telephone,
-					AfDalDataFunc usr_function,
+					OseaClientDataFunc usr_function,
 					gpointer usr_data)
 {
 	RRConnection       *connection = NULL;
@@ -169,16 +169,16 @@ gboolean afdal_customer_telephone_list (gint max_row_number,
 	gchar              *initial_telephone_to_string = NULL;
 	gboolean            result;
 
-	connection = afdal_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("af_customer", NULL);
 	if (!connection)
 		return FALSE;
 	max_row_number_to_string = g_strdup_printf ("%d", max_row_number);
 	initial_telephone_to_string = g_strdup_printf ("%d", initial_telephone);
-	result = afdal_request (connection, __afdal_customer_telephone_list_process, (AfDalFunc)
+	result = oseaclient_request (connection, __aos_customer_telephone_list_process, (OseaClientFunc)
 				usr_function, usr_data,
 				"telephone_list",
-				"max_row_number", COYOTE_XML_ARG_STRING, max_row_number_to_string,
-				"initial_telephone", COYOTE_XML_ARG_STRING,
+				"max_row_number", OSEACOMM_XML_ARG_STRING, max_row_number_to_string,
+				"initial_telephone", OSEACOMM_XML_ARG_STRING,
 				initial_telephone_to_string, NULL);
 	g_free (max_row_number_to_string);
 	g_free (initial_telephone_to_string);
