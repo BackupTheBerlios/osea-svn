@@ -20,8 +20,8 @@
 #define __TAX_VAT_CUSTOMER_H__
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 #include "tax_vat_customer.h"
 #include "osea_listmodel.h"
 

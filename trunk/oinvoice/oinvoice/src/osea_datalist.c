@@ -58,7 +58,7 @@ void __osea_datalist_node_destroy (gpointer data)
 
 AsplDataList * osea_datalist_new      ()
 {
-	return g_tree_new_full (__osea_datalist_key_compare, NULL, NULL, __aspl_datalist_node_destroy) ;
+	return g_tree_new_full (__osea_datalist_key_compare, NULL, NULL, __osea_datalist_node_destroy) ;
 }
 
 void           osea_datalist_free     (AsplDataList * adl)

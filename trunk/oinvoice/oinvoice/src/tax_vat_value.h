@@ -20,8 +20,8 @@
 #define __TAX_VAT_VALUE_H__
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 
 GtkTreeStore * tax_vat_value_tree_store_get   (void);
 

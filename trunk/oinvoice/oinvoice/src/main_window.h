@@ -22,7 +22,7 @@
 
 #include <gnome.h>
 #include <glade/glade.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <aoskernel/aos_kernel.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 #include "osea_datalist.h"
 

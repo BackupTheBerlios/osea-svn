@@ -22,7 +22,7 @@
 #include "settings.h"
 #include "widgets.h"
 #include <glade/glade.h>
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
 GladeXML * about_window_xml = NULL;
 gchar    * hostname  = NULL;
@@ -40,7 +40,7 @@ gchar    * portnumber = NULL;
  **/
 void __about_window_print_active_server (gpointer value, gpointer data)
 {
-	OseaClientSessionServer * server = (AfDalSessionServer *) value;
+	OseaClientSessionServer * server = (OseaClientSessionServer *) value;
 	GString            * string = (GString *) data;
 
 	g_string_sprintfa (string, "  %s (%s:%s)\n", server->name, server->host, server->port);

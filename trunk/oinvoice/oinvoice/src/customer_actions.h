@@ -20,8 +20,8 @@
 #define __CUSTOMER_ACTIONS_H_
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 #include "customer.h"
 
 void customer_actions_update_selection_actions ();

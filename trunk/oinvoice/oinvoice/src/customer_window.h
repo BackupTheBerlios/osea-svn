@@ -20,8 +20,8 @@
 #define __CUSTOMER_WINDOW_H_
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 
 void customer_window_show (gpointer customer);
 

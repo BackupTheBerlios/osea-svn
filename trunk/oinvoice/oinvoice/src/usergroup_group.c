@@ -18,8 +18,8 @@
 
 #include <config.h>
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 #include <string.h>
 #include "usergroup.h"
 #include "usergroup_group.h"
@@ -605,7 +605,7 @@ gboolean  __usergroup_group_select_user_on_model (GtkTreeModel *model,
 						  GtkTreeIter *iter,
 						  gpointer data)
 {
-	AosKernelUser * user = (OseaClientKernelUser *) data;
+	AosKernelUser * user = (AosKernelUser *) data;
 	gint              model_user_id;
 	gboolean          model_user_selected;
 	

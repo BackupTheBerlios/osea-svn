@@ -21,7 +21,7 @@
 
 
 #include <glib.h>
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
 gboolean event_process_oseaclient_multidata  (OseaClientMultiData * data, gpointer datalist_aux);
 

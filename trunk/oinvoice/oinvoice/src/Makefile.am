@@ -6,12 +6,12 @@ INCLUDES = \
 	-DHAVE_CONFIG_H  -DCOMPILATION_DATE=`date +%s` -g -Wall \
 	@PACKAGE_CFLAGS@
 
-bin_PROGRAMS = aspl-fact
+bin_PROGRAMS = oinvoice
 
 %.c %.h: %.gob
 	@GOB2@ --no-private-header $<
 
-aspl_fact_SOURCES = \
+oinvoice_SOURCES = \
 	main.c \
 	login_window.c login_window.h \
 	settings.c settings.h \
@@ -34,7 +34,7 @@ aspl_fact_SOURCES = \
 	usergroup_user.c usergroup_user.h \
 	usergroup_group.c usergroup_group.h \
 	usergroup_permission.c usergroup_permission.h \
-	aspl_datalist.c aspl_datalist.h \
+	osea_datalist.c osea_datalist.h \
 	error.c error.h \
 	support.c support.h \
 	widgets.c widgets.h \
@@ -42,9 +42,9 @@ aspl_fact_SOURCES = \
 	customer.c customer.h \
 	customer_actions.c customer_actions.h \
 	customer_window.c customer_window.h \
-	aspl_listmodel.c aspl_listmodel.h 
+	osea_listmodel.c osea_listmodel.h 
 
-aspl_fact_LDFLAGS = -rdynamic
+oinvoice_LDFLAGS = -rdynamic
 
-aspl_fact_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
+oinvoice_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
 

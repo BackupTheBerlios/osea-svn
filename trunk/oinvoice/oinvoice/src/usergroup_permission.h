@@ -20,8 +20,8 @@
 #define __USERGROUP_PERMISSION_H__
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 
 GtkTreeStore * usergroup_permission_list_store_get            (void);
 

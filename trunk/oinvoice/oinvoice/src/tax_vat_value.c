@@ -19,9 +19,9 @@
 #include <config.h>
 #include <math.h>
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
-#include <oseaclienttax/aos_tax.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
+#include <aostax/aos_tax.h>
 #include <errno.h>
 #include "tax.h"
 #include "tax_vat_value.h"
@@ -182,8 +182,8 @@ static void tax_vat_value_cell_edited  (GtkCellRendererText *cell,
 
 gboolean __print_value_tree (gpointer k, gpointer n, gpointer usr_data)
 {
-	AosTaxVatValueKey  * key = (OseaClientTaxVatValueKey *) k;
-	AosTaxVatValueData * value  = (OseaClientTaxVatValueData *) n;
+	AosTaxVatValueKey  * key = (AosTaxVatValueKey *) k;
+	AosTaxVatValueData * value  = (AosTaxVatValueData *) n;
 
 	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "I:%d, C:%d, V:%ld", key->id_item, key->id_customer, value->value);
 	
@@ -228,7 +228,7 @@ gboolean __tax_vat_value_add_to_model_aux (gpointer key, gpointer node, gpointer
 	gpointer               * data = (gpointer *) usr_data;
 	GtkTreeStore           * store = GTK_TREE_STORE (data[0]);
 	GtkTreeIter            * iter_parent = (GtkTreeIter *) (data[1]);
-	OseaClientList                  * values = (AfDalList *) (data[2]);
+	OseaClientList                  * values = (OseaClientList *) (data[2]);
 	gint                     id_parent = GPOINTER_TO_INT (data[3]);
 	GtkTreeIter              iter;
 	
@@ -269,8 +269,8 @@ gboolean __tax_vat_value_add_to_model (gpointer key, gpointer node, gpointer usr
 	AosTaxVatValueHeader * value;
 	gpointer               * data = (gpointer *) usr_data;
 	GtkTreeStore           * store = GTK_TREE_STORE (data[0]);
-	OseaClientList                  * subrows = (AfDalList *) (data[1]);
-	OseaClientList                  * values = (AfDalList *) (data[2]);
+	OseaClientList                  * subrows = (OseaClientList *) (data[1]);
+	OseaClientList                  * values = (OseaClientList *) (data[2]);
 	gpointer               * userdata = NULL;
 	GtkTreeIter              iter;
 

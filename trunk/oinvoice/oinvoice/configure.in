@@ -1,12 +1,12 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl AC_INIT([aspl-fact], [ML1], [http://bugzilla.aspl.es])
+dnl AC_INIT([oinvoice], [ML1], [http://bugzilla.aspl.es])
 
 AC_PREREQ(2.52)
 AC_INIT(src/main.c)
 
-PACKAGE="aspl-fact"
+PACKAGE="oinvoice"
 PACKAGE_BUGREPORT="http://bugzilla.aspl.es"
-PACKAGE_NAME="aspl-fact"
+PACKAGE_NAME="oinvoice"
 PACKAGE_VERSION="0.0.90"
 
 AC_SUBST(PACKAGE)
@@ -30,7 +30,7 @@ AC_ISC_POSIX
 AM_PROG_CC_STDC
 AC_HEADER_STDC
 
-pkg_modules="gal-2.0 libgnomeui-2.0 libglade-2.0 gconf-2.0 libxml-2.0 >= 2.5.10 afdalcustomer afdalkernel afdaltax coyote afdal"
+pkg_modules="gal-2.0 libgnomeui-2.0 libglade-2.0 gconf-2.0 libxml-2.0 >= 2.5.10 libaoscustomer libaoskernel libaostax liboseacomm liboseaclient"
 PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 
 GOB2_CHECK(2.0.0)
@@ -40,7 +40,7 @@ AC_SUBST(PACKAGE_LIBS)
 
 
 
-GETTEXT_PACKAGE=aspl-fact
+GETTEXT_PACKAGE=oinvoice
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE")
 

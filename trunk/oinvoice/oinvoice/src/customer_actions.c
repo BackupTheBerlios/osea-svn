@@ -18,10 +18,10 @@
 
 #include <config.h>
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
-#include <oseaclienttax/aos_tax.h>
-#include <oseaclientcustomer/aos_customer.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
+#include <aostax/aos_tax.h>
+#include <aoscustomer/aos_customer.h>
 #include "customer_actions.h"
 #include "main_window.h"
 #include "login_window.h"
@@ -114,7 +114,7 @@ void customer_actions_listmodel_create ()
 							       customer_actions_end_activity,
 							       NULL); 
 
- 	customer_actions_listmodel = osea_listmodel_new (cfg, OSEACLIENT_TYPE_CUSTOMER_CUSTOMER); 
+ 	customer_actions_listmodel = osea_listmodel_new (cfg, AOS_TYPE_CUSTOMER_CUSTOMER); 
  	model = customer_actions_listmodel; 
 	view = GTK_TREE_VIEW (customer_get_widget ("customer_treeview"));
 	gtk_tree_view_set_model (view, GTK_TREE_MODEL(model));

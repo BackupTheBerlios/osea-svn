@@ -1,10 +1,10 @@
 SUBDIRS = pixmaps
 
-xpddtddir = $(datadir)/aspl-fact
+xpddtddir = $(datadir)/oinvoice
 xpddtd_DATA = \
 	xpd.dtd
 
-gladedir = $(datadir)/aspl-fact/glade
+gladedir = $(datadir)/oinvoice/glade
 glade_DATA =   \
 	login.glade \
 	connection_settings.glade \

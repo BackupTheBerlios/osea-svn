@@ -25,7 +25,7 @@
 #include "customer.h"
 #include "about_window.h"
 #include <gal/shortcut-bar/e-shortcut-bar.h>
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 #include "settings.h"
 #include "event_source.h"
 #include "event_process.h"
@@ -597,7 +597,7 @@ void main_window_on_log_out_activate (gpointer widget, gpointer user_data)
 	osea_datalist_set_full (datalist, "SIGNAL", transaction_event, g_free);
 	osea_datalist_set (datalist, "MESSAGE", status_message);
 	
-	if (! oseaclient_session_logout (event_process_afdal_nuldata, datalist)) {
+	if (! oseaclient_session_logout (event_process_oseaclient_nuldata, datalist)) {
 		dialog_close_run 
 			(main_window_get (), GTK_MESSAGE_ERROR,
 			 _("There was a problem while logging out. Exiting locally"));
@@ -647,7 +647,7 @@ void main_window_on_quit_activate (gpointer widget, gpointer user_data)
 	osea_datalist_set_full (datalist, "SIGNAL", transaction_event, g_free);
 	osea_datalist_set (datalist, "MESSAGE", status_message);
 	
-	if (! oseaclient_session_logout (event_process_afdal_nuldata, datalist)) {
+	if (! oseaclient_session_logout (event_process_oseaclient_nuldata, datalist)) {
 		dialog_close_run 
 			(main_window_get (), GTK_MESSAGE_ERROR,
 			 _("There was a problem while logging out. Exiting locally"));

@@ -21,8 +21,8 @@
 
 
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 
 AosKernelSession * session_get             ();
 

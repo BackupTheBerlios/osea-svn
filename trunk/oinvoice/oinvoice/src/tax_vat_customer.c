@@ -18,9 +18,9 @@
 
 #include <config.h>
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
-#include <oseaclienttax/aos_tax.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
+#include <aostax/aos_tax.h>
 #include "tax.h"
 #include "tax_vat_customer.h"
 #include "tax_vat_value.h"
@@ -34,7 +34,7 @@
 #include "osea_listmodel.h"
 #include "entry-manager.h"
 #include "detailedview-manager.h"
-#include <oseaclienttax/aos_tax.h>
+#include <aostax/aos_tax.h>
 
 
 gint            tax_vat_customer_transaction_number = 0;
@@ -98,7 +98,7 @@ void tax_vat_customer_listmodel_create ()
 							       tax_vat_customer_end_activity,
 							       NULL); 
 
- 	tax_vat_customer_listmodel = osea_listmodel_new (cfg, OSEACLIENT_TYPE_TAX_VATCUSTOMER); 
+ 	tax_vat_customer_listmodel = osea_listmodel_new (cfg, AOS_TYPE_TAX_VATCUSTOMER); 
  	model = tax_vat_customer_listmodel; 
 
 	view = GTK_TREE_VIEW (tax_vat_get_widget ("vat_customer_treeview"));

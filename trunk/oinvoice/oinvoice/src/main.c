@@ -20,15 +20,15 @@
 #  include <config.h>
 #endif
 #include <gnome.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <aoskernel/aos_kernel.h>
 #include "login_window.h"
 #include "settings.h"
 #include "connection_settings_window.h"
 #include "connection_settings_wizard.h"
 #include <popt.h>
-#include <oseaclient/afdal.h>
-#include <oseaclientkernel/aos_kernel.h>
-#include <oseaclienttax/aos_tax.h>
+#include <liboseaclient/oseaclient.h>
+#include <aoskernel/aos_kernel.h>
+#include <aostax/aos_tax.h>
 
 void fake_log_handler (const gchar *log_domain,
 		       GLogLevelFlags log_level,

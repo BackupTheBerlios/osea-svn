@@ -20,8 +20,8 @@
 #define __USERGROUP_USER_H__
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 
 enum { USERGROUP_USER_ID_COLUMN, 
        USERGROUP_USER_NICK_COLUMN,

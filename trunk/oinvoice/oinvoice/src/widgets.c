@@ -20,7 +20,7 @@
 #include <string.h>
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
 #define LOG_DOMAIN G_LOG_DOMAIN
 

@@ -20,8 +20,8 @@
 #define __TAX_H_
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 #include "tax_vat_customer.h"
 
 GtkWidget    * tax_vat_get_widget                           (const gchar *widget_name);

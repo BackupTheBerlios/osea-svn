@@ -20,15 +20,15 @@
 
 #include <glib-object.h>
 #include <gtk/gtktreemodel.h>
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
 
 #define OSEA_LISTMODEL_TYPE             (osea_listmodel_get_type ())
-#define OSEA_LISTMODEL(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), ASPL_LISTMODEL_TYPE, AsplListmodel))
-#define OSEA_LISTMODEL_CLASS(vtable)    (G_TYPE_CHECK_CLASS_CAST ((vtable), ASPL_LISTMODEL_TYPE, AsplListmodelClass))
+#define OSEA_LISTMODEL(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), OSEA_LISTMODEL_TYPE, AsplListmodel))
+#define OSEA_LISTMODEL_CLASS(vtable)    (G_TYPE_CHECK_CLASS_CAST ((vtable), OSEA_LISTMODEL_TYPE, AsplListmodelClass))
 #define ASPL_IS_LISTMODEL(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), OSEA_LISTMODEL_TYPE))
 #define ASPL_IS_LISTMODEL_CLASS(vtable) (G_TYPE_CHECK_CLASS_TYPE ((vtable), OSEA_LISTMODEL_TYPE))
-#define OSEA_LISTMODEL_GET_CLASS(inst)  (G_TYPE_INSTANCE_GET_CLASS ((inst), ASPL_LISTMODEL_TYPE, AsplListmodelClass))
+#define OSEA_LISTMODEL_GET_CLASS(inst)  (G_TYPE_INSTANCE_GET_CLASS ((inst), OSEA_LISTMODEL_TYPE, AsplListmodelClass))
 
 
 typedef struct   _AsplListmodel AsplListmodel;

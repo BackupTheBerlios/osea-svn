@@ -17,7 +17,7 @@
 
 #include <gtk/gtktreemodel.h>
 #include <gtk/gtktreesortable.h>
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 #include "osea_listmodel.h"
 #include "osea_datalist.h"
 #include "event_source.h"
@@ -439,9 +439,9 @@ void           osea_listmodel_refresh_process (AsplDataList *datalist)
 				 _osea_listmodel_get_node_id (node));
 			gtk_tree_path_free (path);
 
-		} while (oseaclient_list_next (old_list) && afdal_list_next (model->private->list));
+		} while (oseaclient_list_next (old_list) && oseaclient_list_next (model->private->list));
 
-		if (oseaclient_list_length (model->private->list) < afdal_list_length (old_list)) {
+		if (oseaclient_list_length (model->private->list) < oseaclient_list_length (old_list)) {
 			do {
 				node = oseaclient_list_data (old_list);
 				iter.stamp = model->private->stamp;
@@ -457,7 +457,7 @@ void           osea_listmodel_refresh_process (AsplDataList *datalist)
 			oseaclient_list_next (model->private->list);
 	}
 	
-	if ((!old_list) || (oseaclient_list_length (model->private->list) > afdal_list_length (old_list))) {
+	if ((!old_list) || (oseaclient_list_length (model->private->list) > oseaclient_list_length (old_list))) {
 		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "REFRESH:PROCESS: insert elements");
 		do {
 			node = oseaclient_list_data (model->private->list);

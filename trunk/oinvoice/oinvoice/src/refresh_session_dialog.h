@@ -20,7 +20,7 @@
 #define __REFRESH_SESSION_DIALOG_H__
 
 #include <gtk/gtk.h>
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
 gboolean refresh_session_dialog_show (OseaClientPasswordData * pwd_data);
 

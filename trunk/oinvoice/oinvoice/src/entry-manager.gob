@@ -1,7 +1,7 @@
 %alltop{
 /*
  *
- *  LibAfdalTax: interface library to the tax daemon
+ *  LibAosTax: interface library to the tax daemon
  *  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
  *  Copyright (C) 2004 David Marín Carreño
  *
@@ -21,13 +21,13 @@
  */
 %}
 %header{
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkwindow.h>
 #include <glade/glade.h>	
-#include "aspl_listmodel.h"
+#include "osea_listmodel.h"
 #include "support.h"
-#include "aspl_datalist.h"
+#include "osea_datalist.h"
 #include "transaction_progress_window.h"
 %} 
 
@@ -66,7 +66,7 @@ class Entry:Manager from G:Object {
 
 	private GtkWidget * main_entry    = NULL;
 
-	private AfDalDataNode * node  = NULL;
+	private OseaClientDataNode * node  = NULL;
 
 
 	private AsplListmodel * model = NULL;
@@ -98,9 +98,9 @@ class Entry:Manager from G:Object {
 	}
 
 	private void button_ok_clicked_process (AsplDataList * datalist) {
-		AfDalNulData              * data     = aspl_datalist_get (datalist, "DATA");
+		OseaClientNulData              * data     = osea_datalist_get (datalist, "DATA");
 		GtkWindow                 * window;
-		EntryManager              * entry    = aspl_datalist_get (datalist, "ENTRYMANAGER");
+		EntryManager              * entry    = osea_datalist_get (datalist, "ENTRYMANAGER");
 		gboolean                    is_edit  = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (entry), "edit"));
 
 		// Shutdown transaction progress window
@@ -112,21 +112,21 @@ class Entry:Manager from G:Object {
 		gtk_widget_hide (GTK_WIDGET (window));
 
 		// Check what happens
-		if (data->state == AFDAL_ERROR) {
+		if (data->state == OSEACLIENT_ERROR) {
 			dialog_close_run (window, GTK_MESSAGE_ERROR, 
 					  _("There was a problem while %s:\n%s"), 
 					  is_edit ? "editing" : "creating" ,
 					  data->text_response);
-			afdal_nul_free (data);
+			oseaclient_nul_free (data);
 			return;
 		}
 		
 		if (is_edit) {
-			aspl_listmodel_edit_node (ASPL_LISTMODEL (entry->_priv->model), 
+			osea_listmodel_edit_node (OSEA_LISTMODEL (entry->_priv->model), 
 						  entry->_priv->iter,
 						  entry->_priv->node);
 		}else
-			aspl_listmodel_insert_node (ASPL_LISTMODEL (entry->_priv->model),
+			osea_listmodel_insert_node (OSEA_LISTMODEL (entry->_priv->model),
 						    entry->_priv->node);
 		return;
 	}
@@ -152,7 +152,7 @@ class Entry:Manager from G:Object {
 		window = GTK_WINDOW (glade_xml_get_widget (entry->_priv->main_glade,
 							   entry->_priv->window_name));
 
-		object_class = G_OBJECT_CLASS (AFDAL_DATANODE_GET_CLASS (entry->_priv->node));
+		object_class = G_OBJECT_CLASS (OSEACLIENT_DATANODE_GET_CLASS (entry->_priv->node));
 		
 		paramspecs = g_object_class_list_properties (object_class, &param_number);
 
@@ -196,14 +196,14 @@ class Entry:Manager from G:Object {
 		}
 		
 		datalist = support_create_callback (entry_manager_button_ok_clicked_process);
-		aspl_datalist_set (datalist, "ENTRYMANAGER", entry);
+		osea_datalist_set (datalist, "ENTRYMANAGER", entry);
 
 		if (is_edit) {
-			if (!afdal_datanode_edit_wrapper (entry->_priv->node, event_process_afdal_nuldata, datalist))
+			if (!oseaclient_datanode_edit_wrapper (entry->_priv->node, event_process_oseaclient_nuldata, datalist))
 				dialog_close_run (main_window_get (), GTK_MESSAGE_ERROR,
 						  _("There was a problem while editing"));
 		}else {
-			if (!afdal_datanode_new_wrapper (entry->_priv->node, event_process_afdal_nuldata, datalist))
+			if (!oseaclient_datanode_new_wrapper (entry->_priv->node, event_process_oseaclient_nuldata, datalist))
 				dialog_close_run (main_window_get (), GTK_MESSAGE_ERROR,
 						  _("There was a problem while creating"));
 		}
@@ -310,7 +310,7 @@ class Entry:Manager from G:Object {
 		GtkWidget      * window;
 		GtkWidget      * entry;
 		GtkTextBuffer  * buffer;
-		AfDalDataNode  * node;
+		OseaClientDataNode  * node;
 		GParamSpec    ** paramspecs   = NULL;
 		GObjectClass   * object_class = NULL;
 		gint             param_number = 0;
@@ -328,8 +328,8 @@ class Entry:Manager from G:Object {
 		main_window_set_active_window (GTK_WINDOW (window));
 
 		// Before launch window, fill it with data
-		node = aspl_listmodel_get_node (model, &iter);
-		g_return_if_fail (AFDAL_IS_DATANODE (node));		
+		node = osea_listmodel_get_node (model, &iter);
+		g_return_if_fail (OSEACLIENT_IS_DATANODE (node));		
 
 		self->_priv->node = node;
 		self->_priv->model = model;
@@ -337,7 +337,7 @@ class Entry:Manager from G:Object {
 
 
 		// Load text into entry widgets
-		object_class = G_OBJECT_CLASS (AFDAL_DATANODE_GET_CLASS (node));
+		object_class = G_OBJECT_CLASS (OSEACLIENT_DATANODE_GET_CLASS (node));
 		paramspecs = g_object_class_list_properties (object_class, &param_number);
 
 		for (i = 0; i < param_number; i++) {
@@ -373,7 +373,7 @@ class Entry:Manager from G:Object {
 		gtk_window_set_transient_for (GTK_WINDOW (window), main_window_get ());
 		main_window_set_active_window (GTK_WINDOW (window));
 
-		self->_priv->node = g_object_new (aspl_listmodel_get_node_type (model), NULL);
+		self->_priv->node = g_object_new (osea_listmodel_get_node_type (model), NULL);
 		self->_priv->model = model;
 
 		entry_manager_connect_signals (self);

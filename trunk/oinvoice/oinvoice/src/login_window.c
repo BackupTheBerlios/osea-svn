@@ -25,7 +25,7 @@
 #include "main_window.h"
 #include "widgets.h"
 #include "refresh_session_dialog.h"
-#include <oseaclient/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
 GladeXML * login_window_xml = NULL;
 gint       connection_try = 0;

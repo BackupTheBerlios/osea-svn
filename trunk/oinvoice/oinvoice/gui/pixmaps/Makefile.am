@@ -1,6 +1,6 @@
-pixmapgladedir = $(datadir)/aspl-fact/glade
+pixmapgladedir = $(datadir)/oinvoice/glade
 pixmapglade_DATA =   \
-	aspl-fact-login.xpm \
+	oinvoice-login.xpm \
 	Server.png \
 	icon-24x24-highcontrast.png \
 	icon-48x48-highcontrast.png icon-48x48-normal.png \

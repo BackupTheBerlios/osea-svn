@@ -21,13 +21,13 @@
  */
 %}
 %header{
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkwindow.h>
 #include <glade/glade.h>	
-#include "aspl_listmodel.h"
+#include "osea_listmodel.h"
 #include "support.h"
-#include "aspl_datalist.h"
+#include "osea_datalist.h"
 #include "transaction_progress_window.h"
 %} 
 
@@ -64,9 +64,9 @@ class DetailedView:Manager from G:Object {
 	private GList    * items      = NULL
 		destroywith g_list_free;
 	
-	private AfDalDataNode * node  = NULL;
+	private OseaClientDataNode * node  = NULL;
 
-	private AfDalDetailedDataNode * detailed_node = NULL;
+	private OseaClientDetailedDataNode * detailed_node = NULL;
 	
 	private AsplListmodel * model = NULL;
 
@@ -80,7 +80,7 @@ class DetailedView:Manager from G:Object {
 		GtkWidget               * widget;
 		GList                   * cursor;
 		Self                    * self = SELF (user_data);
-		AfDalDataNode           * node = NULL;
+		OseaClientDataNode           * node = NULL;
 		DetailedViewManagerItem * item = NULL;
 		gchar                   * label_text = NULL;
 		gint                      column_number;
@@ -91,7 +91,7 @@ class DetailedView:Manager from G:Object {
 		
 		if (gtk_tree_selection_get_selected (selection, NULL, &iter)) {
 			cursor = g_list_first (self->_priv->items);
-			node = aspl_listmodel_get_node (self->_priv->model, &iter);
+			node = osea_listmodel_get_node (self->_priv->model, &iter);
 
 			while (cursor) {
 				
@@ -100,7 +100,7 @@ class DetailedView:Manager from G:Object {
 				
 				if (GTK_IS_LABEL (widget)) {
 					if (! item->detailed_property) {
-						column_number = aspl_listmodel_get_column (self->_priv->model, 
+						column_number = osea_listmodel_get_column (self->_priv->model, 
 											   item->node_property);
 						
 						switch (gtk_tree_model_get_column_type (GTK_TREE_MODEL(self->_priv->model),
@@ -195,7 +195,7 @@ class DetailedView:Manager from G:Object {
 		DetailedViewManager * dvm = GET_NEW;
 		
 		dvm->_priv->view = view;
-		dvm->_priv->model = ASPL_LISTMODEL (gtk_tree_view_get_model (view));
+		dvm->_priv->model = OSEA_LISTMODEL (gtk_tree_view_get_model (view));
 
 		g_signal_connect (view, "cursor_changed", G_CALLBACK (detailedview_manager_cursor_changed), dvm);
 		g_signal_connect (view, "unselect_all", G_CALLBACK (detailedview_manager_unselect_all), dvm);

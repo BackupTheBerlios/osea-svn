@@ -18,8 +18,8 @@
 
 #include <config.h>
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 #include <string.h>
 #include "usergroup.h"
 #include "usergroup_user.h"

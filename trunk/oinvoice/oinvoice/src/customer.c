@@ -18,9 +18,9 @@
 
 #include <config.h>
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
-#include <oseaclienttax/aos_tax.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
+#include <aostax/aos_tax.h>
 #include "customer.h"
 #include "customer_actions.h"
 #include "main_window.h"

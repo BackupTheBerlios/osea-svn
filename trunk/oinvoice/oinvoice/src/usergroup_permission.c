@@ -18,8 +18,8 @@
 
 #include <config.h>
 #include <glib.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 #include <string.h>
 #include "usergroup.h"
 #include "usergroup_user.h"
@@ -582,7 +582,7 @@ gboolean __usergroup_permission_update_permissions_enabled (GtkTreeModel *model,
 {
 	AsplDataList          * datalist = (AsplDataList *) data;
 	OseaClientData             * oseaclientdata = osea_datalist_get (datalist, "DATA");	
-	OseaClientList                 * permissions = (AfDalList *) oseaclientdata->data;
+	OseaClientList                 * permissions = (OseaClientList *) oseaclientdata->data;
 	AosKernelPermission * permission = NULL;
 	gint                    id;
 	gint                    column = GPOINTER_TO_INT(osea_datalist_get (datalist, "COLUMN"));

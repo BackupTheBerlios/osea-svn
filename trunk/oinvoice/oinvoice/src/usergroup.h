@@ -20,8 +20,8 @@
 #define __USERGROUP_H_
 
 #include <gtk/gtk.h>
-#include <oseacomm/coyote.h>
-#include <oseaclientkernel/aos_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <aoskernel/aos_kernel.h>
 
 GtkWidget    * usergroup_get_widget                           (const gchar *widget_name);
 
