@@ -17,7 +17,7 @@ liboseatype_la_SOURCES = oseatype.c \
 	oseatype-date.c oseatype-time.c oseatype-time-instant.c oseatype-time-duration.c \
 	oseatype-month.c oseatype-year.c oseatype-recurring-date.c oseatype-recurring-day.c \
 	oseatype-string.c oseatype-language.c \
-	oseatype-compound-object.c
+	oseatype-compound-object.c oseatype-list.c
 
 
 liboseatypeinclude_HEADERS = oseatype.h \
@@ -31,7 +31,7 @@ liboseatypeinclude_HEADERS = oseatype.h \
 	oseatype-date.h oseatype-time.h oseatype-time-instant.h oseatype-time-duration.h \
 	oseatype-month.h oseatype-year.h oseatype-recurring-date.h oseatype-recurring-day.h \
 	oseatype-string.h oseatype-language.h \
-	oseatype-compound-object.h
+	oseatype-compound-object.h oseatype-list.h
 
 
 liboseatype_la_LIBADD = $(LIBRARIES_LIBS)

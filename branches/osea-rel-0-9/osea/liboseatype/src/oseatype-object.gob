@@ -34,7 +34,7 @@ requires 2.0.0
 
 class OseaType:Object from G:Object {
 	
-	public gboolean is_finished = FALSE;
+	protected gboolean is_finished = FALSE;
 	property BOOLEAN is_finished
 		(nick = "Is finished",
 		 blurb = "Boolean that says if the message has been fully emitted or received",
@@ -43,7 +43,7 @@ class OseaType:Object from G:Object {
 		 default_value = FALSE,
 		 link);
 
-	public gboolean in_progress = FALSE;
+	protected gboolean in_progress = FALSE;
 	property BOOLEAN in_progress
 		(nick = "Element is in progress",
 		 blurb = "Index of the message logical element currently being emitted/received",
@@ -51,27 +51,28 @@ class OseaType:Object from G:Object {
 		 maximum = TRUE,
 		 link);
 
-	public OseaTypeObject * parent = NULL;
+	protected OseaTypeObject * parent = NULL;
 	property POINTER parent
 		(nick = "Object's container",
 		 blurb = "OseaTypeCompoundObject that contains this object",
 		 link);
 
-	public GMutex * access_mutex = {g_mutex_new ()};
+	protected GMutex * access_mutex = {g_mutex_new ()};
 
         virtual gchar * serialize (self)
         {
 		g_critical ("You must redefine this function");
+		return NULL;
         }
 
 	public gboolean oseatype_object_try_access (self)
 	{
-		return g_mutex_trylock (self->_priv->access_mutex);
+		return g_mutex_trylock (self->access_mutex);
 	}
 
 	public void oseatype_object_release_access_lock (self)
 	{
-		g_mutex_unlock (self->_priv->access_mutex);
+		g_mutex_unlock (self->access_mutex);
 		return;
 	}
 

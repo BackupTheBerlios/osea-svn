@@ -30,15 +30,15 @@ requires 2.0.0
 %}
 
 %{
-
+#include "oseatype-object.h"
 %}
 
 class OseaType:Compound:Object from OseaType:Object {
 	
-	private gint total_length = -1;	
-	private gint current_length = -1;	
-	private gint last_accessed_element = -1;	
-	private gint last_inserted_element = -1;
+	protected gint total_length = -1;	
+	protected gint current_length = -1;	
+	protected gint last_accessed_element = -1;	
+	protected gint last_inserted_element = -1;
 	
 	init (self)
 	{
@@ -46,9 +46,10 @@ class OseaType:Compound:Object from OseaType:Object {
 		OSEATYPE_OBJECT(self)->in_progress = 0;
 	}
 
-	virtual gboolean add (self, OseaTypeObject *object, gpointer attributes);
+	virtual gboolean insert (self, OseaType:Object *object (check null type), 
+				 gpointer attributes, GError **error);
 	
-	virtual gboolean finish (self);
+	virtual gboolean finish (self, GError **error);
 
 	virtual OseaTypeObject * get_next_element (self, GError **error);
 
