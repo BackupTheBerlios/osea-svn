@@ -1,0 +1,59 @@
+dnl Process this file with autoconf to produce a configure script.
+dnl AC_INIT([aspl-fact], [ML1], [http://bugzilla.aspl.es])
+
+AC_PREREQ(2.52)
+AC_INIT(src/main.c)
+
+PACKAGE="aspl-fact"
+PACKAGE_BUGREPORT="http://bugzilla.aspl.es"
+PACKAGE_NAME="aspl-fact"
+PACKAGE_VERSION="0.0.90"
+
+AC_SUBST(PACKAGE)
+AC_SUBST(PACKAGE_BUGREPORT)
+AC_SUBST(PACKAGE_NAME)
+AC_SUBST(PACKAGE_VERSION)
+
+AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
+AM_MAINTAINER_MODE
+AM_CONFIG_HEADER(config.h)
+
+AC_PROG_INTLTOOL([0.11])
+
+AC_DEFINE_UNQUOTED(PACKAGE, $PACKAGE)
+AC_DEFINE_UNQUOTED(PACKAGE_BUGREPORT, $PACKAGE_BUGREPORT)
+AC_DEFINE_UNQUOTED(PACKAGE_NAME, $PACKAGE_NAME)
+AC_DEFINE_UNQUOTED(PACKAGE_VERSION, $PACKAGE_VERSION)
+
+AC_PROG_CC
+AC_ISC_POSIX
+AM_PROG_CC_STDC
+AC_HEADER_STDC
+
+pkg_modules="gal-2.0 libgnomeui-2.0 libglade-2.0 gconf-2.0 libxml-2.0 >= 2.5.10 afdalcustomer afdalkernel afdaltax coyote afdal"
+PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+
+GOB2_CHECK(2.0.0)
+
+AC_SUBST(PACKAGE_CFLAGS)
+AC_SUBST(PACKAGE_LIBS)
+
+
+
+GETTEXT_PACKAGE=aspl-fact
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE")
+
+dnl Add the languages which your application supports here.
+ALL_LINGUAS="es"
+AM_GLIB_GNU_GETTEXT
+AC_PROG_INTLTOOL
+
+AC_OUTPUT([
+Makefile
+src/Makefile
+po/Makefile.in
+gui/Makefile
+gui/pixmaps/Makefile
+])
+

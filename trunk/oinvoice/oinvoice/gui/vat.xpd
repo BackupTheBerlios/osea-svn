@@ -1,0 +1,84 @@
+<xpd>
+
+  <widget name="customers_label">
+    <permission name="list_vat_customer" server="os-tax"/>
+  </widget>
+  
+  <widget name="customers_vpaned">
+    <permission name="list_vat_customer" server="os-tax"/>
+  </widget>
+  
+  <widget name="refresh_button">
+    <permission name="list_vat_customer" server="os-tax"/>
+  </widget>
+  
+  <widget name="refresh1">
+    <permission name="list_vat_customer" server="os-tax"/>
+  </widget>
+
+  
+  
+  <widget name="items_label">
+    <permission name="list_vat_item" server="os-tax"/>
+  </widget>
+  
+  <widget name="items_vpaned">
+    <permission name="list_vat_item" server="os-tax"/>
+  </widget>
+
+
+
+  <widget name="vat_value_label">
+    <permission name="get_vat_value" server="os-tax"/>
+  </widget>
+  
+  <widget name="vat_value_vbox">
+    <permission name="get_vat_value" server="os-tax"/>
+  </widget>
+  
+
+
+  <widget name="new_vat_customer_type1">
+    <permission name="new_vat_customer" server="os-tax"/>
+  </widget>
+  
+  <widget name="new_vat_customer_type2">
+    <permission name="new_vat_customer" server="os-tax"/>
+  </widget>
+  
+  <widget name="new_vat_type_button">
+    <permission name="new_vat_customer" server="os-tax"/>
+  </widget>
+  
+
+  <widget name="edit_vat_customer_type1">
+    <permission name="edit_vat_customer" server="os-tax"/>
+  </widget>
+
+
+  <widget name="remove_vat_customer_type1">
+    <permission name="remove_vat_customer" server="os-tax"/>
+  </widget>
+  <widget name="remove_vat_type_button">
+    <permission name="remove_vat_customer" server="os-tax"/>
+  </widget>
+  
+
+  <widget name="new_vat_item_type1">
+    <permission name="new_vat_item" server="os-tax"/>
+  </widget>
+  
+  <widget name="new_vat_item_type2">
+    <permission name="new_vat_item" server="os-tax"/>
+  </widget>
+
+  <widget name="edit_vat_item_type1">
+    <permission name="edit_vat_item" server="os-tax"/>
+  </widget>
+
+  <widget name="remove_vat_item_type1">
+    <permission name="remove_vat_item" server="os-tax"/>
+  </widget>
+
+
+</xpd>

@@ -1,0 +1,19 @@
+Source: aspl-fact
+Section: unknown
+Priority: optional
+Maintainer: Francis Brosnan Blázquez <francis@aspl.es>
+Build-Depends: debhelper (>> 3.0.0), libcoyote0-dev (>= 0.0.2), 
+ libafdalkernel0-dev (>= 0.0.2), libafdaltax0-dev (>= 0.0.2), 
+ libafdal0-dev (>= 0.0.2), libgnomeui-dev, libglade2-dev, 
+ libgconf2-dev
+Standards-Version: 3.5.2
+
+Package: aspl-fact
+Architecture: any
+Depends: ${shlibs:Depends}, libcoyote0-0 (>= 0.0.2), 
+ libafdal0-0 (>= 0.0.2), libafdalkernel0-0 (>= 0.0.2), 
+ libafdaltax0-0 (>= 0.0.2), libgnomeui-0, libglade2-0,
+ libgconf2-4
+Description: ASPL Fact graphical user interface.
+ ASPL Fact graphical user interface.
+ 

@@ -1,0 +1,1176 @@
+# translation of ASPL Fact
+# Copyright (C) 2003 Advanced Software Production Line
+# This file is distributed under the same license as the ASPL Fact package.
+# David Marín Carreño <david@aspl.es>, 2003.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: ASPL Fact ML1\n"
+"POT-Creation-Date: 2003-11-19 18:15+0100\n"
+"PO-Revision-Date: 2003-05-01 00:45+0200\n"
+"Last-Translator:  <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/about_window.c:89
+#, c-format
+msgid "%d available servers:\n"
+msgstr "%d servidores disponibles:\n"
+
+#: src/event_source.c:164 src/event_source.c:190
+#, c-format
+msgid "EVENT_SOURCE: there's no signal called %s\n"
+msgstr "EVENT_SOURCE: No hay ninguna señal con nombre %s\n"
+
+#: src/event_source.c:174
+#, c-format
+msgid "Emmiting signal '%s'"
+msgstr "Emitiendo señal '%s'"
+
+#: src/login_window.c:109
+msgid "Error obtaining data from kernel server"
+msgstr "Error al obtener datos del servidor núcleo"
+
+#: src/login_window.c:142
+#, c-format
+msgid "Entering login_afdal_kernel_event function with signal '%s'\n"
+msgstr "Entrando en función login_afdal_kernel_event con señal '%s'\n"
+
+#: src/login_window.c:178
+msgid "You must enter a username and a password"
+msgstr "Debe introducir un nombre y una contraseña"
+
+#: src/login_window.c:204
+#, c-format
+msgid ""
+"There was a problem while trying to log \n"
+"into server %s with user %s"
+msgstr ""
+"Hubo un problema al conectarse \\n\n"
+"al servidor %s, puerto %s"
+
+#: src/main_window.c:96
+msgid "Managing"
+msgstr "Gestión"
+
+#: src/main_window.c:97
+msgid "VAT Managing"
+msgstr "Gestión de IVA"
+
+#: src/main_window.c:98
+msgid "Users & Permissions"
+msgstr "Usuarios y permisos"
+
+#: src/main_window.c:132
+msgid "Couldn't find 'main_window' widget in main.glade"
+msgstr "No se pudo encontrar el widget 'main_window' en main.glade"
+
+#: src/main_window.c:211
+#, c-format
+msgid "Error when loading image '%s': %s"
+msgstr "Error al cargar imagen '%s': %s"
+
+#: src/main_window.c:583 src/main_window.c:633
+msgid "Logging out..."
+msgstr "Cerrando sesión actual..."
+
+#: src/main_window.c:593 src/main_window.c:643
+msgid "There was a problem while logging out. Exiting locally"
+msgstr "Hubo un problema al cerrar la sesión. Saliendo de forma local."
+
+#: src/settings.c:52 src/settings.c:103
+msgid "Error: cannot obtain connection with gconf\n"
+msgstr "Error: no se pudo obtener conexión con gconf\n"
+
+#: src/settings.c:125
+#, c-format
+msgid "Error: Cannot set required data (Key: '%s'. Value: '%s'): %s\n"
+msgstr ""
+"Error: No se puedo establecer el dato solicitado (Clave: '%s'. Valor: '%s'): "
+"%s\n"
+
+#: src/tax.c:259
+msgid ""
+"There are no preferences yet. \n"
+"\n"
+"If you want some preferences, you can write down them at "
+"tax_preferences1_activate: tax.c: line 259 \n"
+"\n"
+"(Our litle homenage to abiword project ;-)"
+msgstr ""
+"Aún no hay preferencias.\n"
+"\n"
+"Si quieres preferencias, puedes implementarlas en tax_preferences1_activate: "
+"tax.c. Línea 259\n"
+"\n"
+"(Este es nuestro pequeño homenaje al proyecto abiword ;-)"
+
+#: src/tax_vat_customer.c:207 src/tax_vat_item.c:207 src/tax_vat_value.c:379
+#: src/usergroup_user.c:171 src/usergroup_user.c:331 src/usergroup_group.c:228
+#: src/usergroup_group.c:1299 src/usergroup_permission.c:432
+#: src/usergroup_permission.c:632
+#, c-format
+msgid ""
+"There was a problem while refreshing data:\n"
+"%s"
+msgstr ""
+"Hubo un problema al actualizar los datos:\n"
+"%s"
+
+#: src/tax_vat_customer.c:231 src/tax_vat_item.c:231
+msgid "Reference"
+msgstr "Referencia"
+
+#: src/tax_vat_customer.c:238
+msgid "VAT Customer Type Name"
+msgstr "Nombre de tipo de cliente según IVA"
+
+#: src/tax_vat_customer.c:283
+msgid "Asking af-tax server for VAT customer types..."
+msgstr "Solicitando al servidor af-tax los tipos de clientes según IVA"
+
+#: src/tax_vat_customer.c:294
+msgid "There was a problem while refreshing tax vat customer"
+msgstr "Hubo un problema al actualizar los datos del tipo de cliente según IVA"
+
+#. 		old_title = (gchar *) gtk_window_get_title (GTK_WINDOW(widget));
+#: src/tax_vat_customer.c:364 src/tax_vat_customer.c:594
+#: src/tax_vat_item.c:364 src/tax_vat_item.c:593
+#, c-format
+msgid "%s - ASPL Fact"
+msgstr "%s - ASPL Fact"
+
+#: src/tax_vat_customer.c:466
+#, c-format
+msgid ""
+"There was a problem while removing VAT Customer type:\n"
+"%s"
+msgstr ""
+"Hubo un problema al eliminar el tipo de cliente:\n"
+"%s"
+
+#: src/tax_vat_customer.c:536
+#, c-format
+msgid "Are you sure you want to delete '%s' VAT Customer Type?\n"
+msgstr ""
+"¿Está seguro de que desea eliminar el tipo de cliente según IVA '%s'?\n"
+
+#: src/tax_vat_customer.c:549
+msgid "Removing VAT Customer type..."
+msgstr "Eliminando tipo de cliente según IVA..."
+
+#: src/tax_vat_customer.c:559
+msgid "There was a problem while removing VAT Customer Type"
+msgstr "Hubo un problema al eliminar el tipo de cliente según IVA"
+
+#: src/tax_vat_customer.c:623
+#, c-format
+msgid ""
+"There was a problem while creating VAT Customer type:\n"
+"%s"
+msgstr ""
+"Hubo un problema al crear el tipo de cliente según IVA:\n"
+"%s"
+
+#: src/tax_vat_customer.c:707
+#, c-format
+msgid ""
+"There was a problem while editing VAT Customer type:\n"
+"%s"
+msgstr ""
+"Hubo un problema al editar el tipo de cliente según IVA:\n"
+"%s"
+
+#: src/tax_vat_customer.c:783
+msgid "You must provide a valid customer type name"
+msgstr "Debe proporcionar un nombre de tipo de usuario válido"
+
+#: src/tax_vat_customer.c:793
+msgid "You must provide a valid customer type reference"
+msgstr "Debe proporcionar una referencia de tipo de cliente válida"
+
+#: src/tax_vat_customer.c:835
+msgid "Creating VAT customer type..."
+msgstr "Creando tipo de cliente según IVA..."
+
+#: src/tax_vat_customer.c:845 src/tax_vat_customer.c:861
+#: src/tax_vat_item.c:293 src/tax_vat_item.c:843 src/tax_vat_item.c:860
+#: src/tax_vat_value.c:489
+msgid ""
+"There was a problem while refreshing \n"
+"from server 'af-tax'"
+msgstr ""
+"Hubo un problema al actualizar información\n"
+"del servidor 'af-tax'"
+
+#: src/tax_vat_customer.c:852
+msgid "Updating VAT customer type..."
+msgstr "Actualizando tipo de cliente según IVA..."
+
+#: src/tax_vat_item.c:238
+msgid "VAT Item Type Name"
+msgstr "Nombre de tipo de artículo según IVA"
+
+#: src/tax_vat_item.c:283
+msgid "Asking af-tax server for VAT item types..."
+msgstr "Solicitando al servidor af-tax los tipos de artículos según IVA"
+
+#: src/tax_vat_item.c:466
+#, c-format
+msgid ""
+"There was a problem while removing VAT Item type:\n"
+"%s"
+msgstr ""
+"Hubo un problema al eliminar el tipo de artículo:\n"
+"%s"
+
+#: src/tax_vat_item.c:536
+#, c-format
+msgid "Are you sure you want to delete '%s' VAT Item Type?\n"
+msgstr ""
+"¿Está seguro de que desea eliminar el tipo de artículo según IVA '%s'?\n"
+
+#: src/tax_vat_item.c:548
+msgid "Removing VAT Item type..."
+msgstr "Eliminando tipo de artículo según IVA..."
+
+#: src/tax_vat_item.c:558
+msgid "There was a problem while removing VAT Item Type"
+msgstr "Hubo un problema al eliminar el tipo de artículo según IVA"
+
+#: src/tax_vat_item.c:622
+#, c-format
+msgid ""
+"There was a problem while creating VAT Item type:\n"
+"%s"
+msgstr ""
+"Hubo un problema al crear el tipo de artículo según IVA:\n"
+"%s"
+
+#: src/tax_vat_item.c:706
+#, c-format
+msgid ""
+"There was a problem while editing VAT Item type:\n"
+"%s"
+msgstr ""
+"Hubo un problema al editar el tipo de artículo según IVA:\n"
+"%s"
+
+#: src/tax_vat_item.c:782
+msgid "You must provide a valid item type name"
+msgstr "Debe proporcionar un nombre de tipo de artículo válido"
+
+#: src/tax_vat_item.c:792
+msgid "You must provide a valid item type reference"
+msgstr "Debe proporcionar una referencia de tipo de artículo válida."
+
+#: src/tax_vat_item.c:833
+msgid "Creating VAT item type..."
+msgstr "Creando tipo de artículo según IVA..."
+
+#: src/tax_vat_item.c:851
+msgid "Updating VAT item type..."
+msgstr "Actualizando tipo de artículo según IVA..."
+
+#: src/tax_vat_value.c:415 src/tax_vat_value.c:436
+msgid "Customer Type Ref."
+msgstr "Ref. tipo cliente"
+
+#: src/tax_vat_value.c:422 src/tax_vat_value.c:429
+msgid "Item Type Ref."
+msgstr "Ref. tipo artículo"
+
+#: src/tax_vat_value.c:447
+msgid "Value"
+msgstr "Valor"
+
+#: src/tax_vat_value.c:478
+msgid "Asking af-tax server for VAT values..."
+msgstr "Solicitando valores de IVA al servidor af-tax"
+
+#: src/tax_vat_value.c:523
+#, c-format
+msgid ""
+"There was a problem while setting data:\n"
+"%s"
+msgstr ""
+"Hubo un problema al establecer los datos:\n"
+"%s"
+
+#: src/tax_vat_value.c:573
+msgid "Setting new VAT value..."
+msgstr "Estableciendo nuevo valor de IVA..."
+
+#: src/tax_vat_value.c:594
+msgid ""
+"There was a problem while setting values \n"
+"in server 'af-tax'"
+msgstr ""
+"Hubo un problema al establecer valores en el\n"
+"servidor 'af-tax' "
+
+#: src/usergroup.c:263
+msgid ""
+"There are no preferences yet. \n"
+"\n"
+"If you want some preferences, you can write down them at "
+"usergroup_preferences1_activate: usergroup.c: line 249 \n"
+"\n"
+"(Our litle homenage to abiword project ;-)"
+msgstr ""
+"Aún no hay preferencias.\n"
+"\n"
+"Si quieres preferencias, puedes implementarlas en "
+"usergroup_preferences1_activate: tax.c. Línea 249\n"
+"\n"
+"(Este es nuestro pequeño homenaje al proyecto abiword ;-)"
+
+#: src/usergroup_user.c:224
+msgid "Getting user's group..."
+msgstr "Obteniendo grupos de usuario..."
+
+#: src/usergroup_user.c:233
+msgid "There was a problem while getting user's groups"
+msgstr "Hubo un problema al obtener grupos del usuario."
+
+#: src/usergroup_user.c:354
+msgid "Nick"
+msgstr "Apodo"
+
+#: src/usergroup_user.c:361 src/usergroup_group.c:258
+msgid "Description"
+msgstr "Descripción"
+
+#: src/usergroup_user.c:409
+msgid "Asking af-kernel server for users..."
+msgstr "Solicitando al servidor af-tax los usuarios..."
+
+#: src/usergroup_user.c:420 src/usergroup_user.c:956 src/usergroup_user.c:976
+#: src/usergroup_group.c:322 src/usergroup_group.c:1212
+#: src/usergroup_group.c:1227
+msgid ""
+"There was a problem while refreshing \n"
+"from server 'af-kernel'"
+msgstr ""
+"Hubo un problema al actualizar información\n"
+"del servidor 'af-kernel'"
+
+#: src/usergroup_user.c:454
+#, c-format
+msgid ""
+"There was a problem while removing user:\n"
+"%s"
+msgstr ""
+"Hubo un problema al eliminar el usuario:\n"
+"%s"
+
+#: src/usergroup_user.c:523
+#, c-format
+msgid "Are you sure you want to delete '%s' user?\n"
+msgstr "¿Está seguro de que desea eliminar el usuario ''%s'?\n"
+
+#: src/usergroup_user.c:536
+msgid "Removing User..."
+msgstr "Eliminando usuario..."
+
+#: src/usergroup_user.c:546
+msgid "There was a problem while removing User"
+msgstr "Hubo un problema al eliminar el usuario"
+
+#: src/usergroup_user.c:594 src/usergroup_user.c:698 src/usergroup_group.c:822
+#: src/usergroup_group.c:940
+#, c-format
+msgid "%s properties - ASPL Fact"
+msgstr "Propiedades de %s - ASPL Fact"
+
+#: src/usergroup_user.c:727
+#, c-format
+msgid ""
+"There was a problem while creating user:\n"
+"%s"
+msgstr ""
+"Hubo un problema al crear el usuario:\n"
+"%s"
+
+#: src/usergroup_user.c:807
+#, c-format
+msgid ""
+"There was a problem while editing user:\n"
+"%s"
+msgstr ""
+"Hubo un problema al editar el usuario:\n"
+"%s"
+
+#: src/usergroup_user.c:879
+msgid "You must provide a valid user nick"
+msgstr "Debe proporcionar un apodo de usuario válido"
+
+#: src/usergroup_user.c:899
+msgid "Passwords differ. You must enter the same password in both entries."
+msgstr ""
+"Las contraseñas difieren. Debe introducir la misma contraseña en ambos "
+"campos."
+
+#: src/usergroup_user.c:924
+msgid "You must provide a valid password"
+msgstr "Debe proporcionar una contraseña válida"
+
+#: src/usergroup_user.c:946
+msgid "Creating user..."
+msgstr "Creando usuario..."
+
+#: src/usergroup_user.c:967
+msgid "Updating user..."
+msgstr "Actualizando usuario..."
+
+#: src/usergroup_group.c:251 src/usergroup_group.c:717
+#: src/usergroup_permission.c:470
+msgid "Name"
+msgstr "Nombre"
+
+#: src/usergroup_group.c:308
+msgid "Asking af-kernel server for groups..."
+msgstr "Solicitando grupos al servidor af-kernel..."
+
+#: src/usergroup_group.c:356
+#, c-format
+msgid ""
+"There was a problem while removing group:\n"
+"%s"
+msgstr ""
+"Hubo un problema al eliminar el grupo:\n"
+"%s"
+
+#: src/usergroup_group.c:432
+#, c-format
+msgid "Are you sure you want to delete '%s' group?\n"
+msgstr "¿Está seguro de que desea eliminar el grupo '%s'?\n"
+
+#: src/usergroup_group.c:440
+msgid "Removing Group..."
+msgstr "Eliminando grupo..."
+
+#: src/usergroup_group.c:458
+msgid "There was a problem while removing Group"
+msgstr "Hubo un problema al eliminar el grupo"
+
+#: src/usergroup_group.c:508
+#, c-format
+msgid "There was a problem: %s"
+msgstr "Hubo un problema: %s"
+
+#: src/usergroup_group.c:579
+msgid "There was a problem while removing user to this group."
+msgstr "Hubo un problema al eliminar el usuario de este grupo."
+
+#: src/usergroup_group.c:587
+msgid "There was a problem while adding user to this group."
+msgstr "Hubo un problema al añadir usuarios a este grupo."
+
+#: src/usergroup_group.c:708
+msgid "Selected"
+msgstr "Seleccionado"
+
+#: src/usergroup_group.c:758 src/usergroup_group.c:854
+msgid "There was a problem while asking for already created users."
+msgstr "Hubo un problema al solicitar usuarios ya existentes"
+
+#: src/usergroup_group.c:840
+msgid "Retrieving group information..."
+msgstr "Extrayendo información del grupo..."
+
+#: src/usergroup_group.c:957
+#, c-format
+msgid "There was a problem adding user to the group:%s"
+msgstr "Hubo un problema al añadir el usuario al grupo: %s"
+
+#: src/usergroup_group.c:992
+#, c-format
+msgid ""
+"There was a problem while creating group:\n"
+"%s"
+msgstr ""
+"Hubo un problema al crear el grupo:\n"
+"%s"
+
+#: src/usergroup_group.c:1063
+#, c-format
+msgid "There was a problem while add user %s to the group."
+msgstr "Hubo un problema al añadir el usuario %s al grupo."
+
+#: src/usergroup_group.c:1107
+#, c-format
+msgid ""
+"There was a problem while editing group:\n"
+"%s"
+msgstr ""
+"Hubo un problema al editar el grupo:\n"
+"%s"
+
+#: src/usergroup_group.c:1180
+msgid "You must provide a valid group name"
+msgstr "Debe proporcionar un nombre de grupo válido"
+
+#: src/usergroup_group.c:1204
+msgid "Creating group..."
+msgstr "Creando grupo..."
+
+#: src/usergroup_group.c:1220
+msgid "Updating group..."
+msgstr "Actualizando grupo..."
+
+#: src/usergroup_group.c:1352
+msgid "Getting group's user..."
+msgstr "Obteniendo usuarios del grupo..."
+
+#: src/usergroup_group.c:1361
+msgid "There was a problem while getting group's users"
+msgstr "Hubo un problema al obtener los usuarios del grupo"
+
+#: src/usergroup_permission.c:238
+#, c-format
+msgid ""
+"There was a problem while setting permission:\n"
+"%s"
+msgstr ""
+"Hubo un problema al establecer el permiso:\n"
+"%s"
+
+#: src/usergroup_permission.c:349
+msgid "Setting permission in af-kernel server..."
+msgstr "Estableciendo permiso en servidor af-kernel..."
+
+#: src/usergroup_permission.c:375
+msgid "There was a problem while trying to set permissions"
+msgstr "Hubo un problema al establecer permisos"
+
+#: src/usergroup_permission.c:463
+msgid "Server"
+msgstr "Servidor"
+
+#: src/usergroup_permission.c:530
+msgid "Asking af-kernel server for exiting permission..."
+msgstr "Solicitando al servidor af-kernel permiso para salir..."
+
+#: src/usergroup_permission.c:539
+msgid "There was a problem while retrieving permission from kernel"
+msgstr "Hubo un problema al obtener información del núcleo"
+
+#: src/usergroup_permission.c:658 src/usergroup_permission.c:665
+msgid "Enabled"
+msgstr "Habilitado"
+
+#: src/usergroup_permission.c:695
+msgid "Asking af-kernel server for effective permissions..."
+msgstr "Solicitando al servidor af-kernel los permisos efectivos..."
+
+#: src/usergroup_permission.c:710 src/usergroup_permission.c:735
+msgid "There was a problem while getting permission by user"
+msgstr "Hubo un problema al obtener los permisos del usuario"
+
+#. main_window_set_progressbar (TRUE);
+#: src/usergroup_permission.c:722
+msgid "Asking af-kernel server for actual permissions..."
+msgstr "Solicitando al servidor af-kernel los permisos reales..."
+
+#: src/usergroup_permission.c:749
+msgid "There was a problem while getting permission by group"
+msgstr "Hubo un problema al obtener permisos de grupo"
+
+#: src/usergroup_permission.c:838
+msgid "User nick"
+msgstr "Apodo de usuario"
+
+#: src/usergroup_permission.c:844
+msgid "Group name"
+msgstr "Nombre de grupo:"
+
+#: gui/connection_settings.glade.h:1
+#, fuzzy
+msgid ""
+"\n"
+"\n"
+"The client connection settings for communicate to ASPL Fact central server "
+"has been established.\n"
+"\n"
+"Press Apply to continue.\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Los datos de configuración para la conexión con el servidor central de ASPL "
+"Fact se han establecido.\n"
+"\n"
+"Pulse Aplicar para continuar."
+
+#: gui/connection_settings.glade.h:8
+#, fuzzy
+msgid ""
+"\n"
+"\n"
+"This wizard will assist you to set up your ASPL Fact client program.\n"
+"\n"
+"You will need information about your ASPL Fact central server, that should "
+"be provided by your system manager.\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Este asistente le ayudará a configurar su programa cliente ASPL Fact.\n"
+"\n"
+"Para ello necesitará información acerca de los datos de conexión con el "
+"servidor central de ASPL Fact, que deberán ser suministrados por su "
+"administrador de sistema."
+
+#: gui/connection_settings.glade.h:15 gui/login.glade.h:1 gui/main.glade.h:1
+#: gui/vat.glade.h:1 gui/user.glade.h:1
+msgid " "
+msgstr " "
+
+#: gui/connection_settings.glade.h:16 gui/login.glade.h:2 gui/main.glade.h:11
+#: gui/vat.glade.h:2 gui/user.glade.h:2
+msgid "*"
+msgstr "*"
+
+#: gui/connection_settings.glade.h:17
+msgid "1"
+msgstr "1"
+
+#: gui/connection_settings.glade.h:18
+msgid "2"
+msgstr "2"
+
+#: gui/connection_settings.glade.h:19
+msgid "3"
+msgstr "3"
+
+#: gui/connection_settings.glade.h:20
+msgid "<b><big>Central server address and port</big></b>"
+msgstr "<b><big>Dirección y puerto del servidor central</big></b>"
+
+#: gui/connection_settings.glade.h:21
+msgid "<b>Hostname</b>:"
+msgstr "<b>Nombre de máquina</b>:"
+
+#: gui/connection_settings.glade.h:22
+msgid "<b>Port</b>:"
+msgstr "<b>Puerto</b>:"
+
+#: gui/connection_settings.glade.h:23
+msgid "<big><big><big><b>ASPL Fact client configuration</b></big></big></big>"
+msgstr ""
+"<big><big><big><b>Configuración del cliente ASPL Fact</b></big></big></big>"
+
+#: gui/connection_settings.glade.h:24
+msgid ""
+"<i>Enter here the hostname or the IP address of the host where the ASPL Fact "
+"central server (kernel) is running.</i>"
+msgstr ""
+"<i>Introduzca aquí el nombre o la dirección IP del sistema donde se ejecuta "
+"el servidor central (núcleo) de ASPL Fact.</i>"
+
+#: gui/connection_settings.glade.h:25
+msgid ""
+"<i>Enter here the port number ASPL Fact central server (kernel) is listening "
+"to. (The default value is 55000)</i>"
+msgstr ""
+"<i>Introduzca aquí el número de puerto en el que escucha el servidor central "
+"(núcleo) de ASPL Fact. (El valor predeterminado es 55000)</i>"
+
+#: gui/connection_settings.glade.h:26
+msgid "Connection settings - ASPL Fact"
+msgstr "Configuración de conexión - ASPL Fact"
+
+#: gui/connection_settings.glade.h:27
+msgid "Connection settings wizard - ASPL Fact"
+msgstr "Asistente de configuración de conexión - ASPL Fact"
+
+#: gui/connection_settings.glade.h:28
+msgid "Hostname: "
+msgstr "Nombre de máquina:"
+
+#: gui/connection_settings.glade.h:29
+msgid "Port:"
+msgstr "Puerto:"
+
+#: gui/login.glade.h:3
+msgid "ASPL Fact. Log in."
+msgstr "ASPL Fact. Entrada en el sistema."
+
+#: gui/login.glade.h:4
+msgid "Logging into server..."
+msgstr "Conectándose al servidor..."
+
+#: gui/login.glade.h:5
+msgid "Password: "
+msgstr "Contraseña: "
+
+#: gui/login.glade.h:6
+msgid ""
+"Please enter your username and password\n"
+"to log in the system"
+msgstr ""
+"Introduzca nombre de usuario y contraseña\n"
+"para conectarse al sistema"
+
+#: gui/login.glade.h:8
+msgid "Username: "
+msgstr "Nombre de usuario: "
+
+#: gui/login.glade.h:9
+msgid "_Conn. Settings"
+msgstr "_Config. Conexión"
+
+#: gui/main.glade.h:2
+#, fuzzy
+msgid ""
+"(c) 2002, 2003 Advanced Software Production Line, S.L.\n"
+"\n"
+"<i>Authors:\n"
+"Francis Brosnan <francis@aspl.es>\n"
+"Jorge Cabello <jorge@aspl.es>\n"
+"David Marin <david@aspl.es>\n"
+"Marcos Olmos <marcos@aspl.es>\n"
+"</i>\n"
+msgstr ""
+"(c) 2002, 2003 Advanced Software Production Line, S.L.\n"
+"\n"
+"<i>Autores:\n"
+"Francis Brosnan <francis@aspl.es>\n"
+"Jorge Cabello <jorge@aspl.es>\n"
+"David Marín <david@aspl.es>\n"
+"Marcos Olmos <marcos@aspl.es>\n"
+"</i>"
+
+#: gui/main.glade.h:12
+#, fuzzy
+msgid "<b>Password:</b>"
+msgstr "<b>_Contraseña</b>:"
+
+#: gui/main.glade.h:13
+#, fuzzy
+msgid "<big><big><big></big><b>ASPL Fact ML4</b></big></big>"
+msgstr "<big><big><big></big><b>ASPL Fact ML3</b></big></big>"
+
+#: gui/main.glade.h:14
+msgid "ASPL Fact"
+msgstr "ASPL Fact"
+
+#: gui/main.glade.h:15
+#, fuzzy
+msgid "ASPL Fact. Session expired"
+msgstr "ASPL Fact. Entrada en el sistema."
+
+#: gui/main.glade.h:16
+msgid "About ASPL Fact"
+msgstr "Acerca de ASPL Fact"
+
+#: gui/main.glade.h:17
+msgid ""
+"Couldn't find an appropiate active server register in connected kernel for "
+"managing the current component.\n"
+"\n"
+"Please contact your administrator for notifying this problem."
+msgstr ""
+"No se pudo encontrar en el núcleo un servidor registrado adecuado para el "
+"componente actual.\n"
+"\n"
+"Contacte con su administrador y notifíquele este problema."
+
+#: gui/main.glade.h:20
+msgid "Message"
+msgstr "Mensaje"
+
+#: gui/main.glade.h:21 gui/vat.glade.h:21 gui/user.glade.h:24
+msgid "Prefere_nces"
+msgstr "Prefere_ncias"
+
+#: gui/main.glade.h:22
+msgid ""
+"Your session has expired. \n"
+"Please, enter your password to continue."
+msgstr ""
+
+#: gui/main.glade.h:24 gui/vat.glade.h:33 gui/user.glade.h:30
+msgid "_About"
+msgstr "_Acerca de"
+
+#: gui/main.glade.h:25
+msgid "_About ASPL Fact"
+msgstr "_Acerca de ASPL Fact"
+
+#: gui/main.glade.h:26 gui/vat.glade.h:36 gui/user.glade.h:32
+msgid "_Edit"
+msgstr "_Editar"
+
+#: gui/main.glade.h:27 gui/vat.glade.h:38 gui/user.glade.h:34
+msgid "_File"
+msgstr "_Archivo"
+
+#: gui/main.glade.h:28 gui/vat.glade.h:39 gui/user.glade.h:38
+msgid "_Help"
+msgstr "Ay_uda"
+
+#: gui/main.glade.h:29 gui/vat.glade.h:40 gui/user.glade.h:39
+msgid "_Log Out"
+msgstr "_Cerrar sesión actual"
+
+#: gui/main.glade.h:30
+#, fuzzy
+msgid "_Log out"
+msgstr "Cerrar sesión actual"
+
+#: gui/main.glade.h:31 gui/vat.glade.h:43 gui/user.glade.h:44
+msgid "_Quit"
+msgstr "_Salir"
+
+#: gui/main.glade.h:32
+msgid "_Refresh active servers"
+msgstr "_Actualizar servidores activos"
+
+#: gui/main.glade.h:33
+msgid "_Session info"
+msgstr "Información de _sesión"
+
+#: gui/main.glade.h:34 gui/vat.glade.h:46 gui/user.glade.h:47
+msgid "_Statusbar"
+msgstr "Barra de E_stado"
+
+#: gui/main.glade.h:35 gui/vat.glade.h:47 gui/user.glade.h:48
+msgid "_Toolbar"
+msgstr "Barra de _Herramientas"
+
+#: gui/main.glade.h:36 gui/vat.glade.h:49 gui/user.glade.h:52
+msgid "_View"
+msgstr "_Ver"
+
+#: gui/main.glade.h:37
+msgid "button4"
+msgstr "botón4"
+
+#: gui/main.glade.h:38
+msgid "button5"
+msgstr "botón5"
+
+#: gui/vat.glade.h:3
+msgid "<b>_Description:</b>"
+msgstr "<b>_Descripción:</b>"
+
+#: gui/vat.glade.h:4 gui/user.glade.h:10
+msgid "<b>_Name:</b>"
+msgstr "<b>_Nombre:</b>"
+
+#: gui/vat.glade.h:5
+msgid "<b>_Reference:</b>"
+msgstr "<b>_Referencia:</b>"
+
+#: gui/vat.glade.h:6
+msgid "<big><b>VAT Managing</b></big>"
+msgstr "<big><b>Gestión de IVA</b></big>"
+
+#: gui/vat.glade.h:7
+msgid "Customer type description: "
+msgstr "Descripción de tipo de cliente:"
+
+#: gui/vat.glade.h:8
+msgid "Customer type name:"
+msgstr "Nombre de tipo de cliente:"
+
+#: gui/vat.glade.h:9
+msgid "Customer type reference:"
+msgstr "Referencia de tipo de cliente:"
+
+#: gui/vat.glade.h:10
+msgid "E_dit VAT Item Type"
+msgstr "E_ditar tipo de artículo según IVA"
+
+#: gui/vat.glade.h:11
+msgid "First I_tem Types"
+msgstr "Según tipos de _artículo"
+
+#: gui/vat.glade.h:12
+msgid "First _Customer Types"
+msgstr "Según tipos de _cliente"
+
+#: gui/vat.glade.h:13
+msgid "I_tem types"
+msgstr "Tipos de _artículo"
+
+#: gui/vat.glade.h:14
+msgid "Item type description: "
+msgstr "Descripción de tipo de artículo: "
+
+#: gui/vat.glade.h:15
+msgid "Item type name:"
+msgstr "Nombre de tipo de artículo:"
+
+#: gui/vat.glade.h:16
+msgid "Item type reference:"
+msgstr "Referencia de tipo de artículo:"
+
+#: gui/vat.glade.h:17 gui/user.glade.h:19
+msgid "Log out"
+msgstr "Cerrar sesión actual"
+
+#: gui/vat.glade.h:18
+msgid "Ne_w VAT Item Type"
+msgstr "Nue_vo tipo de artículo según IVA"
+
+#: gui/vat.glade.h:19
+msgid "New VAT I_tem Type"
+msgstr "Nuevo tipo de _artículo según IVA"
+
+#: gui/vat.glade.h:20
+msgid "New VAT Type"
+msgstr "Nuevo tipo de IVA"
+
+#: gui/vat.glade.h:22
+msgid "Re_move VAT Item Type"
+msgstr "Eli_minar tipo de artículo según IVA"
+
+#: gui/vat.glade.h:23 gui/user.glade.h:26
+msgid "Refresh"
+msgstr "Actualizar"
+
+#: gui/vat.glade.h:24 gui/user.glade.h:27
+msgid "Remove VAT Type"
+msgstr "Eliminar tipo de IVA"
+
+#: gui/vat.glade.h:25
+msgid "VAT Customer Type - ASPL Fact"
+msgstr "Tipo de cliente según IVA - ASPL Fact"
+
+#: gui/vat.glade.h:26
+msgid "VAT Customer Type _Properties"
+msgstr "Propiedades del tipo de cliente según IVA"
+
+#: gui/vat.glade.h:27
+msgid "VAT I_tem Types"
+msgstr "Tipos de _artículos según IVA"
+
+#: gui/vat.glade.h:28
+msgid "VAT Item Type - ASPL Fact"
+msgstr "Tipo de artículo según IVA - ASPL Fact"
+
+#: gui/vat.glade.h:29
+msgid "VAT Item Type _Properties"
+msgstr "Propiedades de tipos de artículo según IVA"
+
+#: gui/vat.glade.h:30
+msgid "VAT _Client Types"
+msgstr "Tipos de _Cliente según el IVA"
+
+#: gui/vat.glade.h:31
+msgid "VAT _Values"
+msgstr "_Valores de IVA"
+
+#: gui/vat.glade.h:32
+msgid "Value _Ordering:"
+msgstr "_Ordenar valores:"
+
+#: gui/vat.glade.h:34 gui/user.glade.h:31
+msgid "_Actions"
+msgstr "A_cciones"
+
+#: gui/vat.glade.h:35
+msgid "_Customer types"
+msgstr "Tipos de _cliente"
+
+#: gui/vat.glade.h:37
+msgid "_Edit VAT Customer Type"
+msgstr "_Editar tipo de cliente según IVA"
+
+#: gui/vat.glade.h:41
+msgid "_New VAT Customer Type"
+msgstr "_Nuevo tipo de cliente según IVA"
+
+#: gui/vat.glade.h:42
+msgid "_New VAT Type"
+msgstr "_Nuevo tipo de IVA"
+
+#: gui/vat.glade.h:44 gui/user.glade.h:45
+msgid "_Refresh"
+msgstr "_Actualizar"
+
+#: gui/vat.glade.h:45
+msgid "_Remove VAT Customer Type"
+msgstr "_Eliminar tipo de cliente según IVA"
+
+#: gui/vat.glade.h:48
+msgid "_VAT values"
+msgstr "_Valores de IVA"
+
+#: gui/vat.glade.h:50 gui/user.glade.h:53
+msgid "button9"
+msgstr "botón9"
+
+#: gui/user.glade.h:3
+msgid "<b>Belongs to:</b>"
+msgstr "<b>Pertenece a:</b>"
+
+#: gui/user.glade.h:4
+msgid "<b>Group _Description:</b>"
+msgstr "<b>_Descripción de grupo:</b>"
+
+#: gui/user.glade.h:5
+msgid "<b>Group's users:</b>"
+msgstr "<b>Usuarios del grupo:</b>"
+
+#: gui/user.glade.h:6
+msgid "<b>Group:</b>"
+msgstr "<b>Grupo</b>:"
+
+#: gui/user.glade.h:7
+msgid "<b>User _Description:</b>"
+msgstr "<b>_Descripción de usuario:</b>"
+
+#: gui/user.glade.h:8
+msgid "<b>User:</b>"
+msgstr "<b>Usuario:</b>"
+
+#: gui/user.glade.h:9
+msgid "<b>Users in group:</b>"
+msgstr "<b>Usuarios dentro del grupo:</b>"
+
+#: gui/user.glade.h:11
+msgid "<b>_Nick:</b>"
+msgstr "<b>_Apodo:</b>"
+
+#: gui/user.glade.h:12
+msgid "<b>_Password (again):</b>"
+msgstr "<b>_Contraseña (de nuevo):</b>"
+
+#: gui/user.glade.h:13
+msgid "<b>_Password:</b>"
+msgstr "<b>_Contraseña</b>:"
+
+#: gui/user.glade.h:14
+msgid "<big><b>Users &amp; Permissions</b></big>"
+msgstr "<big><b>Usuarios y permisos</b></big>"
+
+#: gui/user.glade.h:15
+msgid "E_dit group properties"
+msgstr "E_ditar propiedades de grupo"
+
+#: gui/user.glade.h:16
+msgid "Enter passwords only if you want to change them:"
+msgstr "Introduzca las contraseñas sólo si desea cambiarlas:"
+
+#: gui/user.glade.h:17
+msgid "Group _Properties"
+msgstr "_Propiedades de grupo"
+
+#: gui/user.glade.h:18
+msgid "Group properties - ASPL Fact"
+msgstr "Propiedades de grupo - ASPL Fact"
+
+#: gui/user.glade.h:20
+msgid "Ne_w group"
+msgstr "Nue_vo grupo"
+
+#: gui/user.glade.h:21
+msgid "New _Group"
+msgstr "Nuevo _Grupo"
+
+#: gui/user.glade.h:22
+msgid "New user or group"
+msgstr "Nuevo usuario o grupo"
+
+#: gui/user.glade.h:23
+msgid "Permission description:"
+msgstr "Descripción de permiso:"
+
+#: gui/user.glade.h:25
+msgid "Re_move group"
+msgstr "Eli_minar grupo"
+
+#: gui/user.glade.h:28
+msgid "User _Properties"
+msgstr "_Propiedades de usuario"
+
+#: gui/user.glade.h:29
+msgid "User properties - ASPL Fact"
+msgstr "Propiedades de usuario - ASPL Fact"
+
+#: gui/user.glade.h:33
+msgid "_Edit user properties"
+msgstr "_Editar propiedades de usuario"
+
+#: gui/user.glade.h:35
+msgid "_Groups"
+msgstr "_Grupos"
+
+#: gui/user.glade.h:36
+msgid "_Groups Permissions"
+msgstr "Permisos de _Grupo"
+
+#: gui/user.glade.h:37
+msgid "_Groups list"
+msgstr "Lista de _Grupos"
+
+#: gui/user.glade.h:40
+msgid "_New User"
+msgstr "_Nuevo usuario"
+
+#: gui/user.glade.h:41
+msgid "_New User or Group"
+msgstr "_Nuevo usuario o grupo"
+
+#: gui/user.glade.h:42
+msgid "_Permissions"
+msgstr "_Permisos"
+
+#: gui/user.glade.h:43
+msgid "_Permissions list"
+msgstr "_Lista de permisos"
+
+#: gui/user.glade.h:46
+msgid "_Remove user"
+msgstr "_Eliminar usuario"
+
+#: gui/user.glade.h:49
+msgid "_Users"
+msgstr "_Usuarios"
+
+#: gui/user.glade.h:50
+msgid "_Users Permissions"
+msgstr "Permisos de usuarios"
+
+#: gui/user.glade.h:51
+msgid "_Users list"
+msgstr "_Lista de usuarios"
+
+#~ msgid ""
+#~ "There was a problem while removing VAT User type:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Hubo un problema al eliminar el tipo de usuario:\n"
+#~ "%s"
+
+#~ msgid "User capabilities:"
+#~ msgstr "Capacidades del usuario:"
+
+#~ msgid ""
+#~ "There was a problem while connecting \n"
+#~ "to server %s at port %s"
+#~ msgstr ""
+#~ "Hubo un problema al conectarse al \n"
+#~ "servidor %s en el puerto %s"
+
+#~ msgid "Connecting af-tax server..."
+#~ msgstr "Conectándose a af-tax..."
+
+#~ msgid "Entering tax_on_afdal_event function with signal '%s'\n"
+#~ msgstr "Entrando en función tax_on_afdal_event con señal '%s'\n"
+
+#~ msgid ""
+#~ "There was a problem while connecting \n"
+#~ "to server 'af-tax' at host %s and port %s"
+#~ msgstr ""
+#~ "Hubo un problema al conectarse al \n"
+#~ "servidor 'af-tax' en el sistema %s , puerto %s"
+
+#~ msgid "New VAT Customer Type"
+#~ msgstr "Nuevo tipo de cliente según IVA"

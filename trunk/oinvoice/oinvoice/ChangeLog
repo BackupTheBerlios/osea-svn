@@ -1,0 +1,975 @@
+2003-10-29  Francis Brosnan Blazquez  <acinom@titan.aspl>
+
+	* src/tax.c: Minor changes.
+
+2003-10-29  David Marin Carreno  <davefx@titan>
+
+	* gui/user.glade, src/usergroup_permission.c:
+	Adding support for saving dependencies info into permissions (not used yet)
+
+2003-10-28  Francis Brosnan Blazquez  <acinom@titan.aspl>
+
+	* gui/vat.xpd: Modifying.
+
+2003-10-06  David Marin Carreno  <davefx@titan>
+
+	* configure.in: Removing "debug" configure option
+
+	* src/main.c, src/refresh_session_dialog.c:
+	Adding support for "AF_DEBUG" environment variable.
+	Fixing race condition in afdal_event_process.
+
+2003-10-03  David Marin Carreno  <davefx@titan>
+
+	* src/main.c: Adding call to afdal_init function
+
+2003-10-02  David Marin Carreno  <davefx@titan>
+
+	* configure.in: Changing configure.in. Now it works in gentoo... ;-)
+
+2003-09-17  David Marin Carreno  <davefx@titan>
+
+	* src/Makefile.am, src/main.c: Adding compiling time info to --version
+
+	* src/main.c: Cleaning messages in terminal.
+
+	* src/main.c: Removing log messages when DEBUG is not enabled...
+
+	* .cvsignore: Adding stamp-h.in
+
+	* stamp-h.in: Removing file not needed
+
+	* src/event_source.c, src/main.c, src/usergroup_permission.c, configure.in:
+	Adding --enable-debug configuration option.
+	Now aspl-fact should not throw messages to terminal if the user
+	didn't use --enable-debug option.
+
+2003-09-16  David Marin Carreno  <davefx@titan>
+
+	* gui/main.glade: Updating version number
+
+	* src/about_window.c, src/transaction_progress_window.c: Fixing warning
+
+	* ChangeLog: Updating Changelogs
+
+2003-09-14  David Marin Carreno  <davefx@titan>
+
+	* gui/main.glade, src/connection_progress_window.c, src/main_window.c, src/refresh_session_dialog.c:
+	Fixed all problems with refresh_session process :-) (At least I think so)
+
+2003-09-14  David Marin Carreno  <david@aspl.es>
+
+	* gui/main.glade, src/connection_progress_window.c, src/main_window.c, src/refresh_session_dialog.c:
+	Fixed all problems with refresh_session process :-) (At least I think so)
+
+2003-09-13  David Marin Carreno  <david@aspl.es>
+
+	* src/Makefile.am, src/about_window.c, src/connection_progress_window.c, src/login_window.c, src/main_window.c, src/main_window.h, src/refresh_session_dialog.c, src/refresh_session_dialog.h, src/tax_vat_customer.c, src/tax_vat_item.c, src/transaction_progress_window.c, src/usergroup_group.c, src/usergroup_user.c, gui/main.glade:
+	Fixing problems when refreshing session: now it seems to work perfectly.
+	Programmed password-asking callback in aspl-fact for refreshing session
+	(still with problems with transient windows).
+
+2003-09-08  David Marin Carreno  <david@aspl.es>
+
+	* configure.in: Fixing error in pkg_modules line
+
+2003-09-06  David Marin Carreno  <david@aspl.es>
+
+	* src/tax_vat_item.c, src/usergroup.c, src/usergroup_group.c, src/usergroup_permission.c, src/usergroup_user.c, src/widgets.c, configure.in, gui/Makefile.am, gui/user.glade, gui/user.xpd, gui/user_group.xpd, gui/user_permission.xpd, gui/vat.glade, gui/vat.xpd, gui/vat_item.xpd, gui/vat_value.xpd, src/tax.c, src/tax_vat_customer.c:
+	Users and Permissions component now has dynamic permission-disabling.
+	Working in Vat Managing dynamic permission-disabling.
+
+	* gui/main.xpd, gui/user.xpd, gui/vat.xpd: Uploading .xpd files
+
+2003-09-05  David Marin Carreno  <david@aspl.es>
+
+	* gui/Makefile.am, gui/user_group.xpd, src/tax_vat_customer.c, src/tax_vat_item.c, src/usergroup_group.c, src/usergroup_permission.c, src/usergroup_user.c, src/widgets.h:
+	Adding support for dynamic permission checking when
+	abling or disabling widgets sensibility.
+
+	* src/widgets.c: Updating...
+
+2003-09-04  David Marin Carreno  <david@aspl.es>
+
+	* src/main_window.c, src/widgets.c, src/widgets.h: Fixing bugs
+
+	* src/connection_settings_window.c, src/connection_settings_wizard.c, src/error.c, src/login_window.c, src/main_window.c, src/tax.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/transaction_progress_window.c, src/usergroup.c, src/usergroup_group.c, src/usergroup_user.c, src/widgets.c, gui/Makefile.am, gui/permissions.dtd, gui/xpd.dtd, src/about_window.c, src/connection_progress_window.c:
+	Adding permissions-based widget dynamic disabling using XML Permission
+	Description (.xpd) files.
+	Cool.
+
+2003-09-03  David Marin Carreno  <david@aspl.es>
+
+	* gui/Makefile.am: Adding dtd
+
+	* src/connection_settings_wizard.c, src/error.c, src/login_window.c, src/main_window.c, src/tax.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/transaction_progress_window.c, src/usergroup.c, src/usergroup_group.c, src/usergroup_user.c, src/widgets.c, src/widgets.h, configure.in, gui/permissions.dtd, src/Makefile.am, src/about_window.c, src/connection_progress_window.c, src/connection_settings_window.c:
+	Adding support for dynamic widget disabling according to permissions.
+
+2003-09-02  David Marin Carreno  <david@aspl.es>
+
+	* src/tax_vat_item.c, src/tax_vat_value.c, src/usergroup_group.c, src/usergroup_permission.c, src/usergroup_user.c, po/es.po, src/tax_vat_customer.c:
+	Replacing GTree's in afdal_data structures by the new
+	and customized AfDalList.
+
+	Fixing some warnings (due to missing includes).
+
+2003-05-14  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/Makefile.am:
+	Adding headers files to Makefile.am in order to get them inserted into tgz
+	created by using make dist.
+
+2003-05-01  David Marin Carreno  <david@aspl.es>
+
+	* src/usergroup_group.c, src/usergroup_group.h, src/usergroup_permission.c, src/usergroup_user.c:
+	Improving user's feedback
+
+	* gui/user.glade: Putting view rules in new/edit group 'user view'
+
+	* src/tax_vat_value.c: Fixing bug #128
+
+	* src/main_window.c: Fixing bug #127
+
+	* po/POTFILES.in, po/es.po: Updating Spanish translation
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* gui/user.glade: Setting group window to modal.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* ChangeLog: Updating changelogs
+
+	* src/usergroup_permission.c:
+	Finishing support for viewing/editing permissions.
+	(now we can distinguish between user-owned permissions and group-owned
+	permissions)
+
+	* src/usergroup_permission.c:
+	Testing to show effective and only_group permissions...
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Code clean up due to api change at libafdalkernel library.
+
+2003-04-30  David Marin Carreno  <david@aspl.es>
+
+	* src/usergroup_permission.c:
+	Finishing support for viewing/editing permissions.
+	(now we can distinguish between user-owned permissions and group-owned
+	permissions)
+
+	* src/usergroup_permission.c:
+	Testing to show effective and only_group permissions...
+
+2003-04-30  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Code clean up due to api change at libafdalkernel library.
+
+2003-04-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/usergroup_group.c, src/usergroup_user.c, gui/user.glade:
+	Small code clean-up.
+	Added more info at group label.
+
+2003-04-28  David Marin Carreno  <david@aspl.es>
+
+	* gui/user.glade:
+	Naming widgets. Removing permissions labels in users and groups tabs
+
+	* gui/user.glade, src/usergroup.c, src/usergroup_group.c, src/usergroup_permission.c, src/usergroup_user.c:
+	Adding support for showing user and group properties
+
+2003-04-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/event_source.h: Small code indentation.
+
+2003-04-27  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* gui/user.glade, src/usergroup.c, src/usergroup.h, src/usergroup_permission.c, src/usergroup_permission.h:
+	Added support to manage group permissions.
+
+	* src/usergroup_user.c, gui/user.glade:
+	Bug fixed while creating/editing users.
+
+	* src/usergroup_group.c: Bug fixed while editing group.
+
+	* src/usergroup.c, gui/user.glade:
+	More gui functionality enhancement. User can edit group preferences by
+	double-click.
+
+	* src/usergroup_group.c: Finally. We can edit all group preferences.
+
+	* src/usergroup.c, src/usergroup_group.c, src/usergroup_group.h:
+	Added support to create group and, at the same step, add user to the newly
+	create group.
+	added support to edit an already exiting group.
+
+	* src/transaction_progress_window.c:
+	Added some check to transaction_progress_timeout function to not update
+	progress bar when there is no progress bar to update.
+
+	* src/aspl_datalist.c, src/aspl_datalist.h:
+	Added debug functions: aspl_datalist_print.
+
+	* gui/user.glade: Named some widgets.
+
+	* src/main_window.c:
+	Fixed the same bug as previous davefx's commit. I'm not sure about the
+	changes so, I'm going to commit also my changes.
+
+2003-04-27  David Marin Carreno  <david@aspl.es>
+
+	* src/event_source.c, src/main_window.c: Fixing bug in logout and quit
+
+2003-04-25  David Marin Carreno  <david@aspl.es>
+
+	* src/usergroup_user.c, src/aspl_datalist.c, src/event_process.c, src/main_window.c, src/main_window.h, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c, src/usergroup_group.c, src/usergroup_permission.c:
+	Changing from GData to AsplDataList
+
+	* src/aspl_datalist.c: Finishing implementation of aspl_datalist
+
+	* src/aspl_datalist.h: Strings must be constant
+
+	* src/aspl_datalist.h: Changing interface: using GDestroyNotify
+
+	* src/aspl_datalist.c: Implementing aspl_datalist_new
+
+2003-04-24  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/Makefile.am, src/event_source.c: Warnings clean-ups.
+
+	* src/aspl_datalist.c, src/aspl_datalist.h: Added interface and skel.
+
+	* src/event_process.c, src/event_source.c, src/event_source.h, src/usergroup_group.c:
+	Spurious hang-ups has been really solved. This Problem was caused by
+	the not-remove-armed-signals-which-were-executed policy. After several hard
+	tests it seems to work.
+
+2003-04-23  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/event_process.c:
+	Added code to remove signal which were succesfully executed.
+
+	* src/usergroup.c, src/usergroup_group.c:
+	Added support to remove groups.
+
+	* src/event_source.c, src/event_source.h:
+	Adding mutex code to avoid race conditions.
+
+	* src/Makefile.am: Adding module usergroup_group.c to get it compiled.
+
+	* src/usergroup.c, src/usergroup_group.c:
+	Adding support to create groups.
+
+	* gui/user.glade:
+	Added new window to create and edit group preferences.
+
+	* src/usergroup.c, src/usergroup_user.c:
+	Adding support to launch refresh group process. Removed old code which
+	refers to tax_info.
+
+	* src/usergroup_group.c, src/usergroup_group.h:
+	New module to manage groups.
+
+2003-04-23  David Marin Carreno  <david@aspl.es>
+
+	* src/usergroup.c, src/usergroup_permission.c, src/usergroup_permission.h:
+	Adding total support for giving permissions to users
+
+2003-04-22  David Marin Carreno  <david@aspl.es>
+
+	* src/settings.c, src/usergroup.c, src/usergroup.h, src/usergroup_permission.c, src/usergroup_permission.h, src/usergroup_user.c, src/usergroup_user.h, gui/user.glade:
+	Starting support for editing permissions
+
+2003-04-15  David Marin Carreno  <david@aspl.es>
+
+	* src/Makefile.am, src/usergroup.c, src/usergroup_permission.c, src/usergroup_permission.h, src/usergroup_user.c, gui/user.glade:
+	Commiting usergroup_permission.
+	Preliminary version.
+
+	* src/usergroup.c: Fixing bug: not freeing components
+
+	* gui/main.glade, gui/user.glade, gui/vat.glade, src/usergroup.c, src/usergroup_user.c:
+	Now we can add, edit and delete users!!!
+
+2003-04-11  David Marin Carreno  <david@aspl.es>
+
+	* gui/user.glade, po/POTFILES.in, po/es.po, src/usergroup.c, src/usergroup_user.c:
+	Continuing work in managing users
+
+	* gui/user.glade, src/Makefile.am, src/tax.c, src/usergroup.c, src/usergroup.h, src/usergroup_user.c, src/usergroup_user.h:
+	Adding support for listing users (working only partially)
+
+2003-04-09  David Marin Carreno  <david@aspl.es>
+
+	* src/main.c, src/tax.c, src/tax.h, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Removing connection managing from client program(s).
+	Removing connection argument in libafdaltax functions
+
+	* src/Makefile.am, src/about_window.c, src/login_window.c, src/login_window.h, src/main_window.c, src/tax.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c, src/usergroup.c:
+	Updating for use new afdal_session instead of afdal_kernel_session.
+
+2003-04-08  David Marin Carreno  <david@aspl.es>
+
+	* gui/user.glade, po/POTFILES.in, po/es.po, src/Makefile.am, src/login_window.c, src/main_window.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c, src/user.c, src/user.h, src/usergroup.c, src/usergroup.h:
+	Fixing minor problems
+
+	* src/login_window.c:
+	Removing af-kernel auto-registering in client program
+
+2003-03-18  David Marin Carreno  <david@aspl.es>
+
+	* src/Makefile.am, src/event_process.c, src/event_process.h, src/main_window.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c, src/tax_vat_value.h:
+	Adding an uniform way for making remote procedure calls
+
+2003-03-10  David Marin Carreno  <david@aspl.es>
+
+	* gui/user.glade: Updating user.glade
+
+	* src/login_window.c: Adding af-kernel as "registered" server
+
+	* gui/pixmaps/users-24x24-normal.png, gui/pixmaps/users-48x48-normal.png:
+	Adding graphics for users component
+
+	* src/user.c, src/user.h, gui/user.glade:
+	Adding user component (copy from vat component)
+
+	* src/tax_vat_value.c, gui/pixmaps/Makefile.am, po/POTFILES.in, po/es.po, src/Makefile.am, src/error.c, src/main_window.c, src/main_window.h, src/settings.c, src/tax.c, src/tax_vat_customer.c, src/tax_vat_item.c, gui/Makefile.am, gui/main.glade:
+	Adding support for more than one component
+
+	* po/es.po, src/main_window.c, configure.in, gui/main.glade:
+	Adding sidebar for component selection
+
+	* configure.in: Adding afdal dependence
+
+	* configure.in: Upgrading version number
+
+	* ChangeLog: Updating changelog
+
+	* po/es.po: Updating translation
+
+2003-03-10  David Marin Carreno  <david@aspl.es>
+
+	* po/es.po: Updating translation
+
+2003-03-08  David Marin Carreno  <david@aspl.es>
+
+	* src/main_window.c, src/tax.c, src/tax_vat_customer.c:
+	Fixing bug in customer type creation and edition.
+	Adding extra checks in tax.c
+	Changing destroying order in main_window_destroy.
+
+2003-03-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* debian/copyright, debian/changelog, debian/control:
+	*** empty log message ***
+
+2003-03-07  David Marin Carreno  <david@aspl.es>
+
+	* po/es.po: Updating translations
+
+2003-03-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/connection_settings_window.c: Bug 95 solved.
+
+2003-03-07  David Marin Carreno  <david@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c: Trying to fix memory leak
+
+2003-03-07  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* gui/login.glade, src/login_window.c, src/login_window.h:
+	Code clean ups. Api change to conform module name.
+
+2003-03-07  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* gui/vat.glade:
+	Now the new vat customer window doesn't grow with the text of the
+	description.
+
+	* gui/main.glade: Now the server list is not changeable.
+
+	* src/tax.c: Now view menu is updated when a nex tap is selected.
+	The update shows a dot next to the properly entry.
+
+2003-03-07  David Marin Carreno  <david@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_value.c: Fixing memory leaks
+
+2003-03-06  David Marin Carreno  <david@aspl.es>
+
+	* src/login_window.c, src/login_window.h, src/session.c:
+	Fixing function names in afdal_kernel.
+
+	* src/main_window.c, src/main_window.h:
+	Fixing problem when exitting program from menubar (added timeout)
+
+2003-03-06  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/af_data_model.c, src/af_data_model.h: Small code clean up.
+
+	* gui/main.glade: Update due to modules api changes.
+
+	* src/tax.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Update module due to api changes at main_window module.
+
+	* src/Makefile.am: Update makefile.am to compile error.
+
+	* src/main_window.c, src/main_window.h: Code clean up.
+	Remove error function from here an moved out to error module.
+
+	* src/error.c: Module that has all common function for error component.
+
+	* src/error.h:
+	Module which concentrate all function for error component.
+
+	* src/tax_vat_value.c: Small code clean ups.
+	Change api interface to conform to module name.
+
+	* src/tax_vat_item.c, gui/vat.glade:
+	Code clean ups. Change api interface to conform module name.
+	Fixed some bug found while changing api interface.
+
+	* gui/vat.glade, src/tax_vat_customer.c: Code clean ups.
+	Update interface api to conform to module name.
+
+	* gui/vat.glade, src/tax.c, src/tax.h: Code clean up.
+	change api interface to conform to module name.
+
+2003-03-05  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c: Bug 100 solved.
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c: Resolved bug 101.
+
+2003-03-05  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c:
+	Setting the focus on the name entry on new vat customer and new vat item
+	windows.
+
+2003-03-05  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/transaction_progress_window.c, src/transaction_progress_window.h, gui/main.glade:
+	Small code clean up.
+	Change in api interface to conform module name.
+	.glade files modified to get updated for this change.
+
+	* src/event_source.c, src/event_source.h: small code clean up.
+
+	* gui/login.glade, src/connection_progress_window.c, src/connection_progress_window.h:
+	Code clean up.
+	Change api name to conform module name.
+	change login.glade interface definition
+
+2003-03-05  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* src/connection_settings_window.h, src/connection_settings_wizard.h:
+	Code audit. Clean de appearance of the files.
+
+2003-03-05  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/about_window.h: Small code interface clean up.
+
+	* gui/main.glade, src/about_window.c, src/about_window.h:
+	Change api name.
+	Small code clean up.
+
+	* src/about_window.c, src/about_window.h: Small code clean up.
+
+2003-03-05  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* gui/connection_settings.glade:
+	Code Audit. Changes in some functions names.
+
+	* src/connection_settings_window.c, src/connection_settings_window.h:
+	Code audit. Changes in some functions names.
+
+2003-03-05  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/settings.c, src/settings.h: Modified variable names.
+	Added g_return_val_if_fail functions.
+
+	* src/main.c: Small code clean up.
+
+2003-03-05  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* gui/login.glade, src/login_window.c, src/login_window.h:
+	Code audit. Changes in some functions names.
+
+	* gui/connection_settings.glade, src/connection_settings_wizard.c, src/connection_settings_wizard.h:
+	Code audit. Changed some functions names.
+
+2003-03-05  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/dialog.c, src/dialog.h: Change copyright from 2002 to 2003.
+	Added g_return_if_fail function to check wrong parameters.
+
+	* src/session.c, src/session.h: Change copyright to 2003.
+	Added g_return_if_fail checks.
+
+2003-03-04  David Marin Carreno  <david@aspl.es>
+
+	* src/tax.c:
+	Fixing bug 82: double right click doesn't launch edit window
+
+	* src/tax.c, src/tax.h, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Fixed Bug #84:
+	Application continue working perfectly after an error message
+	if af-tax is restarted
+
+	* src/login_window.c, src/main_window.c, src/main_window.h, src/session.c, src/tax.c, src/tax_vat_customer.c, src/tax_vat_value.c, gui/main.glade, gui/vat.glade:
+	Fixing nasty bug at log-out: you can't destroy
+	a menubar from a callback launched by the same
+	menubar.
+
+	Changing the way of launching components: now
+	they are not custom widgets (problem when
+	maintaining two nested GladeXml structures)
+
+2003-03-04  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/main_window.c, src/tax.c: Freeing a lot of things.
+	Adding functions for allowing login again with everything working out
+
+2003-03-04  David Marin Carreno  <david@aspl.es>
+
+	* src/main_window.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Freeing memory correctly in *_process functions.
+	Fixing nasty bug (I freed the same memory twice!!)
+
+2003-03-04  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* src/tax_vat_value.c: Fixed buf entering the values
+
+2003-03-04  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/login_window.c, src/main_window.c, src/session.c, src/session.h, src/tax.c:
+	Solved one-use aspl-fact problem.
+
+2003-03-04  David Marin Carreno  <david@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Freeing more memory ;-)
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Fixing number of arguments problems in tax_vat_customer.c
+	Freeing memory from afdal in correct cases.
+
+2003-03-04  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/login_window.c, src/main_window.c, src/session.h, src/tax.c, src/tax.h, src/tax_vat_customer.c, src/tax_vat_customer.h, src/tax_vat_item.c, src/tax_vat_item.h, src/tax_vat_value.c, src/tax_vat_value.h:
+	General code clean up and functions to free data.
+
+2003-03-03  David Marin Carreno  <david@aspl.es>
+
+	* src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c:
+	Fixing problems while changing from tax_vat_value tab and other VAT tabs.
+
+	* src/tax_vat_value.c, src/tax_vat_value.h, po/es.po:
+	Adding support for editing VAT values
+
+2003-03-03  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/tax_vat_value.c:
+	Readded editable cell code removed by cvs conflicts.
+
+	* src/main_window.c, src/tax_vat_value.c:
+	Added some code to detect editable cell event. Added an enumerate to
+	differ components in main_window.c
+
+2003-03-03  David Marin Carreno  <david@aspl.es>
+
+	* gui/vat.glade, src/tax.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c, src/tax_vat_value.h:
+	Now you can change sorting order in vat_values_list
+
+	* src/tax.c, src/tax_vat_customer.c, src/tax_vat_item.c, src/tax_vat_value.c, src/tax_vat_value.h, gui/vat.glade:
+	Adding support for listing VAT values
+
+2003-02-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/af_data_model.c, src/af_data_model.h, src/tax_vat_value.c:
+	*** empty log message ***
+
+	* src/tax_vat_value.c, src/tax_vat_value.h:
+	Fixing compile error and some warnings.
+
+	* src/af_data_model.c, src/af_data_model.h:
+	Updating data model interface.
+
+	* src/Makefile.am, src/tax.c, src/tax_vat_value.c, src/tax_vat_value.h:
+	Adding support to use new af_data_model module.
+
+	* src/Makefile.am: *** empty log message ***
+
+	* src/af_data_model.c, src/af_data_model.h:
+	Module to manage our own models.
+
+2003-02-28  David Marin Carreno  <david@aspl.es>
+
+	* src/tax_vat_value.c, src/tax_vat_value.h:
+	Adding tax vat value templates... (working)
+
+2003-02-27  David Marin Carreno  <david@aspl.es>
+
+	* po/POTFILES.in, po/es.po, src/tax.c, src/tax_vat_customer.c, src/tax_vat_customer.h, src/tax_vat_item.c, src/tax_vat_item.h:
+	Disabling menu options properly when tabbing
+
+2003-02-26  David Marin Carreno  <david@aspl.es>
+
+	* src/tax.c, src/tax_vat_customer.c, src/tax_vat_customer.h, src/tax_vat_item.c, src/tax_vat_item.h:
+	Fixing double click problem
+
+	* gui/vat.glade, src/Makefile.am, src/tax.c, src/tax_vat_item.c, src/tax_vat_item.h:
+	Adding Tax Vat Item managing...
+
+	* po/es.po, src/tax.c, src/tax.h, src/tax_vat_customer.c, gui/vat.glade:
+	Double click now activates VAT customer type edition window
+	Removing selection when deleting VAT customer type
+
+2003-02-25  David Marin Carreno  <david@aspl.es>
+
+	* gui/vat.glade, src/tax.c, src/tax.h, src/tax_vat_customer.c, src/tax_vat_customer.h:
+	Adding support for Editing VAT Customer Types :-)
+
+	* src/dialog.c, src/dialog.h, src/tax.c, src/tax_vat_customer.c, src/tax_vat_customer.h:
+	Adding support for removing VAT Customer Types
+
+	* src/Makefile.am, src/main_window.c, src/tax.c, src/tax.h, src/tax_vat_customer.c, src/tax_vat_customer.h, src/transaction_progress_window.c, src/transaction_progress_window.h, gui/login.glade, gui/main.glade, gui/vat.glade, po/es.po:
+	Adding support for creating new VAT Customer types
+
+	* src/login_window.c, src/tax_vat_customer.c:
+	Updating for making it to compile against the new "AfDal" model
+
+2003-02-24  David Marin Carreno  <david@aspl.es>
+
+	* src/tax.c, src/tax_vat_customer.c, po/es.po:
+	Updating: now it starts refreshing customer_list... (buggy as for now)
+
+	* gui/vat.glade, src/tax_vat_customer.c, src/tax_vat_customer.h:
+	Setting new labels when selecting customer types in GtkTree :-)
+
+	* src/tax_vat_customer.c, gui/vat.glade:
+	Putting hint rules in gtk_tree_view
+
+	* po/POTFILES.in, po/es.po: Updating Spanish translation
+
+	* src/tax_vat_customer.c, src/tax_vat_customer.h, src/Makefile.am, src/login_window.c, src/main_window.c, src/main_window.h, src/tax.c, src/tax.h:
+	Adding support for showing VAT customer types
+
+2003-02-24  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/Makefile.am, src/about_window.c, src/dialog.c, src/event_source.c, src/login_window.c, src/main.c, src/main_window.c, src/settings.c, src/tax.c:
+	Added -Wall flag to configure.in system.
+	Fixed a lot of ugly warnings due to -Wall flag.
+	Added support to create new vat_customer_type.
+
+2003-02-21  David Marin Carreno  <david@aspl.es>
+
+	* src/main_window.c, src/main_window.h: Fixing compile errors
+
+	* src/about_window.c, src/main_window.c, src/tax.c, gui/main.glade:
+	Changing from CoyoteDatasets to GTrees
+
+2003-02-20  David Marin Carreno  <david@aspl.es>
+
+	* src/connection_settings_window.c, src/connection_settings_wizard.c, src/login_window.c, src/main_window.c, src/main_window.h, src/session.c, src/session.h, src/tax.c, src/tax.h, src/about_window.c, src/connection_progress_window.c:
+	Adding total component division.
+	Adding component for cases where there's no server available
+
+2003-02-19  David Marin Carreno  <david@aspl.es>
+
+	* gui/vat.glade: Adding new interface with VAT related functions
+
+	* src/Makefile.am, src/main_window.c, src/main_window.h, src/session.c, src/tax.c, src/tax.h, configure.in, gui/Makefile.am, gui/main.glade:
+	Splitting GUI into pieces according to the active component.
+	Now, main_window only has the callbacks for activating different components,
+	and everything is now in tax.*
+
+2003-02-18  David Marin Carreno  <david@aspl.es>
+
+	* gui/pixmaps/Makefile.am, src/login_window.c, gui/main.glade:
+	Adding icon for logout.
+
+	Adding support for removing active connection if I change the connection
+	settings.
+
+	* po/es.po: Updating Spanish translation
+
+2003-02-18  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* gui/pixmaps/stock_disconnect.png: Icon for logout process.
+
+2003-02-18  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* src/about_window.c: Available severs -> available servers
+
+2003-02-18  David Marin Carreno  <david@aspl.es>
+
+	* src/about_window.c, src/about_window.h: Adding about_window
+
+	* src/session.c, src/session.h: Adding session maintaining module
+
+2003-02-17  David Marin Carreno  <david@aspl.es>
+
+	* src/Makefile.am, src/login_window.c, src/login_window.h, src/main_window.c, gui/main.glade:
+	Going on in ML2 development: now I'm trying to get a "session status" window
+	in "About..." window (client application).
+
+2003-02-15  David Marin Carreno  <david@aspl.es>
+
+	* gui/pixmaps/icon-24x24-normal.png: Adding small coloured icon
+
+2003-02-14  David Marin Carreno  <david@aspl.es>
+
+	* gui/pixmaps/Makefile.am:
+	Fixing makefile.am: I forgot to commit one of the icons
+
+	* gui/connection_settings.glade, gui/login.glade, gui/main.glade, gui/pixmaps/Makefile.am, gui/pixmaps/vat-24x24-highcontrast.png, gui/pixmaps/vat-24x24-normal.png, gui/pixmaps/vat-48x48-highcontrast.png, gui/pixmaps/vat-48x48-normal.png:
+	Adding VAT-managing icons.
+	Using icons in application.
+
+2003-02-13  David Marin Carreno  <david@aspl.es>
+
+	* gui/pixmaps/icon-24x24-highcontrast.png, gui/pixmaps/icon-48x48-highcontrast.png, gui/pixmaps/icon-48x48-normal.png:
+	Adding icons for application
+
+2003-02-12  David Marin Carreno  <david@aspl.es>
+
+	* src/main_window.c, src/main_window.h, gui/main.glade, po/es.po:
+	Updating interface for Milestone ML2 (VAT Managing)
+
+	* gui/main.glade, po/es.po, src/main_window.c, src/main_window.h:
+	Adding new main window
+
+2003-02-10  David Marin Carreno  <david@aspl.es>
+
+	* configure.in, po/es.po: Changing version to ML2 or 0.0.2
+
+	* ChangeLog: Updating changelog...
+
+	* AUTHORS: Changing version number from 0.1 to 0.0.1
+	Updating AUTHORS files
+
+	* COPYING, Makefile.am: Changing LICENSE files by COPYING files
+
+2003-02-10  David Marin Carreno  <david@aspl.es>
+
+	* AUTHORS: Changing version number from 0.1 to 0.0.1
+	Updating AUTHORS files
+
+	* COPYING, Makefile.am: Changing LICENSE files by COPYING files
+
+2003-01-30  David Marin Carreno  <david@aspl.es>
+
+	* ChangeLog: Updating changelog...
+
+2003-01-28  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* gui/connection_settings.glade, gui/login.glade:
+	Added accelerators to the glade interface
+
+2003-01-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* debian/control: Adding build dependencies
+
+	* debian/changelog: Cambiando número de versión
+
+2003-01-28  Jorge Cabello Arellano  <jorge@aspl.es>
+
+	* gui/connection_settings.glade, gui/login.glade:
+	Added accelerators to the glade interface
+
+2003-01-28  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* debian/control: Adding build dependencies
+
+	* debian/changelog: Cambiando número de versión
+
+2003-01-16  David Marin Carreno  <david@aspl.es>
+
+	* gui/login.glade: Adding "Exit" button in login window
+
+	* ChangeLog: Updating changelog...
+
+	* configure.in: Now, autogen.sh works with old autotools
+
+2003-01-16  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* gui/connection_settings.glade, po/es.po:
+	Modificaciones para que el texto del wizard no sea tan pequeño y para que se
+	informe del valor por defecto del puerto.
+
+2003-01-16  David Marin Carreno  <david@aspl.es>
+
+	* configure.in: Now, autogen.sh works with old autotools
+
+2003-01-16  Marcos Olmos Dominguez  <marcos@aspl.es>
+
+	* gui/connection_settings.glade, po/es.po:
+	Modificaciones para que el texto del wizard no sea tan pequeño y para que se
+	informe del valor por defecto del puerto.
+
+2003-01-15  David Marin Carreno  <david@aspl.es>
+
+	* src/main_window.c: Swapping them (now i've done it well!!)
+
+	* src/main_window.c:
+	Swapping order of function calls in on_login_again_clicked
+
+	* po/es.po, src/main_window.c, gui/main.glade:
+	Support for logging in again
+
+	* src/main_window.c: Support for logging_again!!
+
+2003-01-15  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/connection_progress_window.c, src/connection_settings_window.c, src/dialog.c, src/login_window.c, src/login_window.h:
+	Actualización de solución de warnings.
+
+2003-01-13  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* debian/README.debian, debian/changelog, debian/control, debian/copyright, debian/rules:
+	Actualización de información para tener paquetes debian.
+
+2003-01-13  David Marin Carreno  <david@aspl.es>
+
+	* gui/main.glade, po/es.po:
+	* Server completely operative: deleting default callbacks in
+	  coyote_simple_cfg (Sorry...)
+	* The fault wasn't in Roadrunner: changing call to blocking rr_channel_close
+	  by rr_manager_channel_close_nonblock (coyote_simple).
+	* Adding a new "Logged in" window, with textual message.
+	* Solutioning segfault in af-kernel... (I think I deleted a g_new by
+	  error...)
+
+2003-01-12  David Marin Carreno  <david@aspl.es>
+
+	* src/connection_progress_window.c, src/event_source.c, src/event_source.h, src/login_window.c, src/login_window.h:
+	Cancel connection button now works
+
+	* gui/login.glade, src/event_source.c, src/login_window.c:
+	* Adding af-kernel status codes header
+
+	* Fixing the "client-lock-when-closing-channel" problem: it wasn't our fault
+	  (it was RoadRunner).
+
+	* Adding default callbacks in coyote_simple_cfg so we it show log messages if
+	  a event is not processed by anyone.
+
+	* Added a "cancel" button to client connection progress window (not yet
+	  functional)
+
+2003-01-10  David Marin Carreno  <david@aspl.es>
+
+	* src/login_window.h: Adding login_window
+
+	* src/login_window.c: Adding support for user_data in callbacks
+
+	* po/es.po: Added a new translated string
+
+	* po/es.po: Updating...
+
+	* configure.in: Adding coyote dependency
+
+2003-01-09  David Marin Carreno  <david@aspl.es>
+
+	* gui/main.glade, src/main_window.c, src/main_window.h, po/.cvsignore, gui/.cvsignore, .cvsignore, src/.cvsignore, gui/pixmaps/.cvsignore:
+	Removing unneeded files
+
+	* configure.in, gui/connection_settings.glade, gui/login.glade, po/es.po, src/connection_settings_wizard.c:
+	Adding Spanish translation.
+	Translating all original strings into English
+
+	* po/POTFILES.in: Updating with new potfiles
+
+	* autogen.sh: Improved autogen.sh with intltool support
+
+	* gui/login.glade, src/Makefile.am, src/connection_progress_window.c, src/login_window.c, src/login_window.h, src/dialog.h, src/dialog.c:
+	Adding dialog helper functions
+
+	* gui/Makefile.am, gui/login.glade, src/Makefile.am, src/connection_progress_window.c, src/event_source.c, src/event_source.h, src/login_window.c, src/login_window.h:
+	New event_source module.
+
+2003-01-08  David Marin Carreno  <david@aspl.es>
+
+	* src/connection_settings_window.c, src/connection_settings_window.h, src/login_window.c, src/login_window.h, src/main.c, src/settings.c, src/settings.h, configure.in, gui/connection_settings.glade, gui/login.glade, src/Makefile.am, src/connection_progress_window.c, src/connection_progress_window.h:
+	Adding dependencies with afdal-kernel.
+	Adding connection_progress_window.
+
+	* src/Makefile.am, src/connection_settings_window.c, src/connection_settings_window.h, src/connection_settings_wizard.c, src/login_window.c, src/login_window.h, src/main.c:
+	All jobs finished
+
+	* src/settings.c: Fixing leak in settings_init
+
+	* src/connection_settings_window.c, src/connection_settings_window.h, src/connection_settings_wizard.c, src/connection_settings_wizard.h, src/main.c, src/settings.c, src/settings.h:
+	Updating copyright notices (2003) ;-)
+
+	* autogen.sh, configure.in, gui/connection_settings.glade, src/Makefile.am, src/connection_settings_window.c, src/connection_settings_window.h, src/connection_settings_wizard.c, src/connection_settings_wizard.h, src/login_window.c, src/login_window.h, src/main.c, src/settings.c, src/settings.h:
+	Connection settings wizard finished.
+
+2003-01-07  David Marin Carreno  <david@aspl.es>
+
+	* src/Makefile.am:
+	Añadido -rdynamic para que funcionen los callbacks en cualquier instalacion
+	(sobre todo en woody)
+
+	* gui/connection_settings.glade, gui/login.glade, src/connection_settings_window.c, src/connection_settings_window.h:
+	Subiendo interfaces corregidos.
+	No se usa el GnomeDruid, ya que no funciona bien.
+	Login cambiado para seguir el HIG
+
+2003-01-03  David Marin Carreno  <david@aspl.es>
+
+	* gui/Makefile.am, gui/connection_settings.glade, gui/pixmaps/Makefile.am, gui/pixmaps/Server.png, src/connection_settings_window.c, src/connection_settings_window.h, src/main.c, src/settings.c, src/settings.h:
+	Añadida ventana de configuración de servidor, y el asistente que arranca al
+	principio.
+
+	* src/Makefile.am, src/connection_settings_window.c, src/connection_settings_window.h, src/login_window.c, src/main.c, src/settings.c, src/settings.h:
+	Añadidos módulos de configuración (aún no se emplean completamente)
+
+	* configure.in, src/login_window.c, src/login_window.h, src/main.c:
+	Reorganizando funciones: nueva función login_window_show.
+	Añadida dependencia de gconf.
+
+2003-01-03  Francis Brosnan Blazquez  <francis@aspl.es>
+
+	* src/login_window.h: Lineas para evitar doble inclusión.
+
+2003-01-03  David Marin Carreno  <david@aspl.es>
+
+	* src/login_window.c:
+	Se cierra la aplicación al cerrar la ventana de login
+
+2003-01-02  David Marin Carreno  <david@aspl.es>
+
+	* configure.in, gui/login.glade, gui/pixmaps/Makefile.am, src/Makefile.am, src/login_window.c, src/login_window.h, src/main.c:
+	El programa arranca y muestra la ventana de login.
+	Lo único que funciona en la ventana de login es el botón de cerrar ventana
+	(por ahora)
+
+	* README: Añadidos primeros comentarios
+
+	* AUTHORS: Añadido autor
+
+2002-12-31  David Marin Carreno  <david@aspl.es>
+
+	* configure.in: Añadido directorio gui/pixmaps
+
+	* gui/Makefile.am, gui/login.glade, gui/pixmaps/Makefile.am, gui/pixmaps/aspl-fact-login.xpm:
+	Añadido directorio pixmaps.
+	Añadido fichero glade real
+
+	* Makefile.am, configure.in, gui/Makefile.am, gui/login.glade:
+	Scripts de configuración modificados para incluir directorio de datos (para
+	los .glade)
+
+	* src/Makefile.am, src/main.c:
+	Primera versión: preparando ficheros para automake
+
+	* AUTHORS, ChangeLog, Makefile.am, NEWS, README, acconfig.h, autogen.sh, configure.in, po/ChangeLog, po/POTFILES.in, stamp-h.in:
+	Añadiendo ficheros de automake/autoconf realizados por glade :-)
+

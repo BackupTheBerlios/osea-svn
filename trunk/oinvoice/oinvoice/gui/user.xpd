@@ -1,0 +1,124 @@
+<xpd>
+
+
+
+
+  <widget name="users_label">
+    <permission name="list_user" server="os-kernel"/>
+  </widget>
+  
+  <widget name="users_vpaned">
+    <permission name="list_user" server="os-kernel"/>
+  </widget>
+
+  <widget name="groups_info_table">
+    <permission name="list_user" server="os-kernel"/>
+  </widget>
+  
+  <widget name="refresh_button">
+    <permission name="list_user" server="os-kernel"/>
+  </widget>
+  
+  <widget name="refresh1">
+    <permission name="list_user" server="os-kernel"/>
+  </widget>
+
+  <widget name="users_permissions_menuitem">
+    <permission name="list_user" server="os-kernel"/>
+  </widget>
+
+
+
+  
+  
+  <widget name="groups_label">
+    <permission name="list_group" server="os-kernel"/>
+  </widget>
+  
+  <widget name="groups_vpaned">
+    <permission name="list_group" server="os-kernel"/>
+  </widget>
+  
+  <widget name="users_info_table">
+    <permission name="list_group" server="os-kernel"/>
+  </widget>
+
+  <widget name="groups_permissions_menuitem">
+    <permission name="list_group" server="os-kernel"/>
+  </widget>
+  
+
+
+
+
+  <widget name="permissions_label">
+    <permission name="permission_list" server="os-kernel"/>
+  </widget>
+  
+  <widget name="permissions_vbox">
+    <permission name="permission_list" server="os-kernel"/>
+  </widget>
+  
+  <widget name="permissions_vbox">
+    <permission name="permission_list" server="os-kernel"/>
+  </widget>
+
+
+
+
+  <widget name="usergroup_new_user1">
+    <permission name="new_user" server="os-kernel"/>
+  </widget>
+  
+  <widget name="usergroup_new_user2">
+    <permission name="new_user" server="os-kernel"/>
+  </widget>
+  
+  <widget name="new_button">
+    <permission name="new_user" server="os-kernel"/>
+  </widget>
+  
+
+  <widget name="edit_user1">
+    <permission name="edit_user" server="os-kernel"/>
+  </widget>
+
+
+  <widget name="remove_user1">
+    <permission name="remove_user" server="os-kernel"/>
+  </widget>
+  <widget name="remove_button">
+    <permission name="remove_user" server="os-kernel"/>
+  </widget>
+  
+
+  <widget name="usergroup_new_group1">
+    <permission name="new_group" server="os-kernel"/>
+  </widget>
+  
+  <widget name="usergroup_new_group2">
+    <permission name="new_group" server="os-kernel"/>
+  </widget>
+
+  <widget name="edit_group1">
+    <permission name="edit_group" server="os-kernel"/>
+  </widget>
+
+  <widget name="remove_group1">
+    <permission name="remove_group" server="os-kernel"/>
+  </widget>
+
+
+
+  <widget name="group_users_label">
+    <permission name="add_user_group" server="os-kernel"/>
+  </widget>
+
+  <widget name="group_window_treeview">
+    <permission name="add_user_group" server="os-kernel"/>
+  </widget>
+
+
+
+
+</xpd>

@@ -1,0 +1,8 @@
+<xpd>
+<widget name="refresh_button">
+      <permission name="permission_list" server="os-kernel"/>
+</widget>
+<widget name="refresh1">
+      <permission name="permission_list" server="os-kernel"/>
+</widget>
+</xpd>

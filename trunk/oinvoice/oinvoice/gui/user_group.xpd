@@ -1,0 +1,14 @@
+<xpd>
+<widget name="new_button">
+	<permission name="new_group" server="os-kernel"/>
+</widget>
+<widget name="remove_button">
+	<permission name="remove_group" server="os-kernel"/>
+</widget>
+<widget name="refresh_button">
+      <permission name="list_group" server="os-kernel"/>
+</widget>
+<widget name="refresh1">
+      <permission name="list_group" server="os-kernel"/>
+</widget>
+</xpd>

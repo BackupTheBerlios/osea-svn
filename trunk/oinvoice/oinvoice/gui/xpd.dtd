@@ -1,0 +1,10 @@
+<!--  XML Permission description file  -->
+<!ELEMENT  xpd (widget*) >
+
+<!ELEMENT  widget (permission+)>
+<!ATTLIST  widget name CDATA #REQUIRED >
+
+<!ELEMENT  permission EMPTY >
+<!ATTLIST  permission name CDATA #REQUIRED 
+           server CDATA #REQUIRED >
+
