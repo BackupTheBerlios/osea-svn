@@ -1,4 +1,4 @@
-//  LibAfgs:
+//  LibOseaServer:
 //  Copyright (C) 2003  Advanced Software Production Line, S.L.
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -15,35 +15,35 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFGS_AFKEYS_H__
-#define __AFGS_AFKEYS_H__
+#ifndef __OSEASERVER_AFKEYS_H__
+#define __OSEASERVER_AFKEYS_H__
 
 #include <coyote/coyote.h>
 #include "oseaserver.h"
 
 
-typedef struct __AfgsAfKey {
+typedef struct __OseaServerAfKey {
 	gchar * user;
 	gchar * satellite_server;
 	glong   time_stamp;
 	GList * permission_list;
-}AfgsAfKey;
+}OseaServerAfKey;
 
 
-AfgsAfKey  * oseaserver_afkeys_parse_and_check           (gchar     * af_key);
+OseaServerAfKey  * oseaserver_afkeys_parse_and_check           (gchar     * af_key);
 
-void         oseaserver_afkeys_destroy                   (AfgsAfKey * af_key, 
+void         oseaserver_afkeys_destroy                   (OseaServerAfKey * af_key, 
 						    gboolean     free_permission_list);
 
 void         oseaserver_afkeys_set_connection_key_simple (RRConnection *connection,
-						    AfgsAfKey    *af_key);
+						    OseaServerAfKey    *af_key);
 
 gboolean     oseaserver_afkeys_set_connection_key        (CoyoteXmlServiceData * data,
 						    gpointer               user_data,
 						    RRChannel            * channel,
 						    gint                   msg_no);
 
-AfgsAfKey  * oseaserver_afkeys_get_connection_key        (RRConnection * connection);
+OseaServerAfKey  * oseaserver_afkeys_get_connection_key        (RRConnection * connection);
 
 gboolean     oseaserver_afkeys_is_current                (gchar * af_key);
 

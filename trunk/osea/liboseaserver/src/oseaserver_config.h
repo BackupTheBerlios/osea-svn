@@ -17,16 +17,16 @@
 
 #include <glib.h>
 
-#ifndef __AFGS_CONFIG_H__
-#define __AFGS_CONFIG_H__
+#ifndef __OSEASERVER_CONFIG_H__
+#define __OSEASERVER_CONFIG_H__
 
-typedef struct _oseaserver_configuration AfgsConfiguration;
+typedef struct _oseaserver_configuration OseaServerConfiguration;
 
-AfgsConfiguration * oseaserver_config_load      (gchar *filename, gchar ** accepted_keys);
+OseaServerConfiguration * oseaserver_config_load      (gchar *filename, gchar ** accepted_keys);
 
-gchar             * oseaserver_config_get       (AfgsConfiguration *config, gchar *key);
+gchar             * oseaserver_config_get       (OseaServerConfiguration *config, gchar *key);
 
-void                oseaserver_config_destroy   (AfgsConfiguration *config);
+void                oseaserver_config_destroy   (OseaServerConfiguration *config);
 
 void  	            oseaserver_config_check_permissions (gchar * config_file);
 

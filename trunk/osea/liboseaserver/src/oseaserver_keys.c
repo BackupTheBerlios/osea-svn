@@ -14,7 +14,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#include "oseaserver_afkeys.h"
+#include "oseaserver_keys.h"
 #include <stdlib.h>
 #include <string.h>
 #include <glib-object.h>
@@ -29,9 +29,9 @@
  * 
  * Return value: A parsed af-key or NULL if something fails.
  **/
-AfgsAfKey * oseaserver_afkeys_parse_and_check      (gchar     * af_key)
+OseaServerAfKey * oseaserver_afkeys_parse_and_check      (gchar     * af_key)
 {
-	AfgsAfKey  * result_key;
+	OseaServerAfKey  * result_key;
 	gchar      ** splited_string;
 	gchar      ** argv_permission;
 	gint          int_time_stamp;
@@ -60,7 +60,7 @@ AfgsAfKey * oseaserver_afkeys_parse_and_check      (gchar     * af_key)
 	}
 	
 	// Get af-key user and associated server
-	result_key = g_new0 (AfgsAfKey, 1);
+	result_key = g_new0 (OseaServerAfKey, 1);
 
 	result_key->user = g_strdup (splited_string[0]);
 	result_key->satellite_server = g_strdup (splited_string[1]);
@@ -89,7 +89,7 @@ AfgsAfKey * oseaserver_afkeys_parse_and_check      (gchar     * af_key)
  * 
  * Frees all memory allocated by @af_key.
  **/
-void         oseaserver_afkeys_destroy (AfgsAfKey * af_key, 
+void         oseaserver_afkeys_destroy (OseaServerAfKey * af_key, 
 				  gboolean     free_permission_list)
 {
 
@@ -130,7 +130,7 @@ static void __oseaserver_afkeys_set_connection_key_free (gpointer data)
  * 
  **/
 void        oseaserver_afkeys_set_connection_key_simple (RRConnection *connection,
-						   AfgsAfKey    *af_key)
+						   OseaServerAfKey    *af_key)
 {
  	GObject * object;
   	
@@ -168,7 +168,7 @@ gboolean    oseaserver_afkeys_set_connection_key   (CoyoteXmlServiceData * data,
 {
 	GList        * values;
 	RRConnection * connection = rr_channel_get_connection (channel);
-	AfgsAfKey    * af_key = NULL;
+	OseaServerAfKey    * af_key = NULL;
 	
 
 	// Check for correct params
@@ -204,9 +204,9 @@ gboolean    oseaserver_afkeys_set_connection_key   (CoyoteXmlServiceData * data,
  * 
  * Gets the connection key set.
  * 
- * Return value: An AfgsAfkey or NULL if something fails.
+ * Return value: An OseaServerAfkey or NULL if something fails.
  **/
-AfgsAfKey    * oseaserver_afkeys_get_connection_key   (RRConnection * connection)
+OseaServerAfKey    * oseaserver_afkeys_get_connection_key   (RRConnection * connection)
 {
 	GObject * object;
 
@@ -232,7 +232,7 @@ AfgsAfKey    * oseaserver_afkeys_get_connection_key   (RRConnection * connection
 gboolean     oseaserver_afkeys_check_service_permission (RRChannel * channel, gchar * service_name, gint msg_no)
 {
 	RRConnection * connection;
-	AfgsAfKey    * af_key   = NULL;
+	OseaServerAfKey    * af_key   = NULL;
 	GList        * list_aux = NULL;
 	time_t         time_stamp;
 	

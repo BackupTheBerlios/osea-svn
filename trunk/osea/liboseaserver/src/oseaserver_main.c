@@ -212,14 +212,14 @@ void oseaserver_main_run_server (gchar                * server_name,
 			   gchar               ** argv[], 
 			   gchar                * config_file,
 			   gchar                * accepted_keys [], 
-			   AfgsServicesProvided   services_provided [],
+			   OseaServerServicesProvided   services_provided [],
 			   gint                   services_version,
-			   AfgsMainCallback       check_function,
+			   OseaServerMainCallback       check_function,
 			   struct poptOption    * server_extra_popt_option
 			   )
 {
 	poptContext         ctx;
-	AfgsConfiguration * afcfg;
+	OseaServerConfiguration * afcfg;
 	GError            * error = NULL;
 	gchar             * port;
 	CoyoteSimpleCfg   * config;
@@ -299,7 +299,7 @@ void oseaserver_main_run_server (gchar                * server_name,
 		
 		
 		// Now we try to register our service in kernel
-		if (! oseaserver_reg_register (server_name, services_version, afgs_main_set_is_accepting_connections)) {
+		if (! oseaserver_reg_register (server_name, services_version, oseaserver_main_set_is_accepting_connections)) {
 			oseaserver_main_abort ("couldn't register our service in kernel");
 		}
 	} 

@@ -46,7 +46,7 @@ struct _oseaserver_configuration {
 
 static GTree *valid_keys = NULL;
 
-static AfgsConfiguration *last_cfg = NULL;
+static OseaServerConfiguration *last_cfg = NULL;
 
 gchar *__read_line (FILE *f)
 {
@@ -133,9 +133,9 @@ void __init ( gchar ** accepted_keys)
  * 
  * Return value: A configuration object
  **/
-AfgsConfiguration *oseaserver_config_load (gchar *filename, gchar ** accepted_keys) 
+OseaServerConfiguration *oseaserver_config_load (gchar *filename, gchar ** accepted_keys) 
 {
-	AfgsConfiguration *cfg = NULL;
+	OseaServerConfiguration *cfg = NULL;
 	FILE *file = NULL;
 	gchar *line = NULL;
 	gchar *aux = NULL;
@@ -153,7 +153,7 @@ AfgsConfiguration *oseaserver_config_load (gchar *filename, gchar ** accepted_ke
 		return NULL;
 	}
 
-	cfg = g_new (AfgsConfiguration, 1);
+	cfg = g_new (OseaServerConfiguration, 1);
 	cfg->tree = g_tree_new_full (__tree_compare, NULL, g_free, g_free);
 
 	while (! feof(file)) {
@@ -201,7 +201,7 @@ AfgsConfiguration *oseaserver_config_load (gchar *filename, gchar ** accepted_ke
  * @key: key to search for
  * 
  * Gets the value associted to the given @key. @config object must be
- * a valid oseaserver configuration object obtained from afgs_config_load function. 
+ * a valid oseaserver configuration object obtained from oseaserver_config_load function. 
  * If you want to have access to your configuration you can simply do:
  * 
  * string = oseaserver_config_get (NULL, "a key");
@@ -212,7 +212,7 @@ AfgsConfiguration *oseaserver_config_load (gchar *filename, gchar ** accepted_ke
  *  
  * Return value: A value or NULL if @key weren't defined.
  **/
-gchar *oseaserver_config_get (AfgsConfiguration *config, gchar *key)
+gchar *oseaserver_config_get (OseaServerConfiguration *config, gchar *key)
 {
 	gchar *result;
 
@@ -238,7 +238,7 @@ gchar *oseaserver_config_get (AfgsConfiguration *config, gchar *key)
  * 
  * Frees memory allocated by @config object.
  **/
-void oseaserver_config_destroy (AfgsConfiguration *config) 
+void oseaserver_config_destroy (OseaServerConfiguration *config) 
 {
 	if (!config)
 		config = last_cfg;

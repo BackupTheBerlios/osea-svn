@@ -21,7 +21,7 @@
 #include "oseaserver_reg.h"
 #include "oseaserver_command.h"
 #include "oseaserver_message.h"
-#include "oseaserver_afkeys.h"
+#include "oseaserver_keys.h"
 #include "oseaserver_services.h"
 #include "oseaserver_log.h"
 #include "oseaserver_main.h"

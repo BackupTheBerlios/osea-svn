@@ -14,16 +14,16 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFGS_MAIN_H__
-#define __AFGS_MAIN_H__
+#ifndef __OSEASERVER_MAIN_H__
+#define __OSEASERVER_MAIN_H__
 #include <glib.h>
 #include <string.h>
 #include <popt.h>
 #include "oseaserver.h"
 
-#define AFGS_MAIN_NO_EXTRA_OPTION oseaserver_main_no_extra_options ()
+#define OSEASERVER_MAIN_NO_EXTRA_OPTION oseaserver_main_no_extra_options ()
 
-typedef void (* AfgsMainCallback) (void);
+typedef void (* OseaServerMainCallback) (void);
 
 void oseaserver_main_run_server (gchar                * server_name,
 			   gchar                * server_description,
@@ -33,9 +33,9 @@ void oseaserver_main_run_server (gchar                * server_name,
 			   gchar               ** argv[], 
 			   gchar                * config_file,
 			   gchar                * accepted_keys[], 
-			   AfgsServicesProvided   services_provided[],
+			   OseaServerServicesProvided   services_provided[],
 			   gint                   services_version,
-			   AfgsMainCallback       check_function,
+			   OseaServerMainCallback       check_function,
 			   struct poptOption    * server_extra_popt_option);
 
 void oseaserver_main_abort      (gchar * format, ...);

@@ -15,14 +15,14 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFGS_SERVICES_H__
-#define __AFGS_SERVICES_H__
+#ifndef __OSEASERVER_SERVICES_H__
+#define __OSEASERVER_SERVICES_H__
 
 #include <glib.h>
 #include <afdal/afdal.h>
 #include "oseaserver_config.h"
 
-typedef struct _AfgsServicesProvided {
+typedef struct _OseaServerServicesProvided {
 	gchar     * service_name; /* Name for service */
 	gchar     * description;  /* Description to show when assigning permissions */
 	gboolean (* service_request_process_function) (CoyoteXmlServiceData *data, 
@@ -33,11 +33,11 @@ typedef struct _AfgsServicesProvided {
 	gpointer    user_data;    /* User data to pass to the service request process function */
 	gchar     * actual_permission; /* Name of the actual permission checked when receiving request for this service */
 	gchar     * dependencies; /* Comma-separated list of permissons in which this service depends on */
-} AfgsServicesProvided;
+} OseaServerServicesProvided;
 
-#define AFGS_SERVICES_TABLE_END {NULL, NULL, NULL,  FALSE, NULL, NULL}
+#define OSEASERVER_SERVICES_TABLE_END {NULL, NULL, NULL,  FALSE, NULL, NULL}
 
-void                   oseaserver_services_set         (AfgsServicesProvided * services);
+void                   oseaserver_services_set         (OseaServerServicesProvided * services);
 
 GList                * oseaserver_services_get         ();
 

@@ -19,7 +19,7 @@
 #include "oseaserver_services.h"
 #include <coyote/coyote.h>
 #include <afdal/afdal.h>
-#include "oseaserver_afkeys.h"
+#include "oseaserver_keys.h"
 
 #define LOG_DOMAIN "oseaserver_services"
 
@@ -29,7 +29,7 @@ gboolean kernel_ok_response;
 
 static GList * services_provided = NULL;
 
-AfgsServicesProvided services_provided_by_oseaserver [] = {
+OseaServerServicesProvided services_provided_by_oseaserver [] = {
 	{"set_connection_key",   "", oseaserver_afkeys_set_connection_key, FALSE, NULL, NULL, NULL},
 	{NULL, NULL, NULL, FALSE, NULL, NULL}
 };
@@ -41,16 +41,16 @@ AfgsServicesProvided services_provided_by_oseaserver [] = {
  * This function set up all available services for the actual server
  * 
  **/
-void                   oseaserver_services_set (AfgsServicesProvided * services)
+void                   oseaserver_services_set (OseaServerServicesProvided * services)
 {
 	gint iterator;
-	AfgsServicesProvided * service = NULL;
+	OseaServerServicesProvided * service = NULL;
 
 	g_return_if_fail (services);
 
 	iterator = 0;
 	while ((services[iterator].service_name != NULL)) {
-		service = g_new0 (AfgsServicesProvided, 1);
+		service = g_new0 (OseaServerServicesProvided, 1);
 		service->service_name = services[iterator].service_name;
 		service->description = services[iterator].description;
 		service->service_request_process_function = services[iterator].service_request_process_function;
@@ -65,7 +65,7 @@ void                   oseaserver_services_set (AfgsServicesProvided * services)
 
 	iterator = 0;
 	while ((services_provided_by_oseaserver[iterator].service_name != NULL)) {
-		service = g_new0 (AfgsServicesProvided, 1);
+		service = g_new0 (OseaServerServicesProvided, 1);
 		service->service_name = services_provided_by_oseaserver[iterator].service_name;
 		service->description = services_provided_by_oseaserver[iterator].description;
 		service->service_request_process_function = services_provided_by_oseaserver[iterator].service_request_process_function;
@@ -152,21 +152,21 @@ CoyoteDataSet        * oseaserver_services_get_dataset ()
 
 	while (iterator) {
 
-		if ((((AfgsServicesProvided *)(iterator->data))->need_key)
-		    && (! ((AfgsServicesProvided *) (iterator->data))->actual_permission))
+		if ((((OseaServerServicesProvided *)(iterator->data))->need_key)
+		    && (! ((OseaServerServicesProvided *) (iterator->data))->actual_permission))
 			// Create permission dataset row
 			coyote_dataset_add_nth (dataset, 
-						((AfgsServicesProvided *) (iterator->data))->service_name,
-						((AfgsServicesProvided *) (iterator->data))->description,
-						((AfgsServicesProvided *) (iterator->data))->dependencies,
+						((OseaServerServicesProvided *) (iterator->data))->service_name,
+						((OseaServerServicesProvided *) (iterator->data))->description,
+						((OseaServerServicesProvided *) (iterator->data))->dependencies,
 						NULL);
 		
 		iterator = iterator->next;
 		
 		// Add a new row if next service is not NULL.
 		if (iterator && 
-		    (((AfgsServicesProvided *)(iterator->data))->need_key) &&
-		    (! ((AfgsServicesProvided *)(iterator->data))->actual_permission))
+		    (((OseaServerServicesProvided *)(iterator->data))->need_key) &&
+		    (! ((OseaServerServicesProvided *)(iterator->data))->actual_permission))
 			coyote_dataset_new_row (dataset);
 		
 	}
@@ -240,7 +240,7 @@ gboolean              oseaserver_services_process (CoyoteXmlServiceData * data, 
 {
 	GList       * iterator;
 	gchar       * host_name;
-	AfgsAfKey   * af_key;
+	OseaServerAfKey   * af_key;
 
 	// obtain service type
 	switch (data->type) {
@@ -248,19 +248,19 @@ gboolean              oseaserver_services_process (CoyoteXmlServiceData * data, 
 		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "It's a request, name: %s\n", data->name);
 		
 		for (iterator = g_list_first (services_provided); iterator; iterator = iterator->next) {
-			if (!g_strcasecmp (data->name, ((AfgsServicesProvided *) (iterator->data))->service_name)) {
+			if (!g_strcasecmp (data->name, ((OseaServerServicesProvided *) (iterator->data))->service_name)) {
 
 				// Check for af_key
-				if (((AfgsServicesProvided *) (iterator->data))->need_key) {
-					if (!((AfgsServicesProvided *) (iterator->data))->actual_permission) {
+				if (((OseaServerServicesProvided *) (iterator->data))->need_key) {
+					if (!((OseaServerServicesProvided *) (iterator->data))->actual_permission) {
 						if (!oseaserver_afkeys_check_service_permission (channel, 
-											   ((AfgsServicesProvided *) (iterator->data))->service_name, 
+											   ((OseaServerServicesProvided *) (iterator->data))->service_name, 
 											   msg_no))
 							return FALSE;
 					} else {
 						if (!oseaserver_afkeys_check_service_permission 
 						    (channel, 
-						     ((AfgsServicesProvided *) (iterator->data))->actual_permission, 
+						     ((OseaServerServicesProvided *) (iterator->data))->actual_permission, 
 						     msg_no))
 							return FALSE;
 					}
@@ -280,9 +280,9 @@ gboolean              oseaserver_services_process (CoyoteXmlServiceData * data, 
 
 				free (host_name);
 
-				return ((AfgsServicesProvided *) (iterator->data))->service_request_process_function 
+				return ((OseaServerServicesProvided *) (iterator->data))->service_request_process_function 
 					(data, 		 
-					 ((AfgsServicesProvided *) (iterator->data))->user_data, 
+					 ((OseaServerServicesProvided *) (iterator->data))->user_data, 
 					 channel, msg_no);
 			}
 		}
