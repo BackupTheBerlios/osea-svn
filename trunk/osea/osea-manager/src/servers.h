@@ -18,8 +18,8 @@
 #ifndef __SERVERS_H__
 #define __SERVERS_H__
 
-#include <coyote/coyote.h>
-#include <afdalkernel/afdal_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <libaoskernel/aos_kernel.h>
 
 gboolean servers_remove (gchar * line, gpointer data);
 

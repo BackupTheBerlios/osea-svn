@@ -161,7 +161,7 @@ void        oseaserver_afkeys_set_connection_key_simple (RRConnection *connectio
  * 
  * Return value: 
  **/
-gboolean    oseaserver_afkeys_set_connection_key   (CoyoteXmlServiceData * data,
+gboolean    oseaserver_afkeys_set_connection_key   (OseaCommXmlServiceData * data,
 					      gpointer               user_data,
 					      RRChannel            * channel,
 					      gint                   msg_no)
@@ -176,7 +176,7 @@ gboolean    oseaserver_afkeys_set_connection_key   (CoyoteXmlServiceData * data,
 	if (!values) {
 		// Params seems to be incorrect
 		oseaserver_message_error_answer (channel, msg_no, "Incorrect parameters form", 
-					   COYOTE_CODE_XML_INCORRECT_PARAMETER);
+					   OSEACOMM_CODE_XML_INCORRECT_PARAMETER);
 		return FALSE;
 	}
 
@@ -184,7 +184,7 @@ gboolean    oseaserver_afkeys_set_connection_key   (CoyoteXmlServiceData * data,
 
 	if (! af_key) {
 		oseaserver_message_error_answer (channel, msg_no, "Invalid key",
-					   COYOTE_CODE_ERROR);
+					   OSEACOMM_CODE_ERROR);
 		return FALSE;
 	}
 			
@@ -193,7 +193,7 @@ gboolean    oseaserver_afkeys_set_connection_key   (CoyoteXmlServiceData * data,
 				 af_key,
 				 __oseaserver_afkeys_set_connection_key_free);
 	
-	oseaserver_message_ok_answer (channel, msg_no, "Key established", COYOTE_CODE_OK, NULL);
+	oseaserver_message_ok_answer (channel, msg_no, "Key established", OSEACOMM_CODE_OK, NULL);
 
 	return TRUE;
 }
@@ -242,7 +242,7 @@ gboolean     oseaserver_afkeys_check_service_permission (RRChannel * channel, gc
 	
 	if (!af_key) {
 		oseaserver_message_error_answer (channel, msg_no, "AfKey unset for this connection",
-					   COYOTE_CODE_KEY_REQUIRED);
+					   OSEACOMM_CODE_KEY_REQUIRED);
 		return FALSE;
 	}
 	
@@ -252,14 +252,14 @@ gboolean     oseaserver_afkeys_check_service_permission (RRChannel * channel, gc
 
 	if (! oseaserver_config_get (NULL, "afkey expiration")) {
 		oseaserver_message_error_answer (channel, msg_no, "Your af-key has expired. You must refresh your af-key.",
-					   COYOTE_CODE_KEY_EXPIRED);
+					   OSEACOMM_CODE_KEY_EXPIRED);
 		return FALSE;
 	}
 
 	if (time_stamp > (af_key->time_stamp + atol (oseaserver_config_get (NULL, "afkey expiration")))) {
 		// Session has expired. Asking for a new af_key
 		oseaserver_message_error_answer (channel, msg_no, "Your af-key has expired. You must refresh your af-key.",
-					   COYOTE_CODE_KEY_EXPIRED);
+					   OSEACOMM_CODE_KEY_EXPIRED);
 		return FALSE;
 	}
 	
@@ -270,7 +270,7 @@ gboolean     oseaserver_afkeys_check_service_permission (RRChannel * channel, gc
 	}
 	
 	oseaserver_message_error_answer (channel, msg_no, "You don't have enough permissions",
-				   COYOTE_CODE_INSUFFICIENT_PERMISSIONS);
+				   OSEACOMM_CODE_INSUFFICIENT_PERMISSIONS);
 	
 	return FALSE;
 	

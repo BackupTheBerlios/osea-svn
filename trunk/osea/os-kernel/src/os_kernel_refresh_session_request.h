@@ -19,9 +19,9 @@
 #define __AF_KERNEL_SESSION_REFRESH_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean os_kernel_refresh_session_request                      (CoyoteXmlServiceData *data, 
+gboolean os_kernel_refresh_session_request                      (OseaCommXmlServiceData *data, 
 								 gpointer user_data, 
 								 RRChannel * channel, 
 								 gint msg_no);

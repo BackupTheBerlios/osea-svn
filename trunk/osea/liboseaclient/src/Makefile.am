@@ -1,9 +1,6 @@
-INCLUDES = -g -I$(top_srcdir) $(LIBRARIES_CFLAGS) -DCOMPILATION_DATE=`date +%s` -Wall
+INCLUDES = -g -I$(top_srcdir)/liboseacomm $(LIBRARIES_CFLAGS) -DCOMPILATION_DATE=`date +%s` -Wall
 
-%.c %.h: %.gob
-	@GOB2@ --no-private-header $<
-
-libafdalincludedir = $(includedir)/afdal
+liboseaclientincludedir = $(includedir)/liboseaclient
 
 lib_LTLIBRARIES = liboseaclient.la
 
@@ -20,7 +17,7 @@ liboseaclient_la_SOURCES =	\
 	oseaclient_support.c \
 	oseaclient_decimal.c
 
-libafdalinclude_HEADERS =	\
+liboseaclientinclude_HEADERS =	\
 	oseaclient-datanode.h \
 	oseaclient-detaileddatanode.h \
 	oseaclient.h	\
@@ -36,4 +33,8 @@ libafdalinclude_HEADERS =	\
 liboseaclient_la_LIBADD = \
 	$(LIBRARIES_LIBS)
 
-EXTRA_DIST = oseaclient_data_node.gob
+EXTRA_DIST = oseaclient-datanode.gob oseaclient-detaileddatanode.gob
+
+%.c %.h: %.gob
+	@GOB2@ --no-private-header $<
+

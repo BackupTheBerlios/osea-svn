@@ -23,12 +23,12 @@
 requires 2.0.0
 
 %header{
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 %}
 
 %{
-#include <afdal/afdal.h>
-#include "afdal-kernel-group.h"
+#include <liboseaclient/oseaclient.h>
+#include "aos-kernel-group.h"
 
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
@@ -43,7 +43,7 @@ requires 2.0.0
 
 %}
 
-class AfDal:Kernel:Group from AfDal:DataNode {
+class Aos:Kernel:Group from OseaClient:DataNode {
 	public int id = 0;
 	property INT id
 		(nick = _("Id"),
@@ -74,9 +74,9 @@ class AfDal:Kernel:Group from AfDal:DataNode {
 		 export,
 		 link);
 
-        public AfDalKernelGroup * create (gint id, gchar *name, gchar *description)
+        public AosKernelGroup * create (gint id, gchar *name, gchar *description)
         {
-		AfDalKernelGroup * result;
+		AosKernelGroup * result;
 		
 		result = GET_NEW;
 

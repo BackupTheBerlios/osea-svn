@@ -21,34 +21,34 @@
  * @channel: Channel used to send @message
  * @msg_no: message number which is going to be replied
  * @message: message content
- * @status_code: a code from coyote_code module
+ * @status_code: a code from oseacomm_code module
  * 
  * Creates and sends a negative response message by using the given data. @message is the 
  * message content, sent throught @channel replying to an incoming message numbered as @msg_no.  
  **/
 void            oseaserver_message_error_answer (RRChannel * channel, gint msg_no, gchar * message,
-					   CoyoteCodeType status_code)
+					  OseaCommCodeType status_code)
 {
-	CoyoteXmlObject  * coyote_xml_object = NULL;
-	CoyoteXmlMessage * coyote_xml_message = NULL;
+	OseaCommXmlObject  * oseacomm_xml_object = NULL;
+	OseaCommXmlMessage * oseacomm_xml_message = NULL;
 	GError           * error = NULL;
 
-	coyote_xml_object = coyote_xml_new_object ();
+	oseacomm_xml_object = oseacomm_xml_new_object ();
 	
-	coyote_xml_add_response_service (coyote_xml_object,
+	oseacomm_xml_add_response_service (oseacomm_xml_object,
 					 status_code,
 					 message, NULL);
 	
-	coyote_xml_message = coyote_xml_build_message (coyote_xml_object);
+	oseacomm_xml_message = oseacomm_xml_build_message (oseacomm_xml_object);
 	
 	
-	coyote_simple_reply_error (COYOTE_SIMPLE (channel), 
-				   coyote_xml_message->content,
-				   coyote_xml_message->len,
+	oseacomm_simple_reply_error (OSEACOMM_SIMPLE (channel), 
+				   oseacomm_xml_message->content,
+				   oseacomm_xml_message->len,
 				   msg_no, TRUE, &error);
 	
-	coyote_xml_destroy_message (coyote_xml_message);
-	coyote_xml_destroy_object (coyote_xml_object);
+	oseacomm_xml_destroy_message (oseacomm_xml_message);
+	oseacomm_xml_destroy_object (oseacomm_xml_object);
 	return;
 }
 
@@ -57,7 +57,7 @@ void            oseaserver_message_error_answer (RRChannel * channel, gint msg_n
  * @channel: Channel used to send @message
  * @msg_no: message number which is going to be replied
  * @message: message content
- * @status_code: a code from coyote_code module
+ * @status_code: a code from oseacomm_code module
  * @Varargs: Optional datasets 
  * 
  * Creates and sends an afirmative response message by using the given data. @message is the 
@@ -65,37 +65,37 @@ void            oseaserver_message_error_answer (RRChannel * channel, gint msg_n
  * @Varargs represents a dataset list. 
  * If we want to send an afirmative reply with two datasets we will write something like:+
  *
- * oseaserver_message_ok_answer (channel, msg_no, "Take this data", COYOTE_CODE_OK, 
+ * oseaserver_message_ok_answer (channel, msg_no, "Take this data", OSEACOMM_CODE_OK, 
  *                         dataset1, dataset2, NULL);
  **/
 void            oseaserver_message_ok_answer    (RRChannel * channel, gint msg_no, gchar * message, 
-					   CoyoteCodeType status_code, ...)
+					  OseaCommCodeType status_code, ...)
 {
-	CoyoteXmlObject  * coyote_xml_object = NULL;
-	CoyoteXmlMessage * coyote_xml_message = NULL;
+	OseaCommXmlObject  * oseacomm_xml_object = NULL;
+	OseaCommXmlMessage * oseacomm_xml_message = NULL;
 	GError           * error = NULL;
 	va_list            args;
 
-	coyote_xml_object = coyote_xml_new_object ();
+	oseacomm_xml_object = oseacomm_xml_new_object ();
 
 	va_start (args, status_code);
 
-	coyote_xml_add_vresponse_service (coyote_xml_object,
+	oseacomm_xml_add_vresponse_service (oseacomm_xml_object,
 					  status_code,
 					  message, args);
 
 	va_end (args);
 	
-	coyote_xml_message = coyote_xml_build_message (coyote_xml_object);
+	oseacomm_xml_message = oseacomm_xml_build_message (oseacomm_xml_object);
 	
 	
-	coyote_simple_reply (COYOTE_SIMPLE (channel), 
-				   coyote_xml_message->content,
-				   coyote_xml_message->len,
+	oseacomm_simple_reply (OSEACOMM_SIMPLE (channel), 
+				   oseacomm_xml_message->content,
+				   oseacomm_xml_message->len,
 				   msg_no, TRUE, &error);
 	
-	coyote_xml_destroy_message (coyote_xml_message);
-	coyote_xml_destroy_object (coyote_xml_object);
+	oseacomm_xml_destroy_message (oseacomm_xml_message);
+	oseacomm_xml_destroy_object (oseacomm_xml_object);
 	return;
 }
 
@@ -115,14 +115,14 @@ void            oseaserver_message_ok_answer    (RRChannel * channel, gint msg_n
  * Return value: A GList or NULL if parameters doesn't match
  * in name or order.
  **/
-GList * oseaserver_message_check_params (CoyoteXmlServiceData * data, ...)
+GList * oseaserver_message_check_params (OseaCommXmlServiceData * data, ...)
 {
 	va_list   arguments;
 	gchar   * param      = NULL;
 	GList   * list_aux   = NULL;
 	GList   * result     = NULL;
 
-	CoyoteXmlServiceNode * node = NULL;
+	OseaCommXmlServiceNode * node = NULL;
 
 	g_return_val_if_fail (data, FALSE);
 
@@ -131,7 +131,7 @@ GList * oseaserver_message_check_params (CoyoteXmlServiceData * data, ...)
 	list_aux = g_list_first(data->item_list);
 
 	while ((param = va_arg (arguments, gchar *))) {
-		node = (CoyoteXmlServiceNode *) list_aux->data;
+		node = (OseaCommXmlServiceNode *) list_aux->data;
 
 		if (node) {
 			if (g_strcasecmp (node->attrib, param) != 0) {

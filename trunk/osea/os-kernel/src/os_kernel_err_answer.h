@@ -19,8 +19,8 @@
 #define __AF_KERNEL_ERR_ANSWER_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-void os_kernel_err_answer (RRChannel *channel, gint msg_no, gchar *message, CoyoteCodeType type);
+void os_kernel_err_answer (RRChannel *channel, gint msg_no, gchar *message, OseaCommCodeType type);
 
 #endif

@@ -1,32 +1,33 @@
-INCLUDES = -g -I$(top_srcdir) -I$(top_srcdir) $(LIBRARIES_CFLAGS)  -DCOMPILATION_DATE=`date +%s` -Wall
+INCLUDES = -g -I$(top_srcdir)/liboseacomm -I$(top_srcdir)/liboseaclient \
+	$(LIBRARIES_CFLAGS)  -DCOMPILATION_DATE=`date +%s` -Wall
 
 %.c %.h: %.gob
 	@GOB2@ --no-private-header $<
 
-libafdalkernelincludedir = $(includedir)/afdalkernel
+libaoskernelincludedir = $(includedir)/aoskernel
 
-lib_LTLIBRARIES = libafdalkernel.la
+lib_LTLIBRARIES = libaoskernel.la
 
-libafdalkernel_la_SOURCES =	\
-	afdal-kernel-user.c \
-	afdal-kernel-group.c \
-	afdal_kernel.c \
-	afdal_kernel_register.c \
-        afdal_kernel_user.c \
-	afdal_kernel_group.c \
-	afdal_kernel_permission.c \
-	afdal_kernel_server.c
+libaoskernel_la_SOURCES =	\
+	aos-kernel-user.c \
+	aos-kernel-group.c \
+	aos_kernel.c \
+	aos_kernel_register.c \
+        aos_kernel_user.c \
+	aos_kernel_group.c \
+	aos_kernel_permission.c \
+	aos_kernel_server.c
 
-libafdalkernelinclude_HEADERS =	\
-	afdal-kernel-user.h \
-	afdal-kernel-group.h \
-	afdal_kernel.h \
-	afdal_kernel_register.h \
-	afdal_kernel_user.h \
-	afdal_kernel_group.h \
-	afdal_kernel_permission.h \
-	afdal_kernel_server.h
+libaoskernelinclude_HEADERS =	\
+	aos-kernel-user.h \
+	aos-kernel-group.h \
+	aos_kernel.h \
+	aos_kernel_register.h \
+	aos_kernel_user.h \
+	aos_kernel_group.h \
+	aos_kernel_permission.h \
+	aos_kernel_server.h
 
-libafdalkernel_la_LIBADD = \
+libaoskernel_la_LIBADD = \
 	$(LIBRARIES_LIBS) 
 

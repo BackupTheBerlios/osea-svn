@@ -19,29 +19,29 @@
 #define __AF_KERNEL_USER_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean os_kernel_user_list    (CoyoteXmlServiceData * data, 
+gboolean os_kernel_user_list    (OseaCommXmlServiceData * data, 
 				 gpointer               user_data, 
 				 RRChannel            * channel, 
 				 gint                   msg_no);
 
-gboolean os_kernel_user_new     (CoyoteXmlServiceData * data, 
+gboolean os_kernel_user_new     (OseaCommXmlServiceData * data, 
 				 gpointer               user_data, 
 				 RRChannel            * channel, 
 				 gint                   msg_no);
 
-gboolean os_kernel_user_edit    (CoyoteXmlServiceData * data, 
+gboolean os_kernel_user_edit    (OseaCommXmlServiceData * data, 
 				 gpointer               user_data, 
 				 RRChannel            * channel, 
 				 gint                   msg_no);
 
-gboolean os_kernel_user_remove  (CoyoteXmlServiceData * data,
+gboolean os_kernel_user_remove  (OseaCommXmlServiceData * data,
 				 gpointer               user_data, 
 				 RRChannel            * channel, 
 				 gint                   msg_no);
 
-gboolean os_kernel_user_list_group  (CoyoteXmlServiceData * data,
+gboolean os_kernel_user_list_group  (OseaCommXmlServiceData * data,
 				     gpointer               group_data, 
 				     RRChannel            * channel, 
 				     gint                   msg_no);

@@ -19,7 +19,7 @@
 #define __AF_KERNEL_REGISTER_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
 typedef struct __AfKernelActiveServer {
 	gchar * name;
@@ -28,17 +28,17 @@ typedef struct __AfKernelActiveServer {
 } AfKernelActiveServer;
 
 
-gboolean      os_kernel_register_request               (CoyoteXmlServiceData *data, 
+gboolean      os_kernel_register_request               (OseaCommXmlServiceData *data, 
 							gpointer user_data, 
 							RRChannel * channel, 
 							gint msg_no);
 
-/* gboolean      os_kernel_register_list_request          (CoyoteXmlServiceData *data,  */
+/* gboolean      os_kernel_register_list_request          (OseaCommXmlServiceData *data,  */
 /* 							gpointer user_data,  */
 /* 							RRChannel * channel,  */
 /* 							gint msg_no); */
 
-gboolean      os_kernel_unregister_request             (CoyoteXmlServiceData *data, 
+gboolean      os_kernel_unregister_request             (OseaCommXmlServiceData *data, 
 							gpointer user_data,
 							RRChannel * channel, 
 							gint msg_no);

@@ -18,7 +18,7 @@
 #ifndef __OSEASERVER_AFKEYS_H__
 #define __OSEASERVER_AFKEYS_H__
 
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include "oseaserver.h"
 
 
@@ -38,7 +38,7 @@ void         oseaserver_afkeys_destroy                   (OseaServerAfKey * af_k
 void         oseaserver_afkeys_set_connection_key_simple (RRConnection *connection,
 						    OseaServerAfKey    *af_key);
 
-gboolean     oseaserver_afkeys_set_connection_key        (CoyoteXmlServiceData * data,
+gboolean     oseaserver_afkeys_set_connection_key        (OseaCommXmlServiceData * data,
 						    gpointer               user_data,
 						    RRChannel            * channel,
 						    gint                   msg_no);

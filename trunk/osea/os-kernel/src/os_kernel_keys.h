@@ -19,13 +19,13 @@
 #define __AF_KERNEL_KEYS_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
 gchar  * os_kernel_keys_generate       (gchar * user, gchar * satellite_server);
 
 gchar  * os_kernel_keys_gen_time_stamp ();
 
-gboolean os_kernel_keys_request        (CoyoteXmlServiceData *data, 
+gboolean os_kernel_keys_request        (OseaCommXmlServiceData *data, 
 					gpointer user_data, 
 					RRChannel * channel, 
 					gint msg_no);

@@ -73,10 +73,10 @@ GTK_DOC_CHECK
 #################################################################
 # Links to compile the whole proyect before installing anything
 #################################################################
-test -h liboseacomm        || ln -s liboseacomm/src        liboseacomm
-test -h liboseaclient         || ln -s liboseaclient/src         liboseaclient
-test -h liboseaserver          || ln -s liboseaserver/src          liboseaserver
-test -h libaoskernel   || ln -s libaoskernel/src   libaoskernel
+test -h liboseacomm/liboseacomm        || ln -s src        liboseacomm/liboseacomm
+test -h liboseaclient/liboseaclient    || ln -s src      liboseaclient/liboseaclient
+test -h liboseaserver/liboseaserver    || ln -s src      liboseaserver/liboseaserver
+test -h libaoskernel/libaoskernel      || ln -s src       libaoskernel/libaoskernel
 
 #################################################################
 # Links to generate gtk-doc documentation properly
@@ -85,6 +85,7 @@ test -h doc/reference/src/liboseacomm        || ln -s ../../../liboseacomm/src  
 test -h doc/reference/src/liboseaclient         || ln -s ../../../liboseaclient/src       doc/reference/src/liboseaclient
 test -h doc/reference/src/liboseaserver          || ln -s ../../../liboseaserver/src        doc/reference/src/liboseaserver
 test -h doc/reference/src/libaoskernel   || ln -s ../../../libaoskernel/src doc/reference/src/libaoskernel
+test -h include_dir || ln -s doc/reference/src include_dir
 
 AC_OUTPUT([
 Makefile
@@ -106,10 +107,10 @@ os-kernel/src/Makefile
 os-kernel/data/Makefile
 osea-manager/Makefile
 osea-manager/src/Makefile
-liboseacomm/liboseacomm.pc
-liboseaclient/liboseaclient.pc
-liboseaserver/liboseaserver.pc
-libaoskernel/libaoskernel.pc
+liboseacomm/oseacomm.pc
+liboseaclient/oseaclient.pc
+liboseaserver/oseaserver.pc
+libaoskernel/aoskernel.pc
 doc/Makefile
 doc/reference/Makefile
 ])

@@ -18,8 +18,8 @@
 #ifndef __USER_H__
 #define __USER_H__
 
-#include <coyote/coyote.h>
-#include <afdalkernel/afdal_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <libaoskernel/aos_kernel.h>
 
 gboolean user_new    (gchar * line, gpointer data);
 

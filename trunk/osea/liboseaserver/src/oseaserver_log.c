@@ -150,7 +150,7 @@ void oseaserver_log_check_and_disable_glog ()
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);
 		g_log_set_handler ("AFDAL_REQUEST", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);
-		g_log_set_handler ("afdal_session", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
+		g_log_set_handler ("oseaclient_session", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);
 		g_log_set_handler ("COYOTE_SIMPLE", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_RECURSION, __oseaserver_log_fake_log_handler, NULL);

@@ -15,14 +15,14 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFGS_REG_H__
-#define __AFGS_REG_H__
+#ifndef __OSEA_SERVER_REG_H__
+#define __OSEA_SERVER_REG_H__
 
 #include <glib.h>
 #include "oseaserver_config.h"
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
-gboolean oseaserver_reg_register   (const gchar *server_name, gint version_number, AfDalNulFunc usr_function);
+gboolean oseaserver_reg_register   (const gchar *server_name, gint version_number, OseaClientNulFunc usr_function);
 
 gboolean oseaserver_reg_unregister ();
 

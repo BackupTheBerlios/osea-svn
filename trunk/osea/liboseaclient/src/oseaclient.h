@@ -21,7 +21,7 @@
 
 #include <glib.h>
 #include <librr/rr.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
 typedef enum {OSEACLIENT_ERROR, 
 	      OSEACLIENT_OK, 

@@ -14,16 +14,16 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFGS_COMMAND_H__
-#define __AFGS_COMMAND_H__
+#ifndef __OSEA_SERVER_COMMAND_H__
+#define __OSEA_SERVER_COMMAND_H__
 
 #include <glib.h>
 #include <stdio.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
 gboolean        oseaserver_command_execute_non_query        (gchar * cmd_string, ...);
 
-CoyoteDataSet * oseaserver_command_execute_single_query     (gchar * cmd_string, ...);
+OseaCommDataSet * oseaserver_command_execute_single_query     (gchar * cmd_string, ...);
 
 void            oseaserver_command_close_connection         ();
 

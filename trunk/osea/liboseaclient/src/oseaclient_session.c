@@ -38,7 +38,7 @@ typedef struct __OseaClientSession {
 
 static OseaClientSession         session = { NULL, NULL, NULL };
 static OseaClientSessionServer * server_myself = NULL;
-static gboolean             coyote_initialized = FALSE;
+static gboolean             oseacomm_initialized = FALSE;
 static GList              * active_servers = NULL;
 
 void __oseaclient_session_server_destroy (gpointer data)
@@ -65,14 +65,14 @@ void __oseaclient_session_server_destroy (gpointer data)
 }
 
 
-gchar * __oseaclient_session_extract_session_id (CoyoteDataSet * dataset)
+gchar * __oseaclient_session_extract_session_id (OseaCommDataSet * dataset)
 {
 	g_return_val_if_fail (dataset, NULL);
 
-	return g_strdup (coyote_dataset_get (dataset, 0, 0));
+	return g_strdup (oseacomm_dataset_get (dataset, 0, 0));
 }
 
-OseaClientList * __oseaclient_session_extract_server_info (CoyoteDataSet * data, RRConnection *kernel_connection)
+OseaClientList * __oseaclient_session_extract_server_info (OseaCommDataSet * data, RRConnection *kernel_connection)
 {
 	OseaClientSessionPrivateServer * server;
 	OseaClientList                 * result;
@@ -82,17 +82,17 @@ OseaClientList * __oseaclient_session_extract_server_info (CoyoteDataSet * data,
 	
 	result = oseaclient_list_new_full ((GCompareFunc) g_strcasecmp, NULL, __oseaclient_session_server_destroy);
 
-	for (i=0; i < coyote_dataset_get_height (data); i++) {
+	for (i=0; i < oseacomm_dataset_get_height (data); i++) {
 		server = g_new0 (OseaClientSessionPrivateServer,1);
 
-		server->name = g_strdup (coyote_dataset_get (data, i, 0));
+		server->name = g_strdup (oseacomm_dataset_get (data, i, 0));
 		
 		if (! g_strcasecmp ("af-kernel", server->name))
 			server->connection = kernel_connection;
 
-		server->host = g_strdup (coyote_dataset_get (data, i, 1));
-		server->port = g_strdup (coyote_dataset_get (data, i, 2));
-		server->af_key = g_strdup (coyote_dataset_get (data, i, 3));
+		server->host = g_strdup (oseacomm_dataset_get (data, i, 1));
+		server->port = g_strdup (oseacomm_dataset_get (data, i, 2));
+		server->af_key = g_strdup (oseacomm_dataset_get (data, i, 3));
 
 		oseaclient_list_insert (result, server->name, server);
 
@@ -111,8 +111,8 @@ static  void __oseaclient_session_login_process (RRChannel * channel,
 	OseaClientMultiData  * oseaclient_multidata = NULL;
 	OseaClientNulData    * oseaclient_data = NULL;
 	GList           * list = NULL;
-	CoyoteDataSet   * session_id_dataset = NULL;
-	CoyoteDataSet   * server_info_dataset = NULL;
+	OseaCommDataSet   * session_id_dataset = NULL;
+	OseaCommDataSet   * server_info_dataset = NULL;
 	
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
@@ -136,14 +136,14 @@ static  void __oseaclient_session_login_process (RRChannel * channel,
 
 	if (oseaclient_data->state == OSEACLIENT_OK) {
 
-		session_id_dataset = (CoyoteDataSet *) g_list_nth_data (list, 0);
-		server_info_dataset = (CoyoteDataSet *) g_list_nth_data (list, 1);
+		session_id_dataset = (OseaCommDataSet *) g_list_nth_data (list, 0);
+		server_info_dataset = (OseaCommDataSet *) g_list_nth_data (list, 1);
 		
 		session.session_id  = __oseaclient_session_extract_session_id (session_id_dataset);
 		session.server_info = __oseaclient_session_extract_server_info (server_info_dataset, channel->connection);
 		
-		coyote_dataset_free (session_id_dataset);
-		coyote_dataset_free (server_info_dataset);
+		oseacomm_dataset_free (session_id_dataset);
+		oseacomm_dataset_free (server_info_dataset);
 
 		g_list_free (list);
 	} else {
@@ -189,13 +189,13 @@ gboolean        oseaclient_session_login   (gchar * usr,
 	g_return_val_if_fail (kernel_hostname, FALSE);
 	g_return_val_if_fail (kernel_port, FALSE);
 
-	// Initialize coyote 
-	if ((! coyote_initialized) && (!coyote_init ( NULL, NULL, &error))) {
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Error: unable to initialize coyote: %s\n", error->message);
+	// Initialize oseacomm 
+	if ((! oseacomm_initialized) && (!oseacomm_init ( NULL, NULL, &error))) {
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Error: unable to initialize oseacomm: %s\n", error->message);
 		return FALSE;
 	}
 
-	connection = coyote_connection_new (kernel_hostname, kernel_port, TYPE_COYOTE_SIMPLE);
+	connection = oseacomm_connection_new (kernel_hostname, kernel_port, TYPE_OSEACOMM_SIMPLE);
 
 	if (! connection) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to af-kernel in %s:%s", 
@@ -210,8 +210,8 @@ gboolean        oseaclient_session_login   (gchar * usr,
 	return oseaclient_request (connection, __oseaclient_session_login_process, 
 			      (OseaClientFunc) usr_function, usr_data,
 			      "login", 
-			      "user", COYOTE_XML_ARG_STRING, usr, 
-			      "password", COYOTE_XML_ARG_STRING, passwd, NULL);
+			      "user", OSEACOMM_XML_ARG_STRING, usr, 
+			      "password", OSEACOMM_XML_ARG_STRING, passwd, NULL);
 	
 }
 
@@ -287,7 +287,7 @@ gboolean        oseaclient_session_logout  (OseaClientNulFunc usr_function,
 	return oseaclient_request (connection, __oseaclient_session_logout_process, 
 			      (OseaClientFunc) usr_function, usr_data,
 			      "logout", 
-			      "session_id", COYOTE_XML_ARG_STRING, session.session_id, 
+			      "session_id", OSEACOMM_XML_ARG_STRING, session.session_id, 
 			      NULL);
 	
 }
@@ -304,7 +304,7 @@ static  void __oseaclient_session_refresh_key_process (RRChannel * channel,
 {
 	OseaClientNulData              * oseaclient_nul_data = NULL;
 	OseaClientData                 * oseaclient_data = NULL;
-	CoyoteDataSet             * af_key_dataset = NULL;
+	OseaCommDataSet             * af_key_dataset = NULL;
 	gchar                     * new_af_key = NULL;
 	OseaClientAfKey                * key = NULL;
 	OseaClientSessionPrivateServer * server = NULL;
@@ -330,7 +330,7 @@ static  void __oseaclient_session_refresh_key_process (RRChannel * channel,
 	// If everything was OK, we must process new af_key and set it to corresponding server
 	
 	if (oseaclient_nul_data->state == OSEACLIENT_OK) {
-		new_af_key = g_strdup (coyote_dataset_get (af_key_dataset, 0, 0));
+		new_af_key = g_strdup (oseacomm_dataset_get (af_key_dataset, 0, 0));
 		key =  ___oseaclient_afkeys_parse (new_af_key);
 		
 		server = oseaclient_list_lookup (session.server_info, key->satellite_server);
@@ -339,7 +339,7 @@ static  void __oseaclient_session_refresh_key_process (RRChannel * channel,
 		server->af_key = new_af_key;
 		g_free (tmp);
 		
- 		coyote_dataset_free (af_key_dataset); 
+ 		oseacomm_dataset_free (af_key_dataset); 
 
 	} else {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Key refresh failed: %s", oseaclient_nul_data->text_response);
@@ -383,8 +383,8 @@ gboolean        oseaclient_session_refresh_key          (gchar * server,
 	return oseaclient_request (connection, __oseaclient_session_refresh_key_process, 
 			      (OseaClientFunc) usr_function, usr_data,
 			      "refresh_key", 
-			      "session_id", COYOTE_XML_ARG_STRING, session.session_id,
-			      "server_name", COYOTE_XML_ARG_STRING, server,
+			      "session_id", OSEACOMM_XML_ARG_STRING, session.session_id,
+			      "server_name", OSEACOMM_XML_ARG_STRING, server,
 			      NULL);
 }
 
@@ -399,8 +399,8 @@ static  void __oseaclient_session_refresh_session_process (RRChannel * channel,
 	OseaClientMultiData  * oseaclient_multidata = NULL;
 	OseaClientNulData    * oseaclient_nul_data = NULL;
 	GList           * list = NULL;
-	CoyoteDataSet   * session_id_dataset = NULL;
-	CoyoteDataSet   * server_info_dataset = NULL;
+	OseaCommDataSet   * session_id_dataset = NULL;
+	OseaCommDataSet   * server_info_dataset = NULL;
 	
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
@@ -424,8 +424,8 @@ static  void __oseaclient_session_refresh_session_process (RRChannel * channel,
 
 	if (oseaclient_nul_data->state == OSEACLIENT_OK) {
 
-		session_id_dataset = (CoyoteDataSet *) g_list_nth_data (list, 0);
-		server_info_dataset = (CoyoteDataSet *) g_list_nth_data (list, 1);
+		session_id_dataset = (OseaCommDataSet *) g_list_nth_data (list, 0);
+		server_info_dataset = (OseaCommDataSet *) g_list_nth_data (list, 1);
 
 		g_free (session.session_id);
 		session.session_id  = __oseaclient_session_extract_session_id (session_id_dataset);
@@ -434,8 +434,8 @@ static  void __oseaclient_session_refresh_session_process (RRChannel * channel,
 		/*oseaclient_list_destroy (session.server_info); */
 		session.server_info = __oseaclient_session_extract_server_info (server_info_dataset, channel->connection);
 		
-		coyote_dataset_free (session_id_dataset);
-		coyote_dataset_free (server_info_dataset);
+		oseacomm_dataset_free (session_id_dataset);
+		oseacomm_dataset_free (server_info_dataset);
 
 		g_list_free (list);
 	} else {
@@ -470,8 +470,8 @@ gboolean        oseaclient_session_refresh_session   (gchar * passwd,
 	return oseaclient_request (connection, __oseaclient_session_refresh_session_process, 
 			      (OseaClientFunc) usr_function, usr_data,
 			      "login", 
-			      "user", COYOTE_XML_ARG_STRING, session.user, 
-			      "password", COYOTE_XML_ARG_STRING, passwd, 
+			      "user", OSEACOMM_XML_ARG_STRING, session.user, 
+			      "password", OSEACOMM_XML_ARG_STRING, passwd, 
 			      NULL);
 	
 }
@@ -491,8 +491,8 @@ static  void __oseaclient_session_register_process (RRChannel * channel,
 	OseaClientMultiData  * oseaclient_multidata = NULL;
 	OseaClientNulData    * oseaclient_data = NULL;
 	GList           * list = NULL;
-	CoyoteDataSet   * session_id_dataset = NULL;
-	CoyoteDataSet   * server_info_dataset = NULL;	
+	OseaCommDataSet   * session_id_dataset = NULL;
+	OseaCommDataSet   * server_info_dataset = NULL;	
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
@@ -515,14 +515,14 @@ static  void __oseaclient_session_register_process (RRChannel * channel,
 
 	switch (oseaclient_data->state) {
 	case OSEACLIENT_OK:
-		session_id_dataset = (CoyoteDataSet *) g_list_nth_data (list, 0);
-		server_info_dataset = (CoyoteDataSet *) g_list_nth_data (list, 1);
+		session_id_dataset = (OseaCommDataSet *) g_list_nth_data (list, 0);
+		server_info_dataset = (OseaCommDataSet *) g_list_nth_data (list, 1);
 		
 		session.session_id  = __oseaclient_session_extract_session_id (session_id_dataset);
 		session.server_info = __oseaclient_session_extract_server_info (server_info_dataset, channel->connection);
 		
-		coyote_dataset_free (session_id_dataset);
-		coyote_dataset_free (server_info_dataset);
+		oseacomm_dataset_free (session_id_dataset);
+		oseacomm_dataset_free (server_info_dataset);
 
 		g_list_free (list);
 
@@ -591,13 +591,13 @@ gboolean        oseaclient_session_register (gchar * name,
 	server_myself->host = host;
 	server_myself->port = port;
 
-	// Initialize coyote 
-	if ((! coyote_initialized) && (!coyote_init ( NULL, NULL, &error))) {
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Error: unable to initialize coyote: %s\n", error->message);
+	// Initialize oseacomm 
+	if ((! oseacomm_initialized) && (!oseacomm_init ( NULL, NULL, &error))) {
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Error: unable to initialize oseacomm: %s\n", error->message);
 		return FALSE;
 	}
 
-	connection = coyote_connection_new (kernel_hostname, kernel_port, TYPE_COYOTE_SIMPLE);
+	connection = oseacomm_connection_new (kernel_hostname, kernel_port, TYPE_OSEACOMM_SIMPLE);
 
 	if (! connection) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't connect to af-kernel in %s:%s", 
@@ -608,10 +608,10 @@ gboolean        oseaclient_session_register (gchar * name,
 	result = oseaclient_request (connection, __oseaclient_session_register_process,
 				(OseaClientFunc) usr_function, usr_data,
 				"register", 
-				"name", COYOTE_XML_ARG_STRING, name, 
-				"version", COYOTE_XML_ARG_STRING, version_string,
-				"host", COYOTE_XML_ARG_STRING, host, 
-				"port", COYOTE_XML_ARG_STRING, port, 
+				"name", OSEACOMM_XML_ARG_STRING, name, 
+				"version", OSEACOMM_XML_ARG_STRING, version_string,
+				"host", OSEACOMM_XML_ARG_STRING, host, 
+				"port", OSEACOMM_XML_ARG_STRING, port, 
 				NULL);
 
 	g_free (version_string);
@@ -679,9 +679,9 @@ gboolean        oseaclient_session_unregister  (OseaClientNulFunc usr_function,
 	return oseaclient_request (connection, __oseaclient_session_unregister_process, 
 			      (OseaClientFunc) usr_function, usr_data,
 			      "unregister", 
-			      "name", COYOTE_XML_ARG_STRING, server_myself->name,
-			      "host", COYOTE_XML_ARG_STRING, server_myself->host,
-			      "port", COYOTE_XML_ARG_STRING, server_myself->port,
+			      "name", OSEACOMM_XML_ARG_STRING, server_myself->name,
+			      "host", OSEACOMM_XML_ARG_STRING, server_myself->host,
+			      "port", OSEACOMM_XML_ARG_STRING, server_myself->port,
 			      NULL);
 	
 }
@@ -793,7 +793,7 @@ gboolean __oseaclient_session_send_afkey (gchar *server_name)
 	return oseaclient_request (server->connection,
 			      NULL, NULL, NULL,
 			      "set_connection_key",
-			      "af-key", COYOTE_XML_ARG_STRING, server->af_key,
+			      "af-key", OSEACOMM_XML_ARG_STRING, server->af_key,
 			      NULL);
 
 }
@@ -823,7 +823,7 @@ gboolean        oseaclient_session_send_afkey          (gchar * server_name,
 	return oseaclient_request (server->connection, oseaclient_request_process_nul_data, 
 			      (OseaClientFunc) usr_function, usr_data,
 			      "set_connection_key", 
-			      "af-key", COYOTE_XML_ARG_STRING, server->af_key,
+			      "af-key", OSEACOMM_XML_ARG_STRING, server->af_key,
 			      NULL);
 }
 
@@ -849,9 +849,9 @@ RRConnection  * oseaclient_session_get_connection (gchar *server_name, GError **
 	g_return_val_if_fail (server, NULL);
 	
 	if (! server->connection) {
-		server->connection = coyote_connection_new (server->host, 
+		server->connection = oseacomm_connection_new (server->host, 
 							    server->port, 
-							    TYPE_COYOTE_SIMPLE);
+							    TYPE_OSEACOMM_SIMPLE);
 
 		if (! __oseaclient_session_send_afkey (server_name))
 			return FALSE;

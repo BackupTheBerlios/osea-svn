@@ -18,12 +18,12 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include <popt.h>
 #include <time.h>
 #include <config.h>
-#include <afdal/afdal.h>
-#include <afdalkernel/afdal_kernel.h>
+#include <liboseaclient/oseaclient.h>
+#include <libaoskernel/aos_kernel.h>
 //#include "auto_completion.h"
 #include "help.h"
 #include "commands.h"
@@ -64,7 +64,7 @@ void initialize_log_handlers ()
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, fake_log_handler, NULL);
 		g_log_set_handler ("COYOTE_CONNECTION", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, fake_log_handler, NULL);
-		g_log_set_handler ("AFDAL_REQUEST", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
+		g_log_set_handler ("OSEACLIENT_REQUEST", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, fake_log_handler, NULL);
 		g_log_set_handler ("COYOTE_SIMPLE", G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING 
 				   | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, fake_log_handler, NULL);
@@ -91,12 +91,12 @@ int main (int argc, char *argv[])
 
 	if (version_option) {
 		g_print ("ASPL Command Line Manager version %s, compiled %s", VERSION, ctime(&cd));
-		afdal_print_version_info ();
-		afdal_kernel_print_version_info ();
+		oseaclient_print_version_info ();
+		aos_kernel_print_version_info ();
 		return 0;
 	}
 		
-	afdal_init ();
+	oseaclient_init ();
 	
 	help_initial_help ();
 

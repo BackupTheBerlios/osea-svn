@@ -19,13 +19,13 @@
 #define __AF_KERNEL_REGISTRY__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
 gboolean       os_kernel_registry_insert (gchar * name, gchar * host, gchar *port);
 
-CoyoteDataSet * os_kernel_registry_list ();
+OseaCommDataSet * os_kernel_registry_list ();
 
-CoyoteDataSet * os_kernel_registry_generate_session_info_table (gchar *user, gchar **kernel_afkey);
+OseaCommDataSet * os_kernel_registry_generate_session_info_table (gchar *user, gchar **kernel_afkey);
 
 gboolean os_kernel_registry_remove (gchar *name);
 

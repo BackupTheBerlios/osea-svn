@@ -3,7 +3,7 @@
 #include <glib.h>
 #include <unistd.h>
 #include <src/aos_kernel.h>
-#include <coyote/coyote.h>
+
 
 #define MODULE_TEST_NAME "aos_kernel_permission"
 
@@ -20,8 +20,8 @@ gint     test1_group_created = 0;
 
 gboolean test1_foreach_function (gpointer key, gpointer value, gpointer data) 
 {
-	AfDalKernelPermission * permission;
-	permission = (AfDalKernelPermission *) value;
+	AosKernelPermission * permission;
+	permission = (AosKernelPermission *) value;
 
 	printf ("id: %-3d name: %-20s description: %s server_name: %s server_version: %s\n",
 		permission->id, 
@@ -33,24 +33,24 @@ gboolean test1_foreach_function (gpointer key, gpointer value, gpointer data)
 	return FALSE;
 }
 
-gboolean test1_function (AfDalData * data, gpointer usr_data)
+gboolean test1_function (OseaClientData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Recieved an afirmative response\n");
 	}else {
 		g_print ("Recieved a negative response\n");
 	}
 	
-	afdal_list_foreach (data->data, test1_foreach_function, NULL);
+	oseaclient_list_foreach (data->data, test1_foreach_function, NULL);
 	
 	test1_exit_var = TRUE;
 
 	return TRUE;
 }
 
-gboolean test1_function2 (AfDalNulData * data, gpointer usr_data)
+gboolean test1_function2 (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		
 	}else {
 		
@@ -89,7 +89,7 @@ gboolean test1 (void)
 
 
 
-gboolean init_function_process (AfDalNulData * data, gpointer user_data)
+gboolean init_function_process (OseaClientNulData * data, gpointer user_data)
 {
 	init_function_var = TRUE;
 	return TRUE;
@@ -98,7 +98,7 @@ gboolean init_function_process (AfDalNulData * data, gpointer user_data)
 
 void init_function ()
 {
-	afdal_session_login ("aspl", "prueba", "localhost", "55000", init_function_process, NULL);
+	oseaclient_session_login ("aspl", "prueba", "localhost", "55000", init_function_process, NULL);
 
 	while (init_function_var == FALSE) {
 		sleep (1);

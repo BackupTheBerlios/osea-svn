@@ -18,8 +18,8 @@
 #ifndef __GROUP_H__
 #define __GROUP_H__
 
-#include <coyote/coyote.h>
-#include <afdalkernel/afdal_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <libaoskernel/aos_kernel.h>
 
 gboolean group_new          (gchar * line, gpointer data);
 

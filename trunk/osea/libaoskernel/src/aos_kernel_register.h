@@ -16,19 +16,19 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFDAL_KERNEL_REGISTER_INTERFACE_H__
-#define __AFDAL_KERNEL_REGISTER_INTERFACE_H__
+#ifndef __AOS_KERNEL_REGISTER_INTERFACE_H__
+#define __AOS_KERNEL_REGISTER_INTERFACE_H__
 
 #include "aos_kernel.h"
 
-typedef struct __AfDalKernelServerInfo {
+typedef struct __AosKernelServerInfo {
 	gchar * name;
 	gchar * host;
 	gchar * port;
-}AfDalKernelServerInfo;
+}AosKernelServerInfo;
 
 
-gboolean aos_kernel_register_get_servers  (AfDalDataFunc  usr_function, 
+gboolean aos_kernel_register_get_servers  (OseaClientDataFunc  usr_function, 
 					     gpointer       usr_data);
 
 #endif

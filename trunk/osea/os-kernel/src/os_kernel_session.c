@@ -15,7 +15,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#include <afgs/afgs.h>
+#include <liboseaserver/oseaserver.h>
 #include <glib.h>
 #include "os_kernel_session.h"
 #include "os_kernel_crypto.h"
@@ -30,7 +30,7 @@ void     __os_kernel_session_add (gchar * session_id, gint user, gboolean expire
 	else
 		expire_str = "FALSE";
 
-	result = afgs_command_execute_non_query ("INSERT INTO Kernel_Session \
+	result = oseaserver_command_execute_non_query ("INSERT INTO Kernel_Session \
                  (id, user_id, stime, expire) VALUES \
                  ('%s', %d, current_timestamp, '%s');", session_id, user, expire_str);
 
@@ -42,7 +42,7 @@ void     __os_kernel_session_add (gchar * session_id, gint user, gboolean expire
 
 void     __os_kernel_session_delete_non_expiring_sessions (gint user)
 {
-	afgs_command_execute_non_query ("DELETE FROM kernel_session WHERE \
+	oseaserver_command_execute_non_query ("DELETE FROM kernel_session WHERE \
               user_id = %d AND expire = 'FALSE'", user);
 
 	return;
@@ -78,7 +78,7 @@ gchar *  os_kernel_session_new (gint user, gboolean expire)
 
 void     os_kernel_session_remove (gchar *id)
 {
-	afgs_command_execute_non_query ("DELETE FROM kernel_session WHERE \
+	oseaserver_command_execute_non_query ("DELETE FROM kernel_session WHERE \
               id = '%s'", id);
 }
 
@@ -88,30 +88,30 @@ gboolean os_kernel_session_is_current (gchar *id)
 	gchar               * session_expiration;
 	glong                 session_exp;
 	gboolean              result;
-	CoyoteDataSet       * dataset;
+	OseaCommDataSet       * dataset;
 
 
 
-	session_expiration = afgs_config_get (NULL, "session expiration");
+	session_expiration = oseaserver_config_get (NULL, "session expiration");
 	if (! session_expiration)
 		return FALSE;
 
 	session_exp = atol (session_expiration);
 	g_free (session_expiration);
 
-	afgs_command_execute_non_query ("DELETE FROM Kernel_Session WHERE stime < CURRENT_TIMESTAMP - INTERVAL '%ld seconds' AND expire = 'TRUE'", session_exp);
+	oseaserver_command_execute_non_query ("DELETE FROM Kernel_Session WHERE stime < CURRENT_TIMESTAMP - INTERVAL '%ld seconds' AND expire = 'TRUE'", session_exp);
 
-	afgs_command_execute_non_query ("UPDATE Kernel_Session SET stime = current_timestamp WHERE id='%s'", id);
+	oseaserver_command_execute_non_query ("UPDATE Kernel_Session SET stime = current_timestamp WHERE id='%s'", id);
 
-	dataset = afgs_command_execute_single_query ("SELECT id FROM kernel_session WHERE id = '%s'",
+	dataset = oseaserver_command_execute_single_query ("SELECT id FROM kernel_session WHERE id = '%s'",
 						      id);	
 
-	if (coyote_dataset_get_height (dataset) < 1)
+	if (oseacomm_dataset_get_height (dataset) < 1)
 		result = FALSE;
 	else
 		result = TRUE;
 
-	coyote_dataset_free (dataset);
+	oseacomm_dataset_free (dataset);
 
 	return result;
 	
@@ -120,7 +120,7 @@ gboolean os_kernel_session_is_current (gchar *id)
 
 gboolean os_kernel_session_refresh (gchar *id)
 {
-	gboolean result = afgs_command_execute_non_query ("UPDATE Kernel_Session SET stime = current_timestamp WHERE id='%s'", id);
+	gboolean result = oseaserver_command_execute_non_query ("UPDATE Kernel_Session SET stime = current_timestamp WHERE id='%s'", id);
 
 	return result;
 }

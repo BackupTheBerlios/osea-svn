@@ -1,9 +1,10 @@
-ASPL Fact
-=========
+öSea System
+===========
 
-System for commercial management.
+Open Secure System for Enterprise Applications
 
-(c) 2003, Advanced Software Production Line.
+(c) 2004 David Marín Carreño
+(c) 2003 Advanced Software Production Line, S.L.
 
 
 Requisites:
@@ -11,18 +12,18 @@ Requisites:
 
 Both servers and client need Roadrunner. You must install the last
 version of RoadRunner. Download it from http://rr.codefactory.se.  If
-you experiment problems compiling ASPL Fact against the last stable
+you experiment problems compiling öSea system against the last stable
 version, please checkout the CVS version and try with it.
 
-You must install the last version of LibGDA (0.12 or greater) in
-machines where servers will be installed. Download it from
-http://www.gnome-db.org, or use the last libgda package for your
-distribution.  If you experiment problems using ASPL Fact against the
-last stable version, please checkout the CVS version and try with it.
+You must install the last version of LibGDA in machines where servers
+will be installed. Download it from http://www.gnome-db.org, or use
+the last libgda package for your distribution.  If you experiment
+problems using öSea system against the last stable version, please
+checkout the CVS version and try with it.
 
 
-Installing, configuring ASPL Fact system
-========================================
+Installing, configuring öSea system
+===================================
 
 Server side
 -----------
@@ -30,33 +31,33 @@ Server side
 1) Servers installation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-ASPL Fact server side consists in several different servers. Each one
+öSea system server side consists on several different servers. Each one
 can be installed in a different machine.
 
-For running af-kernel, you will need to install the following
+For running öS-Kernel, you will need to install the following
 components, in the next order:
 
-* libcoyote
-* libafdal
-* libafdalkernel
-* libafgs
-* af-kernel
+* liboseacomm
+* liboseaclient
+* libaoskernel
+* liboseaserver
+* os-kernel
 
-For running af-tax, you will need to install the following components,
+For running os-tax, you will need to install the following components,
 in the next order:
 
-* libcoyote
-* libafdal
-* libafdalkernel
-* libafgs
-* af-tax
+* liboseacomm
+* liboseaclient
+* libaoskernel
+* liboseaserver
+* os-tax
 
 2) Database setup
 ~~~~~~~~~~~~~~~~~
 
-After that, you must initialize database. ASPL Fact uses PostgreSQL as
-database management system. The database server can be installed in any
-machine, but it must be accesible from af-* servers.
+After that, you must initialize database. öSea system uses PostgreSQL
+as database management system. The database server can be installed in
+any machine, but it must be accesible from os-* servers.
 
 You can taylor this installation method for your machines. Here, our
 database server is at the same machine where the other servers run, and
@@ -64,7 +65,7 @@ we've got root access. You can also contribute with other database
 installation methods for including them in this document.
 
 * First of all, you need to configure your postgresql daemon for it to
-  authenticate aspl-fact users against passwords using crypt
+  authenticate oinvoice users against passwords using crypt
   (postgresql <= 6.2) or md5 (postgresql >= 6.3).
 
   Depending your preexisting PostgreSQL configuration, you will need
@@ -88,7 +89,7 @@ installation methods for including them in this document.
   This configuration allows users root and postgres connecting against
   database without a password, and makes all other users from
   localhost and the LAN to connect using md5 as authenticating method
-  (so ASPL Fact users should be authenticated for connecting to the
+  (so öInvoice users should be authenticated for connecting to the
   database). Connections that not match with any of the previous rules
   are rejected.
 
@@ -96,8 +97,8 @@ installation methods for including them in this document.
 * After changing pg_hba.conf, restart postgresql
   ("/etc/init.d/postgresql restart" in debian)
 
-* Now you must create asplfact database. The installation script is in
-  af-kernel/data/create_database.sql. If you want to use another
+* Now you must create osea database. The installation script is in
+  os-kernel/data/create_database.sql. If you want to use another
   database name, you shall change all database installation scripts.
 
   For creating database, login as postgres user:
@@ -125,7 +126,7 @@ installation methods for including them in this document.
   Now, execute database creation script:
 
   ----
-  template1=# \i /usr/src/aspl-fact/af-kernel/data/create_database.sql
+  template1=# \i /usr/src/osea/os-kernel/data/create_database.sql
   ----
 
   After creating that, logout from psql
@@ -139,7 +140,7 @@ installation methods for including them in this document.
   database:
 
   ----
-  postgres@kolbe:$ psql asplfact
+  postgres@kolbe:$ psql osea
   Welcome to psql 7.3.2, the PostgreSQL interactive terminal.
  
   Type:  \copyright for distribution terms
@@ -148,15 +149,15 @@ installation methods for including them in this document.
          \g or terminate with semicolon to execute query
          \q to quit
  
-  asplfact=#
+  osea=#
   ____
 
   Now, you must install the corresponding tables in the database. So
   you should install tables for every installed server:
 
   ----
-  asplfact=# \i /usr/src/aspl-fact/af-tax/data/install.sql
-  asplfact=# \i /usr/src/aspl-fact/af-kernel/data/install.sql
+  osea=# \i /usr/src/osea/os-kernel/data/install.sql
+  osea=# \i /usr/src/oinvoice/os-tax/data/install.sql
   ----
  
   And so on with all the installed servers...
@@ -166,14 +167,14 @@ installation methods for including them in this document.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Now you must customize configuration for all the servers.
-  Copy af-*.cfg.example files to af-*.cfg, and edit them to show your
+  Copy os-*.cfg.example files to os-*.cfg, and edit them to show your
   actual configuration.
 
 4) Start servers
 ~~~~~~~~~~~~~~~~
 
 * Now you only need to start servers properly. The only requisite is
-  that you must start af-kernel first.
+  that you must start os-kernel first.
 
 
 
@@ -184,14 +185,14 @@ Client side
 In the client side, you must install the components following the next
 order:
 
-* libcoyote
-* libafdal
-* libafdalkernel
-* libafdaltax
-* aspl-fact
+* liboseacomm
+* liboseaclient
+* libaoskernel
+* libaostax
+* oinvoice
 
-After that, you can start aspl-fact.
+After that, you can start öInvoice with "oinvoice".
 
 
 
-David Marín <david AT aspl.es>
+David Marín <dmarin AT dyr.es>

@@ -22,7 +22,7 @@
 
 GdaConnection * connection = NULL;
 
-CoyoteDataSet * oseaserver_command_get_dataset          (GdaDataModel *  datamodel);
+OseaCommDataSet * oseaserver_command_get_dataset          (GdaDataModel *  datamodel);
 
 /**
  * oseaserver_command_execute_non_query:
@@ -96,12 +96,12 @@ gboolean oseaserver_command_execute_non_query (gchar * cmd_string, ...)
  *   oseaserver_command_execute_single_query ("SELECT * FROM anywhere WHERE attr = '%s'", value);
  * Return value: a dataset which contains the query data or NULL if something fails.
  **/
-CoyoteDataSet *  oseaserver_command_execute_single_query (gchar * cmd_string, ...)
+OseaCommDataSet *  oseaserver_command_execute_single_query (gchar * cmd_string, ...)
 {
 	gchar         * cmd_result = NULL;
 	GdaCommand    * command    = NULL;
 	GdaDataModel  * datamodel  = NULL;
-	CoyoteDataSet * dataset    = NULL;
+	OseaCommDataSet * dataset    = NULL;
 	va_list         args;
 
 	g_return_val_if_fail (cmd_string, FALSE);
@@ -151,14 +151,14 @@ CoyoteDataSet *  oseaserver_command_execute_single_query (gchar * cmd_string, ..
  * @datamodel: A GdaDataModel to extract data from.
  * 
  * Convenienve function to translate a given @datamodel into a
- * CoyoteDataSet structure.
+ * OseaCommDataSet structure.
  * 
- * Return value: A translated CoyoteDataSet or NULL if fails.
+ * Return value: A translated OseaCommDataSet or NULL if fails.
  **/
-CoyoteDataSet * oseaserver_command_get_dataset          (GdaDataModel *  datamodel)
+OseaCommDataSet * oseaserver_command_get_dataset          (GdaDataModel *  datamodel)
 {
 	gint rows, columns, i, j;
-	CoyoteDataSet * result;
+	OseaCommDataSet * result;
 	GdaValue      * value     = NULL;
 	gchar         * str_value = NULL;
 
@@ -166,7 +166,7 @@ CoyoteDataSet * oseaserver_command_get_dataset          (GdaDataModel *  datamod
 
 	rows = gda_data_model_get_n_rows (datamodel);
 	columns = gda_data_model_get_n_columns (datamodel);
-	result = coyote_dataset_new ();
+	result = oseacomm_dataset_new ();
 
 	for (i = 0; i < rows; i++) {
 		for (j = 0; j < columns; j ++) {
@@ -174,7 +174,7 @@ CoyoteDataSet * oseaserver_command_get_dataset          (GdaDataModel *  datamod
 			value = gda_value_copy ( gda_data_model_get_value_at (datamodel, j, i) );
 			str_value = gda_value_stringify (value);
 
-			coyote_dataset_add (result, str_value);
+			oseacomm_dataset_add (result, str_value);
 			
 			g_free (str_value);
 
@@ -190,7 +190,7 @@ CoyoteDataSet * oseaserver_command_get_dataset          (GdaDataModel *  datamod
 		if (i == (rows - 1))
 			break;
 		
-		coyote_dataset_new_row (result);
+		oseacomm_dataset_new_row (result);
 	}
 
 	return result;

@@ -19,7 +19,7 @@
 #define __AF_KERNEL_LOGIN_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include "os_kernel_register_request.h"
 
 gboolean os_kernel_login_check (gchar * user, gchar * password);
@@ -28,7 +28,7 @@ gboolean os_kernel_login_request_build_active_servers (gchar * key,
 						       AfKernelActiveServer * value, 
 						       gpointer data);
 
-gboolean os_kernel_login_request                      (CoyoteXmlServiceData *data, 
+gboolean os_kernel_login_request                      (OseaCommXmlServiceData *data, 
 						       gpointer user_data, 
 						       RRChannel * channel, 
 						       gint msg_no);

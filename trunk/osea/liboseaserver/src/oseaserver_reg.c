@@ -17,7 +17,7 @@
 
 #include <config.h>
 #include <librr/rr.h>
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 #include "oseaserver_reg.h"
 #include <locale.h>
 
@@ -38,7 +38,7 @@ static const gchar *server_name = NULL;
  * 
  * Return value: TRUE if registration process was OK or FALSE in other case.
  **/
-gboolean oseaserver_reg_register (const gchar *server, gint version_number, AfDalNulFunc usr_function)
+gboolean oseaserver_reg_register (const gchar *server, gint version_number, OseaClientNulFunc usr_function)
 {
 	gchar     * hostname = NULL;
 	gchar     * port = NULL;
@@ -84,7 +84,7 @@ gboolean oseaserver_reg_register (const gchar *server, gint version_number, AfDa
 
 	aux_string = g_strdup (server_name);
 	
-	if (! afdal_session_register (aux_string, version_number, hostname, port, kernel_server, kernel_port, usr_function, NULL)) {
+	if (! oseaclient_session_register (aux_string, version_number, hostname, port, kernel_server, kernel_port, usr_function, NULL)) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't register");
 		g_free (aux_string);
 		return FALSE;
@@ -108,9 +108,9 @@ gboolean oseaserver_reg_register (const gchar *server, gint version_number, AfDa
  * 
  * Return value: TRUE if unregister process was ok or FALSE if something fails.
  **/
-gboolean oseaserver_reg_unregister (AfDalNulFunc usr_function, gpointer user_data)
+gboolean oseaserver_reg_unregister (OseaClientNulFunc usr_function, gpointer user_data)
 {
-	return afdal_session_unregister (usr_function, user_data);
+	return oseaclient_session_unregister (usr_function, user_data);
 }
 
 

@@ -26,9 +26,9 @@
 
 typedef struct {
 	gpointer                       user_data;
-	CoyoteXmlMessage             * concrect_message;
+	OseaCommXmlMessage             * concrect_message;
 	OseaClientFunc                      user_function;
-	CoyoteSimpleCfgCompleteMessage return_function;
+	OseaCommSimpleCfgCompleteMessage return_function;
 	gchar                        * server;
 } OseaClientRequestUserData;
 
@@ -46,7 +46,7 @@ gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer oseaclient_request
 void     oseaclient_refresh_start_afkey_refresh_return_error (gchar *message, OseaClientRequestUserData * request_user_data);
 gpointer oseaclient_request_return_from_failed_afkey_refresh (OseaClientRequestReturnData type,
 							 GString * message, 
-							 CoyoteDataSet ** returned_dataset,
+							 OseaCommDataSet ** returned_dataset,
 							 GList         ** returned_datasets,
 							 gpointer * data,
 							 gpointer * custom_data);
@@ -60,7 +60,7 @@ void     oseaclient_request_cancel_session_refresh_process (OseaClientRequestUse
 /**
  * oseaclient_request:
  * @connection: an already created conection to a af-kernel server
- * @return_function: Function to be executed by coyote when an xml message arrives from the other peer.
+ * @return_function: Function to be executed by oseacomm when an xml message arrives from the other peer.
  * @usr_function: User space function to be executed by liboseaclient when an xml message has been processed.
  * @usr_data: User space data to be passed to @usr_function.
  * @service_name: the service's name we are going to send to.
@@ -74,7 +74,7 @@ void     oseaclient_request_cancel_session_refresh_process (OseaClientRequestUse
  * Return value: Returns TRUE if request goes ok or FALSE if fails.
  **/
 gboolean   oseaclient_request                     (RRConnection * connection,
-					      CoyoteSimpleCfgCompleteMessage return_function,
+					      OseaCommSimpleCfgCompleteMessage return_function,
 					      OseaClientFunc usr_function, 
 					      gpointer usr_data,
 					      gchar * service_name,
@@ -83,12 +83,12 @@ gboolean   oseaclient_request                     (RRConnection * connection,
 	va_list args;
 	GError * error = NULL;
 	
-	CoyoteSimple    * channel = NULL;
-	CoyoteSimpleCfg * config = NULL;
+	OseaCommSimple    * channel = NULL;
+	OseaCommSimpleCfg * config = NULL;
 	RRMessage       * rr_message = NULL;
 	
-	CoyoteXmlObject  * abstract_message = NULL;
-	CoyoteXmlMessage * concrect_message = NULL;
+	OseaCommXmlObject  * abstract_message = NULL;
+	OseaCommXmlMessage * concrect_message = NULL;
 	
 	OseaClientRequestUserData * request_user_data = NULL;
 
@@ -107,21 +107,21 @@ gboolean   oseaclient_request                     (RRConnection * connection,
 
 	// Create a config object to tell to our profile to execute
 	// the following function when a complete response arrives
-	config = coyote_simple_cfg_new ();
-	coyote_simple_cfg_set_complete_message (config, 
+	config = oseacomm_simple_cfg_new ();
+	oseacomm_simple_cfg_set_complete_message (config, 
 						return_function,
 						(gpointer) usr_function, 
 						request_user_data);
 	
 	// Create a channel using the passed connection
-	channel = coyote_simple_start (connection, config, &error);
+	channel = oseacomm_simple_start (connection, config, &error);
 	while ((!channel) && (try_number < 2)) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't start a channel");
 
 		server_name = oseaclient_session_get_server_name (connection, &error);
 		connection = oseaclient_session_new_connection (server_name, &error);
 
-		channel = coyote_simple_start (connection, config, &error);
+		channel = oseacomm_simple_start (connection, config, &error);
 		try_number ++;
 	}
 
@@ -130,15 +130,15 @@ gboolean   oseaclient_request                     (RRConnection * connection,
 		return FALSE;
 	}
 	
-	// Create the message using coyote_xml
-	abstract_message = coyote_xml_new_object ();	
+	// Create the message using oseacomm_xml
+	abstract_message = oseacomm_xml_new_object ();	
 	if (!args) 
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "args param is null");
 	
-	coyote_xml_add_vrequest_service (abstract_message, service_name, args);
-	concrect_message = coyote_xml_build_message (abstract_message);
-	request_user_data->concrect_message = coyote_xml_build_message (abstract_message);
-	coyote_xml_destroy_object (abstract_message);
+	oseacomm_xml_add_vrequest_service (abstract_message, service_name, args);
+	concrect_message = oseacomm_xml_build_message (abstract_message);
+	request_user_data->concrect_message = oseacomm_xml_build_message (abstract_message);
+	oseacomm_xml_destroy_object (abstract_message);
 
 	
 	// Create a road runner message 
@@ -154,7 +154,7 @@ gboolean   oseaclient_request                     (RRConnection * connection,
 	}
 	
 	// Destroy unused objects.
-	coyote_xml_destroy_message (concrect_message);
+	oseacomm_xml_destroy_message (concrect_message);
 
 	va_end (args);
 	
@@ -169,7 +169,7 @@ gboolean   oseaclient_request                     (RRConnection * connection,
  * @channel: channel where @message was recieved.
  * @frame: recieved frame
  * @message: 
- * @returned_dataset: recieved dataset from coyote_xml level. This out
+ * @returned_dataset: recieved dataset from oseacomm_xml level. This out
  * variable is set to the recieved dataset when @type is set to
  * OSEACLIENT_REQUEST_DATA. 
  * 
@@ -177,7 +177,7 @@ gboolean   oseaclient_request                     (RRConnection * connection,
  * functions more quickly and maintainable.
  * This function trusts in incoming message to be process as @type
  * variable says, so is @type is set to OSEACLIENT_REQUEST_DATA, function
- * will expect to find a coyote_dataset from coyote level and will
+ * will expect to find a oseacomm_dataset from oseacomm level and will
  * return a OseaClientData pointer to the caller.
  * If this sound to you very dificult, please see
  * oseaclient_request_process_data/simple_data/nul_data to get an clear
@@ -190,7 +190,7 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 							RRChannel * channel,
 							RRFrame * frame,
 							GString * message, 
-							CoyoteDataSet ** returned_dataset,
+							OseaCommDataSet ** returned_dataset,
 							GList         ** returned_datasets,
 							gpointer * data,
 							gpointer * custom_data)
@@ -200,8 +200,8 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 	OseaClientSimpleData  * user_simple_data = NULL;
 	OseaClientNulData     * user_nul_data = NULL;
 	OseaClientMultiData   * user_multi_data = NULL;
-	CoyoteXmlMessage     * coyote_message = NULL;
-	CoyoteXmlServiceData * xml_data = NULL;
+	OseaCommXmlMessage     * oseacomm_message = NULL;
+	OseaCommXmlServiceData * xml_data = NULL;
 	RRConnection         * connection = NULL;
 
 	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) (*custom_data);	
@@ -233,24 +233,24 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 
 
 	// Close incoming message's channel
-	if (!coyote_simple_close (COYOTE_SIMPLE (channel), &error)) 
+	if (!oseacomm_simple_close (OSEACOMM_SIMPLE (channel), &error)) 
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Error while closing the channel: %s", error->message);
 	else
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "channel closed");
 
 	// validate message	
-	coyote_message = g_new0 (CoyoteXmlMessage, 1);
-	coyote_message->content = message->str;
-	coyote_message->len = message->len;		
+	oseacomm_message = g_new0 (OseaCommXmlMessage, 1);
+	oseacomm_message->content = message->str;
+	oseacomm_message->len = message->len;		
 
-	if (!coyote_xml_validate_message (coyote_message)) {
+	if (!oseacomm_xml_validate_message (oseacomm_message)) {
 
-		coyote_xml_destroy_message (request_user_data->concrect_message);
+		oseacomm_xml_destroy_message (request_user_data->concrect_message);
 		g_free (request_user_data);
 				
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Validation failed, we are goint to die: %s", 
-		       coyote_message->content);
-		g_free (coyote_message);
+		       oseacomm_message->content);
+		g_free (oseacomm_message);
 
 		switch (type) {
 		case OSEACLIENT_REQUEST_MULTI_DATA:
@@ -275,13 +275,13 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 	
 	// Parse incoming message to get an apropiate structure
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Parsing XML message");
-	xml_data = coyote_xml_parse_message (coyote_message);
+	xml_data = oseacomm_xml_parse_message (oseacomm_message);
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "XML message parsed");
-	g_free (coyote_message);
+	g_free (oseacomm_message);
 			
 	if (!xml_data) {
 
-		coyote_xml_destroy_message (request_user_data->concrect_message);
+		oseacomm_xml_destroy_message (request_user_data->concrect_message);
 		g_free (request_user_data);
 				
 		switch (type) {
@@ -310,12 +310,12 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 	
 	if (frame->type ==  RR_FRAME_TYPE_RPY) {
 
-		coyote_xml_destroy_message (request_user_data->concrect_message);
+		oseacomm_xml_destroy_message (request_user_data->concrect_message);
 		g_free (request_user_data);
 				
 		switch (type) {
 		case OSEACLIENT_REQUEST_MULTI_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SERVICES_UPDATE_NEEDED)
 				user_multi_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
 				user_multi_data->state = OSEACLIENT_OK;
@@ -324,7 +324,7 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 				(*returned_datasets) = xml_data->item_list;
 			return user_multi_data;
 		case OSEACLIENT_REQUEST_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SERVICES_UPDATE_NEEDED)
 				user_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
 				user_data->state = OSEACLIENT_OK;
@@ -334,15 +334,15 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 			return user_data;
 			
 		case OSEACLIENT_REQUEST_SIMPLE_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SERVICES_UPDATE_NEEDED)
 				user_simple_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
 				user_simple_data->state = OSEACLIENT_OK;
-			user_simple_data->id = atoi(coyote_dataset_get((xml_data->item_list->data),0,0));
+			user_simple_data->id = atoi(oseacomm_dataset_get((xml_data->item_list->data),0,0));
 			return user_simple_data;
 
 		case OSEACLIENT_REQUEST_NUL_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SERVICES_UPDATE_NEEDED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SERVICES_UPDATE_NEEDED)
 				user_nul_data->state = OSEACLIENT_UPDATE_SERVICES_NEEDED;
 			else
 				user_nul_data->state = OSEACLIENT_OK;
@@ -355,42 +355,42 @@ gpointer   oseaclient_request_close_and_return_initial_data (OseaClientRequestRe
 		
 		// frame_type == RR_FRAME_TYPE_ERR
 
-		if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_KEY_EXPIRED) {			
+		if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_KEY_EXPIRED) {			
 			request_user_data->server = oseaclient_session_get_server_name (connection, NULL);
 			g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Refreshing af key...");
 			oseaclient_event_source_launch (oseaclient_request_start_afkey_refresh, request_user_data);
 			return NULL;
 		}
 
-		coyote_xml_destroy_message (request_user_data->concrect_message);
+		oseacomm_xml_destroy_message (request_user_data->concrect_message);
 		g_free (request_user_data->server);
 		g_free (request_user_data);
 				
 		switch (type) {
 
 		case OSEACLIENT_REQUEST_MULTI_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SESSION_EXPIRED)
 				user_multi_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
 				user_multi_data->state = OSEACLIENT_ERROR;
 			user_multi_data->text_response = g_strdup (xml_data->status_message);
 			return user_multi_data;
 		case OSEACLIENT_REQUEST_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SESSION_EXPIRED)
 				user_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
 				user_data->state = OSEACLIENT_ERROR;
 			user_data->text_response = g_strdup (xml_data->status_message);
 			return user_data;
 		case OSEACLIENT_REQUEST_SIMPLE_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SESSION_EXPIRED)
 				user_simple_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
 				user_simple_data->state = OSEACLIENT_ERROR;
 			user_simple_data->text_response = g_strdup (xml_data->status_message);
 			return user_simple_data;
 		case OSEACLIENT_REQUEST_NUL_DATA:
-			if (coyote_code_get_type (xml_data->status) == COYOTE_CODE_SESSION_EXPIRED)
+			if (oseacomm_code_get_type (xml_data->status) == OSEACOMM_CODE_SESSION_EXPIRED)
 				user_nul_data->state = OSEACLIENT_SESSION_EXPIRED;
 			else
 				user_nul_data->state = OSEACLIENT_ERROR;
@@ -499,8 +499,8 @@ gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer oseaclient_request
 {
 	/* Sending original petition, with original callback function */
 	OseaClientRequestUserData * request_user_data = (OseaClientRequestUserData *) oseaclient_request_user_data;
-	CoyoteSimple    * channel = NULL;
-	CoyoteSimpleCfg * config = NULL;
+	OseaCommSimple    * channel = NULL;
+	OseaCommSimpleCfg * config = NULL;
 	RRMessage       * rr_message = NULL;
 	GError          * error = NULL;
 
@@ -508,14 +508,14 @@ gboolean __oseaclient_request_start_afkey_refresh_3 (gpointer oseaclient_request
 	
 	// Create a config object to tell to our profile to execute
 	// the following function when a complete response arrives
-	config = coyote_simple_cfg_new ();
-	coyote_simple_cfg_set_complete_message (config, 
+	config = oseacomm_simple_cfg_new ();
+	oseacomm_simple_cfg_set_complete_message (config, 
 						request_user_data->return_function,
 						(gpointer) request_user_data->user_function, 
 						request_user_data);
 	
 	// Create a channel using the passed connection
-	channel = coyote_simple_start (oseaclient_session_get_connection (request_user_data->server, FALSE), 
+	channel = oseacomm_simple_start (oseaclient_session_get_connection (request_user_data->server, FALSE), 
 				       config, &error);
 	if (!channel) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't start a channel");
@@ -553,7 +553,7 @@ void oseaclient_refresh_start_afkey_refresh_return_error (gchar *message, OseaCl
 
 gpointer   oseaclient_request_return_from_failed_afkey_refresh (OseaClientRequestReturnData type,
 							   GString * message, 
-							   CoyoteDataSet ** returned_dataset,
+							   OseaCommDataSet ** returned_dataset,
 							   GList         ** returned_datasets,
 							   gpointer * data,
 							   gpointer * custom_data)
@@ -583,7 +583,7 @@ gpointer   oseaclient_request_return_from_failed_afkey_refresh (OseaClientReques
 		break;
 	}
 	
-	coyote_xml_destroy_message (request_user_data->concrect_message);
+	oseacomm_xml_destroy_message (request_user_data->concrect_message);
 				
 	switch (type) {
 	case OSEACLIENT_REQUEST_MULTI_DATA:
@@ -693,13 +693,13 @@ void     oseaclient_request_cancel_session_refresh_process (OseaClientRequestUse
 	oseaclient_request_session_expired_callback_is_active = FALSE;
 
 	g_free (request_user_data->server);
-	coyote_xml_destroy_message (request_user_data->concrect_message);
+	oseacomm_xml_destroy_message (request_user_data->concrect_message);
 	g_free (request_user_data);
 
 	while (cursor) {
 		rud = (OseaClientRequestUserData *) cursor->data;
 		g_free (rud->server);
-		coyote_xml_destroy_message (rud->concrect_message);
+		oseacomm_xml_destroy_message (rud->concrect_message);
 		g_free (rud);
 		cursor = cursor->next;
 	}

@@ -19,7 +19,7 @@
 #include "aos_kernel.h"
 #include <glib.h>
 #include <librr/rr.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include <config.h>
 #include <time.h>
 

@@ -21,7 +21,7 @@
 #include "oseaclient.h"
 
 gboolean          oseaclient_request                               (RRConnection * connection, 
-							       CoyoteSimpleCfgCompleteMessage return_function,
+							       OseaCommSimpleCfgCompleteMessage return_function,
 							       OseaClientFunc usr_function, 
 							       gpointer usr_data,
 							       gchar * service_name,
@@ -49,7 +49,7 @@ gpointer          oseaclient_request_close_and_return_initial_data (OseaClientRe
 							       RRChannel * channel,
 							       RRFrame * frame,
 							       GString * message, 
-							       CoyoteDataSet ** returned_dataset,
+							       OseaCommDataSet ** returned_dataset,
 							       GList ** returned_datasets,
 							       gpointer * data,
 							       gpointer * custom_data);

@@ -1,4 +1,4 @@
-//  LibAfdalKernel: interface library to the kernel daemonstdin: is not a tty
+//  LibAosKernel: interface library to the kernel daemonstdin: is not a tty
 
 //  Copyright (C) 2002  Advanced Software Production Line, S.L.
 //
@@ -19,19 +19,19 @@
 #include "aos_kernel_register.h"
 
 
-AfDalList *__aos_kernel_register_create_tree (CoyoteDataSet *data)
+OseaClientList *__aos_kernel_register_create_tree (OseaCommDataSet *data)
 {
-	AfDalKernelServerInfo *server;
-	AfDalList *result;
+	AosKernelServerInfo *server;
+	OseaClientList *result;
 	gint i;
 	
-	result = afdal_list_new (afdal_support_compare_string);
-	for (i=0; i < coyote_dataset_get_height (data); i++) {
-		server = g_new (AfDalKernelServerInfo, 1);
-		server->name = g_strdup (coyote_dataset_get (data, i, 0));
-		server->host = g_strdup (coyote_dataset_get (data, i, 1));
-		server->port = g_strdup (coyote_dataset_get (data, i, 2));
-		afdal_list_insert (result, server->name, server);
+	result = oseaclient_list_new (oseaclient_support_compare_string);
+	for (i=0; i < oseacomm_dataset_get_height (data); i++) {
+		server = g_new (AosKernelServerInfo, 1);
+		server->name = g_strdup (oseacomm_dataset_get (data, i, 0));
+		server->host = g_strdup (oseacomm_dataset_get (data, i, 1));
+		server->port = g_strdup (oseacomm_dataset_get (data, i, 2));
+		oseaclient_list_insert (result, server->name, server);
 	}
 
 	return result;
@@ -46,30 +46,30 @@ static void __aos_kernel_register_get_servers (RRChannel * channel,
 						 gpointer custom_data)
 {
 
-	AfDalData     * afdal_data = NULL;
-	CoyoteDataSet * dataset = NULL;
+	OseaClientData     * oseaclient_data = NULL;
+	OseaCommDataSet * dataset = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	afdal_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_DATA,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_DATA,
 								  channel,
 								  frame,
 								  message, 
 								  &dataset, 
 								  NULL, &data, &custom_data);
 
-	if (! afdal_data)
+	if (! oseaclient_data)
 		return;
 
 	// Fill user data inside user_data
-	afdal_data->data = __aos_kernel_register_create_tree (dataset);
+	oseaclient_data->data = __aos_kernel_register_create_tree (dataset);
 
 	// Call to user defined callback.	
-	afdal_request_call_user_function (AFDAL_REQUEST_DATA, data, 
-					  custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_DATA, data, 
+					  custom_data, oseaclient_data);
 
 
 	return;
@@ -87,17 +87,17 @@ static void __aos_kernel_register_get_servers (RRChannel * channel,
  * 
  * Return value: 
  **/
-gboolean aos_kernel_register_get_servers (AfDalDataFunc usr_function, 
+gboolean aos_kernel_register_get_servers (OseaClientDataFunc usr_function, 
 					    gpointer usr_data)
 {
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
-	return afdal_request (connection, __aos_kernel_register_get_servers, 
-			      (AfDalFunc) usr_function, usr_data,
+	return oseaclient_request (connection, __aos_kernel_register_get_servers, 
+			      (OseaClientFunc) usr_function, usr_data,
 			      "get_servers",
 			      NULL);
 }

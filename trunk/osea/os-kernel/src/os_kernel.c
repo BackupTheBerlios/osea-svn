@@ -21,8 +21,8 @@
 
 #include <glib.h>
 #include <librr/rr.h>
-#include <coyote/coyote.h>
-#include <afgs/afgs.h>
+#include <liboseacomm/oseacomm.h>
+#include <liboseaserver/oseaserver.h>
 #include <config.h>
 #include <popt.h>
 #include <unistd.h>
@@ -37,6 +37,7 @@
 #include "os_kernel_refresh_session_request.h"
 #include "os_kernel_keys.h"
 #include "os_kernel_crypto.h"
+#include "os_kernel_registry.h"
 
 #define LOG_DOMAIN "af-kernel"
 
@@ -58,7 +59,7 @@ struct poptOption   os_kernel_additional_options[] = {
 };
 
 // Services 
-AfgsServicesProvided services_provided []  = {
+OseaServerServicesProvided services_provided []  = {
 /* Basic services for AF-Architecture */
 	{"login" ,                        "", os_kernel_login_request                 , FALSE, NULL, NULL, NULL}, 
 	{"logout",                        "", os_kernel_logout_request                , FALSE, NULL, NULL, NULL},
@@ -117,14 +118,14 @@ AfgsServicesProvided services_provided []  = {
 	 os_kernel_server_list                   , TRUE, NULL,  NULL, NULL},
 	{"server_remove",                 "Service for removing all the permissions of a given server hosted in af-kernel", 
 	 os_kernel_server_remove                 , TRUE, NULL,  NULL, NULL},
-	AFGS_SERVICES_TABLE_END
+	OSEASERVER_SERVICES_TABLE_END
 };
 
 
 void __os_kernel_process_check ()
 {
-	CoyoteDataSet        * dataset;
-	GList                * services_provided = afgs_services_get ();
+	OseaCommDataSet        * dataset;
+	GList                * services_provided = oseaserver_services_get ();
 	GString              * passwd = NULL;
 	gboolean               result;
 	GList                * iterator = NULL;
@@ -135,14 +136,14 @@ void __os_kernel_process_check ()
 
 
 	// Check if af-kernel has installed its services
-	dataset = afgs_command_execute_single_query ("SELECT version FROM kernel_server WHERE name = 'af-kernel'");
+	dataset = oseaserver_command_execute_single_query ("SELECT version FROM kernel_server WHERE name = 'af-kernel'");
 
-	if (coyote_dataset_get_height (dataset) == 0 ) {
-		coyote_dataset_free (dataset);
+	if (oseacomm_dataset_get_height (dataset) == 0 ) {
+		oseacomm_dataset_free (dataset);
 		
-		afgs_command_execute_non_query ("INSERT INTO kernel_server (name,version,description) VALUES ('af-kernel',1,'Kernel server')");
+		oseaserver_command_execute_non_query ("INSERT INTO kernel_server (name,version,description) VALUES ('af-kernel',1,'Kernel server')");
 		
-		dataset = afgs_command_execute_single_query ("SELECT id FROM kernel_server WHERE name = 'af-kernel'");
+		dataset = oseaserver_command_execute_single_query ("SELECT id FROM kernel_server WHERE name = 'af-kernel'");
 		
 		// Af-kernel hasn't installed anything yet
 
@@ -150,14 +151,14 @@ void __os_kernel_process_check ()
 
 		while (iterator) {
 			// Don't register the following services
-			if ((((AfgsServicesProvided *)(iterator->data))->need_key)
-			    && (! ((AfgsServicesProvided *) (iterator->data))->actual_permission)) {
+			if ((((OseaServerServicesProvided *)(iterator->data))->need_key)
+			    && (! ((OseaServerServicesProvided *) (iterator->data))->actual_permission)) {
 								
-				result = afgs_command_execute_non_query ("INSERT INTO kernel_permission (name, description, server_id) \
+				result = oseaserver_command_execute_non_query ("INSERT INTO kernel_permission (name, description, server_id) \
                                                                           VALUES ('%s', '%s', %s)",
-									 ((AfgsServicesProvided *) (iterator->data))->service_name, 
-									 ((AfgsServicesProvided *) (iterator->data))->description, 
-									 coyote_dataset_get (dataset, 0,0));
+									 ((OseaServerServicesProvided *) (iterator->data))->service_name, 
+									 ((OseaServerServicesProvided *) (iterator->data))->description, 
+									 oseacomm_dataset_get (dataset, 0,0));
 
 				if (!result) {
 					g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Couldn't insert available services");
@@ -169,7 +170,7 @@ void __os_kernel_process_check ()
 			
 		}
 	}		
-	coyote_dataset_free (dataset);
+	oseacomm_dataset_free (dataset);
 
 	// Check if there is no, so insert aspl user.
 	if (os_kernel_superuser) {
@@ -185,30 +186,30 @@ void __os_kernel_process_check ()
 
 
 		// There is no user into database, so create it
-		result = afgs_command_execute_non_query ("INSERT INTO kernel_user (nick, passwd, description) VALUES ('%s', '%s', '%s')",
+		result = oseaserver_command_execute_non_query ("INSERT INTO kernel_user (nick, passwd, description) VALUES ('%s', '%s', '%s')",
 							 os_kernel_superuser,
 							 passwd->str,
 							 "Superuser");
 		if (!result) 
-			afgs_main_abort ("unable to create superuser.");
+			oseaserver_main_abort ("unable to create superuser.");
 		
 		// Now, give to aspl user all capabilities
-		result = afgs_command_execute_non_query ("INSERT INTO kernel_user_have (user_id, permission_id) \
+		result = oseaserver_command_execute_non_query ("INSERT INTO kernel_user_have (user_id, permission_id) \
                                                           SELECT u.id, p.id FROM kernel_permission p, kernel_user u \
                                                           WHERE u.nick = '%s'", os_kernel_superuser);
 		if (!result) 
-			afgs_main_abort ("unable to assign all permissions to user.");
+			oseaserver_main_abort ("unable to assign all permissions to user.");
 		
 		g_print ("User %s created successfully. Exiting..\n", os_kernel_superuser);
-		afgs_log_write ("User %s created successfully. Exiting..\n", os_kernel_superuser);
+		oseaserver_log_write ("User %s created successfully. Exiting..\n", os_kernel_superuser);
 		exit (0);
 	}
 		
-	port = afgs_config_get (NULL, "listening port");
+	port = oseaserver_config_get (NULL, "listening port");
 	if (! port)
 		g_error ("Error: couldn't find 'listening port' key in config file");
 
-	hostname = afgs_config_get (NULL, "listening hostname");
+	hostname = oseaserver_config_get (NULL, "listening hostname");
 	
 	if (!hostname)
 		g_error ("Error: couldn't find 'listening hostname' key in config file");
@@ -232,9 +233,9 @@ gint main (gint argc, gchar * argv[]) {
 	textdomain (GETTEXT_PACKAGE);
 #endif
 
-	afgs_log_check_and_disable_glog ();
+	oseaserver_log_check_and_disable_glog ();
 
-	afgs_main_run_server ("af-kernel",
+	oseaserver_main_run_server ("af-kernel",
 			      "AF Architecture Main server",
 			      VERSION,
 			      COMPILATION_DATE,

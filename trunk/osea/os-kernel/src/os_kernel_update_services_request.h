@@ -18,9 +18,9 @@
 #define __AF_KERNEL_UPDATE_SERVICES_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean os_kernel_update_services    (CoyoteXmlServiceData * data, 
+gboolean os_kernel_update_services    (OseaCommXmlServiceData * data, 
 				       gpointer               user_data, 
 				       RRChannel            * channel, 
 				       gint                   msg_no);

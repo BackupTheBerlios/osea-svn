@@ -26,9 +26,9 @@
 gboolean servers_process_var = FALSE;
 
 
-gboolean servers_remove_process (AfDalNulData * data, gpointer usr_data)
+gboolean servers_remove_process (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Server removed\n");
 	}else {
 		g_print ("Failed to remove server: %s\n", data->text_response);
@@ -64,7 +64,7 @@ gboolean servers_remove (gchar * line, gpointer data)
 		return FALSE;
 	}
 	
-	if (!afdal_kernel_server_remove (id,  servers_remove_process, NULL)) {
+	if (!aos_kernel_server_remove (id,  servers_remove_process, NULL)) {
 		g_print ("Unable to remove servers\n");
 		return FALSE;
 	}
@@ -79,9 +79,9 @@ gboolean servers_remove (gchar * line, gpointer data)
 
 gboolean servers_list_foreach_function (gpointer key, gpointer value, gpointer data) 
 {
-	AfDalKernelServer * server;
+	AosKernelServer * server;
 
-	server = (AfDalKernelServer *) value;
+	server = (AosKernelServer *) value;
 
 	if (server->description)
 		g_print ("   %-4d %-12s %-7d %s\n", server->id, server->name, server->version, server->description);
@@ -93,13 +93,13 @@ gboolean servers_list_foreach_function (gpointer key, gpointer value, gpointer d
 
 
 
-gboolean servers_list_process (AfDalData * data, gpointer servers_data) {
+gboolean servers_list_process (OseaClientData * data, gpointer servers_data) {
 	
-	if (data->state == AFDAL_OK) {
-		g_print ("\n  Number of servers %d.\n", afdal_list_length (data->data));
+	if (data->state == OSEACLIENT_OK) {
+		g_print ("\n  Number of servers %d.\n", oseaclient_list_length (data->data));
 		g_print ("   %-3s %-10s %-2s %s\n", "ID", "SERVER", "VERSION", "DESCRIPTION");
 		
-		afdal_list_foreach (data->data, servers_list_foreach_function, servers_data);		
+		oseaclient_list_foreach (data->data, servers_list_foreach_function, servers_data);		
 	}else {
 		g_print ("Unable to list already created servers: %s\n", data->text_response);
 	}
@@ -116,7 +116,7 @@ gboolean servers_list   (gchar * line, gpointer data)
 		return FALSE;
 	}
 	
-	if (!afdal_kernel_server_list (0, 0,  servers_list_process, NULL)) {
+	if (!aos_kernel_server_list (0, 0,  servers_list_process, NULL)) {
 		g_print ("Unable to list already created servers\n");
 		return FALSE;
 	}

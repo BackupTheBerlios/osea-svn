@@ -17,22 +17,22 @@
 
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include <time.h>
-#include <afgs/afgs.h>
+#include <liboseaserver/oseaserver.h>
 #include "os_kernel_logout_request.h"
 #include "os_kernel_session.h"
 
-gboolean os_kernel_logout_request (CoyoteXmlServiceData *data, gpointer user_data, RRChannel * channel, gint msg_no)
+gboolean os_kernel_logout_request (OseaCommXmlServiceData *data, gpointer user_data, RRChannel * channel, gint msg_no)
 {
 	GList * values;
 
-	values = afgs_message_check_params (data, "session_id", NULL);
+	values = oseaserver_message_check_params (data, "session_id", NULL);
 
 	if (! values) {
 		// Params seems to be incorrect
-		afgs_message_error_answer (channel, msg_no, "Incorrect parameters form", 
-					   COYOTE_CODE_XML_INCORRECT_PARAMETER);
+		oseaserver_message_error_answer (channel, msg_no, "Incorrect parameters form", 
+					   OSEACOMM_CODE_XML_INCORRECT_PARAMETER);
 		return FALSE;
 	}
 
@@ -40,7 +40,7 @@ gboolean os_kernel_logout_request (CoyoteXmlServiceData *data, gpointer user_dat
 	os_kernel_session_remove ((gchar *) g_list_nth_data (values, 0));
 
 	// Params seems to be incorrect
-	afgs_message_ok_answer (channel, msg_no, "Logout successful", COYOTE_CODE_OK, NULL);
+	oseaserver_message_ok_answer (channel, msg_no, "Logout successful", OSEACOMM_CODE_OK, NULL);
 
 	return TRUE;
 }

@@ -23,12 +23,12 @@
 requires 2.0.0
 
 %header{
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 %}
 
 %{
-#include <afdal/afdal.h>
-#include "afdal-kernel-user.h"
+#include <liboseaclient/oseaclient.h>
+#include "aos-kernel-user.h"
 
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
@@ -43,7 +43,7 @@ requires 2.0.0
 
 %}
 
-class AfDal:Kernel:User from AfDal:DataNode {
+class Aos:Kernel:User from OseaClient:DataNode {
  	public int id = 0;
         property INT id
                 (nick = _("Datanode Identification"),
@@ -75,9 +75,9 @@ class AfDal:Kernel:User from AfDal:DataNode {
 		 link);
 
 
-        public AfDalKernelUser * create (gint id, gchar *nick, gchar *description)
+        public AosKernelUser * create (gint id, gchar *nick, gchar *description)
         {
-		AfDalKernelUser * result;
+		AosKernelUser * result;
 		
 		result = GET_NEW;
 

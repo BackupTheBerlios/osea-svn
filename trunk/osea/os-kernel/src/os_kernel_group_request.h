@@ -19,39 +19,39 @@
 #define __AF_KERNEL_GROUP_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean os_kernel_group_list    (CoyoteXmlServiceData * data, 
+gboolean os_kernel_group_list    (OseaCommXmlServiceData * data, 
 				  gpointer               group_data, 
 				  RRChannel            * channel, 
 				  gint                   msg_no);
 
-gboolean os_kernel_group_new     (CoyoteXmlServiceData * data, 
+gboolean os_kernel_group_new     (OseaCommXmlServiceData * data, 
 				  gpointer               group_data, 
 				  RRChannel            * channel, 
 				  gint                   msg_no);
 
-gboolean os_kernel_group_edit    (CoyoteXmlServiceData * data, 
+gboolean os_kernel_group_edit    (OseaCommXmlServiceData * data, 
 				  gpointer               group_data, 
 				  RRChannel            * channel, 
 				  gint                   msg_no);
 
-gboolean os_kernel_group_remove  (CoyoteXmlServiceData * data,
+gboolean os_kernel_group_remove  (OseaCommXmlServiceData * data,
 				  gpointer               group_data, 
 				  RRChannel            * channel, 
 				  gint                   msg_no);
 
-gboolean os_kernel_group_add_user  (CoyoteXmlServiceData * data,
+gboolean os_kernel_group_add_user  (OseaCommXmlServiceData * data,
 				    gpointer               group_data, 
 				    RRChannel            * channel, 
 				    gint                   msg_no);
 
-gboolean os_kernel_group_remove_user  (CoyoteXmlServiceData * data,
+gboolean os_kernel_group_remove_user  (OseaCommXmlServiceData * data,
 				       gpointer               group_data, 
 				       RRChannel            * channel, 
 				       gint                   msg_no);
 
-gboolean os_kernel_group_list_user  (CoyoteXmlServiceData * data,
+gboolean os_kernel_group_list_user  (OseaCommXmlServiceData * data,
 				     gpointer               group_data, 
 				     RRChannel            * channel, 
 				     gint                   msg_no);

@@ -20,8 +20,8 @@
 #endif
 
 #include <glib.h>
-#include <coyote/coyote.h>
-#include <afgs/afgs.h>
+#include <liboseacomm/oseacomm.h>
+#include <liboseaserver/oseaserver.h>
 #include "os_kernel_keys.h"
 
 #define LOG_DOMAIN "af-kernel_registry"
@@ -31,9 +31,9 @@ gboolean       os_kernel_registry_insert (gchar * name, gchar * host, gchar *por
 {
 	gboolean result;
 
-	afgs_command_execute_non_query ("DELETE FROM Kernel_Registry WHERE name='%s'", name);
+	oseaserver_command_execute_non_query ("DELETE FROM Kernel_Registry WHERE name='%s'", name);
 
-	result = afgs_command_execute_non_query ("INSERT INTO Kernel_Registry \
+	result = oseaserver_command_execute_non_query ("INSERT INTO Kernel_Registry \
                  (name, host, port, stime) VALUES \
                  ('%s', '%s', %s, current_timestamp);", name, host, port);
 
@@ -44,31 +44,31 @@ gboolean       os_kernel_registry_insert (gchar * name, gchar * host, gchar *por
 }
 
 
-CoyoteDataSet * os_kernel_registry_list ()
+OseaCommDataSet * os_kernel_registry_list ()
 {
-	CoyoteDataSet    * result = NULL;
+	OseaCommDataSet    * result = NULL;
 
-	result = afgs_command_execute_single_query ("SELECT name, host, port FROM Kernel_Registry");	
+	result = oseaserver_command_execute_single_query ("SELECT name, host, port FROM Kernel_Registry");	
 	
 	return result;
 }
 
-CoyoteDataSet * os_kernel_registry_generate_session_info_table (gchar *user, gchar **kernel_afkey)
+OseaCommDataSet * os_kernel_registry_generate_session_info_table (gchar *user, gchar **kernel_afkey)
 {
-	CoyoteDataSet * result;
+	OseaCommDataSet * result;
 	gchar         * af_key  = NULL;
 	gchar         * server_name;
 	gint            i;
 
-	result = afgs_command_execute_single_query ("select name, host, port, 'afkey' AS afkey from kernel_registry");
+	result = oseaserver_command_execute_single_query ("select name, host, port, 'afkey' AS afkey from kernel_registry");
 
-	for (i=0; i < coyote_dataset_get_height (result); i++) {
-		server_name = (gchar *) coyote_dataset_get (result, i, 0);
+	for (i=0; i < oseacomm_dataset_get_height (result); i++) {
+		server_name = (gchar *) oseacomm_dataset_get (result, i, 0);
 		af_key = os_kernel_keys_generate (user, server_name);
-		coyote_dataset_set (result, af_key, i, 3);
+		oseacomm_dataset_set (result, af_key, i, 3);
 
 		// Check if af_key is af-kernel key for user
-		if (!g_strcasecmp (coyote_dataset_get (result, i,0), "af-kernel")) {
+		if (!g_strcasecmp (oseacomm_dataset_get (result, i,0), "af-kernel")) {
 			// Store af-kernel af-key generated to use it before
 			*kernel_afkey = g_strdup(af_key);
 		}
@@ -83,5 +83,5 @@ CoyoteDataSet * os_kernel_registry_generate_session_info_table (gchar *user, gch
 
 gboolean os_kernel_registry_remove (gchar *name)
 {
-	return 	afgs_command_execute_non_query ("DELETE FROM Kernel_Registry WHERE name='%s'", name);
+	return 	oseaserver_command_execute_non_query ("DELETE FROM Kernel_Registry WHERE name='%s'", name);
 }

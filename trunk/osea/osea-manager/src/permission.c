@@ -16,8 +16,8 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-#include <coyote/coyote.h>
-#include <afdalkernel/afdal_kernel.h>
+#include <liboseacomm/oseacomm.h>
+#include <libaoskernel/aos_kernel.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -34,8 +34,8 @@ gboolean permission_unset_group_exit_var;
 
 gboolean permission_list_foreach (gpointer key, gpointer value, gpointer data) 
 {
-	AfDalKernelPermission * permission;
-	permission = (AfDalKernelPermission *) value;
+	AosKernelPermission * permission;
+	permission = (AosKernelPermission *) value;
 
 	if (permission->description) {
 		g_print ("%-3d %-24s %-16s %-7s %s\n",
@@ -56,12 +56,12 @@ gboolean permission_list_foreach (gpointer key, gpointer value, gpointer data)
 	return FALSE;
 }
 
-gboolean permission_list_process (AfDalData * data, gpointer user_data)
+gboolean permission_list_process (OseaClientData * data, gpointer user_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("%-3s %-24s %-16s %-7s %s\n\n",
 			 "Id", "Name", "Server Name", "Version", "Description");
-		afdal_list_foreach (data->data, permission_list_foreach, NULL);
+		oseaclient_list_foreach (data->data, permission_list_foreach, NULL);
 	}else{
 		g_print ("Unable to get permission list: %s\n", data->text_response);
 	}
@@ -79,7 +79,7 @@ gboolean permission_list          (gchar * line, gpointer data)
 		return FALSE;
 	}	
 
-	if (!afdal_kernel_permission_list (0, 0,  permission_list_process, NULL)) {
+	if (!aos_kernel_permission_list (0, 0,  permission_list_process, NULL)) {
 		g_print ("Unable to get permission list\n");
 		return FALSE;
 	}
@@ -117,7 +117,7 @@ gboolean permission_list_by_user  (gchar * line, gpointer data)
 	}
 
 
-	if (!afdal_kernel_permission_list_by_user (0, 0, id,  permission_list_process, NULL)) {
+	if (!aos_kernel_permission_list_by_user (0, 0, id,  permission_list_process, NULL)) {
 		g_print ("Unable to get permission list\n");
 		return FALSE;
 	}
@@ -156,7 +156,7 @@ gboolean permission_list_by_group (gchar * line, gpointer data)
 	}
 
 
-	if (!afdal_kernel_permission_list_by_group (0, 0, id,  permission_list_process, NULL)) {
+	if (!aos_kernel_permission_list_by_group (0, 0, id,  permission_list_process, NULL)) {
 		g_print ("Unable to get permission list\n");
 		return FALSE;
 	}
@@ -169,9 +169,9 @@ gboolean permission_list_by_group (gchar * line, gpointer data)
 }
 
 
-gboolean permission_set_user_process (AfDalNulData * data, gpointer usr_data)
+gboolean permission_set_user_process (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Permission set to user correctly.\n");
 	}else{
 		g_print ("Unable to set permission to user: %s\n", data->text_response);
@@ -218,7 +218,7 @@ gboolean permission_set_user      (gchar * line, gpointer data)
 	}
 	
 
-	if (!afdal_kernel_permission_user_set (id_permission, id_user,  
+	if (!aos_kernel_permission_user_set (id_permission, id_user,  
 					       permission_set_user_process, NULL)) {
 		g_print ("Unable to set user permission\n");
 		return FALSE;
@@ -231,9 +231,9 @@ gboolean permission_set_user      (gchar * line, gpointer data)
 	return TRUE;
 }
 
-gboolean permission_unset_user_process (AfDalNulData * data, gpointer usr_data)
+gboolean permission_unset_user_process (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Permission unset to user correctly.\n");
 	}else{
 		g_print ("Unable to unset permission to user: %s\n", data->text_response);
@@ -281,7 +281,7 @@ gboolean permission_unset_user      (gchar * line, gpointer data)
 	}
 	
 
-	if (!afdal_kernel_permission_user_unset (id_permission, id_user,  
+	if (!aos_kernel_permission_user_unset (id_permission, id_user,  
 						 permission_unset_user_process, NULL)) {
 		g_print ("Unable to unset user permission\n");
 		return FALSE;
@@ -294,9 +294,9 @@ gboolean permission_unset_user      (gchar * line, gpointer data)
 	return TRUE;
 }
 
-gboolean permission_set_group_process (AfDalNulData * data, gpointer usr_data)
+gboolean permission_set_group_process (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Permission set to group correctly.\n");
 	}else{
 		g_print ("Unable to set permission to group: %s\n", data->text_response);
@@ -343,7 +343,7 @@ gboolean permission_set_group      (gchar * line, gpointer data)
 	}
 	
 
-	if (!afdal_kernel_permission_group_set (id_permission, id_group,  
+	if (!aos_kernel_permission_group_set (id_permission, id_group,  
 					       permission_set_group_process, NULL)) {
 		g_print ("Unable to set group permission\n");
 		return FALSE;
@@ -356,9 +356,9 @@ gboolean permission_set_group      (gchar * line, gpointer data)
 	return TRUE;
 }
 
-gboolean permission_unset_group_process (AfDalNulData * data, gpointer usr_data)
+gboolean permission_unset_group_process (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Permission unset to group correctly.\n");
 	}else{
 		g_print ("Unable to unset permission to group: %s\n", data->text_response);
@@ -406,7 +406,7 @@ gboolean permission_unset_group      (gchar * line, gpointer data)
 	}
 	
 
-	if (!afdal_kernel_permission_group_unset (id_permission, id_group,  
+	if (!aos_kernel_permission_group_unset (id_permission, id_group,  
 						 permission_unset_group_process, NULL)) {
 		g_print ("Unable to unset group permission\n");
 		return FALSE;

@@ -19,49 +19,49 @@
 #define __AF_KERNEL_PERMISSION_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean os_kernel_permission_user_set              (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_user_set              (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);
 
-gboolean os_kernel_permission_user_unset            (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_user_unset            (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);
 
-gboolean os_kernel_permission_group_set              (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_group_set              (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);
 
-gboolean os_kernel_permission_group_unset            (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_group_unset            (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);
 
-gboolean os_kernel_permission_list                  (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_list                  (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);
 
-gboolean os_kernel_permission_list_by_user          (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_list_by_user          (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);
 
-gboolean os_kernel_permission_actual_list_by_user   (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_actual_list_by_user   (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);
 
-gboolean os_kernel_permission_from_group_list_by_user          (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_from_group_list_by_user          (OseaCommXmlServiceData * data, 
 								gpointer               permission_data, 
 								RRChannel            * channel, 
 								gint                   msg_no);
 
-gboolean os_kernel_permission_list_by_group         (CoyoteXmlServiceData * data, 
+gboolean os_kernel_permission_list_by_group         (OseaCommXmlServiceData * data, 
 						     gpointer               permission_data, 
 						     RRChannel            * channel, 
 						     gint                   msg_no);

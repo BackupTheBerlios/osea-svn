@@ -16,7 +16,7 @@
 
 #include <glib.h>
 #include <librr/rr.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include <time.h>
 #include "oseaserver.h"
 
@@ -41,8 +41,8 @@ void oseaserver_main_complete_message (RRChannel * channel,
 				 gpointer user_data,
 				 gpointer custom_data)
 {
-	CoyoteXmlMessage * xml_message = NULL;
-	CoyoteXmlServiceData * data;
+	OseaCommXmlMessage * xml_message = NULL;
+	OseaCommXmlServiceData * data;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
@@ -52,7 +52,7 @@ void oseaserver_main_complete_message (RRChannel * channel,
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "It's a MSG frame.");
 		// obtain the instance config
 		
-		xml_message = g_new (CoyoteXmlMessage, 1);
+		xml_message = g_new (OseaCommXmlMessage, 1);
 		xml_message->content = message->str;
 		xml_message->len = message->len;
 
@@ -60,17 +60,17 @@ void oseaserver_main_complete_message (RRChannel * channel,
 
 		// validate message
 
-		if (!coyote_xml_validate_message (xml_message)) {
+		if (!oseacomm_xml_validate_message (xml_message)) {
 			g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Validation failed");
 			oseaserver_message_error_answer (channel, frame->msgno, "XML Validation failed",
-						   COYOTE_CODE_XML_VALIDATION_PROBLEM);
+						   OSEACOMM_CODE_XML_VALIDATION_PROBLEM);
 			return;
 		} else 	
 			// parse message
-			if (!(data = coyote_xml_parse_message (xml_message))) {
+			if (!(data = oseacomm_xml_parse_message (xml_message))) {
 				g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Message parsing failed");
 				oseaserver_message_error_answer (channel, frame->msgno, "XML parse failed", 
-							   COYOTE_CODE_XML_PARSE_PROBLEM);
+							   OSEACOMM_CODE_XML_PARSE_PROBLEM);
 				return;
 			} else {				
 				g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Trying to execute the parsed service");
@@ -145,7 +145,7 @@ gboolean oseaserver_main_server_init (RRChannel *channel,  const gchar *piggybac
 	// initialize the config for the particular instance of the channel
 
 	g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Server init");
-	channel->instance_config = coyote_simple_cfg_new ();
+	channel->instance_config = oseacomm_simple_cfg_new ();
 
 	rr_channel_set_aggregate (channel, FALSE);
 
@@ -161,12 +161,12 @@ gboolean oseaserver_main_server_init (RRChannel *channel,  const gchar *piggybac
  * 
  * Return value: 
  **/
-gboolean oseaserver_main_set_is_accepting_connections (AfDalNulData * data, gpointer user_data)
+gboolean oseaserver_main_set_is_accepting_connections (OseaClientNulData * data, gpointer user_data)
 {
 	
 	is_accepting_connections = data->state;
 	
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Server will allow connections.");
 		oseaserver_log_write ("Register ok, accepting connections");
 	}else {
@@ -185,7 +185,7 @@ void oseaserver_main_print_version_info (gchar *server_name, gchar *server_versi
 	g_print ("%s version %s, compiled %s", server_name, server_version,
 		 ctime (&server_compilation_date));
 	oseaserver_print_version_info ();
-	afdal_print_version_info ();
+	oseaclient_print_version_info ();
 }
 
 
@@ -222,7 +222,7 @@ void oseaserver_main_run_server (gchar                * server_name,
 	OseaServerConfiguration * afcfg;
 	GError            * error = NULL;
 	gchar             * port;
-	CoyoteSimpleCfg   * config;
+	OseaCommSimpleCfg   * config;
 	RRProfileRegistry * beep_profile;
 	RRListener        * server;
 	struct poptOption   oseaserver_main_popoptions[] = { 
@@ -271,11 +271,11 @@ void oseaserver_main_run_server (gchar                * server_name,
 	oseaserver_log_write ("%s server starting ...", server_name);
 
 	// Initialize afdal
-	afdal_init ();
+	oseaclient_init ();
 
 	// Initialize road runner
-	if (!coyote_init (argc, argv, &error)) 
-		oseaserver_main_abort ("failed to call coyote_init: %s", error->message);
+	if (!oseacomm_init (argc, argv, &error)) 
+		oseaserver_main_abort ("failed to call oseacomm_init: %s", error->message);
 	
 	// Initialize database connection
 	if (! oseaserver_database_init (server_name, "Database Connection", *argc, *argv))
@@ -311,15 +311,15 @@ void oseaserver_main_run_server (gchar                * server_name,
 	beep_profile = rr_profile_registry_new ();
 	
 	// Create a config object
-	config = coyote_simple_cfg_new ();
+	config = oseacomm_simple_cfg_new ();
 	
-	coyote_simple_cfg_set_complete_message (config, oseaserver_main_complete_message, NULL, NULL);	
-	coyote_simple_cfg_set_close_indication (config, oseaserver_main_close_indication);	
-	coyote_simple_cfg_set_close_confirmation (config, oseaserver_main_close_confirmation);	
-	coyote_simple_cfg_set_server_init (config, oseaserver_main_server_init, NULL);
+	oseacomm_simple_cfg_set_complete_message (config, oseaserver_main_complete_message, NULL, NULL);	
+	oseacomm_simple_cfg_set_close_indication (config, oseaserver_main_close_indication);	
+	oseacomm_simple_cfg_set_close_confirmation (config, oseaserver_main_close_confirmation);	
+	oseacomm_simple_cfg_set_server_init (config, oseaserver_main_server_init, NULL);
 		
-	// Add to the supported profiles coyote_simple
-	rr_profile_registry_add_profile (beep_profile, TYPE_COYOTE_SIMPLE, config);
+	// Add to the supported profiles oseacomm_simple
+	rr_profile_registry_add_profile (beep_profile, TYPE_OSEACOMM_SIMPLE, config);
 
 
         port = oseaserver_config_get (NULL, "listening port");

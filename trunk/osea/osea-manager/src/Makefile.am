@@ -1,11 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES = $(ASPLCLM_CFLAGS)  -DCOMPILATION_DATE=`date +%s` -I$(top_srcdir) -I$(top_srcdir)/libafdalkernel/src -g -Wall 
+INCLUDES = $(OSEAMANAGER_CFLAGS)  -DCOMPILATION_DATE=`date +%s` -I$(top_srcdir) -I$(top_srcdir)/include_dir -g -Wall 
 
 
-bin_PROGRAMS = aspl-clm
+bin_PROGRAMS = osea-manager
 
-aspl_clm_SOURCES = \
+osea_manager_SOURCES = \
 	main.c \
 	auto_completion.c auto_completion.h \
         help.c help.h \
@@ -17,8 +17,8 @@ aspl_clm_SOURCES = \
 	servers.c servers.h
 
 
-aspl_clm_LDADD = $(ASPLCLM_LIBS) $(READLINE_DEPLIBS) -lpopt \
-	$(top_builddir)/libafdalkernel/src/libafdalkernel.la \
-	$(top_builddir)/libafdal/src/libafdal.la \
-	$(top_builddir)/libcoyote/src/libcoyote.la 
+osea_manager_LDADD = $(OSEAMANAGER_LIBS) $(READLINE_DEPLIBS) -lpopt \
+	$(top_builddir)/libaoskernel/src/libaoskernel.la \
+	$(top_builddir)/liboseaclient/src/liboseaclient.la \
+	$(top_builddir)/liboseacomm/src/liboseacomm.la 
 

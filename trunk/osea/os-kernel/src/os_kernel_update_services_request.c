@@ -16,18 +16,18 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "os_kernel_update_services_request.h"
-#include <afgs/afgs.h>
-#include <coyote/coyote.h>
+#include <liboseaserver/oseaserver.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean os_kernel_update_services    (CoyoteXmlServiceData * data, 
+gboolean os_kernel_update_services    (OseaCommXmlServiceData * data, 
 				       gpointer               user_data, 
 				       RRChannel            * channel, 
 				       gint                   msg_no)
 {
 
 	GList          * values;
-	CoyoteDataSet  * dataset; 
-	CoyoteDataSet  * permissions;
+	OseaCommDataSet  * dataset; 
+	OseaCommDataSet  * permissions;
 	gchar         ** splited_string;
 	gchar          * permission_string;
 	gboolean         response;
@@ -37,65 +37,65 @@ gboolean os_kernel_update_services    (CoyoteXmlServiceData * data,
 
 	
 	// Check params
-	values = afgs_message_check_params (data, "server_name", "description", "version", "permissions", NULL);
+	values = oseaserver_message_check_params (data, "server_name", "description", "version", "permissions", NULL);
 	if (!values) {
 		
 		// Params seems to be incorrect
-		afgs_message_error_answer (channel, msg_no, "Incorrect parameters form",
-					   COYOTE_CODE_XML_INCORRECT_PARAMETER);
+		oseaserver_message_error_answer (channel, msg_no, "Incorrect parameters form",
+					   OSEACOMM_CODE_XML_INCORRECT_PARAMETER);
 		return FALSE;
 	}
 
 
 
 	// Check if the server is already installed
-	dataset = afgs_command_execute_single_query ("SELECT * FROM kernel_server WHERE name = '%s'", 
+	dataset = oseaserver_command_execute_single_query ("SELECT * FROM kernel_server WHERE name = '%s'", 
 						     g_list_nth_data (values, 0));
 
-	if (coyote_dataset_get_height (dataset) == 0) {
+	if (oseacomm_dataset_get_height (dataset) == 0) {
 		// Server not installed. Install it.
-		response = afgs_command_execute_non_query ("INSERT INTO kernel_server (name, description, version) VALUES ('%s', '%s', %s)",
+		response = oseaserver_command_execute_non_query ("INSERT INTO kernel_server (name, description, version) VALUES ('%s', '%s', %s)",
 							   g_list_nth_data (values, 0),
 							   g_list_nth_data (values, 1),
 							   g_list_nth_data (values, 2));
 		if (!response) {
-			afgs_message_error_answer (channel, msg_no, "Unable to install server services",
-						   COYOTE_CODE_ERROR);
+			oseaserver_message_error_answer (channel, msg_no, "Unable to install server services",
+						   OSEACOMM_CODE_ERROR);
 			return FALSE;
 		}
 	}
-	coyote_dataset_free (dataset);
+	oseacomm_dataset_free (dataset);
 	
 
 	// We are going to check if update_services request is
 	// executed to install all services or to update already existing services.
 	// Right now we only support install mode
-	dataset = afgs_command_execute_single_query ("SELECT * \
+	dataset = oseaserver_command_execute_single_query ("SELECT * \
                                                       FROM kernel_permission p, kernel_server s \
                                                       WHERE p.server_id = s.id and s.name = '%s'",
 						     g_list_nth_data (values, 0));
 
-	if (coyote_dataset_get_height (dataset) == 0) {
+	if (oseacomm_dataset_get_height (dataset) == 0) {
 		// Install mode
-		coyote_dataset_free (dataset);
+		oseacomm_dataset_free (dataset);
 		
 		// First we are going to insert all permissions
 		g_print ("Recieved permissions\n");
 		permissions = g_list_nth_data (values, 3);
 
-		coyote_dataset_print (permissions);
+		oseacomm_dataset_print (permissions);
 
-		height = coyote_dataset_get_height (permissions);
+		height = oseacomm_dataset_get_height (permissions);
 
 		for (iterator = 0; iterator < height; iterator++) {
-			response = afgs_command_execute_non_query ("INSERT INTO kernel_permission (name, description, server_id) VALUES \
+			response = oseaserver_command_execute_non_query ("INSERT INTO kernel_permission (name, description, server_id) VALUES \
                                                                     ('%s', '%s', (SELECT id FROM kernel_server WHERE name = '%s'))",
-								   coyote_dataset_get (permissions, iterator, 0),
-								   coyote_dataset_get (permissions, iterator, 1),
+								   oseacomm_dataset_get (permissions, iterator, 0),
+								   oseacomm_dataset_get (permissions, iterator, 1),
 								   g_list_nth_data (values, 0));
 			if (!response) {
-				afgs_message_error_answer (channel, msg_no, "Unable to install server services",
-							   COYOTE_CODE_XML_INCORRECT_PARAMETER);
+				oseaserver_message_error_answer (channel, msg_no, "Unable to install server services",
+							   OSEACOMM_CODE_XML_INCORRECT_PARAMETER);
 				return FALSE;
 			}
 		}
@@ -104,7 +104,7 @@ gboolean os_kernel_update_services    (CoyoteXmlServiceData * data,
 		for (iterator = 0; iterator < height; iterator++) {
 
 			// Check for NULL permission_string 
-			permission_string = (gchar *) coyote_dataset_get (permissions, iterator, 2);
+			permission_string = (gchar *) oseacomm_dataset_get (permissions, iterator, 2);
 
 			if (!(permission_string && *permission_string)) 
 				continue;
@@ -115,14 +115,14 @@ gboolean os_kernel_update_services    (CoyoteXmlServiceData * data,
 
 			while (splited_string[iterator2] != NULL) {
 				
-				response = afgs_command_execute_non_query ("INSERT INTO kernel_depends (id_permission, id_depends) VALUES ( \
+				response = oseaserver_command_execute_non_query ("INSERT INTO kernel_depends (id_permission, id_depends) VALUES ( \
                                                                             (SELECT id FROM kernel_permission WHERE name = '%s'), \
                                                                             (SELECT id FROM kernel_permission WHERE name = '%s'))",
-									   coyote_dataset_get (permissions, iterator, 0),
+									   oseacomm_dataset_get (permissions, iterator, 0),
 									   splited_string[iterator2]);
 				if (!response) {
-					afgs_message_error_answer (channel, msg_no, "Unable to install service dependencies",
-								   COYOTE_CODE_XML_INCORRECT_PARAMETER);
+					oseaserver_message_error_answer (channel, msg_no, "Unable to install service dependencies",
+								   OSEACOMM_CODE_XML_INCORRECT_PARAMETER);
 					return FALSE;
 				}
 
@@ -133,7 +133,7 @@ gboolean os_kernel_update_services    (CoyoteXmlServiceData * data,
 		
 	}else {
 		// Update mode, not implemented
-		coyote_dataset_free (dataset);
+		oseacomm_dataset_free (dataset);
 
 		// Clue: you have to check
 		//     1) permissions that were removed
@@ -145,7 +145,7 @@ gboolean os_kernel_update_services    (CoyoteXmlServiceData * data,
 	
 	
 	
-	afgs_message_ok_answer (channel, msg_no, "Services updated", COYOTE_CODE_OK, NULL);
+	oseaserver_message_ok_answer (channel, msg_no, "Services updated", OSEACOMM_CODE_OK, NULL);
 
 	return TRUE;
 }

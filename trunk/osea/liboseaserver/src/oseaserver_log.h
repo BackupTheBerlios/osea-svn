@@ -15,11 +15,11 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFGS_LOG_H__
-#define __AFGS_LOG_H__
+#ifndef __OSEA_SERVER_LOG_H__
+#define __OSEA_SERVER_LOG_H__
 
 #include <glib.h>
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 #include "oseaserver_config.h"
 
 void oseaserver_log_write (gchar * log_msg, ...);

@@ -26,9 +26,9 @@
 #include <stdlib.h>
 gboolean group_process_var = FALSE;
 
-gboolean group_new_process (AfDalSimpleData * data, gpointer usr_data)
+gboolean group_new_process (OseaClientSimpleData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) 
+	if (data->state == OSEACLIENT_OK) 
 		g_print ("Group created successfully\n");
 	else
 		g_print ("Group creation failed: %s\n", data->text_response);
@@ -60,7 +60,7 @@ gboolean group_new (gchar * line, gpointer data)
 	description = readline ("Enter new group description: ");
 
 	// Create group
-	if (!afdal_kernel_group_new (group, description, group_new_process, NULL)) {
+	if (!aos_kernel_group_new (group, description, group_new_process, NULL)) {
 		g_print ("Unable to create group\n");
 		return FALSE;
 	}
@@ -75,9 +75,9 @@ gboolean group_new (gchar * line, gpointer data)
 	return TRUE;
 }
 
-gboolean group_remove_process (AfDalNulData * data, gpointer usr_data)
+gboolean group_remove_process (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Group removed\n");
 	}else {
 		g_print ("Failed to remove group: %s\n", data->text_response);
@@ -113,7 +113,7 @@ gboolean group_remove (gchar * line, gpointer data)
 		return FALSE;
 	}
 	
-	if (!afdal_kernel_group_remove (id,  group_remove_process, NULL)) {
+	if (!aos_kernel_group_remove (id,  group_remove_process, NULL)) {
 		g_print ("Unable to remove group\n");
 		return FALSE;
 	}
@@ -128,8 +128,8 @@ gboolean group_remove (gchar * line, gpointer data)
 
 gboolean group_list_foreach_function (gpointer key, gpointer value, gpointer data) 
 {
-	AfDalKernelGroup * group;
-	group = (AfDalKernelGroup *) value;
+	AosKernelGroup * group;
+	group = (AosKernelGroup *) value;
 
 	if (group->description)
 		g_print ("   %-4d %-12s %s\n", group->id, group->name,  group->description);
@@ -141,13 +141,13 @@ gboolean group_list_foreach_function (gpointer key, gpointer value, gpointer dat
 
 
 
-gboolean group_list_process (AfDalData * data, gpointer group_data) {
+gboolean group_list_process (OseaClientData * data, gpointer group_data) {
 	
-	if (data->state == AFDAL_OK) {
-		g_print ("\n  Number of groups %d.\n", afdal_list_length (data->data));
+	if (data->state == OSEACLIENT_OK) {
+		g_print ("\n  Number of groups %d.\n", oseaclient_list_length (data->data));
 		g_print ("   %-3s %-10s %s\n", "ID", "GROUP", "DESCRIPTION");
 		
-		afdal_list_foreach (data->data, group_list_foreach_function, group_data);		
+		oseaclient_list_foreach (data->data, group_list_foreach_function, group_data);		
 	}else {
 		g_print ("Unable to list already created groups: %s\n", data->text_response);
 		return FALSE;
@@ -158,13 +158,13 @@ gboolean group_list_process (AfDalData * data, gpointer group_data) {
 	return TRUE;
 }
 
-gboolean group_user_list_process (AfDalData * data, gpointer user_data) {
+gboolean group_user_list_process (OseaClientData * data, gpointer user_data) {
 	
-	if (data->state == AFDAL_OK) {
-		g_print ("\n  Number of users %d.\n", afdal_list_length (data->data));
+	if (data->state == OSEACLIENT_OK) {
+		g_print ("\n  Number of users %d.\n", oseaclient_list_length (data->data));
 		g_print ("   %-3s %-10s %s\n", "ID", "USER", "DESCRIPTION");
 		
-		afdal_list_foreach (data->data, user_list_foreach_function, user_data);		
+		oseaclient_list_foreach (data->data, user_list_foreach_function, user_data);		
 	}else {
 		g_print ("Unable to list already created users: %s\n", data->text_response);
 		return FALSE;
@@ -183,7 +183,7 @@ gboolean group_list   (gchar * line, gpointer data)
 		return FALSE;
 	}
 	
-	if (!afdal_kernel_group_list (0, 0,  group_list_process, NULL)) {
+	if (!aos_kernel_group_list (0, 0,  group_list_process, NULL)) {
 		g_print ("Unable to list already created groups\n");
 		return FALSE;
 	}
@@ -220,7 +220,7 @@ gboolean group_list_by_user   (gchar * line, gpointer data)
 		return FALSE;
 	}
 
-	if (!afdal_kernel_group_list_user (0, 0, id, group_user_list_process, NULL)) {
+	if (!aos_kernel_group_list_user (0, 0, id, group_user_list_process, NULL)) {
 		g_print ("Unable to list users in group\n");
 		return FALSE;
 	}
@@ -232,9 +232,9 @@ gboolean group_list_by_user   (gchar * line, gpointer data)
 	return TRUE;
 }
 
-gboolean group_add_user_process (AfDalNulData * data, gpointer user_data)
+gboolean group_add_user_process (OseaClientNulData * data, gpointer user_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("User added Ok\n");
 	}else {
 		g_print ("Unable to add user..add group user failed: %s\n", data->text_response);
@@ -281,7 +281,7 @@ gboolean group_add_user   (gchar * line, gpointer data)
 		return FALSE;
 	}
 
-	if (!afdal_kernel_group_add_user (id_group, id_user,  group_add_user_process, NULL)) {
+	if (!aos_kernel_group_add_user (id_group, id_user,  group_add_user_process, NULL)) {
 		g_print ("Unable to add user in group\n");
 		return FALSE;
 	}
@@ -293,9 +293,9 @@ gboolean group_add_user   (gchar * line, gpointer data)
 	return TRUE;
 }
 
-gboolean group_del_user_process (AfDalNulData * data, gpointer user_data)
+gboolean group_del_user_process (OseaClientNulData * data, gpointer user_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("User deleted Ok\n");
 	}else {
 		g_print ("Unable to delete user..del group user failed: %s\n", data->text_response);
@@ -343,7 +343,7 @@ gboolean group_del_user     (gchar * line, gpointer data)
 		return FALSE;
 	}
 
-	if (!afdal_kernel_group_remove_user (id_group, id_user,  group_del_user_process, NULL)) {
+	if (!aos_kernel_group_remove_user (id_group, id_user,  group_del_user_process, NULL)) {
 		g_print ("Unable to del user in group\n");
 		return FALSE;
 	}

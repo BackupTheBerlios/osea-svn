@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <readline/readline.h>
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 
 RRConnection * connection = NULL;
 gchar        * hostname   = NULL;
@@ -29,7 +29,7 @@ gboolean connection_process_exit_var = FALSE;
 gboolean connection_connected = FALSE;
 
 
-gboolean __connection_ask_password (AfDalPasswordData *pwd_data)
+gboolean __connection_ask_password (OseaClientPasswordData *pwd_data)
 {
 	gchar * password = NULL;
 
@@ -45,9 +45,9 @@ gboolean __connection_ask_password (AfDalPasswordData *pwd_data)
 }
 
 
-gboolean connection_process (AfDalNulData * data, gpointer user_data) 
+gboolean connection_process (OseaClientNulData * data, gpointer user_data) 
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("Login ok\n");
 		connection_connected = TRUE;
 	}else {
@@ -57,7 +57,7 @@ gboolean connection_process (AfDalNulData * data, gpointer user_data)
 
 	connection_process_exit_var = TRUE;
 
-	afdal_password_set_callback (__connection_ask_password);
+	oseaclient_password_set_callback (__connection_ask_password);
 
 	return TRUE;
 }
@@ -101,7 +101,7 @@ gboolean connection_open (gchar * server_name, gpointer data)
 
 	g_print ("Connecting to %s:%s...", hostname, port);
 	
-	if (!afdal_session_login (user, password, hostname, port, connection_process, NULL)) {
+	if (!oseaclient_session_login (user, password, hostname, port, connection_process, NULL)) {
 		g_print ("Unable to make login\n");
 		return FALSE;
 	}

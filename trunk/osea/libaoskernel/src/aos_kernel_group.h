@@ -15,48 +15,48 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef __AFDAL_KERNEL_GROUP_INTERFACE_H__
-#define __AFDAL_KERNEL_GROUP_INTERFACE_H__
+#ifndef __AOS_KERNEL_GROUP_INTERFACE_H__
+#define __AOS_KERNEL_GROUP_INTERFACE_H__
 
 #include "aos_kernel.h"
 
 
 gboolean           aos_kernel_group_list     (gint           initial_group, 
 						gint           max_row_number,
-						AfDalDataFunc  usr_function, 
+						OseaClientDataFunc  usr_function, 
 						gpointer       usr_data);
 
 gboolean           aos_kernel_group_new      (gchar           * name, 
 						gchar           * description,
-						AfDalSimpleFunc   usr_function, 
+						OseaClientSimpleFunc   usr_function, 
 						gpointer          usr_data);
 
 gboolean           aos_kernel_group_remove   (gint id,
-						AfDalNulFunc   usr_function,
+						OseaClientNulFunc   usr_function,
 						gpointer       usr_data);
 
 
 gboolean           aos_kernel_group_edit     (gint           id,
 						gchar        * new_name, 
 						gchar        * new_description,
-						AfDalNulFunc   usr_function, 
+						OseaClientNulFunc   usr_function, 
 						gpointer       usr_data);
 
 
 gboolean           aos_kernel_group_add_user     (gint           group_id,
 						    gint           user_id,
-						    AfDalNulFunc   usr_function, 
+						    OseaClientNulFunc   usr_function, 
 						    gpointer       usr_data);
 
 gboolean          aos_kernel_group_remove_user   (gint           group_id,
 						    gint           user_id,
-						    AfDalNulFunc   usr_function, 
+						    OseaClientNulFunc   usr_function, 
 						    gpointer       usr_data);
 
 gboolean          aos_kernel_group_list_user   (gint           initial_group, 
 						  gint           max_row_number,
 	                                          gint           group_id,
-						  AfDalDataFunc  usr_function, 
+						  OseaClientDataFunc  usr_function, 
 						  gpointer       usr_data);
 			 
 #endif

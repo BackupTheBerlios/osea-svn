@@ -6,7 +6,7 @@ intltool-merge
 intltool-updateMakefile 
 Makefile.in 
 aclocal.m4 
-afdalkernel.pc 
+*.pc 
 config.log 
 config.status
 configure 

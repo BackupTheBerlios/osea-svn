@@ -17,10 +17,10 @@
 
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include <unistd.h>
 #include <time.h>
-#include <afgs/afgs.h>
+#include <liboseaserver/oseaserver.h>
 #include "os_kernel_keys.h"
 #include "os_kernel_login_request.h"
 #include "os_kernel_register_request.h"
@@ -32,65 +32,65 @@
 
 gboolean os_kernel_login_check (gchar * user, gchar * password) 
 {
-	CoyoteDataSet * dataset;
+	OseaCommDataSet * dataset;
 	gchar         * db_password;
 	GString       * password_ciphered;
 
 	g_return_val_if_fail (user, FALSE);
 	g_return_val_if_fail (password, FALSE);
 
-	dataset = afgs_command_execute_single_query ("SELECT passwd FROM kernel_user WHERE nick = '%s'",
+	dataset = oseaserver_command_execute_single_query ("SELECT passwd FROM kernel_user WHERE nick = '%s'",
 						      user, NULL);
 
-	if (coyote_dataset_get_height (dataset) == 0)
+	if (oseacomm_dataset_get_height (dataset) == 0)
 		return FALSE;
 	
-	db_password = (gchar *) coyote_dataset_get (dataset, 0, 0);
+	db_password = (gchar *) oseacomm_dataset_get (dataset, 0, 0);
 
 	
 	password_ciphered = os_kernel_crypto_md5_sum (password);
 	
 	if (g_strcasecmp (password_ciphered->str, db_password)) {
 		g_string_free (password_ciphered, TRUE);
-		coyote_dataset_free (dataset);
+		oseacomm_dataset_free (dataset);
 		return FALSE;
 	}
 	
 	g_string_free (password_ciphered, TRUE);
-	coyote_dataset_free (dataset);
+	oseacomm_dataset_free (dataset);
 	
 	return TRUE;
 }
 
-gboolean os_kernel_login_request (CoyoteXmlServiceData *data, gpointer user_data, RRChannel * channel, gint msg_no)
+gboolean os_kernel_login_request (OseaCommXmlServiceData *data, gpointer user_data, RRChannel * channel, gint msg_no)
 {
 	GList          * values;
-	CoyoteDataSet  * session_id_dataset;
-	CoyoteDataSet  * servers_dataset;
-	CoyoteDataSet  * user_id_dataset;
+	OseaCommDataSet  * session_id_dataset;
+	OseaCommDataSet  * servers_dataset;
+	OseaCommDataSet  * user_id_dataset;
 	RRConnection   * rr_connection;
 	gchar          * session_id = NULL;
 	gchar          * af_key = NULL;
 	
 
 	// Check for correct params
-	values = afgs_message_check_params (data, "user","password", NULL);
+	values = oseaserver_message_check_params (data, "user","password", NULL);
 	if (!values) {
 		// Params seems to be incorrect
-		afgs_message_error_answer (channel, msg_no, "Incorrect parameters form", 
-					   COYOTE_CODE_XML_INCORRECT_PARAMETER);
+		oseaserver_message_error_answer (channel, msg_no, "Incorrect parameters form", 
+					   OSEACOMM_CODE_XML_INCORRECT_PARAMETER);
 		return FALSE;
 	}
 
 	// Check for login
 	if (!os_kernel_login_check ((gchar *) g_list_nth_data (values, 0), 
 				    (gchar *) g_list_nth_data (values, 1))) {
-		afgs_log_write ("Login failed for user %s", g_list_nth_data (values, 0));
-		afgs_message_error_answer (channel, msg_no, "Login failed",
-					   COYOTE_CODE_ERROR);
+		oseaserver_log_write ("Login failed for user %s", g_list_nth_data (values, 0));
+		oseaserver_message_error_answer (channel, msg_no, "Login failed",
+					   OSEACOMM_CODE_ERROR);
 		return FALSE;
 	}
-	afgs_log_write ("Login ok for user %s", g_list_nth_data (values, 0));
+	oseaserver_log_write ("Login ok for user %s", g_list_nth_data (values, 0));
 	
 	// Login correct, create server table
 	
@@ -101,25 +101,25 @@ gboolean os_kernel_login_request (CoyoteXmlServiceData *data, gpointer user_data
 
 	rr_connection = rr_channel_get_connection (channel);
 
-	afgs_afkeys_set_connection_key_simple (rr_connection, 
-					       afgs_afkeys_parse_and_check (af_key));
+	oseaserver_afkeys_set_connection_key_simple (rr_connection, 
+					       oseaserver_afkeys_parse_and_check (af_key));
 	
 
 	// Create session_id dataset
 
-	user_id_dataset = afgs_command_execute_single_query ("select id from kernel_user where nick = '%s'",
+	user_id_dataset = oseaserver_command_execute_single_query ("select id from kernel_user where nick = '%s'",
 						      (gchar *) g_list_nth_data (values, 0));
 
-	session_id = os_kernel_session_new (atoi (coyote_dataset_get (user_id_dataset, 0, 0)), TRUE);
-	session_id_dataset = coyote_dataset_new ();
+	session_id = os_kernel_session_new (atoi (oseacomm_dataset_get (user_id_dataset, 0, 0)), TRUE);
+	session_id_dataset = oseacomm_dataset_new ();
 
-	coyote_dataset_add (session_id_dataset, session_id);
+	oseacomm_dataset_add (session_id_dataset, session_id);
 
 	
 
 	// Send all generated data to user
 
-	afgs_message_ok_answer (channel, msg_no, "Login ok", COYOTE_CODE_OK, 
+	oseaserver_message_ok_answer (channel, msg_no, "Login ok", OSEACOMM_CODE_OK, 
 				session_id_dataset, servers_dataset, NULL);	
 
 	return TRUE;

@@ -1,4 +1,4 @@
 SUBDIRS = src test
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = afdalkernel.pc
+pkgconfig_DATA = libaoskernel.pc

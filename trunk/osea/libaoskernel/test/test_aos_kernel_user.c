@@ -16,9 +16,9 @@ gboolean init_function_var = FALSE;
 gboolean test1_exit_var = FALSE;
 gint     test1_user_created = 0;
 
-gboolean test1_function (AfDalSimpleData * data, gpointer usr_data)
+gboolean test1_function (OseaClientSimpleData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		printf ("User created: %d\n", data->id);
 		test1_user_created = data->id;
 		test1_exit_var = TRUE;	
@@ -30,10 +30,10 @@ gboolean test1_function (AfDalSimpleData * data, gpointer usr_data)
 	return TRUE;
 }
 
-gboolean test1_function2 (AfDalNulData * data, gpointer usr_data)
+gboolean test1_function2 (OseaClientNulData * data, gpointer usr_data)
 {
 	gboolean edited = GPOINTER_TO_INT (usr_data);
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		if (edited)
 			printf ("User edited\n");
 		else 
@@ -104,11 +104,11 @@ gboolean test1 (void)
 gboolean    test2_exit_var = FALSE;
 GList    *  test2_user_to_remove = NULL;
 
-gboolean test2_function2 (AfDalNulData * data, gpointer usr_data)
+gboolean test2_function2 (OseaClientNulData * data, gpointer usr_data)
 {
 	gboolean is_the_last = GPOINTER_TO_INT (usr_data);
 	printf ("We got a response..\n");
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		printf ("User deleted\n");
 	}else {
 		printf ("Fail to delete user\n");
@@ -123,8 +123,8 @@ gboolean test2_function2 (AfDalNulData * data, gpointer usr_data)
 
 gboolean test2_foreach_function (gpointer key, gpointer value, gpointer data) 
 {
-	AfDalKernelUser * user;
-	user = (AfDalKernelUser *) value;
+	AosKernelUser * user;
+	user = (AosKernelUser *) value;
 
 	printf ("id: %d nick: %s description: %s\n",
 		user->id, user->nick, user->description);
@@ -136,18 +136,18 @@ gboolean test2_foreach_function (gpointer key, gpointer value, gpointer data)
 
 
 
-gboolean test2_function (AfDalData * data, gpointer user_data) {
+gboolean test2_function (OseaClientData * data, gpointer user_data) {
 	
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		printf ("Recieved correct response: %s\n", data->text_response);
-		printf ("Number of nodes..%d\n", afdal_list_length (data->data));
+		printf ("Number of nodes..%d\n", oseaclient_list_length (data->data));
 		
 	}else {
 		printf ("Recieved incorrect response: %s\n", data->text_response);
 		exit (-1);
 	}
 
-	afdal_list_foreach (data->data, test2_foreach_function, user_data);
+	oseaclient_list_foreach (data->data, test2_foreach_function, user_data);
 	test2_exit_var = TRUE;	
 	return TRUE;
 }
@@ -208,7 +208,7 @@ gboolean test2 (void) {
 	return TRUE;
 }
 
-gboolean init_function_process (AfDalNulData * data, gpointer user_data)
+gboolean init_function_process (OseaClientNulData * data, gpointer user_data)
 {
 	init_function_var = TRUE;
 	return TRUE;
@@ -217,7 +217,7 @@ gboolean init_function_process (AfDalNulData * data, gpointer user_data)
 
 void init_function ()
 {
-	afdal_session_login ("aspl", "prueba", "localhost", "55000", init_function_process, NULL);
+	oseaclient_session_login ("aspl", "prueba", "localhost", "55000", init_function_process, NULL);
 
 	while (init_function_var == FALSE) {
 		sleep (1);

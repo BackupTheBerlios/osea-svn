@@ -20,7 +20,7 @@
 
 void __aos_kernel_permission_destroy (gpointer data)
 {
-	AfDalKernelPermission * permission = (AfDalKernelPermission *) data;
+	AosKernelPermission * permission = (AosKernelPermission *) data;
 	
 	g_free (permission->name);
 	g_free (permission->description);
@@ -31,25 +31,25 @@ void __aos_kernel_permission_destroy (gpointer data)
 	return;
 }
 
-AfDalList * __aos_kernel_list_permission_create_tree (CoyoteDataSet *data)
+OseaClientList * __aos_kernel_list_permission_create_tree (OseaCommDataSet *data)
 {
-	AfDalKernelPermission * permission;
-	AfDalList             * result;
+	AosKernelPermission * permission;
+	OseaClientList             * result;
 	gint i;
 	
-	result = afdal_list_new_full (afdal_support_compare_id, NULL, __aos_kernel_permission_destroy);
+	result = oseaclient_list_new_full (oseaclient_support_compare_id, NULL, __aos_kernel_permission_destroy);
 
-	for (i=0; i < coyote_dataset_get_height (data); i++) {
-		permission = g_new0 (AfDalKernelPermission,1);
+	for (i=0; i < oseacomm_dataset_get_height (data); i++) {
+		permission = g_new0 (AosKernelPermission,1);
 
-		permission->id = afdal_support_get_number (coyote_dataset_get (data, i, 0));
-		permission->name = g_strdup (coyote_dataset_get (data, i, 1));
-		permission->description = g_strdup (coyote_dataset_get (data, i, 2));
-		permission->server_name = g_strdup (coyote_dataset_get (data, i, 3));
-		permission->server_version = g_strdup (coyote_dataset_get (data, i, 4));
-		permission->depends = g_strdup (coyote_dataset_get (data, i, 5));
+		permission->id = oseaclient_support_get_number (oseacomm_dataset_get (data, i, 0));
+		permission->name = g_strdup (oseacomm_dataset_get (data, i, 1));
+		permission->description = g_strdup (oseacomm_dataset_get (data, i, 2));
+		permission->server_name = g_strdup (oseacomm_dataset_get (data, i, 3));
+		permission->server_version = g_strdup (oseacomm_dataset_get (data, i, 4));
+		permission->depends = g_strdup (oseacomm_dataset_get (data, i, 5));
 
-		afdal_list_insert (result, GINT_TO_POINTER (permission->id), permission);
+		oseaclient_list_insert (result, GINT_TO_POINTER (permission->id), permission);
 	}
 
 	return result;
@@ -60,25 +60,25 @@ static  void __aos_kernel_permission_list_process (RRChannel * channel,
 						     gpointer    data, 
 						     gpointer    custom_data)
 {
-	AfDalData     * afdal_data = NULL;
-	CoyoteDataSet * dataset = NULL;
+	OseaClientData     * oseaclient_data = NULL;
+	OseaCommDataSet * dataset = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 	g_return_if_fail (data);
 
 	// Close the channel properly
-	afdal_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_DATA, channel,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_DATA, channel,
 								  frame, message, &dataset, NULL, &data, &custom_data);
 
-	if (! afdal_data)
+	if (! oseaclient_data)
 		return;
 
 	// Fill permission data inside permission_data
-	afdal_data->data = __aos_kernel_list_permission_create_tree (dataset);
+	oseaclient_data->data = __aos_kernel_list_permission_create_tree (dataset);
 
 	// Call to user defined callback.	
-	afdal_request_call_user_function (AFDAL_REQUEST_DATA, data, custom_data, afdal_data);
+	oseaclient_request_call_user_function (OSEACLIENT_REQUEST_DATA, data, custom_data, oseaclient_data);
 
 	return;
 }
@@ -98,7 +98,7 @@ static  void __aos_kernel_permission_list_process (RRChannel * channel,
  **/
 gboolean           aos_kernel_permission_list     (gint           initial_permission, 
 						     gint           max_row_number,
-						     AfDalDataFunc  usr_function, 
+						     OseaClientDataFunc  usr_function, 
 						     gpointer       usr_data)
 {
 	gchar * string_initial_permission;
@@ -106,17 +106,17 @@ gboolean           aos_kernel_permission_list     (gint           initial_permis
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
 	string_initial_permission = g_strdup_printf ("%d", initial_permission);
 	string_max_row_number = g_strdup_printf ("%d", max_row_number);
 
-	result = afdal_request (connection, __aos_kernel_permission_list_process, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, __aos_kernel_permission_list_process, (OseaClientFunc) usr_function, usr_data,
 				"permission_list", 
-				"initial_permission", COYOTE_XML_ARG_STRING, string_initial_permission,
-				"row_number", COYOTE_XML_ARG_STRING, string_max_row_number,
+				"initial_permission", OSEACOMM_XML_ARG_STRING, string_initial_permission,
+				"row_number", OSEACOMM_XML_ARG_STRING, string_max_row_number,
 				NULL);
 	
 	g_free (string_initial_permission);
@@ -139,7 +139,7 @@ gboolean           aos_kernel_permission_list     (gint           initial_permis
 gboolean           aos_kernel_permission_list_by_user        (gint           initial_permission, 
 								gint           max_row_number,
 								gint           user_id,
-								AfDalDataFunc  usr_function, 
+								OseaClientDataFunc  usr_function, 
 								gpointer       usr_data)
 {
 	gchar * string_initial_permission;
@@ -148,7 +148,7 @@ gboolean           aos_kernel_permission_list_by_user        (gint           ini
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -156,11 +156,11 @@ gboolean           aos_kernel_permission_list_by_user        (gint           ini
 	string_max_row_number     = g_strdup_printf ("%d", max_row_number);
 	string_user_id            = g_strdup_printf ("%d", user_id);
 
-	result = afdal_request (connection, __aos_kernel_permission_list_process, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, __aos_kernel_permission_list_process, (OseaClientFunc) usr_function, usr_data,
 				"permission_list_by_user", 
-				"initial_permission", COYOTE_XML_ARG_STRING, string_initial_permission,
-				"row_number", COYOTE_XML_ARG_STRING, string_max_row_number,
-				"user_id", COYOTE_XML_ARG_STRING, string_user_id,
+				"initial_permission", OSEACOMM_XML_ARG_STRING, string_initial_permission,
+				"row_number", OSEACOMM_XML_ARG_STRING, string_max_row_number,
+				"user_id", OSEACOMM_XML_ARG_STRING, string_user_id,
 				NULL);
 	
 	g_free (string_initial_permission);
@@ -187,7 +187,7 @@ gboolean           aos_kernel_permission_list_by_user        (gint           ini
 gboolean           aos_kernel_permission_actual_list_by_user        (gint           initial_permission, 
 								       gint           max_row_number,
 								       gint           user_id,
-								       AfDalDataFunc  usr_function, 
+								       OseaClientDataFunc  usr_function, 
 								       gpointer       usr_data)
 {
 	gchar * string_initial_permission;
@@ -196,7 +196,7 @@ gboolean           aos_kernel_permission_actual_list_by_user        (gint       
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -204,11 +204,11 @@ gboolean           aos_kernel_permission_actual_list_by_user        (gint       
 	string_max_row_number     = g_strdup_printf ("%d", max_row_number);
 	string_user_id            = g_strdup_printf ("%d", user_id);
 
-	result = afdal_request (connection, __aos_kernel_permission_list_process, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, __aos_kernel_permission_list_process, (OseaClientFunc) usr_function, usr_data,
 				"permission_actual_list_by_user", 
-				"initial_permission", COYOTE_XML_ARG_STRING, string_initial_permission,
-				"row_number", COYOTE_XML_ARG_STRING, string_max_row_number,
-				"user_id", COYOTE_XML_ARG_STRING, string_user_id,
+				"initial_permission", OSEACOMM_XML_ARG_STRING, string_initial_permission,
+				"row_number", OSEACOMM_XML_ARG_STRING, string_max_row_number,
+				"user_id", OSEACOMM_XML_ARG_STRING, string_user_id,
 				NULL);
 	
 	g_free (string_initial_permission);
@@ -235,7 +235,7 @@ gboolean           aos_kernel_permission_actual_list_by_user        (gint       
 gboolean           aos_kernel_permission_from_group_list_by_user  (gint           initial_permission, 
 								     gint           max_row_number,
 								     gint           user_id,
-								     AfDalDataFunc  usr_function, 
+								     OseaClientDataFunc  usr_function, 
 								     gpointer       usr_data)
 {
 	gchar * string_initial_permission;
@@ -244,7 +244,7 @@ gboolean           aos_kernel_permission_from_group_list_by_user  (gint         
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -252,11 +252,11 @@ gboolean           aos_kernel_permission_from_group_list_by_user  (gint         
 	string_max_row_number     = g_strdup_printf ("%d", max_row_number);
 	string_user_id            = g_strdup_printf ("%d", user_id);
 
-	result = afdal_request (connection, __aos_kernel_permission_list_process, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, __aos_kernel_permission_list_process, (OseaClientFunc) usr_function, usr_data,
 				"permission_from_group_list_by_user", 
-				"initial_permission", COYOTE_XML_ARG_STRING, string_initial_permission,
-				"row_number", COYOTE_XML_ARG_STRING, string_max_row_number,
-				"user_id", COYOTE_XML_ARG_STRING, string_user_id,
+				"initial_permission", OSEACOMM_XML_ARG_STRING, string_initial_permission,
+				"row_number", OSEACOMM_XML_ARG_STRING, string_max_row_number,
+				"user_id", OSEACOMM_XML_ARG_STRING, string_user_id,
 				NULL);
 	
 	g_free (string_initial_permission);
@@ -282,7 +282,7 @@ gboolean           aos_kernel_permission_from_group_list_by_user  (gint         
 gboolean           aos_kernel_permission_list_by_group       (gint           initial_permission, 
 								gint           max_row_number,
 								gint           group_id,
-								AfDalDataFunc  usr_function, 
+								OseaClientDataFunc  usr_function, 
 								gpointer       usr_data)
 {
 	gchar * string_initial_permission;
@@ -291,7 +291,7 @@ gboolean           aos_kernel_permission_list_by_group       (gint           ini
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
@@ -299,11 +299,11 @@ gboolean           aos_kernel_permission_list_by_group       (gint           ini
 	string_max_row_number     = g_strdup_printf ("%d", max_row_number);
 	string_group_id            = g_strdup_printf ("%d", group_id);
 
-	result = afdal_request (connection, __aos_kernel_permission_list_process, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, __aos_kernel_permission_list_process, (OseaClientFunc) usr_function, usr_data,
 				"permission_list_by_group", 
-				"initial_permission", COYOTE_XML_ARG_STRING, string_initial_permission,
-				"row_number", COYOTE_XML_ARG_STRING, string_max_row_number,
-				"group_id", COYOTE_XML_ARG_STRING, string_group_id,
+				"initial_permission", OSEACOMM_XML_ARG_STRING, string_initial_permission,
+				"row_number", OSEACOMM_XML_ARG_STRING, string_max_row_number,
+				"group_id", OSEACOMM_XML_ARG_STRING, string_group_id,
 				NULL);
 	
 	g_free (string_initial_permission);
@@ -326,7 +326,7 @@ gboolean           aos_kernel_permission_list_by_group       (gint           ini
  **/
 gboolean           aos_kernel_permission_user_set   (gint           id,
 						       gint           user_id,
-						       AfDalNulFunc  usr_function, 
+						       OseaClientNulFunc  usr_function, 
 						       gpointer       usr_data)
 {
 	gchar * string_id;
@@ -337,14 +337,14 @@ gboolean           aos_kernel_permission_user_set   (gint           id,
 	string_id = g_strdup_printf ("%d", id);
 	string_user_id = g_strdup_printf ("%d", user_id);
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
-	result = afdal_request (connection, afdal_request_process_nul_data, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, oseaclient_request_process_nul_data, (OseaClientFunc) usr_function, usr_data,
 				"permission_user_set", 
-				"id", COYOTE_XML_ARG_STRING, string_id,
-				"user_id", COYOTE_XML_ARG_STRING, string_user_id,
+				"id", OSEACOMM_XML_ARG_STRING, string_id,
+				"user_id", OSEACOMM_XML_ARG_STRING, string_user_id,
 				NULL);
 	
 	g_free (string_id);
@@ -366,7 +366,7 @@ gboolean           aos_kernel_permission_user_set   (gint           id,
  **/
 gboolean           aos_kernel_permission_user_unset (gint           id,
 						       gint           user_id,
-						       AfDalNulFunc  usr_function, 
+						       OseaClientNulFunc  usr_function, 
 						       gpointer       usr_data)
 {
 	gchar * string_id;
@@ -374,17 +374,17 @@ gboolean           aos_kernel_permission_user_unset (gint           id,
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
 	string_id = g_strdup_printf ("%d", id);
 	string_user_id = g_strdup_printf ("%d", user_id);
 
-	result = afdal_request (connection, afdal_request_process_nul_data, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, oseaclient_request_process_nul_data, (OseaClientFunc) usr_function, usr_data,
 				"permission_user_unset", 
-				"id", COYOTE_XML_ARG_STRING, string_id,
-				"user_id", COYOTE_XML_ARG_STRING, string_user_id,
+				"id", OSEACOMM_XML_ARG_STRING, string_id,
+				"user_id", OSEACOMM_XML_ARG_STRING, string_user_id,
 				NULL);
 	
 	g_free (string_id);
@@ -409,7 +409,7 @@ gboolean           aos_kernel_permission_user_unset (gint           id,
 gboolean           aos_kernel_permission_user_set_value   (gint           id,
 						             gint           user_id,
 							     gboolean       value,
-							     AfDalNulFunc   usr_function, 
+							     OseaClientNulFunc   usr_function, 
 							     gpointer       usr_data)
 {
 	if (value)
@@ -432,7 +432,7 @@ gboolean           aos_kernel_permission_user_set_value   (gint           id,
  **/
 gboolean           aos_kernel_permission_group_set   (gint           id,
 							gint           group_id,
-							AfDalNulFunc  usr_function, 
+							OseaClientNulFunc  usr_function, 
 							gpointer       usr_data)
 {
 	gchar * string_id;
@@ -440,17 +440,17 @@ gboolean           aos_kernel_permission_group_set   (gint           id,
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
 	string_id = g_strdup_printf ("%d", id);
 	string_group_id = g_strdup_printf ("%d", group_id);
 
-	result = afdal_request (connection, afdal_request_process_nul_data, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, oseaclient_request_process_nul_data, (OseaClientFunc) usr_function, usr_data,
 				"permission_group_set", 
-				"id", COYOTE_XML_ARG_STRING, string_id,
-				"group_id", COYOTE_XML_ARG_STRING, string_group_id,
+				"id", OSEACOMM_XML_ARG_STRING, string_id,
+				"group_id", OSEACOMM_XML_ARG_STRING, string_group_id,
 				NULL);
 	
 	g_free (string_id);
@@ -472,7 +472,7 @@ gboolean           aos_kernel_permission_group_set   (gint           id,
  **/
 gboolean           aos_kernel_permission_group_unset (gint           id,
 							gint           group_id,
-							AfDalNulFunc  usr_function, 
+							OseaClientNulFunc  usr_function, 
 							gpointer       usr_data)
 {
 	gchar * string_id;
@@ -480,17 +480,17 @@ gboolean           aos_kernel_permission_group_unset (gint           id,
 	gboolean result;
 	RRConnection * connection = NULL;
 
-	connection = afdal_session_get_connection ("af-kernel", NULL);
+	connection = oseaclient_session_get_connection ("af-kernel", NULL);
 	if (! connection)
 		return FALSE;
 
 	string_id = g_strdup_printf ("%d", id);
 	string_group_id = g_strdup_printf ("%d", group_id);
 
-	result = afdal_request (connection, afdal_request_process_nul_data, (AfDalFunc) usr_function, usr_data,
+	result = oseaclient_request (connection, oseaclient_request_process_nul_data, (OseaClientFunc) usr_function, usr_data,
 				"permission_group_unset", 
-				"id", COYOTE_XML_ARG_STRING, string_id,
-				"group_id", COYOTE_XML_ARG_STRING, string_group_id,
+				"id", OSEACOMM_XML_ARG_STRING, string_id,
+				"group_id", OSEACOMM_XML_ARG_STRING, string_group_id,
 				NULL);
 	
 	g_free (string_id);
@@ -515,7 +515,7 @@ gboolean           aos_kernel_permission_group_unset (gint           id,
 gboolean           aos_kernel_permission_group_set_value   (gint           id,
 							      gint           group_id,
 							      gboolean       value,
-							      AfDalNulFunc   usr_function, 
+							      OseaClientNulFunc   usr_function, 
 							      gpointer       usr_data)
 {
 	if (value)

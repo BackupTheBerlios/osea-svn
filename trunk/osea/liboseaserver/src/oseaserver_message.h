@@ -14,20 +14,20 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __AFGS_MESSAGE_H__
-#define __AFGS_MESSAGE_H__
+#ifndef __OSEA_SERVER_MESSAGE_H__
+#define __OSEA_SERVER_MESSAGE_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include "oseaserver_config.h"
 
 void            oseaserver_message_error_answer (RRChannel * channel, gint msg_no, gchar * message,
-					   CoyoteCodeType status_code);
+					   OseaCommCodeType status_code);
 
 void            oseaserver_message_ok_answer    (RRChannel * channel, gint msg_no, gchar * message, 
-					   CoyoteCodeType status_code, ...);
+					   OseaCommCodeType status_code, ...);
 
-GList         * oseaserver_message_check_params (CoyoteXmlServiceData * data, ...);
+GList         * oseaserver_message_check_params (OseaCommXmlServiceData * data, ...);
 
 #endif
 

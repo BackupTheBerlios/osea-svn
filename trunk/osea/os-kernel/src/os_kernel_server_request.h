@@ -18,14 +18,14 @@
 #define __AF_KERNEL_SERVER_REQUEST_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean os_kernel_server_remove    (CoyoteXmlServiceData * data, 
+gboolean os_kernel_server_remove    (OseaCommXmlServiceData * data, 
 				     gpointer               user_data, 
 				     RRChannel            * channel, 
 				     gint                   msg_no);
 
-gboolean os_kernel_server_list         (CoyoteXmlServiceData * data, 
+gboolean os_kernel_server_list         (OseaCommXmlServiceData * data, 
 					gpointer               permission_data, 
 					RRChannel            * channel, 
 					gint                   msg_no);

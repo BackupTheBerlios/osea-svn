@@ -15,25 +15,25 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef __AFDAL_KERNEL_SERVER_INTERFACE_H__
-#define __AFDAL_KERNEL_SERVER_INTERFACE_H__
+#ifndef __AOS_KERNEL_SERVER_INTERFACE_H__
+#define __AOS_KERNEL_SERVER_INTERFACE_H__
 
 #include "aos_kernel.h"
 
-typedef struct __AfDalKernelServer {
+typedef struct __AosKernelServer {
 	gint    id;
 	gchar * name;
 	gint    version;
 	gchar * description;
-}AfDalKernelServer;
+}AosKernelServer;
 
 gboolean           aos_kernel_server_list        (gint           initial_server, 
 						    gint           max_row_number,
-						    AfDalDataFunc  usr_function, 
+						    OseaClientDataFunc  usr_function, 
 						    gpointer       usr_data);
 
 gboolean           aos_kernel_server_remove      (gint id,
-						    AfDalNulFunc   usr_function,
+						    OseaClientNulFunc   usr_function,
 						    gpointer       usr_data);
 
 

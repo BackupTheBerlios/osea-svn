@@ -17,8 +17,8 @@
 
 #include <unistd.h>
 #include "oseaserver_services.h"
-#include <coyote/coyote.h>
-#include <afdal/afdal.h>
+#include <liboseacomm/oseacomm.h>
+#include <liboseaclient/oseaclient.h>
 #include "oseaserver_keys.h"
 
 #define LOG_DOMAIN "oseaserver_services"
@@ -104,25 +104,25 @@ static  void __oseaserver_services_kernel_response_received (RRChannel * channel
 				    gpointer    data, 
 				    gpointer    custom_data)
 {
-	AfDalNulData  * afdal_data = NULL;
-	CoyoteDataSet * dataset = NULL;
+	OseaClientNulData  * oseaclient_data = NULL;
+	OseaCommDataSet * dataset = NULL;
 
 	g_return_if_fail (channel);
 	g_return_if_fail (message);
 
 	// Close the channel properly
-	afdal_data = afdal_request_close_and_return_initial_data (AFDAL_REQUEST_NUL_DATA, channel,
+	oseaclient_data = oseaclient_request_close_and_return_initial_data (OSEACLIENT_REQUEST_NUL_DATA, channel,
 								  frame, message, &dataset, NULL,
 								  &data, &custom_data);
 
-	if (! afdal_data)
+	if (! oseaclient_data)
 		return;
 
-	if (afdal_data->state == AFDAL_OK)
+	if (oseaclient_data->state == OSEACLIENT_OK)
 		kernel_ok_response = TRUE;
 	else {
 		kernel_ok_response = FALSE;
-		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,  "Af-kernel response: %s\n", afdal_data->text_response);
+		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,  "Af-kernel response: %s\n", oseaclient_data->text_response);
 	}
 	
 	active_wait = FALSE;
@@ -138,15 +138,15 @@ static  void __oseaserver_services_kernel_response_received (RRChannel * channel
  * 
  * Return value: 
  **/
-CoyoteDataSet        * oseaserver_services_get_dataset ()
+OseaCommDataSet        * oseaserver_services_get_dataset ()
 {
 
-	CoyoteDataSet  * dataset        = NULL;
+	OseaCommDataSet  * dataset        = NULL;
 	GList          * iterator       = NULL;
 
 	g_return_val_if_fail (services_provided, NULL);
 
-	dataset = coyote_dataset_new ();
+	dataset = oseacomm_dataset_new ();
 
 	iterator = g_list_first (services_provided);
 
@@ -155,7 +155,7 @@ CoyoteDataSet        * oseaserver_services_get_dataset ()
 		if ((((OseaServerServicesProvided *)(iterator->data))->need_key)
 		    && (! ((OseaServerServicesProvided *) (iterator->data))->actual_permission))
 			// Create permission dataset row
-			coyote_dataset_add_nth (dataset, 
+			oseacomm_dataset_add_nth (dataset, 
 						((OseaServerServicesProvided *) (iterator->data))->service_name,
 						((OseaServerServicesProvided *) (iterator->data))->description,
 						((OseaServerServicesProvided *) (iterator->data))->dependencies,
@@ -167,13 +167,13 @@ CoyoteDataSet        * oseaserver_services_get_dataset ()
 		if (iterator && 
 		    (((OseaServerServicesProvided *)(iterator->data))->need_key) &&
 		    (! ((OseaServerServicesProvided *)(iterator->data))->actual_permission))
-			coyote_dataset_new_row (dataset);
+			oseacomm_dataset_new_row (dataset);
 		
 	}
 
 	g_print ("Returned dataset\n");
 
-	coyote_dataset_print (dataset);
+	oseacomm_dataset_print (dataset);
 	
 	return dataset;
 
@@ -197,12 +197,12 @@ gboolean oseaserver_services_update (const gchar *server_name, const gchar *serv
 	gchar        * kernel_port = oseaserver_config_get (NULL, "kernel port");
 
 	// Initialize coyote 
-	if (!coyote_init ( NULL, NULL, &error)) {
+	if (!oseacomm_init ( NULL, NULL, &error)) {
 		g_log (LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "Error: unable to initialize coyote: %s\n", error->message);
 		return FALSE;
 	}
 	// Establish connection
-	connection = coyote_connection_new (kernel_hostname, kernel_port, TYPE_COYOTE_SIMPLE);
+	connection = oseacomm_connection_new (kernel_hostname, kernel_port, TYPE_OSEACOMM_SIMPLE);
 	g_free (kernel_hostname);
 	g_free (kernel_port);
 	
@@ -215,13 +215,13 @@ gboolean oseaserver_services_update (const gchar *server_name, const gchar *serv
 	// Build message
 	active_wait = TRUE;
 	
-	if (!afdal_request (connection, __oseaserver_services_kernel_response_received,
+	if (!oseaclient_request (connection, __oseaserver_services_kernel_response_received,
 			    NULL, NULL,
 			    "update_services", 
-			    "server_name", COYOTE_XML_ARG_STRING, server_name, 
-			    "description", COYOTE_XML_ARG_STRING, server_description, 
-			    "version", COYOTE_XML_ARG_STRING, g_strdup_printf("%d",version_number), 
-			    "permissions", COYOTE_XML_ARG_DATASET, oseaserver_services_get_dataset (), 
+			    "server_name", OSEACOMM_XML_ARG_STRING, server_name, 
+			    "description", OSEACOMM_XML_ARG_STRING, server_description, 
+			    "version", OSEACOMM_XML_ARG_STRING, g_strdup_printf("%d",version_number), 
+			    "permissions", OSEACOMM_XML_ARG_DATASET, oseaserver_services_get_dataset (), 
 			    NULL))
 		return FALSE;
 	
@@ -236,7 +236,7 @@ gboolean oseaserver_services_update (const gchar *server_name, const gchar *serv
 }
 
 
-gboolean              oseaserver_services_process (CoyoteXmlServiceData * data, RRChannel * channel, gint msg_no)
+gboolean              oseaserver_services_process (OseaCommXmlServiceData * data, RRChannel * channel, gint msg_no)
 {
 	GList       * iterator;
 	gchar       * host_name;
@@ -244,7 +244,7 @@ gboolean              oseaserver_services_process (CoyoteXmlServiceData * data, 
 
 	// obtain service type
 	switch (data->type) {
-	case COYOTE_XML_SERVICE_REQUEST:
+	case OSEACOMM_XML_SERVICE_REQUEST:
 		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "It's a request, name: %s\n", data->name);
 		
 		for (iterator = g_list_first (services_provided); iterator; iterator = iterator->next) {
@@ -266,7 +266,7 @@ gboolean              oseaserver_services_process (CoyoteXmlServiceData * data, 
 					}
 				}
 				// Log client ip, user and service name into the log.
-				host_name = coyote_connection_get_client_name (channel);
+				host_name = oseacomm_connection_get_client_name (channel);
 				af_key = oseaserver_afkeys_get_connection_key (rr_channel_get_connection (channel));
 				if (af_key) {
 
@@ -292,10 +292,10 @@ gboolean              oseaserver_services_process (CoyoteXmlServiceData * data, 
 		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Not recognized service request %s. Generating error request...", data->name);
 
 		oseaserver_message_error_answer (channel, msg_no, "Critical error: the service is not provided by this server",
-					   COYOTE_CODE_UNKNOWN_SERVICE);
+					   OSEACOMM_CODE_UNKNOWN_SERVICE);
 		return TRUE;
 
-	case COYOTE_XML_SERVICE_RESPONSE:
+	case OSEACOMM_XML_SERVICE_RESPONSE:
 		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "It's a response\n");		
 		return TRUE;
 

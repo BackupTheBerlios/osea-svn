@@ -1,8 +1,9 @@
-INCLUDES = -g -I$(top_srcdir) $(LIBRARIES_CFLAGS) \
+INCLUDES = -g -I$(top_srcdir)/liboseacomm -I$(top_srcdir)/liboseaclient \
+	 $(LIBRARIES_CFLAGS) \
 	-DPACKAGE_DTD_DIR=\""$(datadir)"\" \
 	-DCOMPILATION_DATE=`date +%s` -Wall
 
-liboseaserverincludedir = $(includedir)/oseaserver
+liboseaserverincludedir = $(includedir)/liboseaserver
 
 lib_LTLIBRARIES = liboseaserver.la
 

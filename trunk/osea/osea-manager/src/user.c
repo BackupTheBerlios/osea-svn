@@ -25,9 +25,9 @@
 gboolean user_process_var = FALSE;
 
 
-gboolean user_new_process (AfDalSimpleData * data, gpointer usr_data)
+gboolean user_new_process (OseaClientSimpleData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) 
+	if (data->state == OSEACLIENT_OK) 
 		g_print ("User created successfully\n");
 	else
 		g_print ("User creation failed: %s\n", data->text_response);
@@ -69,7 +69,7 @@ gboolean user_new (gchar * line, gpointer data)
 	description = readline ("Enter new user description: ");
 
 	// Create user
-	if (!afdal_kernel_user_new (user, password, description, user_new_process, NULL)) {
+	if (!aos_kernel_user_new (user, password, description, user_new_process, NULL)) {
 		g_print ("Unable to create user\n");
 		return FALSE;
 	}
@@ -84,9 +84,9 @@ gboolean user_new (gchar * line, gpointer data)
 	return TRUE;
 }
 
-gboolean user_remove_process (AfDalNulData * data, gpointer usr_data)
+gboolean user_remove_process (OseaClientNulData * data, gpointer usr_data)
 {
-	if (data->state == AFDAL_OK) {
+	if (data->state == OSEACLIENT_OK) {
 		g_print ("User removed\n");
 	}else {
 		g_print ("Failed to remove user: %s\n", data->text_response);
@@ -122,7 +122,7 @@ gboolean user_remove (gchar * line, gpointer data)
 		return FALSE;
 	}
 	
-	if (!afdal_kernel_user_remove (id,  user_remove_process, NULL)) {
+	if (!aos_kernel_user_remove (id,  user_remove_process, NULL)) {
 		g_print ("Unable to remove user\n");
 		return FALSE;
 	}
@@ -137,8 +137,8 @@ gboolean user_remove (gchar * line, gpointer data)
 
 gboolean user_list_foreach_function (gpointer key, gpointer value, gpointer data) 
 {
-	AfDalKernelUser * user;
-	user = (AfDalKernelUser *) value;
+	AosKernelUser * user;
+	user = (AosKernelUser *) value;
 
 	if (user->description)
 		g_print ("   %-4d %-12s %s\n", user->id, user->nick, user->description);
@@ -150,13 +150,13 @@ gboolean user_list_foreach_function (gpointer key, gpointer value, gpointer data
 
 
 
-gboolean user_list_process (AfDalData * data, gpointer user_data) {
+gboolean user_list_process (OseaClientData * data, gpointer user_data) {
 	
-	if (data->state == AFDAL_OK) {
-		g_print ("\n  Number of users %d.\n", afdal_list_length (data->data));
+	if (data->state == OSEACLIENT_OK) {
+		g_print ("\n  Number of users %d.\n", oseaclient_list_length (data->data));
 		g_print ("   %-3s %-10s %s\n", "ID", "USER", "DESCRIPTION");
 		
-		afdal_list_foreach (data->data, user_list_foreach_function, user_data);		
+		oseaclient_list_foreach (data->data, user_list_foreach_function, user_data);		
 	}else {
 		g_print ("Unable to list already created users: %s\n", data->text_response);
 		return FALSE;
@@ -174,7 +174,7 @@ gboolean user_list   (gchar * line, gpointer data)
 		return FALSE;
 	}
 	
-	if (!afdal_kernel_user_list (0, 0,  user_list_process, NULL)) {
+	if (!aos_kernel_user_list (0, 0,  user_list_process, NULL)) {
 		g_print ("Unable to list already created users\n");
 		return FALSE;
 	}

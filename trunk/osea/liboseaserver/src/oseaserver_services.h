@@ -19,13 +19,13 @@
 #define __OSEASERVER_SERVICES_H__
 
 #include <glib.h>
-#include <afdal/afdal.h>
+#include <liboseaclient/oseaclient.h>
 #include "oseaserver_config.h"
 
 typedef struct _OseaServerServicesProvided {
 	gchar     * service_name; /* Name for service */
 	gchar     * description;  /* Description to show when assigning permissions */
-	gboolean (* service_request_process_function) (CoyoteXmlServiceData *data, 
+	gboolean (* service_request_process_function) (OseaCommXmlServiceData *data, 
 						       gpointer user_data, 
 						       RRChannel * channel, 
 						       gint msg_no);
@@ -41,9 +41,9 @@ void                   oseaserver_services_set         (OseaServerServicesProvid
 
 GList                * oseaserver_services_get         ();
 
-CoyoteDataSet        * oseaserver_services_get_dataset ();
+OseaCommDataSet      * oseaserver_services_get_dataset ();
 
-gboolean               oseaserver_services_process     (CoyoteXmlServiceData * data, RRChannel * channel, gint msg_no);
+gboolean               oseaserver_services_process     (OseaCommXmlServiceData * data, RRChannel * channel, gint msg_no);
 
 gboolean               oseaserver_services_update   (const gchar *server_name, const gchar *server_description, gint version_number);
 

@@ -21,7 +21,7 @@
 #include <sys/types.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 #include "oseaserver_config.h"
 #include "oseaserver_database.h"
 

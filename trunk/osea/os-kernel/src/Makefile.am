@@ -1,7 +1,7 @@
 INCLUDES = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	$(AFKERNEL_CFLAGS) -DSYSCONFDIR=\""$(sysconfdir)"\" \
-	-I$(top_srcdir) -I$(top_srcdir)/liboseacomm \
+	$(OSKERNEL_CFLAGS) -DSYSCONFDIR=\""$(sysconfdir)"\" \
+	-I$(top_srcdir) -I$(top_srcdir)/include_dir \
 	-DCOMPILATION_DATE=`date +%s` -Wall
 
 bin_PROGRAMS = os-kernel
@@ -22,7 +22,7 @@ os_kernel_SOURCES = \
 	os_kernel_keys.c os_kernel_keys.h
 
 os_kernel_LDADD = \
-	$(AFKERNEL_LIBS) \
+	$(OSKERNEL_LIBS) \
 	$(top_builddir)/liboseaserver/src/liboseaserver.la  \
 	$(top_builddir)/liboseaclient/src/liboseaclient.la \
 	$(top_builddir)/liboseacomm/src/liboseacomm.la -lpopt
