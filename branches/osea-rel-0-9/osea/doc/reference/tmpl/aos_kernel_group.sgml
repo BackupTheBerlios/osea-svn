@@ -1,0 +1,101 @@
+<!-- ##### SECTION Title ##### -->
+aos_kernel_group
+
+<!-- ##### SECTION Short_Description ##### -->
+This module allow to manage all group related services at os-kernel server.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION aos_kernel_group_list ##### -->
+<para>
+
+</para>
+
+@initial_group: 
+@max_row_number: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_group_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@description: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_group_remove ##### -->
+<para>
+
+</para>
+
+@id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_group_edit ##### -->
+<para>
+
+</para>
+
+@id: 
+@new_name: 
+@new_description: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_group_add_user ##### -->
+<para>
+
+</para>
+
+@group_id: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_group_remove_user ##### -->
+<para>
+
+</para>
+
+@group_id: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_group_list_user ##### -->
+<para>
+
+</para>
+
+@initial_group: 
+@max_row_number: 
+@group_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+

@@ -1,0 +1,79 @@
+<!-- ##### SECTION Title ##### -->
+aos_kernel_user
+
+<!-- ##### SECTION Short_Description ##### -->
+This module allow to manage all user related services at os-kernel server.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION aos_kernel_user_list ##### -->
+<para>
+
+</para>
+
+@initial_user: 
+@max_row_number: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_user_new ##### -->
+<para>
+
+</para>
+
+@nick: 
+@password: 
+@description: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_user_remove ##### -->
+<para>
+
+</para>
+
+@id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_user_edit ##### -->
+<para>
+
+</para>
+
+@id: 
+@new_nick: 
+@new_password: 
+@new_description: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION aos_kernel_user_list_group ##### -->
+<para>
+
+</para>
+
+@initial_group: 
+@max_row_number: 
+@user_id: 
+@usr_function: 
+@usr_data: 
+@Returns: 
+
+
