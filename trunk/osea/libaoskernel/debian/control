@@ -1,0 +1,26 @@
+Source: libafdalkernel
+Section: devel
+Priority: optional
+Maintainer: Francis Brosnan Blázquez <francis@aspl.es>
+Standards-Version: 3.5.8
+Build-Depends: debmake, libcoyote0-dev (>= 0.0.2), libafdal0-dev (>= 0.0.2)
+
+Package: libafdalkernel0-dev
+Architecture: any
+Depends: libafdal0-dev (>= 0.0.2), libafdalkernel0-0 (>= 0.0.2), 
+ libcoyote0-dev (>= 0.0.2), librr0.9-dev, libglib2.0-dev, libxml2-dev
+Description: LibAfDalKernel development files
+ LibAfdalKernel is the communication interface to af-kernel server.
+
+Package: libafdalkernel0-doc
+Architecture: any
+Depends: lynx | www-browser
+Description: LibAfDalKernel documentation
+
+Package: libafdalkernel0-0
+Architecture: any
+Depends: ${shlibs:Depends}, libcoyote0-0 (>= 0.0.2), libafdal0-0 (>= 0.0.2), 
+ librr0.9-0, libglib2.0-0
+Description: LibAfDalKernel interface library to af-kernel server.
+ LibAfdalKernel is the communication interface to af-kernel server.
+

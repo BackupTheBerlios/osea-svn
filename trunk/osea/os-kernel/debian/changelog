@@ -1,0 +1,12 @@
+af-kernel (0.0.2-0) unstable; urgency=low
+	
+  * Ml2 release debian package.
+
+ -- Francis Brosnan Bláquez <francis@aspl.es>  Fri,  07 Mar 2003 12:19:57 +0100
+	
+af-kernel (0.0.1-0) unstable; urgency=low
+
+  * Initial Release.
+
+ -- unknown <francis@aspl.es>  Mon, 13 Jan 2003 14:46:31 +0100
+

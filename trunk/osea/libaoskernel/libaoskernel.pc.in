@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libafdalkernel
+Description: Support library interface to kernel server.
+Requires: coyote afdal
+Version: @VERSION@
+Libs: -L${libdir} -lafdalkernel
+Cflags: -I${includedir}
