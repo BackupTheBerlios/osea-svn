@@ -1,6 +1,6 @@
 SUBDIRS = src test
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = oseaserver.pc
+pkgconfig_DATA = liboseaserver.pc
 
 
