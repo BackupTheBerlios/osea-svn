@@ -1,5 +1,6 @@
 //  customer: LibOseaClient layer for client-side
-//  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2004 David Marín Carreño
 
 //  This program is free software; you can redistribute it and/or modify 
 //  it under the terms of the GNU General Public License as published by 
@@ -30,7 +31,7 @@ gboolean aos_customer_customer_address_set (gint customer_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -58,7 +59,7 @@ gboolean aos_customer_customer_address_update_all (gint address_id,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	address_id_to_string = g_strdup_printf ("%d", address_id);
@@ -142,7 +143,7 @@ gboolean aos_customer_customer_address_list (gint initial_customer,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_customer_to_string = g_strdup_printf ("%d", initial_customer);
@@ -171,7 +172,7 @@ gboolean aos_customer_customer_address_remove (gint customer_id,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -196,7 +197,7 @@ gboolean aos_customer_customer_address_add (gint customer_id,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -223,7 +224,7 @@ gboolean aos_customer_customer_telephone_set (gint customer_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -251,7 +252,7 @@ gboolean aos_customer_customer_telephone_update_all (gint telephone_id,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	telephone_id_to_string = g_strdup_printf ("%d", telephone_id);
@@ -335,7 +336,7 @@ gboolean aos_customer_customer_telephone_list (gint initial_customer,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_customer_to_string = g_strdup_printf ("%d", initial_customer);
@@ -364,7 +365,7 @@ gboolean aos_customer_customer_telephone_remove (gint customer_id,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -390,7 +391,7 @@ gboolean aos_customer_customer_telephone_add (gint customer_id,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -418,7 +419,7 @@ gboolean aos_customer_customer_inet_data_set (gint customer_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -446,7 +447,7 @@ gboolean aos_customer_customer_inet_data_update_all (gint inet_data_id,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	inet_data_id_to_string = g_strdup_printf ("%d", inet_data_id);
@@ -530,7 +531,7 @@ gboolean aos_customer_customer_inet_data_list (gint initial_customer,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_customer_to_string = g_strdup_printf ("%d", initial_customer);
@@ -559,7 +560,7 @@ gboolean aos_customer_customer_inet_data_remove (gint customer_id,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -585,7 +586,7 @@ gboolean aos_customer_customer_inet_data_add (gint customer_id,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -613,7 +614,7 @@ gboolean aos_customer_customer_contact_set (gint customer_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -641,7 +642,7 @@ gboolean aos_customer_customer_contact_update_all (gint contact_id,
 	gchar              *contact_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	contact_id_to_string = g_strdup_printf ("%d", contact_id);
@@ -725,7 +726,7 @@ gboolean aos_customer_customer_contact_list (gint initial_customer,
 	gchar              *contact_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_customer_to_string = g_strdup_printf ("%d", initial_customer);
@@ -754,7 +755,7 @@ gboolean aos_customer_customer_contact_remove (gint customer_id,
 	gchar              *contact_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -779,7 +780,7 @@ gboolean aos_customer_customer_contact_add (gint customer_id,
 	gchar              *contact_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -809,7 +810,7 @@ gboolean aos_customer_customer_new (gchar * legal_id,
 	gchar              *enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	vat_customer_type_to_string = g_strdup_printf ("%d", vat_customer_type);
@@ -837,7 +838,7 @@ gboolean aos_customer_customer_remove (gint customer_id,
 	gchar              *customer_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -867,7 +868,7 @@ gboolean aos_customer_customer_edit (gint customer_id,
 	gchar              *new_enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -959,14 +960,14 @@ gboolean aos_customer_customer_list (gint max_row_number,
 	gchar              *initial_customer_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af-customer", NULL);
+	connection = oseaclient_session_get_connection ("os-customer", NULL);
 	if (!connection)
 		return FALSE;
 	max_row_number_to_string = g_strdup_printf ("%d", max_row_number);
 	initial_customer_to_string = g_strdup_printf ("%d", initial_customer);
 	result = oseaclient_request (connection, __aos_customer_customer_list_process, (OseaClientFunc)
 				usr_function, usr_data,
-				"af_customer_customer_list",
+				"customer_list",
 				"initial", OSEACOMM_XML_ARG_STRING, initial_customer_to_string,
 				"row_number", OSEACOMM_XML_ARG_STRING, max_row_number_to_string,
 				NULL);

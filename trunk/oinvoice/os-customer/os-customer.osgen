@@ -1,6 +1,6 @@
-// IDL Definition for AF-CUSTOMER server
+// IDL Definition for OS-CUSTOMER server
 
-server interface af-customer { 
+server interface os-customer { 
 	
 	relation legal_id_type;
 	relation located;

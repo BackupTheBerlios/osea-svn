@@ -1,5 +1,6 @@
 //  customer: LibOseaClient layer for client-side
-//  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2004 David Marín Carreño
 
 //  This program is free software; you can redistribute it and/or modify 
 //  it under the terms of the GNU General Public License as published by 
@@ -27,7 +28,7 @@ gboolean aos_customer_contact_new (gchar * name,
 	gchar              *customer_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -49,7 +50,7 @@ gboolean aos_customer_contact_remove (gint contact_id,
 	gchar              *contact_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	contact_id_to_string = g_strdup_printf ("%d", contact_id);
@@ -73,7 +74,7 @@ gboolean aos_customer_contact_edit (gint contact_id,
 	gchar              *new_customer_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	contact_id_to_string = g_strdup_printf ("%d", contact_id);
@@ -154,7 +155,7 @@ gboolean aos_customer_contact_list (gint max_row_number,
 	gchar              *initial_contact_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	max_row_number_to_string = g_strdup_printf ("%d", max_row_number);

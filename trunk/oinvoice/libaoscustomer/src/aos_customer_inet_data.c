@@ -1,5 +1,6 @@
 //  customer: LibOseaClient layer for client-side
-//  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2004 David Marín Carreño
 
 //  This program is free software; you can redistribute it and/or modify 
 //  it under the terms of the GNU General Public License as published by 
@@ -28,7 +29,7 @@ gboolean aos_customer_inet_data_new (gchar * inet_data,
 	gchar              *enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -52,7 +53,7 @@ gboolean aos_customer_inet_data_remove (gint inet_data_id,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	inet_data_id_to_string = g_strdup_printf ("%d", inet_data_id);
@@ -78,7 +79,7 @@ gboolean aos_customer_inet_data_edit (gint inet_data_id,
 	gchar              *new_enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	inet_data_id_to_string = g_strdup_printf ("%d", inet_data_id);
@@ -163,7 +164,7 @@ gboolean aos_customer_inet_data_list (gint max_row_number,
 	gchar              *initial_inet_data_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	max_row_number_to_string = g_strdup_printf ("%d", max_row_number);

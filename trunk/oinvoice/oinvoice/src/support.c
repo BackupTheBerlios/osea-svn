@@ -1,5 +1,6 @@
 //  oinvoice: support functions
 //  Copyright (C) 2002, 2003  Francis Brosnan Blázquez
+//  Copyright (C) 2004 David Marín Carreño
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by

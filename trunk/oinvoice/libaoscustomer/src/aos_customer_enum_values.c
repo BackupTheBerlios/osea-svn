@@ -1,5 +1,6 @@
 //  customer: LibOseaClient layer for client-side
-//  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2004 David Marín Carreño
 
 //  This program is free software; you can redistribute it and/or modify 
 //  it under the terms of the GNU General Public License as published by 
@@ -29,7 +30,7 @@ gboolean aos_customer_enum_values_address_set (gint enum_values_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -57,7 +58,7 @@ gboolean aos_customer_enum_values_address_update_all (gint address_id,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	address_id_to_string = g_strdup_printf ("%d", address_id);
@@ -139,7 +140,7 @@ gboolean aos_customer_enum_values_address_list (gint initial_enum_values,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_enum_values_to_string = g_strdup_printf ("%d", initial_enum_values);
@@ -168,7 +169,7 @@ gboolean aos_customer_enum_values_address_remove (gint enum_values_id,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -193,7 +194,7 @@ gboolean aos_customer_enum_values_address_add (gint enum_values_id,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -220,7 +221,7 @@ gboolean aos_customer_enum_values_telephone_set (gint enum_values_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -248,7 +249,7 @@ gboolean aos_customer_enum_values_telephone_update_all (gint telephone_id,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	telephone_id_to_string = g_strdup_printf ("%d", telephone_id);
@@ -331,7 +332,7 @@ gboolean aos_customer_enum_values_telephone_list (gint initial_enum_values,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_enum_values_to_string = g_strdup_printf ("%d", initial_enum_values);
@@ -360,7 +361,7 @@ gboolean aos_customer_enum_values_telephone_remove (gint enum_values_id,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -386,7 +387,7 @@ gboolean aos_customer_enum_values_telephone_add (gint enum_values_id,
 	gchar              *telephone_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -414,7 +415,7 @@ gboolean aos_customer_enum_values_inet_data_set (gint enum_values_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -442,7 +443,7 @@ gboolean aos_customer_enum_values_inet_data_update_all (gint inet_data_id,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	inet_data_id_to_string = g_strdup_printf ("%d", inet_data_id);
@@ -525,7 +526,7 @@ gboolean aos_customer_enum_values_inet_data_list (gint initial_enum_values,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_enum_values_to_string = g_strdup_printf ("%d", initial_enum_values);
@@ -554,7 +555,7 @@ gboolean aos_customer_enum_values_inet_data_remove (gint enum_values_id,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -580,7 +581,7 @@ gboolean aos_customer_enum_values_inet_data_add (gint enum_values_id,
 	gchar              *inet_data_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -608,7 +609,7 @@ gboolean aos_customer_enum_values_customer_set (gint enum_values_id,
 	gchar              *value_to_set_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -636,7 +637,7 @@ gboolean aos_customer_enum_values_customer_update_all (gint customer_id,
 	gchar              *customer_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -718,7 +719,7 @@ gboolean aos_customer_enum_values_customer_list (gint initial_enum_values,
 	gchar              *customer_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	initial_enum_values_to_string = g_strdup_printf ("%d", initial_enum_values);
@@ -747,7 +748,7 @@ gboolean aos_customer_enum_values_customer_remove (gint enum_values_id,
 	gchar              *customer_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -773,7 +774,7 @@ gboolean aos_customer_enum_values_customer_add (gint enum_values_id,
 	gchar              *customer_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -799,7 +800,7 @@ gboolean aos_customer_enum_values_new (gchar * enum_type,
 	gchar              *enum_order_in_type_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_order_in_type_to_string = g_strdup_printf ("%d", enum_order_in_type);
@@ -822,7 +823,7 @@ gboolean aos_customer_enum_values_remove (gint enum_values_id,
 	gchar              *enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -847,7 +848,7 @@ gboolean aos_customer_enum_values_edit (gint enum_values_id,
 	gchar              *new_enum_order_in_type_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	enum_values_id_to_string = g_strdup_printf ("%d", enum_values_id);
@@ -930,7 +931,7 @@ gboolean aos_customer_enum_values_list (gint max_row_number,
 	gchar              *initial_enum_values_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	max_row_number_to_string = g_strdup_printf ("%d", max_row_number);

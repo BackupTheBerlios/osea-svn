@@ -1,5 +1,6 @@
 //  customer: LibOseaClient layer for client-side
-//  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  Copyright (C) 2004 David Marín Carreño
 
 //  This program is free software; you can redistribute it and/or modify 
 //  it under the terms of the GNU General Public License as published by 
@@ -32,7 +33,7 @@ gboolean aos_customer_address_new (gchar * address,
 	gchar              *enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	customer_id_to_string = g_strdup_printf ("%d", customer_id);
@@ -59,7 +60,7 @@ gboolean aos_customer_address_remove (gint address_id,
 	gchar              *address_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	address_id_to_string = g_strdup_printf ("%d", address_id);
@@ -88,7 +89,7 @@ gboolean aos_customer_address_edit (gint address_id,
 	gchar              *new_enum_values_id_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	address_id_to_string = g_strdup_printf ("%d", address_id);
@@ -184,7 +185,7 @@ gboolean aos_customer_address_list (gint max_row_number,
 	gchar              *initial_address_to_string = NULL;
 	gboolean            result;
 
-	connection = oseaclient_session_get_connection ("af_customer", NULL);
+	connection = oseaclient_session_get_connection ("os_customer", NULL);
 	if (!connection)
 		return FALSE;
 	max_row_number_to_string = g_strdup_printf ("%d", max_row_number);

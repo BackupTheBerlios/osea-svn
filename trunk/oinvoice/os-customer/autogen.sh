@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PACKAGE="af_customer: Support for description needed"
+PACKAGE="os-customer"
 
 (automake --version) < /dev/null > /dev/null 2>&1 || {
 	echo;
