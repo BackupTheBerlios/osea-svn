@@ -1,0 +1,436 @@
+%alltop{
+/*
+ *
+ *  LibOseaType: Classes for message composition
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-compound-object.h"
+#include "oseatype-object.h"
+%}
+
+%{
+#include <glib.h>
+#include <string.h>
+
+%}
+
+class OseaType:List from OseaType:Compound:Object {
+	
+	private GPtrArray *array = NULL;
+	private gboolean has_gaps = FALSE;
+	private const gchar * type = NULL;
+	private guint calculate_last_inserted_element (self) 
+	{
+		guint i = 0;
+		OseaTypeObject * otobj;
+		OseaTypeCompoundObject * oco = OSEATYPE_COMPOUND_OBJECT(self);
+
+		if (! self->_priv->has_gaps)
+			return OSEATYPE_COMPOUND_OBJECT(self)->last_inserted_element;
+
+		for (i = oco->last_inserted_element + 1; i < oco->total_length; i++) {
+			otobj = g_ptr_array_index (self->_priv->array, i);
+			if (! otobj) {
+				if (i == oco->current_length)
+					self->_priv->has_gaps = FALSE;				
+				return (i-1);
+			}
+		}
+		
+		return (oco->total_length - 1);
+		
+	}
+
+	public OseaTypeObject * new (void)
+	{
+		OseaTypeList * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+		OSEATYPE_COMPOUND_OBJECT(result)->total_length = -1;
+		OSEATYPE_COMPOUND_OBJECT(result)->current_length = 0;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_accessed_element = -1;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_inserted_element = -1;
+		result->_priv->array = g_ptr_array_new ();
+		
+		return OSEATYPE_OBJECT(result);
+		
+	}	
+
+	public OseaTypeObject * new_defined (gint max_length, const gchar *type)
+	{
+		OseaTypeList * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+
+		OSEATYPE_COMPOUND_OBJECT(result)->current_length = 0;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_accessed_element = -1;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_inserted_element = -1;
+
+		if (max_length > -1) {
+			OSEATYPE_COMPOUND_OBJECT(result)->total_length = max_length;
+			result->_priv->array = g_ptr_array_sized_new (max_length);
+			g_ptr_array_set_size (result->_priv->array, max_length);
+		} else {
+			OSEATYPE_COMPOUND_OBJECT(result)->total_length = -1;
+			result->_priv->array = g_ptr_array_new ();
+		}
+
+		if (type && type[0]) {
+			result->_priv->type = type;
+		}
+
+		return OSEATYPE_OBJECT(result);
+	}
+
+	override (OseaType:Compound:Object) gboolean insert (OseaTypeCompoundObject *oco, 
+							     OseaType:Object *object (check null type), 
+							     gpointer attributes, GError **error)
+	{
+		gint i = GPOINTER_TO_INT (attributes);
+	        OseaTypeList *self = OSEATYPE_LIST(oco);
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+
+		/* Check if the object is already finished: if it is, you cannot insert */
+
+		if (OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeList"), 201,
+				     "Cannot insert element: the object is marked as already finished.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		}
+
+		/* Check if the list has a defined element type, and checking the inserted object type */
+		if (self->_priv->type && self->_priv->type[0]) {
+			if (strcmp (self->_priv->type, G_OBJECT_TYPE_NAME (G_OBJECT(object)))) {
+				/* Predefined type and given object type are different */
+				g_set_error (error,
+					     g_quark_from_static_string ("OseaTypeList"), 206,
+					     "Cannot insert element: given object type (%s) different from predefined type (%s).",
+					     G_OBJECT_TYPE_NAME (G_OBJECT(oco)), self->_priv->type);
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+				return FALSE;
+				
+			}
+		}
+
+		/* Check if the including element is already in other structure */
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		if (OSEATYPE_OBJECT(object)->parent != NULL) {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeList"), 207,
+				     "Cannot insert element: given object is already included in other a %s.",
+				     G_OBJECT_TYPE_NAME (G_OBJECT(object->parent)));
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		} else {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+		}
+
+		if (i >= 0) {
+			/* Insert the new element in that position */
+			if (oco->total_length < 0) {
+				g_set_error (error, 
+					     g_quark_from_static_string ("OseaTypeList"), 202, 
+					     "Cannot insert element in a arbitrary position in not-presized lists.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+				return FALSE;
+
+			}
+
+			if ((oco->total_length >= 0) && (i >= oco->total_length)) {
+				g_set_error (error, 
+					     g_quark_from_static_string ("OseaTypeList"), 203, 
+					     "Cannot add element in %ud position. The maximum element number is %ud",
+					     i, oco->total_length);
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+				return FALSE;
+			}
+			self->_priv->array->pdata[i] = object;
+			oco->current_length ++;
+
+			/* We could have inserted the element leaving a gap in the array, so has_gaps = TRUE */
+			self->_priv->has_gaps = TRUE;
+
+			oco->last_inserted_element = oseatype_list_calculate_last_inserted_element (self);
+		} else {
+			if (oco->total_length < 0) {
+				g_ptr_array_add (self->_priv->array, object);
+				oco->current_length ++;
+				oco->last_inserted_element ++;
+			} else {
+				self->_priv->array->pdata[oco->last_inserted_element + 1] = object;
+				oco->current_length ++;
+				self->_priv->has_gaps = TRUE;
+				oco->last_inserted_element = oseatype_list_calculate_last_inserted_element (self);
+			}
+		}
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		OSEATYPE_OBJECT(object)->parent = OSEATYPE_OBJECT(self);
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+
+		if (oco->current_length == oco->total_length) {
+			OSEATYPE_OBJECT(oco)->is_finished = TRUE;
+			OSEATYPE_OBJECT(oco)->in_progress = FALSE;
+		} else {
+			OSEATYPE_OBJECT(oco)->is_finished = FALSE;
+			OSEATYPE_OBJECT(oco)->in_progress = TRUE;
+		}
+
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+		return TRUE;
+	}
+
+
+
+	override (OseaType:Compound:Object) gboolean finish (OseaTypeCompoundObject *oco, 
+							     GError **error)
+	{
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+
+		if (OSEATYPE_OBJECT(oco)->is_finished) {
+				g_set_error (error, 
+					     g_quark_from_static_string ("OseaTypeList"), 204, 
+					     "Cannot finish element: already finished.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+				return FALSE;
+			
+		}
+
+		if ((oco->total_length >= 0) && (oco->total_length > oco->current_length)) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeList"), 205,
+				     "Cannot finish: presized list (defined length: %d) not yet completed (current length: %d)",
+				     oco->total_length, oco->current_length);
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		}
+
+		OSEATYPE_OBJECT(oco)->is_finished = TRUE;
+		OSEATYPE_OBJECT(oco)->in_progress = FALSE;
+		
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+		return TRUE;
+	}
+
+	override (OseaType:Compound:Object) OseaTypeObject * get_next_element (OseaTypeCompoundObject *oco, 
+									       GError **error)
+	{
+		OseaTypeObject *result = NULL;
+	        OseaTypeList *self = OSEATYPE_LIST(oco);
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+	
+
+		/* We check if the object is finished or in progress */
+		if (! OSEATYPE_OBJECT(oco)->in_progress && ! OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeList"), 210,
+				     "Cannot get element: list not finished nor in process yet.");
+
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return NULL;
+			
+		}
+		
+		/* We check if the next element is ready */
+		if (oco->last_inserted_element <= oco->last_accessed_element) {
+			if ((oco->last_accessed_element >= oco->total_length - 1) && 
+			    (OSEATYPE_OBJECT(oco)->is_finished)) 
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 211,
+					     "Cannot get element: end of list reached.");
+			else
+				g_set_error (error, 
+					     g_quark_from_static_string ("OseaTypeList"), 212,
+					     "Cannot get element: there is no available next element yet.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return NULL;			
+		}
+		
+		result = OSEATYPE_OBJECT (g_ptr_array_index (self->_priv->array, oco->last_accessed_element + 1));
+		
+		oco->last_accessed_element ++;
+
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+		
+		return result;
+		
+	}
+
+	override (OseaType:Compound:Object) OseaTypeObject * get_element (OseaTypeCompoundObject *oco, 
+									  gpointer attributes,
+									  GError **error)
+	{
+		OseaTypeObject *result = NULL;
+	        OseaTypeList *self = OSEATYPE_LIST(oco);
+		gint index = GPOINTER_TO_INT(attributes);
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+
+		/* We check if the object is finished or in progress */
+		if (! OSEATYPE_OBJECT(oco)->in_progress && ! OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeList"), 210,
+				     "Cannot get element: list not finished nor in process yet.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+			return NULL;
+			
+		}
+
+		/* We check if the given element is ready */
+
+
+		/* Check for out-of-range index */
+		/* First for pre-sized or finished lists */
+
+		if (oco->total_length >=0 && index >= oco->total_length) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 213,
+					     "Cannot get element: index out of range for given finished/presized list.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+				return NULL;			
+		}
+
+		/* Then avoid out of range searches in not-finished or not-sized lists */
+		if (index >= self->_priv->array->len) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 214,
+					     "Cannot get element: index currently out of range for given list.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+		
+				return NULL;			
+		}
+
+		/* Check for data in the given list index */
+		if (! self->_priv->array->pdata[index]) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 215,
+					     "Tried to retrieve an empty element.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+				return NULL;			
+		}
+		
+
+		result = OSEATYPE_OBJECT (g_ptr_array_index (self->_priv->array, index));				
+
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+		return result;
+	}
+
+
+	override (OseaType:Compound:Object) OseaTypeObject * extract_element (OseaTypeCompoundObject *oco, 
+									      gpointer attributes,
+									      GError **error)
+	{
+		OseaTypeObject *result = NULL;
+	        OseaTypeList *self = OSEATYPE_LIST(oco);
+		gint index = GPOINTER_TO_INT(attributes);
+		
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+		
+		/* We check if the object is finished or in progress */
+		if (! OSEATYPE_OBJECT(oco)->in_progress && ! OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeList"), 210,
+				     "Cannot get element: list not finished nor in process yet.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+			return NULL;
+			
+		}
+
+		/* We check if the given element is ready */
+
+
+		/* Check for out-of-range index */
+		/* First for pre-sized or finished lists */
+
+		if (oco->total_length >=0 && index >= oco->total_length) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 213,
+					     "Cannot get element: index out of range for given finished/presized list.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+				return NULL;			
+		}
+
+		/* Then avoid out of range searches in not-finished or not-sized lists */
+		if (index >= self->_priv->array->len) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 214,
+					     "Cannot get element: index currently out of range for given list.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+		
+				return NULL;			
+		}
+
+		/* Check for data in the given list index */
+		if (! self->_priv->array->pdata[index]) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 215,
+					     "Tried to retrieve an empty element.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+				return NULL;			
+		}
+		
+		result = OSEATYPE_OBJECT (g_ptr_array_index (self->_priv->array, index));
+
+		self->_priv->array = g_ptr_array_remove_index (self->_priv->array, index);
+
+		if (oco->last_accessed_element >= index)
+			oco->last_accessed_element --;
+		if (oco->last_inserted_element >= index)
+			oco->last_inserted_element --;
+		
+		oco->total_length --;
+		oco->current_length --;
+		
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+		
+		oseatype_object_lock_access (OSEATYPE_OBJECT(result));
+		OSEATYPE_OBJECT(result)->parent = NULL;
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(result));
+		
+
+		return result;
+	}
+
+	private void finalize (self) 
+	{
+		gint i;
+
+		for (i=0; i<=self->_priv->array->len; i++) {
+			if (self->_priv->array->pdata[i])
+				g_object_unref (self->_priv->array->pdata[i]);
+		}
+
+		g_ptr_array_free (self->_priv->array, TRUE);
+	}
+
+
+}

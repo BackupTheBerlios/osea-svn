@@ -1,0 +1,140 @@
+
+
+%alltop{
+/*
+ *
+ *  LibOseaType: Classes for message composition
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-simple-object.h"
+%}
+
+%{
+#include <glib.h>
+/* #include <sys/types.h> */
+/* #include <regex.h> */
+#define _XOPEN_SOURCE /* glibc2 needs this */
+#include <time.h>
+%}
+
+class OseaType:Date from OseaType:Simple:Object {
+	
+	private gchar * date = {g_strdup("1970-01-01")}
+	        destroywith g_free;
+
+	public OseaTypeObject * new (void)
+	{
+		OseaTypeDate * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+
+		return OSEATYPE_OBJECT(result);
+
+	}	
+
+	public gboolean set (OseaTypeDate *self, gchar *date_arg, GError **error)
+	{
+/* 		regex_t *regexp; */
+/* 		gint year; */
+/* 		gint month; */
+/* 		gint day; */
+
+		struct tm tm;
+		time_t time;
+		gchar *value;
+		gchar *date = g_strdup (date_arg);
+
+		date = g_strstrip (date);
+
+		if (! date) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeDate"), 201, "Cannot set date: it's empty");
+			return FALSE;
+		}
+
+		
+/* 		regcomp (regexp, "[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]", REG_EXTENDED); */
+		
+
+/* 		if (regexec (regexp, (const char *) date, 0, NULL, 0)) { */
+/* 			#warning Untested code. You must check it with good test cases. */
+/* 			g_set_error (error, g_quark_from_static_string ("OseaTypeDate"),  */
+/* 				     201, "Cannot set date: it doesn't match with YYYY-MM-DD"); */
+/* 			regfree (regexp); */
+/* 			return FALSE; */
+/* 		} */
+		
+
+/* 		sscanf ((const char*) date, "%d-%d-%d", &year, &month, &day); */
+
+/* 		if (year < 1 || month < 1 || day < 1 || month > 12 || day > 31) { */
+/* 			#warning Untested code. You must check it with good test cases. */
+/* 			g_set_error (error, g_quark_from_static_string ("OseaTypeDate"),  */
+/* 				     202, "Cannot set date: it is not a valid date"); */
+/* 			return FALSE; */
+/* 		} */
+
+		
+
+		value = strptime(date, "%Y-%m-%d", &tm);
+		if (!value || *value != '\0') { 
+			#warning Untested code. You must check it with good test cases.
+			g_set_error (error, g_quark_from_static_string ("OseaTypeDate"),
+				     202, "Cannot set date: it is not a valid date in format YYYY-MM-DD");
+			return FALSE;
+		}
+		
+		time = mktime (&tm);
+		if (time == -1) { 
+			#warning Untested code. You must check it with good test cases.
+			g_set_error (error, g_quark_from_static_string ("OseaTypeDate"),
+				     203, "Cannot set date: it is not a valid date");
+			return FALSE;
+		}
+
+		g_free (date);
+
+		date = g_new (gchar, 11);
+		strftime (date, 11, "%Y-%m-%d", &tm);
+			
+		self->_priv->date = date;
+		OSEATYPE_OBJECT(self)->is_finished = TRUE;
+		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+
+		return TRUE;
+
+	}	
+
+
+	public gchar * get (OseaTypeDate *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeDate"), 100, "Cannot get value: not yet completed");
+			return NULL;				     
+		} else {
+			return g_strdup(self->_priv->date);
+		}
+
+	}
+
+}

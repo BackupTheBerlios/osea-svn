@@ -1,5 +1,5 @@
-//  LibCoyote:  Support library with xml and communication functions.
-//  Copyright (C) 2002, 2003 Advanced Software Production Line, S.L.
+//  LibOseaType:  Support library with classes for message composition
+//  Copyright (C) 2004 David Marín Carreño
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -15,20 +15,13 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef __COYOTE_H__
-#define __COYOTE_H__
+#ifndef __OSEATYPE_H__
+#define __OSEATYPE_H__
+
+#define OSEATYPE_MESSAGE_MAX_LENGTH 255
+
 #include <glib.h>
-#include <librr/rr.h>
+#include "oseatype-message.h"
 
-#include "oseacomm_simple.h"
-#include "oseacomm_simple_cfg.h"
-#include "oseacomm_connection.h"
-#include "oseacomm_xml.h"
-#include "oseacomm_dataset.h"
-#include "oseacomm_code.h"
-
-gboolean oseacomm_init (gint *argc, gchar ***argv, GError **error);
-
-gboolean oseacomm_exit (GError **error);
 
 #endif

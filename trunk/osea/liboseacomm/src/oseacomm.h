@@ -19,16 +19,45 @@
 #ifndef __OSEACOMM_H__
 #define __OSEACOMM_H__
 #include <glib.h>
-#include <librr/rr.h>
 
-#include "oseacomm_simple.h"
-#include "oseacomm_simple_cfg.h"
-#include "oseacomm_connection.h"
-#include "oseacomm_xml.h"
-#include "oseacomm_dataset.h"
-#include "oseacomm_code.h"
+#include "oseacomm_partial_message.h"
+#include "oseacomm_peer_info.h"
 
-gboolean oseacomm_init (gint *argc, gchar ***argv, GError **error);
+gboolean oseacomm_init                      (gint *argc, gchar ***argv, GError **error);
+
+gboolean oseacomm_set_properties            (gchar *property_name,
+					     gpointer value, ...);
+
+gboolean oseacomm_connect                   (gchar *peer_name);
+gboolean oseacomm_disconnect                (gchar *peer_name);
+
+gboolean oseacomm_set_connection_properties (gchar *peer_name,
+					     gchar *property_name,
+					     gpointer value, ...);
+
+
+gint     oseacomm_send                      (gchar *peer_name,
+			                     OseaCommMessage *message);
+
+typedef  gboolean (*OseaCommReplyReceive)   (gint message_id,
+					     gint error_code,
+					     OseaCommMessage *message,
+					     gboolean is_last);
+
+
+gboolean oseacomm_set_listener_properties   (gchar *property_name,
+					     gpointer value, ...);
+
+gboolean oseacomm_wait                      (gint port);
+
+typedef  gboolean (*OseaCommMessageReceive) (gint message_id,
+					     OseaCommPeerInfo *peer_info,
+					     OseaCommMessage *message,
+					     gboolean is_last);
+
+gboolean oseacomm_reply                     (gint message_id,
+					     gint error_code,
+					     OseaCommMessage *message);
 
 gboolean oseacomm_exit (GError **error);
 

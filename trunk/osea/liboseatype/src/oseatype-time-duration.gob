@@ -1,0 +1,150 @@
+
+
+%alltop{
+/*
+ *
+ *  LibOseaType: Classes for message composition
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-simple-object.h"
+%}
+
+%{
+#include <glib.h>
+/* #include <sys/types.h> */
+/* #include <regex.h> */
+#define _XOPEN_SOURCE /* glibc2 needs this */
+#include <time.h>
+%}
+
+class OseaType:Time:Duration from OseaType:Simple:Object {
+	
+	private guint years = 0;
+	private guint months = 0;
+	private guint days = 0;
+	private guint hours = 0;
+	private guint minutes = 0;
+	private guint seconds = 0;
+
+	public OseaTypeObject * new (void)
+	{
+		OseaTypeTimeDuration * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+
+		return OSEATYPE_OBJECT(result);
+
+	}	
+
+	public gboolean set (OseaTypeTimeDuration *self, 
+			     guint years,
+			     guint months,
+			     guint days,
+			     guint hours,
+			     guint minutes,
+			     guint seconds,
+			     GError **error)
+	{
+
+		self->_priv->years = years;
+		self->_priv->months = months;
+		self->_priv->days = days;
+		self->_priv->hours = hours;
+		self->_priv->minutes = minutes;
+		self->_priv->seconds = seconds;
+		OSEATYPE_OBJECT(self)->is_finished = TRUE;
+		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+
+		return TRUE;
+
+	}	
+
+
+	public guint get_years (OseaTypeTimeDuration *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeDuration"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->years;
+		}
+
+	}
+
+	public guint get_months (OseaTypeTimeDuration *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeDuration"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->months;
+		}
+
+	}
+
+	public guint get_days (OseaTypeTimeDuration *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeDuration"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->days;
+		}
+
+	}
+
+	public guint get_hours (OseaTypeTimeDuration *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeDuration"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->hours;
+		}
+
+	}
+
+	public guint get_minutes (OseaTypeTimeDuration *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeDuration"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->minutes;
+		}
+
+	}
+
+	public guint get_seconds (OseaTypeTimeDuration *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeDuration"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->seconds;
+		}
+
+	}
+
+
+}

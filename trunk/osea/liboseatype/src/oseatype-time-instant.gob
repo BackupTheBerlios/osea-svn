@@ -1,0 +1,145 @@
+
+
+%alltop{
+/*
+ *
+ *  LibOseaType: Classes for message composition
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-simple-object.h"
+%}
+
+%{
+#include <glib.h>
+/* #include <sys/types.h> */
+/* #include <regex.h> */
+#define _XOPEN_SOURCE /* glibc2 needs this */
+#include <time.h>
+%}
+
+class OseaType:Time:Instant from OseaType:Simple:Object {
+	
+	private gchar * time = {g_strdup("1970-01-01")}
+	        destroywith g_free;
+
+	public OseaTypeObject * new (void)
+	{
+		OseaTypeTimeInstant * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+
+		return OSEATYPE_OBJECT(result);
+
+	}	
+
+	public gboolean set (OseaTypeTimeInstant *self, gchar *time_arg, GError **error)
+	{
+
+		struct tm tm;
+		time_t timet;
+		gchar *value;
+		gchar *time = g_strdup (time_arg);
+
+		time = g_strstrip (time);
+
+		if (! time) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeTimeInstant"), 201, "Cannot set time: it's empty");
+			return FALSE;
+		}
+
+		value = strptime(time, "%Y-%m-%d %T", &tm);
+		if (!value || *value != '\0') { 
+			value = strptime(time, "%Y-%m-%d %T %z", &tm);
+			if (!value || *value != '\0') { 
+				g_set_error (error, g_quark_from_static_string ("OseaTypeTimeInstant"),
+					     202, "Cannot set time: it is not a valid time in format 'hh:mm:ss' or 'hh:mm:ssZ, +hh:mm'");
+				return FALSE;
+			}
+		}
+		
+		
+
+
+		timet = mktime (&tm);
+		if (timet == -1) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeInstant"),
+				     203, "Cannot set time: it is not a valid time");
+			return FALSE;
+		}
+/* 		printf ("sec: %d\n", tm.tm_sec); */
+/* 		printf ("min: %d\n", tm.tm_min); */
+/* 		printf ("hour: %d\n", tm.tm_hour); */
+/* 		printf ("mday: %d\n", tm.tm_mday); */
+/* 		printf ("mon: %d\n", tm.tm_mon); */
+/* 		printf ("year: %d\n", tm.tm_year); */
+/* 		printf ("wday: %d\n", tm.tm_wday); */
+/* 		printf ("yday: %d\n", tm.tm_yday); */
+/* 		printf ("isdst: %d\n", tm.tm_isdst); */
+
+		g_free (time);
+
+		time = g_new (gchar, 20);
+		strftime (time, 20, "%Y-%m-%d %T %z", &tm);
+
+		self->_priv->time = time;
+		OSEATYPE_OBJECT(self)->is_finished = TRUE;
+		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+
+		return TRUE;
+
+	}	
+
+
+	public gchar * get (OseaTypeTimeInstant *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeInstant"), 100, "Cannot get value: not yet completed");
+			return NULL;				     
+		} else {
+			return g_strdup(self->_priv->time);
+		}
+
+	}
+
+
+	public gchar * get_simple (OseaTypeTimeInstant *self, GError **error)
+	{
+		gchar * tmp;
+		gchar * result;
+
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeTimeInstant"), 100, "Cannot get value: not yet completed");
+			return NULL;				     
+		} else {
+			tmp = g_strdup (self->_priv->time);
+			tmp[19] = '\0';
+
+			result = g_strdup (tmp);
+			g_free (tmp);
+			return result;
+		}
+
+	}
+
+}

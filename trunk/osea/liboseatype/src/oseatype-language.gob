@@ -1,0 +1,105 @@
+
+
+%alltop{
+/*
+ *
+ *  LibOseaType: Classes for message composition
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-simple-object.h"
+%}
+
+%{
+#include <glib.h>
+
+%}
+
+class OseaType:Language from OseaType:Simple:Object {
+	
+	private gchar * value
+		destroywith g_free;
+
+	public OseaTypeObject * new (void)
+	{
+		OseaTypeLanguage * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+
+		return OSEATYPE_OBJECT(result);
+
+	}	
+
+	public gboolean set (OseaTypeLanguage *self, gchar * value, GError **error)
+	{
+
+		gchar *allowed_languages[] = {
+			"aa","ab","ae","af","am","ar","as","ay","az","ba","be","bg","bh",
+			"bi","bn","bo","br","bs","ca","ce","ch","co","cs","cu","cv","cy",
+			"da","de","dz","el","en","eo","es","et","eu","fa","fi","fj","fo",
+			"fr","fy","ga","gd","gl","gn","gu","gv","ha","he","hi","ho","hr",
+			"hu","hy","hz","ia","id","ie","ik","io","is","it","iu","ja","jv",
+			"ka","ki","kj","kk","kl","km","kn","ko","ks","ku","kv","kw","ky",
+			"la","lb","ln","lo","lt","lv","mg","mh","mi","mk","ml","mn","mo",
+			"mr","ms","mt","my","na","nb","nd","ne","ng","nl","nn","no","nr",
+			"nv","ny","oc","om","or","os","pa","pi","pl","ps","pt","qu","rm",
+			"rn","ro","ru","rw","sa","sc","sd","se","sg","si","sk","sl","sm",
+			"sn","so","sq","sr","ss","st","su","sv","sw","ta","te","tg","th",
+			"ti","tk","tl","tn","to","tr","ts","tt","tw","ty","ug","uk","ur",
+			"uz","vi","vo","wa","wo","xh","yi","yo","za","zh","zu", NULL};
+
+		gchar *tmp=NULL;
+		gint i=0;
+		
+		while (allowed_languages[i] != NULL && g_ascii_strcasecmp(allowed_languages[i], value))
+			i++;
+
+		if (allowed_languages[i] == NULL) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeLanguage"), 201, 
+				     "Cannot set value: '%s' is not a valid language identificator.");
+			return NULL;			
+		}	     
+
+		if (self->_priv->value)
+			g_free (self->_priv->value);
+
+		self->_priv->value = g_ascii_strup (value,-1);
+		OSEATYPE_OBJECT(self)->is_finished = TRUE;
+		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+
+		return TRUE;
+
+	}	
+
+	public gchar *get (OseaTypeLanguage *self, GError **error) 
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeLanguage"), 100, "Cannot get value: not yet completed");
+			return NULL;				     
+		} else {
+			return g_strdup(self->_priv->value);
+		}
+
+
+	}
+
+}

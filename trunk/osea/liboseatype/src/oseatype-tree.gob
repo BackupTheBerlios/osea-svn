@@ -1,0 +1,326 @@
+%alltop{
+/*
+ *
+ *  LibOseaType: Classes for message composition
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-compound-object.h"
+#include "oseatype-object.h"
+
+%}
+
+%{
+#include <glib.h>
+#include <string.h>
+
+%}
+
+class OseaType:Tree from OseaType:Compound:Object {
+	
+	private GNode * read_tree = NULL;
+	private GNode * write_tree = NULL;
+	private const gchar * type = NULL;
+
+	public OseaTypeObject * new (void)
+	{
+		OseaTypeTree * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+		OSEATYPE_COMPOUND_OBJECT(result)->total_length = -1;
+		OSEATYPE_COMPOUND_OBJECT(result)->current_length = 0;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_accessed_element = -1;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_inserted_element = -1;
+		
+		return OSEATYPE_OBJECT(result);
+		
+	}	
+
+	public OseaTypeObject * new_defined (const gchar *type)
+	{
+		OseaTypeTree * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+
+		OSEATYPE_COMPOUND_OBJECT(result)->total_length = -1;
+		OSEATYPE_COMPOUND_OBJECT(result)->current_length = 0;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_accessed_element = -1;
+		OSEATYPE_COMPOUND_OBJECT(result)->last_inserted_element = -1;
+
+		if (type && type[0]) {
+			result->_priv->type = type;
+		}
+
+		return OSEATYPE_OBJECT(result);
+	}
+
+	public gboolean insert_child (OseaTypeTree *tree, 
+				      OseaType:Object *object (check null type), 
+				      GError **error)
+	{ 
+		OseaTypeCompoundObject *oco = OSEATYPE_COMPOUND_OBJECT(tree);
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+
+		/* Check if the object is already finished: if it is, you cannot insert */
+
+		if (OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeTree"), 201,
+				     "Cannot insert element: the object is marked as already finished.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		}
+
+		/* Check if the tree has a defined element type, and checking the inserted object type */
+		if (self->_priv->type && self->_priv->type[0]) {
+			if (strcmp (self->_priv->type, G_OBJECT_TYPE_NAME (G_OBJECT(object)))) {
+				/* Predefined type and given object type are different */
+				g_set_error (error,
+					     g_quark_from_static_string ("OseaTypeTree"), 206,
+					     "Cannot insert element: given object type (%s) different from predefined type (%s).",
+					     G_OBJECT_TYPE_NAME (G_OBJECT(oco)), self->_priv->type);
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+				return FALSE;
+				
+			}
+		}
+
+		/* Check if the including element is already in other structure */
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		if (OSEATYPE_OBJECT(object)->parent != NULL) {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeTree"), 207,
+				     "Cannot insert element: given object is already included in other a %s.",
+				     G_OBJECT_TYPE_NAME (G_OBJECT(object->parent)));
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		} else {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+		}
+
+
+		/* Insert actually the element in the tree as a child of current write_tree */
+
+		if (tree->_priv->write_tree) {
+			tree->_priv->write_tree = g_node_append_data (tree->_priv->write_tree, object);			
+		} else {
+			tree->_priv->write_tree = g_node_new (object);
+			tree->_priv->read_tree = tree->_priv->write_tree;
+		}
+
+		oco->current_length ++;
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		OSEATYPE_OBJECT(object)->parent = OSEATYPE_OBJECT(self);
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+
+		OSEATYPE_OBJECT(oco)->is_finished = FALSE;
+		OSEATYPE_OBJECT(oco)->in_progress = TRUE;
+
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+		return TRUE;
+		
+		
+	}
+
+
+	public gboolean insert_sibling (OseaTypeTree *tree, 
+				      OseaType:Object *object (check null type), 
+				      GError **error)
+	{ 
+
+		GNode * aux_node = NULL;
+
+		OseaTypeCompoundObject *oco = OSEATYPE_COMPOUND_OBJECT(tree);
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+
+		/* Check if the object is already finished: if it is, you cannot insert */
+
+		if (OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeTree"), 201,
+				     "Cannot insert element: the object is marked as already finished.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		}
+
+		/* Check if the tree has a defined element type, and checking the inserted object type */
+		if (self->_priv->type && self->_priv->type[0]) {
+			if (strcmp (self->_priv->type, G_OBJECT_TYPE_NAME (G_OBJECT(object)))) {
+				/* Predefined type and given object type are different */
+				g_set_error (error,
+					     g_quark_from_static_string ("OseaTypeTree"), 206,
+					     "Cannot insert element: given object type (%s) different from predefined type (%s).",
+					     G_OBJECT_TYPE_NAME (G_OBJECT(oco)), self->_priv->type);
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+				return FALSE;
+				
+			}
+		}
+
+		/* Check if the including element is already in other structure */
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		if (OSEATYPE_OBJECT(object)->parent != NULL) {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeTree"), 207,
+				     "Cannot insert element: given object is already included in other a %s.",
+				     G_OBJECT_TYPE_NAME (G_OBJECT(object->parent)));
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		} else {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+		}
+
+
+		/* Insert actually the element in the tree as the last sibling of current write_tree */
+
+		if (tree->_priv->write_tree) {
+			if (! G_NODE_IS_ROOT (tree->_priv->write_tree))
+				tree->_priv->write_tree = g_node_append_data (tree->_priv->write_tree->parent, object);	
+			else {
+				tree->_priv->write_tree = g_node_last_sibling (tree->_priv->write_tree);
+				aux = g_new0 (GNode, 1);
+				aux->prev = tree->_priv->write_tree;
+				aux->data = object;
+				tree->_priv->write_tree->next = aux;
+				tree->_priv->write_tree = aux;
+			}
+			
+		} else {
+			tree->_priv->write_tree = g_node_new (object);
+			tree->_priv->read_tree = tree->_priv->write_tree;
+		}
+
+		oco->current_length ++;
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		OSEATYPE_OBJECT(object)->parent = OSEATYPE_OBJECT(self);
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+
+		OSEATYPE_OBJECT(oco)->is_finished = FALSE;
+		OSEATYPE_OBJECT(oco)->in_progress = TRUE;
+
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+		return TRUE;
+		
+		
+	}
+
+
+	public gboolean write_go_parent (OseaTypeTree *tree, 
+					 GError **error)
+	{ 
+		
+		OseaTypeCompoundObject *oco = OSEATYPE_COMPOUND_OBJECT(tree);
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+
+		/* Check if the object is already finished: if it is, you cannot move write cursor */
+
+		if (OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeTree"), 201,
+				     "Cannot move write cursor: the object is marked as already finished.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		}
+
+
+		/* Move the cursor to the parent node */
+
+		if (tree->_priv->write_tree) {
+			tree->_priv->write_tree = tree->_priv->write_tree->parent;
+		}
+
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+		return TRUE;
+		
+		
+	}
+
+
+	/* VOY POR AQUÍ. ESTO NO ES TRIVIAL. ¿CÓMO SE VA A LEER?
+	   Parece claro que no hay que permitir una navegación libre por un árbol no acabado, ya que
+	   los códigos de error serían muy difíciles de definir...
+
+	   Tengo que definir un caso de uso para ver cómo puede ser más cómodo. Quizá lo mejor sea tener 
+	   dos juegos de funciones: uno diseñado para lectura "consecutiva" (permitido cuando aún no se
+	   está marcado finished) y el otro diseñado para lectura libre, permitido sólo cuando está 
+	   marcado finished.
+	*/
+
+	public gboolean read_go_parent (OseaTypeTree *tree, 
+					 GError **error)
+	{ 
+		
+		OseaTypeCompoundObject *oco = OSEATYPE_COMPOUND_OBJECT(tree);
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+
+		/* Check if the object is already finished: if it is, you cannot move write cursor */
+
+		if (OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeTree"), 201,
+				     "Cannot move write cursor: the object is marked as already finished.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		}
+
+
+		/* Move the cursor to the parent node */
+
+		if (tree->_priv->write_tree) {
+			tree->_priv->write_tree = tree->_priv->write_tree->parent;
+		}
+
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+		return TRUE;
+		
+		
+	}
+
+
+
+
+	private void finalize (self) 
+	{
+		gint i;
+
+		for (i=0; i<=self->_priv->array->len; i++) {
+			if (self->_priv->array->pdata[i])
+				g_object_unref (self->_priv->array->pdata[i]);
+		}
+
+		g_ptr_array_free (self->_priv->array, TRUE);
+	}
+
+
+}
