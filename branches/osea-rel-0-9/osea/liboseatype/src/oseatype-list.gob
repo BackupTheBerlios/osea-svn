@@ -135,6 +135,19 @@ class OseaType:List from OseaType:Compound:Object {
 			}
 		}
 
+		/* Check if the including element is already in other structure */
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		if (OSEATYPE_OBJECT(object)->parent != NULL) {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+			g_set_error (error,
+				     g_quark_from_static_string ("OseaTypeList"), 207,
+				     "Cannot insert element: given object is already included in other a %s.",
+				     G_OBJECT_TYPE_NAME (G_OBJECT(object->parent)));
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+			return FALSE;
+		} else {
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
+		}
 
 		if (i >= 0) {
 			/* Insert the new element in that position */
@@ -174,6 +187,10 @@ class OseaType:List from OseaType:Compound:Object {
 				oco->last_inserted_element = oseatype_list_calculate_last_inserted_element (self);
 			}
 		}
+
+		oseatype_object_lock_access (OSEATYPE_OBJECT(object));
+		OSEATYPE_OBJECT(object)->parent = self;
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(object));
 
 		if (oco->current_length == oco->total_length) {
 			OSEATYPE_OBJECT(oco)->is_finished = TRUE;

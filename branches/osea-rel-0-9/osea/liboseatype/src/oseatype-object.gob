@@ -29,7 +29,7 @@ requires 2.0.0
 %}
 
 %{
-
+#include <glib.h>
 %}
 
 class OseaType:Object from G:Object {
@@ -57,7 +57,11 @@ class OseaType:Object from G:Object {
 		 blurb = "OseaTypeCompoundObject that contains this object",
 		 link);
 
-	protected GMutex * access_mutex = {g_mutex_new ()};
+	protected GMutex * access_mutex = {g_mutex_new ()}
+		destroy {
+			if (VAR) g_mutex_free(VAR);
+			VAR = NULL;
+		};
 
         virtual gchar * serialize (self)
         {

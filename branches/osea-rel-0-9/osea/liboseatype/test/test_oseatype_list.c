@@ -1,6 +1,7 @@
 #include <liboseatype/src/oseatype-list.h>
 #include <liboseatype/src/oseatype-compound-object.h>
 #include <liboseatype/src/oseatype-int.h>
+#include <liboseatype/src/oseatype-char.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -44,11 +45,11 @@ gint value_next_element (OseaTypeList *list)
 
 }
 
-
-int main()
+int main(int argc, char **argv)
 {
-	OseaTypeList * list;
-	OseaTypeInt * integer;
+	OseaTypeList * list = NULL;
+	OseaTypeInt * integer = NULL;
+	OseaTypeChar * character = NULL;
 	GError * err = NULL;
 
 
@@ -84,6 +85,9 @@ int main()
 					     GINT_TO_POINTER(-1), &err))
 		abort_execution (err, 13);
 	g_error_free (err);
+	g_object_unref (OSEATYPE_OBJECT(integer));
+	integer = NULL;
+
 	err = NULL;
 
 	// now start to extract the elements
@@ -104,7 +108,12 @@ int main()
 	}
 
 	g_object_unref (G_OBJECT(list));
-	
+	list = NULL;
+
+
+
+
+
 
 	// Second, create a length and type defined list
 
@@ -112,13 +121,29 @@ int main()
 	integer = OSEATYPE_INT(oseatype_int_new());
 	list = OSEATYPE_LIST(oseatype_list_new_defined (3, G_OBJECT_TYPE_NAME(integer)));
 
-	if (! oseatype_int_set (integer, 10, &err))
+	character = OSEATYPE_CHAR (oseatype_char_new());
+	if (! oseatype_char_set (character, 'a', &err))
 		abort_execution (err, 20);
+	if (oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list),
+					       OSEATYPE_OBJECT(character),
+					       GINT_TO_POINTER(-1), &err)) {
+		return 20;
+	}
+	g_object_unref (G_OBJECT(character));
+	
+
+	g_error_free (err);
+	err = NULL;
+
+	if (! oseatype_int_set (integer, 10, &err))
+		abort_execution (err, 21);
 	if (! oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list), 
 					       OSEATYPE_OBJECT(integer), 
-					       GINT_TO_POINTER(-1), &err)) {
+					       GINT_TO_POINTER(-1), &err)) 
 		abort_execution (err, 21);
-	}
+	 
+
+
 
 	integer = OSEATYPE_INT(oseatype_int_new());
 	if (! oseatype_int_set (integer, 30, &err))
@@ -136,15 +161,84 @@ int main()
 					     GINT_TO_POINTER(1), &err))
 		abort_execution (err, 25);
 
+	if (oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list), 
+					     OSEATYPE_OBJECT(integer), 
+					     GINT_TO_POINTER(1), &err)) {
+		return 26;
+	}
+		
+	g_error_free (err);
+	err = NULL;
+
 	if (oseatype_compound_object_finish (OSEATYPE_COMPOUND_OBJECT(list), &err))
-		abort_execution (err, 26);
+		abort_execution (err, 27);
+
+	g_error_free (err);
+	err = NULL;
 
 	
-	if (value_next_element (list) != 10) return 27;
-	if (value_next_element (list) != 20) return 28;
-	if (value_next_element (list) != 30) return 29;
+	if (value_next_element (list) != 10) return 28;
+	if (value_next_element (list) != 20) return 29;
+	if (value_next_element (list) != 30) return 30;
 	
 	g_object_unref (G_OBJECT(list));
+	list = NULL;
+
+
+
+
+
+	// Third, we are going to write and starting reading before finishing
+
+
+	integer = OSEATYPE_INT(oseatype_int_new());
+	list = OSEATYPE_LIST(oseatype_list_new_defined (-1, G_OBJECT_TYPE_NAME(integer)));
+
+	if (! oseatype_int_set (integer, 10, &err))
+		abort_execution (err, 31);
+	if (! oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list), 
+					       OSEATYPE_OBJECT(integer), 
+					       GINT_TO_POINTER(-1), &err)) {
+		abort_execution (err, 31);
+	}
+
+	if (value_next_element (list) != 10) return 32;
+
+	integer = OSEATYPE_INT(oseatype_int_new());
+	if (! oseatype_int_set (integer, 20, &err))
+		abort_execution (err, 33);
+	if (! oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list), 
+					     OSEATYPE_OBJECT(integer), 
+					     GINT_TO_POINTER(-1), &err))
+		abort_execution (err, 33);
+
+	if (value_next_element (list) != 20) return 34;
+
+	integer = OSEATYPE_INT(oseatype_int_new());
+	if (! oseatype_int_set (integer, 30, &err))
+		abort_execution (err, 35);
+	if (! oseatype_compound_object_insert (OSEATYPE_COMPOUND_OBJECT(list), 
+					     OSEATYPE_OBJECT(integer), 
+					     GINT_TO_POINTER(-1), &err))
+		abort_execution (err, 35);
+
+	if (value_next_element (list) != 30) return 36;
+
+	if (! oseatype_compound_object_finish (OSEATYPE_COMPOUND_OBJECT(list), &err))
+		abort_execution (err, 37);
+
+	integer = OSEATYPE_INT (oseatype_compound_object_get_next_element (OSEATYPE_COMPOUND_OBJECT(list), &err));
+	if (! err)
+	        return 38;
+		
+	g_error_free (err);
+	err = NULL;
+
+	g_object_unref (G_OBJECT(list));
+	list = NULL;
+
+	if (argc > 1)
+		sleep (60);
 
 
 	return 0;
