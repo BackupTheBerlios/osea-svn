@@ -1,0 +1,28 @@
+Source: libcoyote
+Section: devel
+Priority: optional
+Maintainer: Francis Brosnan Blázquez <francis@aspl.es>
+Standards-Version: 3.5.8
+Build-Depends: debmake, librr0.9-dev, libglib2.0-dev, libxml2-dev
+
+Package: libcoyote0-dev
+Architecture: any
+Depends: libcoyote0-0 (>= 0.0.2), librr0.9-dev, libglib2.0-dev, libxml2-dev
+Description: LibCoyote development files.
+ Libcoyote is the support library for libafdal*. It has all the common
+ xml and communication functionalities.
+
+Package: libcoyote0-doc
+Architecture: any
+Depends: lynx | www-browser
+Description: LibCoyote reference manual
+ Libcoyote is the support library for libafdal*. It has all the common
+ xml and communication functionalities.
+
+Package: libcoyote0-0
+Architecture: any
+Depends: ${shlibs:Depends}, librr0.9-0, libglib2.0-0, libxml2
+Description: Libcoyote common library support for libafdal.
+ Libcoyote is the support library for libafdal*. It has all the common
+ xml and communication functionalities.
+

@@ -1,0 +1,1482 @@
+<FUNCTION>
+<NAME>afgs_log_write</NAME>
+<RETURNS>void  </RETURNS>
+gchar * log_msg, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_log_vwrite</NAME>
+<RETURNS>void  </RETURNS>
+gchar * log_msg, va_list args
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_log_check_and_disable_glog</NAME>
+<RETURNS>void  </RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_reg_register</NAME>
+<RETURNS>gboolean  </RETURNS>
+const gchar *server_name, gint version_number, AfDalNulFunc usr_function
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_reg_unregister</NAME>
+<RETURNS>gboolean  </RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_print_version_info</NAME>
+<RETURNS>void  </RETURNS>
+
+</FUNCTION>
+<MACRO>
+<NAME>AFGS_MAIN_NO_EXTRA_OPTION</NAME>
+#define AFGS_MAIN_NO_EXTRA_OPTION afgs_main_no_extra_options ()
+</MACRO>
+<USER_FUNCTION>
+<NAME>AfgsMainCallback</NAME>
+<RETURNS>void </RETURNS>
+void
+</USER_FUNCTION>
+<FUNCTION>
+<NAME>afgs_main_run_server</NAME>
+<RETURNS>void  </RETURNS>
+gchar                * server_name,gchar                * server_description,gchar                * server_version,glong                  server_compilation_date,gint                 * argc,gchar               ** argv[],gchar                * config_file,gchar                * accepted_keys[],AfgsServicesProvided   services_provided[],gint                   services_version,AfgsMainCallback       check_function,struct poptOption    * server_extra_popt_option
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_main_abort</NAME>
+<RETURNS>void  </RETURNS>
+gchar * format, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_afkeys_parse_and_check</NAME>
+<RETURNS>AfgsAfKey   *</RETURNS>
+gchar     * af_key
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_afkeys_destroy</NAME>
+<RETURNS>void  </RETURNS>
+AfgsAfKey * af_key,gboolean     free_permission_list
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_afkeys_set_connection_key_simple</NAME>
+<RETURNS>void  </RETURNS>
+RRConnection *connection,AfgsAfKey    *af_key
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_afkeys_set_connection_key</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteXmlServiceData * data,gpointer               user_data,RRChannel            * channel,gint                   msg_no
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_afkeys_get_connection_key</NAME>
+<RETURNS>AfgsAfKey   *</RETURNS>
+RRConnection * connection
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_afkeys_is_current</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * af_key
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_afkeys_check_service_permission</NAME>
+<RETURNS>gboolean  </RETURNS>
+RRChannel * channel, gchar * service_name, gint msg_no
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_signal_handler_init</NAME>
+<RETURNS>void  </RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_message_error_answer</NAME>
+<RETURNS>void  </RETURNS>
+RRChannel * channel, gint msg_no, gchar * message,CoyoteCodeType status_code
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_message_ok_answer</NAME>
+<RETURNS>void  </RETURNS>
+RRChannel * channel, gint msg_no, gchar * message,CoyoteCodeType status_code, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_message_check_params</NAME>
+<RETURNS>GList          *</RETURNS>
+CoyoteXmlServiceData * data, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_database_init</NAME>
+<RETURNS>gboolean  </RETURNS>
+const gchar *connection_name,const gchar *connection_description,gint argc,gchar **argv
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_database_new_connection</NAME>
+<RETURNS>GdaConnection  *</RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_database_quit</NAME>
+<RETURNS>gboolean  </RETURNS>
+
+</FUNCTION>
+<MACRO>
+<NAME>AFGS_SERVICES_TABLE_END</NAME>
+#define AFGS_SERVICES_TABLE_END {NULL, NULL, NULL,  FALSE, NULL, NULL}
+</MACRO>
+<FUNCTION>
+<NAME>afgs_services_set</NAME>
+<RETURNS>void  </RETURNS>
+AfgsServicesProvided * services
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_services_get</NAME>
+<RETURNS>GList                 *</RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_services_get_dataset</NAME>
+<RETURNS>CoyoteDataSet         *</RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_services_process</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteXmlServiceData * data, RRChannel * channel, gint msg_no
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_services_update</NAME>
+<RETURNS>gboolean  </RETURNS>
+const gchar *server_name, const gchar *server_description, gint version_number
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_command_execute_non_query</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * cmd_string, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_command_execute_single_query</NAME>
+<RETURNS>CoyoteDataSet  *</RETURNS>
+gchar * cmd_string, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_config_load</NAME>
+<RETURNS>AfgsConfiguration  *</RETURNS>
+gchar *filename, gchar ** accepted_keys
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_config_get</NAME>
+<RETURNS>gchar              *</RETURNS>
+AfgsConfiguration *config, gchar *key
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_config_destroy</NAME>
+<RETURNS>void  </RETURNS>
+AfgsConfiguration *config
+</FUNCTION>
+<FUNCTION>
+<NAME>afgs_config_check_permissions</NAME>
+<RETURNS>void  </RETURNS>
+gchar * config_file
+</FUNCTION>
+<USER_FUNCTION>
+<NAME>AfDalPasswordNotifyCallback</NAME>
+<RETURNS>void </RETURNS>
+gchar *password, gpointer user_data
+</USER_FUNCTION>
+<TYPEDEF>
+<NAME>AfDalPasswordData</NAME>
+typedef struct {
+	AfDalPasswordNotifyCallback notify_cb;
+	gpointer user_data;
+} AfDalPasswordData;
+</TYPEDEF>
+<USER_FUNCTION>
+<NAME>AfDalPasswordCallback</NAME>
+<RETURNS>gboolean </RETURNS>
+AfDalPasswordData * pwd_data
+</USER_FUNCTION>
+<FUNCTION>
+<NAME>afdal_password_set_callback</NAME>
+<RETURNS>void  </RETURNS>
+AfDalPasswordCallback cb
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_password_get</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalPasswordNotifyCallback notify_cb, gpointer user_data
+</FUNCTION>
+<MACRO>
+<NAME>AFDAL_TYPE_DATANODE</NAME>
+#define AFDAL_TYPE_DATANODE	(afdal_datanode_get_type())
+</MACRO>
+<MACRO>
+<NAME>AFDAL_DATANODE</NAME>
+#define AFDAL_DATANODE(obj)	G_TYPE_CHECK_INSTANCE_CAST((obj), afdal_datanode_get_type(), AfDalDataNode)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_DATANODE_CONST</NAME>
+#define AFDAL_DATANODE_CONST(obj)	G_TYPE_CHECK_INSTANCE_CAST((obj), afdal_datanode_get_type(), AfDalDataNode const)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_DATANODE_CLASS</NAME>
+#define AFDAL_DATANODE_CLASS(klass)	G_TYPE_CHECK_CLASS_CAST((klass), afdal_datanode_get_type(), AfDalDataNodeClass)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_IS_DATANODE</NAME>
+#define AFDAL_IS_DATANODE(obj)	G_TYPE_CHECK_INSTANCE_TYPE((obj), afdal_datanode_get_type ())
+</MACRO>
+<MACRO>
+<NAME>AFDAL_DATANODE_GET_CLASS</NAME>
+#define AFDAL_DATANODE_GET_CLASS(obj)	G_TYPE_INSTANCE_GET_CLASS((obj), afdal_datanode_get_type(), AfDalDataNodeClass)
+</MACRO>
+<STRUCT>
+<NAME>AfDalDataNode</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>AfDalDataNode</NAME>
+struct AfDalDataNode {
+	GObject __parent__;
+};
+</STRUCT>
+<STRUCT>
+<NAME>AfDalDataNodeClass</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>AfDalDataNodeClass</NAME>
+struct AfDalDataNodeClass {
+	GObjectClass __parent__;
+	gboolean (* edit_wrapper) (AfDalDataNode * self, AfDalNulFunc usr_function, gpointer usr_data);
+	gboolean (* new_wrapper) (AfDalDataNode * self, AfDalNulFunc usr_function, gpointer usr_data);
+};
+</STRUCT>
+<FUNCTION>
+<NAME>afdal_datanode_get_type</NAME>
+<RETURNS>GType 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_datanode_edit_wrapper</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalDataNode * self,AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_datanode_new_wrapper</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalDataNode * self,AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_decimal_stringfy</NAME>
+<RETURNS>gchar         *</RETURNS>
+AfDalDecimal * decimal
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_decimal_free</NAME>
+<RETURNS>void  </RETURNS>
+AfDalDecimal * decimal
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_decimal_new</NAME>
+<RETURNS>AfDalDecimal  *</RETURNS>
+gchar * value
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_new</NAME>
+<RETURNS>AfDalList  *</RETURNS>
+GCompareFunc compare_func
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_new_full</NAME>
+<RETURNS>AfDalList  *</RETURNS>
+GCompareFunc compare_func,GDestroyNotify key_destroy_func,GDestroyNotify value_destroy_func
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_insert</NAME>
+<RETURNS>void  </RETURNS>
+AfDalList *list, gpointer key, gpointer value
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_index</NAME>
+<RETURNS>gint  </RETURNS>
+AfDalList *list, gpointer key
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_lookup</NAME>
+<RETURNS>gpointer  </RETURNS>
+AfDalList *list, gpointer key
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_nth_data</NAME>
+<RETURNS>gpointer  </RETURNS>
+AfDalList *list, gint n
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_length</NAME>
+<RETURNS>guint  </RETURNS>
+AfDalList *list
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_remove</NAME>
+<RETURNS>void  </RETURNS>
+AfDalList *list, gpointer key
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_foreach</NAME>
+<RETURNS>void  </RETURNS>
+AfDalList *list, GTraverseFunc func, gpointer user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_replace</NAME>
+<RETURNS>void  </RETURNS>
+AfDalList *list, gpointer key, gpointer new_value
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_destroy</NAME>
+<RETURNS>void  </RETURNS>
+AfDalList *list
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_first</NAME>
+<RETURNS>void  </RETURNS>
+AfDalList *list
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_data</NAME>
+<RETURNS>gpointer  </RETURNS>
+AfDalList *list
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_next</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalList *list
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_set_cursor_position</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalList *list, gint cursor_position
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_list_get_cursor_position</NAME>
+<RETURNS>gint  </RETURNS>
+AfDalList *list
+</FUNCTION>
+<ENUM>
+<NAME>AfDalState</NAME>
+typedef enum {AFDAL_ERROR, 
+	      AFDAL_OK, 
+	      AFDAL_UPDATE_SERVICES_NEEDED,
+	      AFDAL_SESSION_EXPIRED
+} AfDalState;
+</ENUM>
+<STRUCT>
+<NAME>_AfDalMultiData</NAME>
+struct _AfDalMultiData {
+	AfDalState state;
+	gchar     * text_response;
+	GList     * multi_data;
+};
+</STRUCT>
+<STRUCT>
+<NAME>_AfDalData</NAME>
+struct _AfDalData {
+	AfDalState  state;
+	gchar     * text_response;
+	AfDalList     * data;  
+};
+</STRUCT>
+<STRUCT>
+<NAME>_AfDalSimpleData</NAME>
+struct _AfDalSimpleData {
+	AfDalState  state;
+	gchar     * text_response;
+	gint        id;
+};
+</STRUCT>
+<STRUCT>
+<NAME>_AfDalNulData</NAME>
+struct _AfDalNulData {
+	AfDalState  state;
+	gchar     * text_response;
+};
+</STRUCT>
+<ENUM>
+<NAME>AfDalRequestReturnData</NAME>
+typedef enum {AFDAL_REQUEST_MULTI_DATA,
+	      AFDAL_REQUEST_DATA, 
+	      AFDAL_REQUEST_SIMPLE_DATA, 
+	      AFDAL_REQUEST_NUL_DATA} AfDalRequestReturnData;
+</ENUM>
+<USER_FUNCTION>
+<NAME>AfDalMultiFunc</NAME>
+<RETURNS>gboolean </RETURNS>
+AfDalMultiData  * data, gpointer usr_data
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>AfDalDataFunc</NAME>
+<RETURNS>gboolean </RETURNS>
+AfDalData       * data, gpointer usr_data
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>AfDalSimpleFunc</NAME>
+<RETURNS>gboolean </RETURNS>
+AfDalSimpleData * data, gpointer usr_data
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>AfDalNulFunc</NAME>
+<RETURNS>gboolean </RETURNS>
+AfDalNulData    * data, gpointer usr_data
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>AfDalFunc</NAME>
+<RETURNS>gboolean </RETURNS>
+gpointer          data, gpointer usr_data
+</USER_FUNCTION>
+<FUNCTION>
+<NAME>afdal_nul_free</NAME>
+<RETURNS>void  </RETURNS>
+AfDalNulData * data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_simple_free</NAME>
+<RETURNS>void  </RETURNS>
+AfDalSimpleData * data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_data_free</NAME>
+<RETURNS>void  </RETURNS>
+AfDalData * data, gboolean destroy_list
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_multi_free</NAME>
+<RETURNS>void  </RETURNS>
+AfDalMultiData * data, gboolean destroy_lists
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_print_version_info</NAME>
+<RETURNS>void  </RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_init</NAME>
+<RETURNS>void  </RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_login</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * usr,gchar * passwd,gchar * kernel_hostname,gchar * kernel_port,AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_logout</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_refresh_key</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * server,AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_refresh_session</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * passwd,AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_send_afkey</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * server,AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_register</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * name,gint    version_number,gchar * host,gchar * port,gchar * kernel_hostname,gchar * kernel_port,AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_unregister</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalNulFunc usr_function,gpointer usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_server_exists</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar *server_name
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_active_servers</NAME>
+<RETURNS>GList          *</RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_server_free</NAME>
+<RETURNS>void  </RETURNS>
+AfDalSessionServer *pserv
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_get_permission_list</NAME>
+<RETURNS>GList          *</RETURNS>
+gchar * server_name
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_free_permission_list</NAME>
+<RETURNS>void  </RETURNS>
+GList * permissions
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_get_permission</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar * server_name, gchar * permission_name
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_get_connection</NAME>
+<RETURNS>RRConnection   *</RETURNS>
+gchar *server_name,GError **error
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_delete_connection</NAME>
+<RETURNS>void  </RETURNS>
+gchar *server_name
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_new_connection</NAME>
+<RETURNS>RRConnection   *</RETURNS>
+gchar *server_name,GError **error
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_session_get_server_name</NAME>
+<RETURNS>gchar          *</RETURNS>
+RRConnection *connection,GError **error
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request</NAME>
+<RETURNS>gboolean  </RETURNS>
+RRConnection * connection,CoyoteSimpleCfgCompleteMessage return_function,AfDalFunc usr_function,gpointer usr_data,gchar * service_name,...
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request_process_data</NAME>
+<RETURNS>void  </RETURNS>
+RRChannel * channel,RRFrame * frame,GString * message,gpointer data,gpointer custom_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request_process_simple_data</NAME>
+<RETURNS>void  </RETURNS>
+RRChannel * channel,RRFrame * frame,GString * message,gpointer data,gpointer custom_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request_process_nul_data</NAME>
+<RETURNS>void  </RETURNS>
+RRChannel * channel,RRFrame * frame,GString * message,gpointer data,gpointer custom_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request_close_and_return_initial_data</NAME>
+<RETURNS>gpointer  </RETURNS>
+AfDalRequestReturnData type,RRChannel * channel,RRFrame * frame,GString * message,CoyoteDataSet ** returned_dataset,GList ** returned_datasets,gpointer * data,gpointer * custom_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request_start_afkey_refresh</NAME>
+<RETURNS>gboolean  </RETURNS>
+gpointer afdal_request_user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request_start_session_refresh</NAME>
+<RETURNS>gboolean  </RETURNS>
+gpointer afdal_request_user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_request_call_user_function</NAME>
+<RETURNS>void  </RETURNS>
+AfDalRequestReturnData type,gpointer handler,gpointer user_data,gpointer afdal_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_support_compare_id</NAME>
+<RETURNS>gint  </RETURNS>
+gconstpointer a, gconstpointer b
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_support_compare_string</NAME>
+<RETURNS>gint  </RETURNS>
+gconstpointer a, gconstpointer b
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_support_get_number</NAME>
+<RETURNS>glong  </RETURNS>
+const gchar * from_string
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_add_signal</NAME>
+<RETURNS>void  </RETURNS>
+gchar *signal_name
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_set_callback</NAME>
+<RETURNS>guint  </RETURNS>
+gchar *signal_name, GSourceFunc callback
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_emit_signal</NAME>
+<RETURNS>void  </RETURNS>
+gchar *signal_name, gpointer data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_remove_signal</NAME>
+<RETURNS>void  </RETURNS>
+gchar *signal_name
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_exist</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar *signal_name
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_arm_signal</NAME>
+<RETURNS>gchar   *</RETURNS>
+gchar * signal_basename, GSourceFunc func
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_launch</NAME>
+<RETURNS>void  </RETURNS>
+GSourceFunc func, gpointer data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_event_source_print_pool</NAME>
+<RETURNS>void  </RETURNS>
+
+</FUNCTION>
+<MACRO>
+<NAME>AFDAL_TYPE_KERNEL_GROUP</NAME>
+#define AFDAL_TYPE_KERNEL_GROUP	(afdal_kernel_group_get_type())
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP</NAME>
+#define AFDAL_KERNEL_GROUP(obj)	G_TYPE_CHECK_INSTANCE_CAST((obj), afdal_kernel_group_get_type(), AfDalKernelGroup)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_CONST</NAME>
+#define AFDAL_KERNEL_GROUP_CONST(obj)	G_TYPE_CHECK_INSTANCE_CAST((obj), afdal_kernel_group_get_type(), AfDalKernelGroup const)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_CLASS</NAME>
+#define AFDAL_KERNEL_GROUP_CLASS(klass)	G_TYPE_CHECK_CLASS_CAST((klass), afdal_kernel_group_get_type(), AfDalKernelGroupClass)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_IS_KERNEL_GROUP</NAME>
+#define AFDAL_IS_KERNEL_GROUP(obj)	G_TYPE_CHECK_INSTANCE_TYPE((obj), afdal_kernel_group_get_type ())
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_GET_CLASS</NAME>
+#define AFDAL_KERNEL_GROUP_GET_CLASS(obj)	G_TYPE_INSTANCE_GET_CLASS((obj), afdal_kernel_group_get_type(), AfDalKernelGroupClass)
+</MACRO>
+<STRUCT>
+<NAME>AfDalKernelGroup</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>AfDalKernelGroup</NAME>
+struct AfDalKernelGroup {
+	AfDalDataNode __parent__;
+	/*< public >*/
+	int id;
+	char * name;
+	char * description;
+};
+</STRUCT>
+<STRUCT>
+<NAME>AfDalKernelGroupClass</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>AfDalKernelGroupClass</NAME>
+struct AfDalKernelGroupClass {
+	AfDalDataNodeClass __parent__;
+};
+</STRUCT>
+<FUNCTION>
+<NAME>afdal_kernel_group_get_type</NAME>
+<RETURNS>GType 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_get_id</NAME>
+<RETURNS>gint  </RETURNS>
+AfDalKernelGroup * self
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_set_id</NAME>
+<RETURNS>void  </RETURNS>
+AfDalKernelGroup * self,gint val
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_get_name</NAME>
+<RETURNS>gchar  *</RETURNS>
+AfDalKernelGroup * self
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_set_name</NAME>
+<RETURNS>void  </RETURNS>
+AfDalKernelGroup * self,gchar * val
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_get_description</NAME>
+<RETURNS>gchar  *</RETURNS>
+AfDalKernelGroup * self
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_set_description</NAME>
+<RETURNS>void  </RETURNS>
+AfDalKernelGroup * self,gchar * val
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_create</NAME>
+<RETURNS>AfDalKernelGroup  *</RETURNS>
+gint id,gchar * name,gchar * description
+</FUNCTION>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_PROP_ID</NAME>
+#define AFDAL_KERNEL_GROUP_PROP_ID(arg)    	"id",({gint z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_GET_PROP_ID</NAME>
+#define AFDAL_KERNEL_GROUP_GET_PROP_ID(arg)	"id",({gint *z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_PROP_NAME</NAME>
+#define AFDAL_KERNEL_GROUP_PROP_NAME(arg)    	"name",({gchar *z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_GET_PROP_NAME</NAME>
+#define AFDAL_KERNEL_GROUP_GET_PROP_NAME(arg)	"name",({gchar **z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_GROUP_PROP_DESCRIPTION(arg)    	"description",({gchar *z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_GET_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_GROUP_GET_PROP_DESCRIPTION(arg)	"description",({gchar **z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_PROP_ID</NAME>
+#define AFDAL_KERNEL_GROUP_PROP_ID(arg)    	"id",(gint )(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_GET_PROP_ID</NAME>
+#define AFDAL_KERNEL_GROUP_GET_PROP_ID(arg)	"id",(gint *)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_PROP_NAME</NAME>
+#define AFDAL_KERNEL_GROUP_PROP_NAME(arg)    	"name",(gchar *)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_GET_PROP_NAME</NAME>
+#define AFDAL_KERNEL_GROUP_GET_PROP_NAME(arg)	"name",(gchar **)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_GROUP_PROP_DESCRIPTION(arg)    	"description",(gchar *)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_GROUP_GET_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_GROUP_GET_PROP_DESCRIPTION(arg)	"description",(gchar **)(arg)
+</MACRO>
+<FUNCTION>
+<NAME>afdal_kernel_server_list</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_server,gint           max_row_number,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_server_remove</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_list</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_permission,gint           max_row_number,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_list_by_user</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_permission,gint           max_row_number,gint           user_id,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_actual_list_by_user</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_permission,gint           max_row_number,gint           user_id,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_from_group_list_by_user</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_permission,gint           max_row_number,gint           user_id,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_list_by_group</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_permission,gint           max_row_number,gint           group_id,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_user_set</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gint           user_id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_user_unset</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gint           user_id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_user_set_value</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gint           user_id,gboolean       value,AfDalNulFunc   usr_func,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_group_set</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gint           group_id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_group_unset</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gint           group_id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_permission_group_set_value</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gint           user_id,gboolean       value,AfDalNulFunc   usr_func,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_register_get_servers</NAME>
+<RETURNS>gboolean  </RETURNS>
+AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_list</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_group,gint           max_row_number,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_new</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar           * name,gchar           * description,AfDalSimpleFunc   usr_function,gpointer          usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_remove</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_edit</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gchar        * new_name,gchar        * new_description,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_add_user</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           group_id,gint           user_id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_remove_user</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           group_id,gint           user_id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_group_list_user</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_group,gint           max_row_number,gint           group_id,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_list</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_user,gint           max_row_number,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_new</NAME>
+<RETURNS>gboolean  </RETURNS>
+gchar           * nick,gchar           * password,gchar           * description,AfDalSimpleFunc   usr_function,gpointer          usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_remove</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint id,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_edit</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           id,gchar        * new_nick,gchar        * new_password,gchar        * new_description,AfDalNulFunc   usr_function,gpointer       usr_data
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_list_group</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint           initial_group,gint           max_row_number,gint           user_id,AfDalDataFunc  usr_function,gpointer       usr_data
+</FUNCTION>
+<MACRO>
+<NAME>AFDAL_TYPE_KERNEL_USER</NAME>
+#define AFDAL_TYPE_KERNEL_USER	(afdal_kernel_user_get_type())
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER</NAME>
+#define AFDAL_KERNEL_USER(obj)	G_TYPE_CHECK_INSTANCE_CAST((obj), afdal_kernel_user_get_type(), AfDalKernelUser)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_CONST</NAME>
+#define AFDAL_KERNEL_USER_CONST(obj)	G_TYPE_CHECK_INSTANCE_CAST((obj), afdal_kernel_user_get_type(), AfDalKernelUser const)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_CLASS</NAME>
+#define AFDAL_KERNEL_USER_CLASS(klass)	G_TYPE_CHECK_CLASS_CAST((klass), afdal_kernel_user_get_type(), AfDalKernelUserClass)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_IS_KERNEL_USER</NAME>
+#define AFDAL_IS_KERNEL_USER(obj)	G_TYPE_CHECK_INSTANCE_TYPE((obj), afdal_kernel_user_get_type ())
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_GET_CLASS</NAME>
+#define AFDAL_KERNEL_USER_GET_CLASS(obj)	G_TYPE_INSTANCE_GET_CLASS((obj), afdal_kernel_user_get_type(), AfDalKernelUserClass)
+</MACRO>
+<STRUCT>
+<NAME>AfDalKernelUser</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>AfDalKernelUser</NAME>
+struct AfDalKernelUser {
+	AfDalDataNode __parent__;
+	/*< public >*/
+	int id;
+	char * nick;
+	char * description;
+};
+</STRUCT>
+<STRUCT>
+<NAME>AfDalKernelUserClass</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>AfDalKernelUserClass</NAME>
+struct AfDalKernelUserClass {
+	AfDalDataNodeClass __parent__;
+};
+</STRUCT>
+<FUNCTION>
+<NAME>afdal_kernel_user_get_type</NAME>
+<RETURNS>GType 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_get_id</NAME>
+<RETURNS>gint  </RETURNS>
+AfDalKernelUser * self
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_set_id</NAME>
+<RETURNS>void  </RETURNS>
+AfDalKernelUser * self,gint val
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_get_nick</NAME>
+<RETURNS>gchar  *</RETURNS>
+AfDalKernelUser * self
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_set_nick</NAME>
+<RETURNS>void  </RETURNS>
+AfDalKernelUser * self,gchar * val
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_get_description</NAME>
+<RETURNS>gchar  *</RETURNS>
+AfDalKernelUser * self
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_set_description</NAME>
+<RETURNS>void  </RETURNS>
+AfDalKernelUser * self,gchar * val
+</FUNCTION>
+<FUNCTION>
+<NAME>afdal_kernel_user_create</NAME>
+<RETURNS>AfDalKernelUser  *</RETURNS>
+gint id,gchar * nick,gchar * description
+</FUNCTION>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_PROP_ID</NAME>
+#define AFDAL_KERNEL_USER_PROP_ID(arg)    	"id",({gint z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_GET_PROP_ID</NAME>
+#define AFDAL_KERNEL_USER_GET_PROP_ID(arg)	"id",({gint *z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_PROP_NICK</NAME>
+#define AFDAL_KERNEL_USER_PROP_NICK(arg)    	"nick",({gchar *z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_GET_PROP_NICK</NAME>
+#define AFDAL_KERNEL_USER_GET_PROP_NICK(arg)	"nick",({gchar **z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_USER_PROP_DESCRIPTION(arg)    	"description",({gchar *z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_GET_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_USER_GET_PROP_DESCRIPTION(arg)	"description",({gchar **z = (arg); z;})
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_PROP_ID</NAME>
+#define AFDAL_KERNEL_USER_PROP_ID(arg)    	"id",(gint )(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_GET_PROP_ID</NAME>
+#define AFDAL_KERNEL_USER_GET_PROP_ID(arg)	"id",(gint *)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_PROP_NICK</NAME>
+#define AFDAL_KERNEL_USER_PROP_NICK(arg)    	"nick",(gchar *)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_GET_PROP_NICK</NAME>
+#define AFDAL_KERNEL_USER_GET_PROP_NICK(arg)	"nick",(gchar **)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_USER_PROP_DESCRIPTION(arg)    	"description",(gchar *)(arg)
+</MACRO>
+<MACRO>
+<NAME>AFDAL_KERNEL_USER_GET_PROP_DESCRIPTION</NAME>
+#define AFDAL_KERNEL_USER_GET_PROP_DESCRIPTION(arg)	"description",(gchar **)(arg)
+</MACRO>
+<FUNCTION>
+<NAME>afdal_kernel_print_version_info</NAME>
+<RETURNS>void  </RETURNS>
+
+</FUNCTION>
+<MACRO>
+<NAME>COYOTE_SIMPLE_URI</NAME>
+#define COYOTE_SIMPLE_URI "http://fact.aspl.es/profiles/coyote_profile"
+</MACRO>
+<STRUCT>
+<NAME>CoyoteSimple</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteSimpleClass</NAME>
+</STRUCT>
+<MACRO>
+<NAME>TYPE_COYOTE_SIMPLE</NAME>
+#define TYPE_COYOTE_SIMPLE (coyote_simple_get_type ())
+</MACRO>
+<MACRO>
+<NAME>COYOTE_SIMPLE</NAME>
+#define COYOTE_SIMPLE(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), TYPE_COYOTE_SIMPLE, CoyoteSimple))
+</MACRO>
+<MACRO>
+<NAME>COYOTE_SIMPLE_CLASS</NAME>
+#define COYOTE_SIMPLE_CLASS(class) (G_TYPE_CHECK_CLASS_CAST ((class), TYPE_COYOTE_SIMPLE, CoyoteSimpleClass))
+</MACRO>
+<MACRO>
+<NAME>IS_COYOTE_SIMPLE</NAME>
+#define IS_COYOTE_SIMPLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), TYPE_COYOTE_SIMPLE))
+</MACRO>
+<MACRO>
+<NAME>IS_COYOTE_SIMPLE_CLASS</NAME>
+#define IS_COYOTE_SIMPLE_CLASS(class) (G_TYPE_CHECK_CLASS_TYPE ((class), TYPE_COYOTE_SIMPLE))
+</MACRO>
+<MACRO>
+<NAME>COYOTE_SIMPLE_GET_CLASS</NAME>
+#define COYOTE_SIMPLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), TYPE_COYOTE_SIMPLE, CoyoteSimpleClass))
+</MACRO>
+<STRUCT>
+<NAME>CoyoteSimple</NAME>
+struct CoyoteSimple {
+	RRChannel parent_object;
+	GByteArray * buffer;
+	gboolean finish_connection;
+};
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteSimpleClass</NAME>
+struct CoyoteSimpleClass {
+	RRChannelClass parent_class;
+};
+</STRUCT>
+<FUNCTION>
+<NAME>coyote_simple_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_start</NAME>
+<RETURNS>CoyoteSimple  *</RETURNS>
+RRConnection * connection,CoyoteSimpleCfg * config,GError ** error
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_close</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteSimple * channel,GError ** error
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_send</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteSimple * channel,gchar * data,gint len, gint free,GError ** error
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_reply</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteSimple * channel,gchar * data, gint len,gint msg_no, gint free,GError ** error
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_reply_error</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteSimple * channel,gchar * data, gint len,gint msg_no, gint free,GError ** error
+</FUNCTION>
+<STRUCT>
+<NAME>CoyoteXmlObject</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteXmlMessage</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteXmlServiceData</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteXmlServiceNode</NAME>
+</STRUCT>
+<ENUM>
+<NAME>CoyoteXmlServiceType</NAME>
+typedef enum {COYOTE_XML_SERVICE_REQUEST, COYOTE_XML_SERVICE_RESPONSE} CoyoteXmlServiceType;
+</ENUM>
+<ENUM>
+<NAME>CoyoteXmlArgType</NAME>
+typedef enum {COYOTE_XML_ARG_STRING, COYOTE_XML_ARG_DATASET} CoyoteXmlArgType;
+</ENUM>
+<STRUCT>
+<NAME>CoyoteXmlMessage</NAME>
+struct CoyoteXmlMessage {
+	gchar *content;
+	gint len;
+};
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteXmlServiceNode</NAME>
+struct CoyoteXmlServiceNode {
+	gchar * attrib;
+	CoyoteXmlArgType type;
+	gpointer value;
+};
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteXmlServiceData</NAME>
+struct CoyoteXmlServiceData {
+	CoyoteXmlServiceType type;
+	gchar * name;
+	gchar * protocol_version;
+	gchar * status;
+	gchar * status_message;
+	GList * item_list;
+};
+</STRUCT>
+<FUNCTION>
+<NAME>coyote_xml_new_object</NAME>
+<RETURNS>CoyoteXmlObject  *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_destroy_object</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteXmlObject * object
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_add_request_service</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteXmlObject * object,gchar * name_of_service,...
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_add_vrequest_service</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteXmlObject * object,gchar * name_of_service,va_list args
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_add_response_service</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteXmlObject * object,CoyoteCodeType status_code,gchar * explanation,...
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_add_vresponse_service</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteXmlObject * object,CoyoteCodeType status_code,gchar * explanation,va_list args
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_validate_message</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteXmlMessage * message
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_parse_message</NAME>
+<RETURNS>CoyoteXmlServiceData  *</RETURNS>
+CoyoteXmlMessage * message
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_parse_destroy</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteXmlServiceData * data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_build_message</NAME>
+<RETURNS>CoyoteXmlMessage  *</RETURNS>
+CoyoteXmlObject * object
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_xml_destroy_message</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteXmlMessage * message
+</FUNCTION>
+<ENUM>
+<NAME>CoyoteCodeType</NAME>
+typedef enum {COYOTE_CODE_OK, 
+	      COYOTE_CODE_ERROR, 
+	      COYOTE_CODE_UNKNOWN_SERVICE,
+	      COYOTE_CODE_XML_VALIDATION_PROBLEM,
+	      COYOTE_CODE_XML_PARSE_PROBLEM,
+	      COYOTE_CODE_XML_INCORRECT_PARAMETER,
+	      COYOTE_CODE_KEY_REQUIRED,
+	      COYOTE_CODE_KEY_EXPIRED,
+	      COYOTE_CODE_KEY_INVALID,
+	      COYOTE_CODE_INSUFFICIENT_PERMISSIONS,
+	      COYOTE_CODE_SERVICES_UPDATE_NEEDED,
+	      COYOTE_CODE_SESSION_EXPIRED,
+	      COYOTE_CODE_UNKNOWN_CODE              // This code must be the last one always
+} CoyoteCodeType;
+</ENUM>
+<STRUCT>
+<NAME>CoyoteCode</NAME>
+struct CoyoteCode {
+	gchar *status_code;
+	gchar *status_text;
+};
+</STRUCT>
+<STRUCT>
+<NAME>CoyoteCode</NAME>
+</STRUCT>
+<FUNCTION>
+<NAME>coyote_code_get_type</NAME>
+<RETURNS>CoyoteCodeType  </RETURNS>
+gchar *status
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_code_get_status</NAME>
+<RETURNS>const gchar    *</RETURNS>
+CoyoteCodeType type
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_code_new</NAME>
+<RETURNS>CoyoteCode     *</RETURNS>
+CoyoteCodeType type, const gchar *extended_message
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_code_free</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteCode *code
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_init</NAME>
+<RETURNS>gboolean  </RETURNS>
+gint *argc, gchar ***argv, GError **error
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_exit</NAME>
+<RETURNS>gboolean  </RETURNS>
+GError **error
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_new</NAME>
+<RETURNS>CoyoteDataSet  *</RETURNS>
+
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_get</NAME>
+<RETURNS>const gchar  *</RETURNS>
+CoyoteDataSet * data,gint row,gint col
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_set</NAME>
+<RETURNS>gboolean  </RETURNS>
+CoyoteDataSet * dataset,gchar * data,gint row,gint col
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_add</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteDataSet * data, gchar * user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_add_nth</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteDataSet * data, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_new_row</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteDataSet * data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_get_height</NAME>
+<RETURNS>gint  </RETURNS>
+CoyoteDataSet * data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_get_width</NAME>
+<RETURNS>gint  </RETURNS>
+CoyoteDataSet * data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_lookup_row</NAME>
+<RETURNS>gint  </RETURNS>
+CoyoteDataSet * data, gint column, const gchar *value
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_free</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteDataSet * data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_dataset_print</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteDataSet * data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_connection_new</NAME>
+<RETURNS>RRConnection  *</RETURNS>
+gchar * server, gchar * port, gint connection_profile
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_connection_get_client_name</NAME>
+<RETURNS>gchar         *</RETURNS>
+RRChannel * channel
+</FUNCTION>
+<STRUCT>
+<NAME>CoyoteSimpleCfg</NAME>
+</STRUCT>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgFrameAvailable</NAME>
+<RETURNS>gboolean </RETURNS>
+RRChannel *channel, 
+							  RRFrame *frame, 
+							  GError **error
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgCloseConfirmation</NAME>
+<RETURNS>void </RETURNS>
+RRChannel *channel, gint code,
+							  const gchar *xml_lang, 
+							  const gchar *diagnostic
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgCloseIndication</NAME>
+<RETURNS>gboolean </RETURNS>
+RRChannel *channel, gint code,
+							  const gchar *xml_lang, 
+							  const gchar *diagnostic,
+							  GError **error
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgClientInit</NAME>
+<RETURNS>gboolean </RETURNS>
+RRChannel *channel, 
+							  GError **error
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgServerInit</NAME>
+<RETURNS>gboolean </RETURNS>
+RRChannel *channel, 
+							  const gchar *piggyback, 
+							  GError **error
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgClientConfirmation</NAME>
+<RETURNS>void </RETURNS>
+RRChannel *channel, 
+							  const gchar *piggyback
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgServerConfirmation</NAME>
+<RETURNS>void </RETURNS>
+RRChannel *channel
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgFinalize</NAME>
+<RETURNS>void </RETURNS>
+RRChannel *channel
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>CoyoteSimpleCfgCompleteMessage</NAME>
+<RETURNS>void </RETURNS>
+RRChannel *channel, 
+							  RRFrame *frame,
+							  GString *text, 
+							  gpointer  data, 
+							  gpointer custom_data 
+</USER_FUNCTION>
+<STRUCT>
+<NAME>CoyoteSimpleCfg</NAME>
+struct CoyoteSimpleCfg {
+	CoyoteSimpleCfgFrameAvailable      frame_available_cb;
+	
+	CoyoteSimpleCfgCloseConfirmation   close_confirmation_cb;
+
+	CoyoteSimpleCfgCloseIndication     close_indication_cb;
+
+	CoyoteSimpleCfgClientInit          client_init_cb;
+
+	CoyoteSimpleCfgServerInit          server_init_cb;
+
+	CoyoteSimpleCfgClientConfirmation  client_confirmation_cb;
+
+	CoyoteSimpleCfgServerConfirmation  server_confirmation_cb;
+
+	CoyoteSimpleCfgFinalize            finalize_cb;
+
+
+	CoyoteSimpleCfgCompleteMessage     complete_message_cb;
+	
+	gpointer  server_init_data;
+	gpointer  complete_message_data;
+	gpointer  complete_message_custom_data;
+	
+	GByteArray *buffer;
+	gint buffer_len;
+};
+</STRUCT>
+<FUNCTION>
+<NAME>coyote_simple_cfg_new</NAME>
+<RETURNS>CoyoteSimpleCfg  *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_destroy</NAME>
+<RETURNS>void 	</RETURNS>
+CoyoteSimpleCfg *config
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_set_frame_available</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteSimpleCfg *config,CoyoteSimpleCfgFrameAvailable cb
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_set_close_indication</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteSimpleCfg *config,CoyoteSimpleCfgCloseIndication cb
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_set_close_confirmation</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteSimpleCfg *config,CoyoteSimpleCfgCloseConfirmation cb
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_set_finalize</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteSimpleCfg *config,CoyoteSimpleCfgFinalize cb
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_set_server_init</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteSimpleCfg *config,CoyoteSimpleCfgServerInit cb,gpointer data
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_set_server_confirm</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteSimpleCfg *config,CoyoteSimpleCfgServerConfirmation cb
+</FUNCTION>
+<FUNCTION>
+<NAME>coyote_simple_cfg_set_complete_message</NAME>
+<RETURNS>void  </RETURNS>
+CoyoteSimpleCfg * config,CoyoteSimpleCfgCompleteMessage cb,gpointer data,gpointer custom_data
+</FUNCTION>
