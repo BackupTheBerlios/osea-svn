@@ -23,68 +23,8 @@
 #include <glib.h>
 #include <librr/rr.h>
 #include <liboseacomm/oseacomm.h>
-
-typedef enum {OSEACLIENT_ERROR, 
-	      OSEACLIENT_OK, 
-	      OSEACLIENT_UPDATE_SERVICES_NEEDED,
-	      OSEACLIENT_SESSION_EXPIRED
-} OseaClientState;
-
+#include "oseaclient_types.h"
 #include "oseaclient_list.h"
-
-struct __OseaClientMultiData {
-	OseaClientState state;
-	gchar     * text_response;
-	GList     * multi_data;
-};
-
-struct __OseaClientData {
-	OseaClientState  state;
-	gchar     * text_response;
-	OseaClientList     * data;  
-};
-
-struct __OseaClientSimpleData {
-	OseaClientState  state;
-	gchar     * text_response;
-	gint        id;
-};
-
-struct __OseaClientNulData {
-	OseaClientState  state;
-	gchar     * text_response;
-};
-
-typedef enum {OSEACLIENT_REQUEST_MULTI_DATA,
-	      OSEACLIENT_REQUEST_DATA, 
-	      OSEACLIENT_REQUEST_SIMPLE_DATA, 
-	      OSEACLIENT_REQUEST_NUL_DATA} OseaClientRequestReturnData;
-
-typedef struct __OseaClientMultiData  OseaClientMultiData;
-typedef struct __OseaClientData       OseaClientData;
-typedef struct __OseaClientSimpleData OseaClientSimpleData;
-typedef struct __OseaClientNulData    OseaClientNulData;
-
-
-typedef gboolean (* OseaClientMultiFunc)   (OseaClientMultiData  * data, gpointer usr_data);
-typedef gboolean (* OseaClientDataFunc)    (OseaClientData       * data, gpointer usr_data);
-typedef gboolean (* OseaClientSimpleFunc)  (OseaClientSimpleData * data, gpointer usr_data);
-typedef gboolean (* OseaClientNulFunc)     (OseaClientNulData    * data, gpointer usr_data);
-typedef gboolean (* OseaClientFunc)        (gpointer          data, gpointer usr_data);
-
-
-void    oseaclient_nul_free    (OseaClientNulData * data);
-
-void    oseaclient_simple_free (OseaClientSimpleData * data);
-
-void    oseaclient_data_free   (OseaClientData * data, gboolean destroy_list);
-
-void    oseaclient_multi_free  (OseaClientMultiData * data, gboolean destroy_lists);
-
-void    oseaclient_print_version_info ();
-
-void    oseaclient_init ();
-
 #include "oseaclient_request.h"
 #include "oseaclient_session.h"
 #include "oseaclient_event_source.h"
@@ -94,5 +34,11 @@ void    oseaclient_init ();
 #include "oseaclient-detaileddatanode.h"
 #include "oseaclient_decimal.h"
 #include "oseaclient_keys.h"
+
+
+void    oseaclient_print_version_info ();
+
+void    oseaclient_init ();
+
 
 #endif

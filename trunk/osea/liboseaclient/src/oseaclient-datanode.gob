@@ -22,7 +22,7 @@
 requires 2.0.0
 
 %header{
-#include "oseaclient.h"
+#include "oseaclient_types.h"
 %}
 
 %{

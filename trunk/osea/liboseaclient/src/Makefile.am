@@ -8,6 +8,7 @@ liboseaclient_la_SOURCES =	\
 	oseaclient-datanode.c \
 	oseaclient-detaileddatanode.c \
 	oseaclient.c \
+	oseaclient_types.c \
 	oseaclient_list.c \
 	oseaclient_request.c \
 	oseaclient_session.c \
@@ -21,6 +22,7 @@ liboseaclientinclude_HEADERS =	\
 	oseaclient-datanode.h \
 	oseaclient-detaileddatanode.h \
 	oseaclient.h	\
+	oseaclient_types.h \
 	oseaclient_list.h \
 	oseaclient_request.h \
 	oseaclient_session.h \
