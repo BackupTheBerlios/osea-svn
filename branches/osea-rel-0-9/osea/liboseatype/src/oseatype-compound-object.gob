@@ -55,7 +55,6 @@ class OseaType:Compound:Object from OseaType:Object {
 
 	virtual OseaTypeObject * get_element (self, gpointer attributes, GError **error);
 
-	virtual void destroy (self, gboolean destroy_contents);
-				 
+	virtual OseaTypeObject * extract_element (self, gpointer attributes, GError **error);
 
 }

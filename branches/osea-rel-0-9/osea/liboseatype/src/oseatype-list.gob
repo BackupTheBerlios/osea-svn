@@ -37,7 +37,8 @@ class OseaType:List from OseaType:Compound:Object {
 	
 	private GArray *array = NULL;
 	private gboolean has_gaps = FALSE;
-	private gchar * type = NULL; 
+	private gchar * type = NULL
+		destroywith g_free; 
 
 	private guint calculate_last_inserted_element (self) 
 	{
@@ -319,6 +320,91 @@ class OseaType:List from OseaType:Compound:Object {
 		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
 
 		return result;
+	}
+
+
+	override (OseaType:Compound:Object) OseaTypeObject * extract_element (OseaTypeCompoundObject *oco, 
+									      gpointer attributes,
+									      GError **error)
+	{
+		OseaTypeObject *result = NULL;
+	        OseaTypeList *self = OSEATYPE_LIST(oco);
+		gint index = GPOINTER_TO_INT(attributes);
+		
+		oseatype_object_lock_access (OSEATYPE_OBJECT(oco));
+		
+		/* We check if the object is finished or in progress */
+		if (! OSEATYPE_OBJECT(oco)->in_progress && ! OSEATYPE_OBJECT(oco)->is_finished) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeList"), 210,
+				     "Cannot get element: list not finished nor in process yet.");
+			oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+			return NULL;
+			
+		}
+
+		/* We check if the given element is ready */
+
+
+		/* Check for out-of-range index */
+		/* First for pre-sized or finished lists */
+
+		if (oco->total_length >=0 && index >= oco->total_length) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 213,
+					     "Cannot get element: index out of range for given finished/presized list.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+				return NULL;			
+		}
+
+		/* Then avoid out of range searches in not-finished or not-sized lists */
+		if (index >= self->_priv->array->len) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 214,
+					     "Cannot get element: index currently out of range for given list.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+		
+				return NULL;			
+		}
+
+		/* Check for data in the given list index */
+		if (! self->_priv->array->data[index]) {
+				g_set_error (error, g_quark_from_static_string ("OseaTypeList"), 215,
+					     "Tried to retrieve an empty element.");
+				oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+
+				return NULL;			
+		}
+		
+		result = OSEATYPE_OBJECT (g_array_index (self->_priv->array, gpointer, 
+							 index));				
+
+		self->_priv->array = g_array_remove_index (self->_priv->array, index);
+
+		if (oco->last_accessed_element >= index)
+			oco->last_accessed_element --;
+		if (oco->last_inserted_element >= index)
+			oco->last_inserted_element --;
+		
+		oco->total_length --;
+		oco->current_length --;
+		
+		oseatype_object_release_access_lock (OSEATYPE_OBJECT(oco));
+		
+		return result;
+	}
+
+	private void finalize (self) 
+	{
+		gint i;
+		OseaTypeCompoundObject *oco = OSEATYPE_COMPOUND_OBJECT (self);
+
+		for (i=0; i<=self->_priv->array->len; i++) {
+			if (self->_priv->array->data[i])
+				g_object_unref (self->_priv->array->data[i]);
+		}
+
+		g_array_free (self->_priv->array, TRUE);
 	}
 
 
