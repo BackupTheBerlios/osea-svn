@@ -3,9 +3,9 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: libcoyote
-Description: AfDal library support
+Name: liboseacomm
+Description: öSea communications support
 Requires: roadrunner
 Version: @VERSION@
-Libs: -L${libdir} -lcoyote
+Libs: -L${libdir} -loseacomm
 Cflags: -I${includedir}
