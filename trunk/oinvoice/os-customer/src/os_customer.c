@@ -1,4 +1,4 @@
-//  af_customer: Daemon for the server-side
+//  os_customer: Daemon for the server-side
 //  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
 
 //  This program is free software; you can redistribute it and/or modify 
@@ -30,215 +30,215 @@
 #include <glib.h>
 #include <locale.h>
 #include <librr/rr.h>
-#include <coyote/coyote.h>
-#include <afgs/afgs.h>
+#include <liboseacomm/oseacomm.h>
+#include <liboseaserver/oseaserver.h>
 #include <popt.h>
 
 // Modules exported by this server
-#include "af_customer_enum_values.h"
-#include "af_customer_address.h"
-#include "af_customer_telephone.h"
-#include "af_customer_inet_data.h"
-#include "af_customer_contact.h"
-#include "af_customer_customer.h"
-#define LOG_DOMAIN "af_customer"
-#define AF_CUSTOMER_SERVICES_VERSION 1
+#include "os_customer_enum_values.h"
+#include "os_customer_address.h"
+#include "os_customer_telephone.h"
+#include "os_customer_inet_data.h"
+#include "os_customer_contact.h"
+#include "os_customer_customer.h"
+#define LOG_DOMAIN "os_customer"
+#define OS_CUSTOMER_SERVICES_VERSION 1
 
 //Services
-AfgsServicesProvided services_provided[] = {
-	{"af_customer_enum_values_address_set", "",
-	 af_customer_enum_values_address_set, TRUE, NULL, NULL, NULL}
+OseaServerServicesProvided services_provided[] = {
+	{"enum_values_address_set", "",
+	 os_customer_enum_values_address_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_address_update_all", "",
-	 af_customer_enum_values_address_update_all, TRUE, NULL, NULL, NULL}
+	{"enum_values_address_update_all", "",
+	 os_customer_enum_values_address_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_address_list", "",
-	 af_customer_enum_values_address_list, TRUE, NULL, NULL, NULL}
+	{"enum_values_address_list", "",
+	 os_customer_enum_values_address_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_address_remove", "",
-	 af_customer_enum_values_address_remove, TRUE, NULL, NULL, NULL}
+	{"enum_values_address_remove", "",
+	 os_customer_enum_values_address_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_address_add", "",
-	 af_customer_enum_values_address_add, TRUE, NULL, NULL, NULL}
+	{"enum_values_address_add", "",
+	 os_customer_enum_values_address_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_telephone_set", "",
-	 af_customer_enum_values_telephone_set, TRUE, NULL, NULL, NULL}
+	{"enum_values_telephone_set", "",
+	 os_customer_enum_values_telephone_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_telephone_update_all", "",
-	 af_customer_enum_values_telephone_update_all, TRUE, NULL, NULL, NULL}
+	{"enum_values_telephone_update_all", "",
+	 os_customer_enum_values_telephone_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_telephone_list", "",
-	 af_customer_enum_values_telephone_list, TRUE, NULL, NULL, NULL}
+	{"enum_values_telephone_list", "",
+	 os_customer_enum_values_telephone_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_telephone_remove", "",
-	 af_customer_enum_values_telephone_remove, TRUE, NULL, NULL, NULL}
+	{"enum_values_telephone_remove", "",
+	 os_customer_enum_values_telephone_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_telephone_add", "",
-	 af_customer_enum_values_telephone_add, TRUE, NULL, NULL, NULL}
+	{"enum_values_telephone_add", "",
+	 os_customer_enum_values_telephone_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_inet_data_set", "",
-	 af_customer_enum_values_inet_data_set, TRUE, NULL, NULL, NULL}
+	{"enum_values_inet_data_set", "",
+	 os_customer_enum_values_inet_data_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_inet_data_update_all", "",
-	 af_customer_enum_values_inet_data_update_all, TRUE, NULL, NULL, NULL}
+	{"enum_values_inet_data_update_all", "",
+	 os_customer_enum_values_inet_data_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_inet_data_list", "",
-	 af_customer_enum_values_inet_data_list, TRUE, NULL, NULL, NULL}
+	{"enum_values_inet_data_list", "",
+	 os_customer_enum_values_inet_data_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_inet_data_remove", "",
-	 af_customer_enum_values_inet_data_remove, TRUE, NULL, NULL, NULL}
+	{"enum_values_inet_data_remove", "",
+	 os_customer_enum_values_inet_data_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_inet_data_add", "",
-	 af_customer_enum_values_inet_data_add, TRUE, NULL, NULL, NULL}
+	{"enum_values_inet_data_add", "",
+	 os_customer_enum_values_inet_data_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_customer_set", "",
-	 af_customer_enum_values_customer_set, TRUE, NULL, NULL, NULL}
+	{"enum_values_customer_set", "",
+	 os_customer_enum_values_customer_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_customer_update_all", "",
-	 af_customer_enum_values_customer_update_all, TRUE, NULL, NULL, NULL}
+	{"enum_values_customer_update_all", "",
+	 os_customer_enum_values_customer_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_customer_list", "",
-	 af_customer_enum_values_customer_list, TRUE, NULL, NULL, NULL}
+	{"enum_values_customer_list", "",
+	 os_customer_enum_values_customer_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_customer_remove", "",
-	 af_customer_enum_values_customer_remove, TRUE, NULL, NULL, NULL}
+	{"enum_values_customer_remove", "",
+	 os_customer_enum_values_customer_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_customer_add", "",
-	 af_customer_enum_values_customer_add, TRUE, NULL, NULL, NULL}
+	{"enum_values_customer_add", "",
+	 os_customer_enum_values_customer_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_new", "",
-	 af_customer_enum_values_new, TRUE, NULL, NULL, NULL}
+	{"enum_values_new", "",
+	 os_customer_enum_values_new, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_remove", "",
-	 af_customer_enum_values_remove, TRUE, NULL, NULL, NULL}
+	{"enum_values_remove", "",
+	 os_customer_enum_values_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_edit", "",
-	 af_customer_enum_values_edit, TRUE, NULL, NULL, NULL}
+	{"enum_values_edit", "",
+	 os_customer_enum_values_edit, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_enum_values_list", "",
-	 af_customer_enum_values_list, TRUE, NULL, NULL, NULL}
+	{"enum_values_list", "",
+	 os_customer_enum_values_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_address_new", "",
-	 af_customer_address_new, TRUE, NULL, NULL, NULL}
+	{"address_new", "",
+	 os_customer_address_new, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_address_remove", "",
-	 af_customer_address_remove, TRUE, NULL, NULL, NULL}
+	{"address_remove", "",
+	 os_customer_address_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_address_edit", "",
-	 af_customer_address_edit, TRUE, NULL, NULL, NULL}
+	{"address_edit", "",
+	 os_customer_address_edit, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_address_list", "",
-	 af_customer_address_list, TRUE, NULL, NULL, NULL}
+	{"address_list", "",
+	 os_customer_address_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_telephone_new", "",
-	 af_customer_telephone_new, TRUE, NULL, NULL, NULL}
+	{"telephone_new", "",
+	 os_customer_telephone_new, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_telephone_remove", "",
-	 af_customer_telephone_remove, TRUE, NULL, NULL, NULL}
+	{"telephone_remove", "",
+	 os_customer_telephone_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_telephone_edit", "",
-	 af_customer_telephone_edit, TRUE, NULL, NULL, NULL}
+	{"telephone_edit", "",
+	 os_customer_telephone_edit, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_telephone_list", "",
-	 af_customer_telephone_list, TRUE, NULL, NULL, NULL}
+	{"telephone_list", "",
+	 os_customer_telephone_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_inet_data_new", "",
-	 af_customer_inet_data_new, TRUE, NULL, NULL, NULL}
+	{"inet_data_new", "",
+	 os_customer_inet_data_new, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_inet_data_remove", "",
-	 af_customer_inet_data_remove, TRUE, NULL, NULL, NULL}
+	{"inet_data_remove", "",
+	 os_customer_inet_data_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_inet_data_edit", "",
-	 af_customer_inet_data_edit, TRUE, NULL, NULL, NULL}
+	{"inet_data_edit", "",
+	 os_customer_inet_data_edit, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_inet_data_list", "",
-	 af_customer_inet_data_list, TRUE, NULL, NULL, NULL}
+	{"inet_data_list", "",
+	 os_customer_inet_data_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_contact_new", "",
-	 af_customer_contact_new, TRUE, NULL, NULL, NULL}
+	{"contact_new", "",
+	 os_customer_contact_new, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_contact_remove", "",
-	 af_customer_contact_remove, TRUE, NULL, NULL, NULL}
+	{"contact_remove", "",
+	 os_customer_contact_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_contact_edit", "",
-	 af_customer_contact_edit, TRUE, NULL, NULL, NULL}
+	{"contact_edit", "",
+	 os_customer_contact_edit, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_contact_list", "",
-	 af_customer_contact_list, TRUE, NULL, NULL, NULL}
+	{"contact_list", "",
+	 os_customer_contact_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_address_set", "",
-	 af_customer_customer_address_set, TRUE, NULL, NULL, NULL}
+	{"customer_address_set", "",
+	 os_customer_customer_address_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_address_update_all", "",
-	 af_customer_customer_address_update_all, TRUE, NULL, NULL, NULL}
+	{"customer_address_update_all", "",
+	 os_customer_customer_address_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_address_list", "",
-	 af_customer_customer_address_list, TRUE, NULL, NULL, NULL}
+	{"customer_address_list", "",
+	 os_customer_customer_address_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_address_remove", "",
-	 af_customer_customer_address_remove, TRUE, NULL, NULL, NULL}
+	{"customer_address_remove", "",
+	 os_customer_customer_address_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_address_add", "",
-	 af_customer_customer_address_add, TRUE, NULL, NULL, NULL}
+	{"customer_address_add", "",
+	 os_customer_customer_address_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_telephone_set", "",
-	 af_customer_customer_telephone_set, TRUE, NULL, NULL, NULL}
+	{"customer_telephone_set", "",
+	 os_customer_customer_telephone_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_telephone_update_all", "",
-	 af_customer_customer_telephone_update_all, TRUE, NULL, NULL, NULL}
+	{"customer_telephone_update_all", "",
+	 os_customer_customer_telephone_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_telephone_list", "",
-	 af_customer_customer_telephone_list, TRUE, NULL, NULL, NULL}
+	{"customer_telephone_list", "",
+	 os_customer_customer_telephone_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_telephone_remove", "",
-	 af_customer_customer_telephone_remove, TRUE, NULL, NULL, NULL}
+	{"customer_telephone_remove", "",
+	 os_customer_customer_telephone_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_telephone_add", "",
-	 af_customer_customer_telephone_add, TRUE, NULL, NULL, NULL}
+	{"customer_telephone_add", "",
+	 os_customer_customer_telephone_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_inet_data_set", "",
-	 af_customer_customer_inet_data_set, TRUE, NULL, NULL, NULL}
+	{"customer_inet_data_set", "",
+	 os_customer_customer_inet_data_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_inet_data_update_all", "",
-	 af_customer_customer_inet_data_update_all, TRUE, NULL, NULL, NULL}
+	{"customer_inet_data_update_all", "",
+	 os_customer_customer_inet_data_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_inet_data_list", "",
-	 af_customer_customer_inet_data_list, TRUE, NULL, NULL, NULL}
+	{"customer_inet_data_list", "",
+	 os_customer_customer_inet_data_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_inet_data_remove", "",
-	 af_customer_customer_inet_data_remove, TRUE, NULL, NULL, NULL}
+	{"customer_inet_data_remove", "",
+	 os_customer_customer_inet_data_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_inet_data_add", "",
-	 af_customer_customer_inet_data_add, TRUE, NULL, NULL, NULL}
+	{"customer_inet_data_add", "",
+	 os_customer_customer_inet_data_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_contact_set", "",
-	 af_customer_customer_contact_set, TRUE, NULL, NULL, NULL}
+	{"customer_contact_set", "",
+	 os_customer_customer_contact_set, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_contact_update_all", "",
-	 af_customer_customer_contact_update_all, TRUE, NULL, NULL, NULL}
+	{"customer_contact_update_all", "",
+	 os_customer_customer_contact_update_all, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_contact_list", "",
-	 af_customer_customer_contact_list, TRUE, NULL, NULL, NULL}
+	{"customer_contact_list", "",
+	 os_customer_customer_contact_list, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_contact_remove", "",
-	 af_customer_customer_contact_remove, TRUE, NULL, NULL, NULL}
+	{"customer_contact_remove", "",
+	 os_customer_customer_contact_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_contact_add", "",
-	 af_customer_customer_contact_add, TRUE, NULL, NULL, NULL}
+	{"customer_contact_add", "",
+	 os_customer_customer_contact_add, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_new", "",
-	 af_customer_customer_new, TRUE, NULL, NULL, NULL}
+	{"customer_new", "",
+	 os_customer_customer_new, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_remove", "",
-	 af_customer_customer_remove, TRUE, NULL, NULL, NULL}
+	{"customer_remove", "",
+	 os_customer_customer_remove, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_edit", "",
-	 af_customer_customer_edit, TRUE, NULL, NULL, NULL}
+	{"customer_edit", "",
+	 os_customer_customer_edit, TRUE, NULL, NULL, NULL}
 	,
-	{"af_customer_customer_list", "",
-	 af_customer_customer_list, TRUE, NULL, NULL, NULL}
+	{"customer_list", "",
+	 os_customer_customer_list, TRUE, NULL, NULL, NULL}
 	,
-	AFGS_SERVICES_TABLE_END
+	OSEASERVER_SERVICES_TABLE_END
 };
 
 gint main (gint argc,
@@ -254,17 +254,17 @@ gint main (gint argc,
 	textdomain (GETTEXT_PACKAGE);
 #endif
 
-	afgs_log_check_and_disable_glog ();
+	oseaserver_log_check_and_disable_glog ();
 
-	afgs_main_run_server ("af-customer",
-			      "af-customer server",
+	oseaserver_main_run_server ("os-customer",
+			      "os-customer server",
 			      VERSION,
 			      COMPILATION_DATE,
 			      &argc, &argv,
-			      g_build_filename (SYSCONFDIR, "aspl-fact", "af-customer.cfg", NULL),
+			      g_build_filename (SYSCONFDIR, "oinvoice", "os-customer.cfg", NULL),
 			      accepted_keys,
 			      services_provided,
-			      AF_CUSTOMER_SERVICES_VERSION, NULL, AFGS_MAIN_NO_EXTRA_OPTION);
+			      OS_CUSTOMER_SERVICES_VERSION, NULL, OSEASERVER_MAIN_NO_EXTRA_OPTION);
 
 	return 0;
 }

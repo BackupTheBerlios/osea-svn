@@ -1,4 +1,4 @@
-//  af_customer: Daemon for the server-side
+//  os_customer: Daemon for the server-side
 //  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
 
 //  This program is free software; you can redistribute it and/or modify 
@@ -16,25 +16,25 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 
-#ifndef __AF_CUSTOMER_CONTACT_H__
-#define __AF_CUSTOMER_CONTACT_H__
+#ifndef __OS_CUSTOMER_CONTACT_H__
+#define __OS_CUSTOMER_CONTACT_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean            af_customer_contact_new (CoyoteXmlServiceData * data,
+gboolean            os_customer_contact_new (OseaCommXmlServiceData * data,
 					     gpointer user_data,
 					     RRChannel * channel,
 					     gint msg_no);
-gboolean            af_customer_contact_remove (CoyoteXmlServiceData * data,
+gboolean            os_customer_contact_remove (OseaCommXmlServiceData * data,
 						gpointer user_data,
 						RRChannel * channel,
 						gint msg_no);
-gboolean            af_customer_contact_edit (CoyoteXmlServiceData * data,
+gboolean            os_customer_contact_edit (OseaCommXmlServiceData * data,
 					      gpointer user_data,
 					      RRChannel * channel,
 					      gint msg_no);
-gboolean            af_customer_contact_list (CoyoteXmlServiceData * data,
+gboolean            os_customer_contact_list (OseaCommXmlServiceData * data,
 					      gpointer user_data,
 					      RRChannel * channel,
 					      gint msg_no);

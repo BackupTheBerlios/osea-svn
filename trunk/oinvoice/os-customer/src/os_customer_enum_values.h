@@ -1,4 +1,4 @@
-//  af_customer: Daemon for the server-side
+//  os_customer: Daemon for the server-side
 //  Copyright (C) 2002,2003 Advanced Software Production Line, S.L.
 
 //  This program is free software; you can redistribute it and/or modify 
@@ -16,105 +16,105 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 
-#ifndef __AF_CUSTOMER_ENUM_VALUES_H__
-#define __AF_CUSTOMER_ENUM_VALUES_H__
+#ifndef __OS_CUSTOMER_ENUM_VALUES_H__
+#define __OS_CUSTOMER_ENUM_VALUES_H__
 
 #include <glib.h>
-#include <coyote/coyote.h>
+#include <liboseacomm/oseacomm.h>
 
-gboolean            af_customer_enum_values_address_set (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_address_set (OseaCommXmlServiceData * data,
 							 gpointer user_data,
 							 RRChannel * channel,
 							 gint msg_no);
-gboolean            af_customer_enum_values_address_update_all (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_address_update_all (OseaCommXmlServiceData * data,
 								gpointer user_data,
 								RRChannel * channel,
 								gint msg_no);
-gboolean            af_customer_enum_values_address_list (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_address_list (OseaCommXmlServiceData * data,
 							  gpointer user_data,
 							  RRChannel * channel,
 							  gint msg_no);
-gboolean            af_customer_enum_values_address_remove (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_address_remove (OseaCommXmlServiceData * data,
 							    gpointer user_data,
 							    RRChannel * channel,
 							    gint msg_no);
-gboolean            af_customer_enum_values_address_add (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_address_add (OseaCommXmlServiceData * data,
 							 gpointer user_data,
 							 RRChannel * channel,
 							 gint msg_no);
-gboolean            af_customer_enum_values_telephone_set (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_telephone_set (OseaCommXmlServiceData * data,
 							   gpointer user_data,
 							   RRChannel * channel,
 							   gint msg_no);
-gboolean            af_customer_enum_values_telephone_update_all (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_telephone_update_all (OseaCommXmlServiceData * data,
 								  gpointer user_data,
 								  RRChannel * channel,
 								  gint msg_no);
-gboolean            af_customer_enum_values_telephone_list (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_telephone_list (OseaCommXmlServiceData * data,
 							    gpointer user_data,
 							    RRChannel * channel,
 							    gint msg_no);
-gboolean            af_customer_enum_values_telephone_remove (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_telephone_remove (OseaCommXmlServiceData * data,
 							      gpointer user_data,
 							      RRChannel * channel,
 							      gint msg_no);
-gboolean            af_customer_enum_values_telephone_add (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_telephone_add (OseaCommXmlServiceData * data,
 							   gpointer user_data,
 							   RRChannel * channel,
 							   gint msg_no);
-gboolean            af_customer_enum_values_inet_data_set (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_inet_data_set (OseaCommXmlServiceData * data,
 							   gpointer user_data,
 							   RRChannel * channel,
 							   gint msg_no);
-gboolean            af_customer_enum_values_inet_data_update_all (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_inet_data_update_all (OseaCommXmlServiceData * data,
 								  gpointer user_data,
 								  RRChannel * channel,
 								  gint msg_no);
-gboolean            af_customer_enum_values_inet_data_list (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_inet_data_list (OseaCommXmlServiceData * data,
 							    gpointer user_data,
 							    RRChannel * channel,
 							    gint msg_no);
-gboolean            af_customer_enum_values_inet_data_remove (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_inet_data_remove (OseaCommXmlServiceData * data,
 							      gpointer user_data,
 							      RRChannel * channel,
 							      gint msg_no);
-gboolean            af_customer_enum_values_inet_data_add (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_inet_data_add (OseaCommXmlServiceData * data,
 							   gpointer user_data,
 							   RRChannel * channel,
 							   gint msg_no);
-gboolean            af_customer_enum_values_customer_set (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_customer_set (OseaCommXmlServiceData * data,
 							  gpointer user_data,
 							  RRChannel * channel,
 							  gint msg_no);
-gboolean            af_customer_enum_values_customer_update_all (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_customer_update_all (OseaCommXmlServiceData * data,
 								 gpointer user_data,
 								 RRChannel * channel,
 								 gint msg_no);
-gboolean            af_customer_enum_values_customer_list (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_customer_list (OseaCommXmlServiceData * data,
 							   gpointer user_data,
 							   RRChannel * channel,
 							   gint msg_no);
-gboolean            af_customer_enum_values_customer_remove (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_customer_remove (OseaCommXmlServiceData * data,
 							     gpointer user_data,
 							     RRChannel * channel,
 							     gint msg_no);
-gboolean            af_customer_enum_values_customer_add (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_customer_add (OseaCommXmlServiceData * data,
 							  gpointer user_data,
 							  RRChannel * channel,
 							  gint msg_no);
-gboolean            af_customer_enum_values_new (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_new (OseaCommXmlServiceData * data,
 						 gpointer user_data,
 						 RRChannel * channel,
 						 gint msg_no);
-gboolean            af_customer_enum_values_remove (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_remove (OseaCommXmlServiceData * data,
 						    gpointer user_data,
 						    RRChannel * channel,
 						    gint msg_no);
-gboolean            af_customer_enum_values_edit (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_edit (OseaCommXmlServiceData * data,
 						  gpointer user_data,
 						  RRChannel * channel,
 						  gint msg_no);
-gboolean            af_customer_enum_values_list (CoyoteXmlServiceData * data,
+gboolean            os_customer_enum_values_list (OseaCommXmlServiceData * data,
 						  gpointer user_data,
 						  RRChannel * channel,
 						  gint msg_no);
