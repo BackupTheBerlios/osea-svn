@@ -26,48 +26,14 @@ requires 2.0.0
 
 %header{
 #include <glib.h>
-#include "oseatype-simple-object.h"
+#include "oseatype-object.h"
 %}
 
 %{
-#include <glib.h>
 
 %}
 
-class OseaType:Char from OseaType:Simple:Object {
+class OseaType:Simple:Object from OseaType:Object {
 	
-	private gchar value;
-
-	public OseaTypeObject * new (void)
-	{
-		OseaTypeChar * result = GET_NEW;
-		OSEATYPE_OBJECT(result)->is_finished = FALSE;
-		OSEATYPE_OBJECT(result)->in_progress = FALSE;
-
-		return OSEATYPE_OBJECT(result);
-
-	}	
-
-	public gboolean set (OseaTypeChar *self, gchar value, GError **error)
-	{
-		self->_priv->value = value;
-		OSEATYPE_OBJECT(self)->is_finished = TRUE;
-		OSEATYPE_OBJECT(self)->in_progress = TRUE;
-
-		return TRUE;
-
-	}	
-
-	public gchar get (OseaTypeChar *self, GError **error) 
-	{
-		if (! OSEATYPE_OBJECT(self)->is_finished) {
-			g_set_error (error, g_quark_from_static_string ("OseaTypeChar"), 100, "Cannot get value: not yet completed");
-			return 0;				     
-		} else {
-			return self->_priv->value;
-		}
-
-
-	}
-
+	
 }

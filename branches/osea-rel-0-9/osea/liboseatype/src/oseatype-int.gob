@@ -26,32 +26,48 @@ requires 2.0.0
 
 %header{
 #include <glib.h>
-#include "oseatype-object.h"
+#include "oseatype-simple-object.h"
 %}
 
 %{
+#include <glib.h>
 
 %}
 
-class OseaType:Int from OseaType:Object {
+class OseaType:Int from OseaType:Simple:Object {
 	
-	public gint value;
-	property INT value
-		(nick = "Value",
-		 blurb = "Object actual value",
-		 minimum = G_MININT,
-		 maximum = G_MAXINT,
-		 export,
-		 link);
+	private gint value;
 
-
-	public OseaTypeObject * new (gint value)
+	public OseaTypeObject * new (void)
 	{
 		OseaTypeInt * result = GET_NEW;
-		result->value = value;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
 
 		return OSEATYPE_OBJECT(result);
 
 	}	
+
+	public gboolean set (OseaTypeInt *self, gint value, GError **error)
+	{
+		self->_priv->value = value;
+		OSEATYPE_OBJECT(self)->is_finished = TRUE;
+		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+
+		return TRUE;
+
+	}	
+
+	public gint get (OseaTypeInt *self, GError **error) 
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeInt"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->value;
+		}
+
+
+	}
 
 }

@@ -20,6 +20,8 @@
 #define __OSEACOMM_H__
 #include <glib.h>
 
+#include "oseacomm_partial_message.h"
+#include "oseacomm_peer_info.h"
 
 gboolean oseacomm_init                      (gint *argc, gchar ***argv, GError **error);
 
@@ -35,12 +37,11 @@ gboolean oseacomm_set_connection_properties (gchar *peer_name,
 
 
 gint     oseacomm_send                      (gchar *peer_name,
-			                     OseaCommPartialMessage *message,
-			                     gboolean is_last);
+			                     OseaCommMessage *message);
 
 typedef  gboolean (*OseaCommReplyReceive)   (gint message_id,
 					     gint error_code,
-					     OseaCommPartialMessage *message,
+					     OseaCommMessage *message,
 					     gboolean is_last);
 
 
@@ -51,13 +52,12 @@ gboolean oseacomm_wait                      (gint port);
 
 typedef  gboolean (*OseaCommMessageReceive) (gint message_id,
 					     OseaCommPeerInfo *peer_info,
-					     OseaCommPartialMessage *message,
+					     OseaCommMessage *message,
 					     gboolean is_last);
 
 gboolean oseacomm_reply                     (gint message_id,
 					     gint error_code,
-					     OseaCommPartialMessage *message,
-					     gboolean is_last);
+					     OseaCommMessage *message);
 
 gboolean oseacomm_exit (GError **error);
 

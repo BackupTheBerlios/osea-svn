@@ -1,0 +1,112 @@
+
+
+%alltop{
+/*
+ *
+ *  LibOseaType: Classes for message composition
+ *  Copyright (C) 2004 David Marín Carreño
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or   
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+%}
+
+requires 2.0.0
+
+%header{
+#include <glib.h>
+#include "oseatype-simple-object.h"
+%}
+
+%{
+#include <glib.h>
+/* #include <sys/types.h> */
+/* #include <regex.h> */
+#define _XOPEN_SOURCE /* glibc2 needs this */
+#include <time.h>
+%}
+
+class OseaType:Recurring:Date from OseaType:Simple:Object {
+	
+	private gchar * date = {g_strdup("01-01")}
+	        destroywith g_free;
+
+	public OseaTypeObject * new (void)
+	{
+		OseaTypeRecurringDate * result = GET_NEW;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
+
+		return OSEATYPE_OBJECT(result);
+
+	}	
+
+	public gboolean set (OseaTypeRecurringDate *self, gchar *date_arg, GError **error)
+	{
+		struct tm tm;
+		time_t time;
+		gchar *value;
+		gchar *date = g_strdup_printf ("2000-%s", date_arg);
+
+		date = g_strstrip (date);
+
+		if (! date) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypeRecurringDate"), 201, "Cannot set date: it's empty");
+			return FALSE;
+		}
+
+
+		value = strptime(date, "%Y-%m-%d", &tm);
+		if (!value || *value != '\0') { 
+			#warning Untested code. You must check it with good test cases.
+			g_set_error (error, g_quark_from_static_string ("OseaTypeRecurringDate"),
+				     202, "Cannot set date: it is not a valid recurring date in format MM-DD");
+			return FALSE;
+		}
+		
+		time = mktime (&tm);
+		if (time == -1) { 
+			#warning Untested code. You must check it with good test cases.
+			g_set_error (error, g_quark_from_static_string ("OseaTypeRecurringDate"),
+				     203, "Cannot set date: it is not a valid recurring date");
+			return FALSE;
+		}
+
+		g_free (date);
+
+		date = g_new (gchar, 7);
+		strftime (date, 7, "%m-%d", &tm);
+			
+		self->_priv->date = date;
+		OSEATYPE_OBJECT(self)->is_finished = TRUE;
+		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+
+		return TRUE;
+
+	}	
+
+
+	public gchar * get (OseaTypeRecurringDate *self, GError **error)
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeRecurringDate"), 100, "Cannot get value: not yet completed");
+			return NULL;				     
+		} else {
+			return g_strdup(self->_priv->date);
+		}
+
+	}
+
+}

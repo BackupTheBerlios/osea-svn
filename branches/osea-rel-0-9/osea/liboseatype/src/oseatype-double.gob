@@ -34,13 +34,13 @@ requires 2.0.0
 
 %}
 
-class OseaType:Char from OseaType:Simple:Object {
+class OseaType:Double from OseaType:Simple:Object {
 	
-	private gchar value;
+	private gdouble value;
 
 	public OseaTypeObject * new (void)
 	{
-		OseaTypeChar * result = GET_NEW;
+		OseaTypeDouble * result = GET_NEW;
 		OSEATYPE_OBJECT(result)->is_finished = FALSE;
 		OSEATYPE_OBJECT(result)->in_progress = FALSE;
 
@@ -48,7 +48,7 @@ class OseaType:Char from OseaType:Simple:Object {
 
 	}	
 
-	public gboolean set (OseaTypeChar *self, gchar value, GError **error)
+	public gboolean set (OseaTypeDouble *self, gdouble value, GError **error)
 	{
 		self->_priv->value = value;
 		OSEATYPE_OBJECT(self)->is_finished = TRUE;
@@ -58,10 +58,10 @@ class OseaType:Char from OseaType:Simple:Object {
 
 	}	
 
-	public gchar get (OseaTypeChar *self, GError **error) 
+	public gdouble get (OseaTypeDouble *self, GError **error) 
 	{
 		if (! OSEATYPE_OBJECT(self)->is_finished) {
-			g_set_error (error, g_quark_from_static_string ("OseaTypeChar"), 100, "Cannot get value: not yet completed");
+			g_set_error (error, g_quark_from_static_string ("OseaTypeDouble"), 100, "Cannot get value: not yet completed");
 			return 0;				     
 		} else {
 			return self->_priv->value;

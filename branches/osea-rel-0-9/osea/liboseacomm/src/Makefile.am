@@ -9,7 +9,7 @@ liboseacomm_la_SOURCES =	\
 
 
 liboseacomminclude_HEADERS =	\
-	oseacomm.h
+	oseacomm.h oseacomm_peer_info.h oseacomm_partial_message.h
 
 liboseacomm_la_LIBADD = \
 	$(LIBRARIES_LIBS)

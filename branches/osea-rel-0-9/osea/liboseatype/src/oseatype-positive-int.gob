@@ -34,13 +34,13 @@ requires 2.0.0
 
 %}
 
-class OseaType:Char from OseaType:Simple:Object {
+class OseaType:Positive:Int from OseaType:Simple:Object {
 	
-	private gchar value;
+	private gint value;
 
 	public OseaTypeObject * new (void)
 	{
-		OseaTypeChar * result = GET_NEW;
+		OseaTypePositiveInt * result = GET_NEW;
 		OSEATYPE_OBJECT(result)->is_finished = FALSE;
 		OSEATYPE_OBJECT(result)->in_progress = FALSE;
 
@@ -48,20 +48,27 @@ class OseaType:Char from OseaType:Simple:Object {
 
 	}	
 
-	public gboolean set (OseaTypeChar *self, gchar value, GError **error)
+	public gboolean set (OseaTypePositiveInt *self, gint value, GError **error)
 	{
-		self->_priv->value = value;
-		OSEATYPE_OBJECT(self)->is_finished = TRUE;
-		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+		if (value <= 0) {
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypePositiveInt"), 201, "Cannot set value: it is zero or negative");
+			return FALSE;
+		} else {
 
-		return TRUE;
-
+			self->_priv->value = value;
+			OSEATYPE_OBJECT(self)->is_finished = TRUE;
+			OSEATYPE_OBJECT(self)->in_progress = TRUE;
+			
+			return TRUE;
+		}
 	}	
 
-	public gchar get (OseaTypeChar *self, GError **error) 
+	public gint get (OseaTypePositiveInt *self, GError **error) 
 	{
 		if (! OSEATYPE_OBJECT(self)->is_finished) {
-			g_set_error (error, g_quark_from_static_string ("OseaTypeChar"), 100, "Cannot get value: not yet completed");
+			g_set_error (error, 
+				     g_quark_from_static_string ("OseaTypePositiveInt"), 202, "Cannot get value: not yet completed");
 			return 0;				     
 		} else {
 			return self->_priv->value;

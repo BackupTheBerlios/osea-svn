@@ -26,32 +26,48 @@ requires 2.0.0
 
 %header{
 #include <glib.h>
-#include "oseatype-object.h"
+#include "oseatype-simple-object.h"
 %}
 
 %{
+#include <glib.h>
 
 %}
 
-class OseaType:Boolean from OseaType:Object {
+class OseaType:Boolean from OseaType:Simple:Object {
 	
-	public gboolean value;
-	property BOOLEAN value
-		(nick = "Value",
-		 blurb = "Object actual value",
-		 minimum = FALSE,
-		 maximum = TRUE,
-		 export,
-		 link);
+	private gboolean value;
 
-
-	public OseaTypeObject * new (gboolean value)
+	public OseaTypeObject * new (void)
 	{
 		OseaTypeBoolean * result = GET_NEW;
-		result->value = value;
+		OSEATYPE_OBJECT(result)->is_finished = FALSE;
+		OSEATYPE_OBJECT(result)->in_progress = FALSE;
 
 		return OSEATYPE_OBJECT(result);
 
 	}	
+
+	public gboolean set (OseaTypeBoolean *self, gboolean value, GError **error)
+	{
+		self->_priv->value = value;
+		OSEATYPE_OBJECT(self)->is_finished = TRUE;
+		OSEATYPE_OBJECT(self)->in_progress = TRUE;
+
+		return TRUE;
+
+	}	
+
+	public gboolean get (OseaTypeBoolean *self, GError **error) 
+	{
+		if (! OSEATYPE_OBJECT(self)->is_finished) {
+			g_set_error (error, g_quark_from_static_string ("OseaTypeBoolean"), 100, "Cannot get value: not yet completed");
+			return 0;				     
+		} else {
+			return self->_priv->value;
+		}
+
+
+	}
 
 }
