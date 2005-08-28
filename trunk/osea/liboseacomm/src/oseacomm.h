@@ -45,10 +45,11 @@ typedef  gboolean (*OseaCommReplyReceive)   (gint message_id,
 					     gboolean is_last);
 
 
-gboolean oseacomm_set_listener_properties   (gchar *property_name,
+gboolean oseacomm_set_listener_properties   (gchar *listener_name,
+					     gchar *property_name,
 					     gpointer value, ...);
 
-gboolean oseacomm_wait                      (gint port);
+gboolean oseacomm_wait                      (gchar *listener_name);
 
 typedef  gboolean (*OseaCommMessageReceive) (gint message_id,
 					     OseaCommPeerInfo *peer_info,
