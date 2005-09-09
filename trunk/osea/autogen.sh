@@ -1,28 +1,25 @@
 #!/bin/sh
+# Run this to generate all the initial makefiles, etc.
 
-PACKAGE="öSea system: N-tier open secure system for enterprise application development"
+srcdir=`dirname $0`
+test -z "$srcdir" && srcdir=.
 
-(automake --version) < /dev/null > /dev/null 2>&1 || {
-	echo;
-	echo "You must have automake installed to compile $PACKAGE";
-	echo;
-	exit;
+PKG_NAME="GNOME Data Access"
+AUTOCONF=autoconf
+REQUIRED_AUTOCONF_VERSION=2.59
+AUTOMAKE=automake-1.9
+REQUIRED_AUTOMAKE_VERSION=1.9
+
+(test -f $srcdir/configure.in \
+  && test -d $srcdir/idl \
+  && test -f $srcdir/idl/GNOME_Database.idl) || {
+    echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
+    echo " top-level GDA directory"
+    exit 1
 }
 
-(autoconf --version) < /dev/null > /dev/null 2>&1 || {
-	echo;
-	echo "You must have autoconf installed to compile $PACKAGE";
-	echo;
-	exit;
-}
+gnome_autogen=`which gnome-autogen.sh`
+test -z "$gnome_autogen"
 
-echo "Generating configuration files for $PACKAGE, please wait...."
-echo;
+USE_GNOME2_MACROS=1 . $gnome_autogen
 
-aclocal $ACLOCAL_FLAGS;
-autoheader;
-automake --add-missing;
-autoconf;
-libtoolize;
-
-./configure $@ --enable-maintainer-mode --enable-compile-warnings

@@ -22,17 +22,17 @@ AM_PROG_LIBTOOL
 
 GOB2_CHECK(2.0.0)
 
-PKG_CHECK_MODULES(LIBRARIES, roadrunner >= 0.9  glib-2.0 gthread-2.0)
+PKG_CHECK_MODULES(LIBRARIES, vortex >= 0.8  glib-2.0 gthread-2.0)
 AC_SUBST(LIBRARIES_CFLAGS)
 AC_SUBST(LIBRARIES_LIBS)
 
-PKG_CHECK_MODULES(OSKERNEL, roadrunner >= 0.9 glib-2.0 libgda >= 0.11)
-AC_SUBST(OSKERNEL_CFLAGS)
-AC_SUBST(OSKERNEL_LIBS)
+#PKG_CHECK_MODULES(OSKERNEL, roadrunner >= 0.9 glib-2.0 libgda >= 0.11)
+#AC_SUBST(OSKERNEL_CFLAGS)
+#AC_SUBST(OSKERNEL_LIBS)
 
-PKG_CHECK_MODULES(OSEAMANAGER, roadrunner >= 0.9 glib-2.0)
-AC_SUBST(OSEAMANAGER_CFLAGS)
-AC_SUBST(OSEAMANAGER_LIBS)
+#PKG_CHECK_MODULES(OSEAMANAGER, roadrunner >= 0.9 glib-2.0)
+#AC_SUBST(OSEAMANAGER_CFLAGS)
+#AC_SUBST(OSEAMANAGER_LIBS)
 
 #######################
 # Check for readline.
@@ -76,7 +76,7 @@ GTK_DOC_CHECK
 test -h liboseacomm/liboseacomm        || ln -s src        liboseacomm/liboseacomm
 test -h liboseaclient/liboseaclient    || ln -s src      liboseaclient/liboseaclient
 test -h liboseaserver/liboseaserver    || ln -s src      liboseaserver/liboseaserver
-test -h libaoskernel/libaoskernel      || ln -s src       libaoskernel/libaoskernel
+#test -h libaoskernel/libaoskernel      || ln -s src       libaoskernel/libaoskernel
 
 #################################################################
 # Links to generate gtk-doc documentation properly
@@ -84,11 +84,14 @@ test -h libaoskernel/libaoskernel      || ln -s src       libaoskernel/libaosker
 test -h doc/reference/src/liboseacomm        || ln -s ../../../liboseacomm/src      doc/reference/src/liboseacomm
 test -h doc/reference/src/liboseaclient         || ln -s ../../../liboseaclient/src       doc/reference/src/liboseaclient
 test -h doc/reference/src/liboseaserver          || ln -s ../../../liboseaserver/src        doc/reference/src/liboseaserver
-test -h doc/reference/src/libaoskernel   || ln -s ../../../libaoskernel/src doc/reference/src/libaoskernel
+#test -h doc/reference/src/libaoskernel   || ln -s ../../../libaoskernel/src doc/reference/src/libaoskernel
 test -h include_dir || ln -s doc/reference/src include_dir
 
 AC_OUTPUT([
 Makefile
+libshieldvortex/Makefile
+libshieldvortex/src/Makefile
+libshieldvortex/test/Makefile
 liboseatype/Makefile
 liboseatype/src/Makefile
 liboseatype/test/Makefile
@@ -102,19 +105,20 @@ liboseaclient/test/Makefile
 liboseaserver/Makefile
 liboseaserver/src/Makefile
 liboseaserver/test/Makefile
-libaoskernel/Makefile
-libaoskernel/src/Makefile
-libaoskernel/test/Makefile
+#libaoskernel/Makefile
+#libaoskernel/src/Makefile
+#libaoskernel/test/Makefile
 os-kernel/Makefile
 os-kernel/src/Makefile
 os-kernel/data/Makefile
 osea-manager/Makefile
 osea-manager/src/Makefile
+libshieldvortex/libshieldvortex.pc
 liboseatype/liboseatype.pc
 liboseacomm/liboseacomm.pc
 liboseaclient/liboseaclient.pc
 liboseaserver/liboseaserver.pc
-libaoskernel/libaoskernel.pc
+#libaoskernel/libaoskernel.pc
 doc/Makefile
 doc/reference/Makefile
 ])

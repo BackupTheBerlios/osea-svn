@@ -15,3 +15,16 @@
    License along with this library; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+#ifndef __SHIELDVORTEX_H__
+#define __SHIELDVORTEX_H__
+
+#include <vortex.h>
+#include "shieldvortex_tls.h"
+#include "shieldvortex_sasl.h"
+
+void shieldvortex_init ();
+
+void shieldvortex_exit ();
+
+#endif
