@@ -89,9 +89,6 @@ test -h include_dir || ln -s doc/reference/src include_dir
 
 AC_OUTPUT([
 Makefile
-libshieldvortex/Makefile
-libshieldvortex/src/Makefile
-libshieldvortex/test/Makefile
 liboseatype/Makefile
 liboseatype/src/Makefile
 liboseatype/test/Makefile
@@ -110,7 +107,6 @@ os-kernel/src/Makefile
 os-kernel/data/Makefile
 osea-manager/Makefile
 osea-manager/src/Makefile
-libshieldvortex/libshieldvortex.pc
 liboseatype/liboseatype.pc
 liboseacomm/liboseacomm.pc
 liboseaclient/liboseaclient.pc
