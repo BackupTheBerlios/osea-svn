@@ -105,9 +105,6 @@ liboseaclient/test/Makefile
 liboseaserver/Makefile
 liboseaserver/src/Makefile
 liboseaserver/test/Makefile
-#libaoskernel/Makefile
-#libaoskernel/src/Makefile
-#libaoskernel/test/Makefile
 os-kernel/Makefile
 os-kernel/src/Makefile
 os-kernel/data/Makefile
@@ -118,7 +115,6 @@ liboseatype/liboseatype.pc
 liboseacomm/liboseacomm.pc
 liboseaclient/liboseaclient.pc
 liboseaserver/liboseaserver.pc
-#libaoskernel/libaoskernel.pc
 doc/Makefile
 doc/reference/Makefile
 ])
